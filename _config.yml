@@ -6,14 +6,14 @@ pygments:         true
 permalink:        pretty
 
 # Setup
-title:            Hyde
-tagline:          'A Jekyll theme'
-description:      'A brazen two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
-url:              http://hyde.getpoole.com
+title:            James Carleton
+tagline:          
+description:      'UX Designer'
+url:              http://carletondesign.com
 
 author:
-  name:           'Mark Otto'
-  url:            https://twitter.com/mdo
+  name:           'James Carleton'
+  url:            http://carletondesign.com
 
 paginate:         5
 
@@ -21,4 +21,8 @@ paginate:         5
 version:          2.0.0
 
 github:
-  repo:           https://github.com/poole/hyde
+  repo:           https://github.com/fwg001/fwg001.github.io
+  
+ assets:
+    sources:
+      - assets/fonts
