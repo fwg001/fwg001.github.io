@@ -58,6 +58,7 @@ html {
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
   background-color: #202020;
+  background-image: url('/assets/shattered-island.gif');
 }
 @media (min-width: 48rem) {
   .sidebar {
