@@ -3,4 +3,6 @@ layout: page
 title: Portfolio
 ---
 
-Here is my work
+[SeniorHousingNet](/portfolio/shn/)
+
+[Realtor.com Local](/portfolio/rdc_local)
