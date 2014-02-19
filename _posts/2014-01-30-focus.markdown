@@ -2,6 +2,21 @@
 layout: post
 title:  "Focus"
 permalink: Focus
+categories:
+- General
+tags:
+- distraction
+- focus
+- productivity
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  _wpas_done_all: '1'
+  gplus_authorship_disabled: '1'
+  _wpas_skip_6000158: '1'
+  _wpas_skip_6000169: '1'
 
 ---
 

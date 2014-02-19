@@ -2,7 +2,6 @@
 layout: page
 title: Portfolio
 ---
+<a href="/portfolio/shn/"><img src="/assets/shn.jpg">SeniorHousingNet</a>
 
-[SeniorHousingNet](/portfolio/shn/)
-
-[Realtor.com Local](/portfolio/rdc_local)
+<a href="/portfolio/rdc_local/"><img src="/assets/rdc_local.jpg">Realtor.com Local</a>
