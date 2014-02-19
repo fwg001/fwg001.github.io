@@ -4,7 +4,7 @@
  <title>James Carleton</title>
  <link href="http://carletondesign.com/atom.xml" rel="self"/>
  <link href="http://carletondesign.com/"/>
- <updated>2014-02-18T21:58:47-08:00</updated>
+ <updated>2014-02-18T23:03:37-08:00</updated>
  <id>http://carletondesign.com</id>
  <author>
    <name>James Carleton</name>
@@ -20,6 +20,1235 @@
    <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/distractions.png&quot; alt=&quot;Distractions&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;I’ve been working on focus. We live in a world of distractions and it’s way too easy to lose time to things that are in front of us instead of what’s a real priority. Smart devices have multiplied and so have their power to get our attention. Each notification is a clever pull for your attention. You have new messages, you have an appointment tomorrow, someone likes something. Sure it’s great to be informed, but it’s killing my focus. Why am I acting like each notification is a critical situation requiring my immediate and full attention? Instead of responding to a text/email/im/whatever, I should be considering its priority and dealing with it at the right time. If I immediately respond, I’m moving it to the top of my list. Is it more important than what I was doing? Sometimes it may be, but most of the time it’s just a distraction. I owe my friends/family/employer better focus. So, I’m striving to be disciplined instead of distracted.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>It's a Write/Read Mobile Web: Luke W</title>
+   <link href="http://carletondesign.com/design/development/learning/websites/2014/01/22/its-a-write-read-web-luke-w/"/>
+   <updated>2014-01-22T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/design/development/learning/websites/2014/01/22/its-a-write-read-web-luke-w</id>
+   <content type="html">&lt;img class=&quot;aligncenter size-large wp-image-451&quot; alt=&quot;LukeW&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2014/01/D+G_LukeW1-1024x883.jpg&quot; width=&quot;604&quot; height=&quot;520&quot; /&gt;
+
+I recently attended &lt;a title=&quot;Designers+Geeks&quot; href=&quot;http://www.designersandgeeks.com/events/its-a-write-read-mobile-web&quot;&gt;Designers+Geeks&lt;/a&gt;, at Yelp HQ in SF, and took some notes on &lt;a title=&quot;LukeW&quot; href=&quot;http://lukew.com&quot;&gt;LukeW&lt;/a&gt;&#39;s great talk, &lt;em&gt;It&#39;s a Write/Read &lt;del&gt;Mobile&lt;/del&gt; Multi-Device Web&lt;/em&gt;.
+
+I had soaked up lots of knowledge from Luke at &lt;a title=&quot;An Event Apart&quot; href=&quot;http://aneventapart.com/&quot;&gt;AEA&lt;/a&gt; SF back in 2011 so this time expected lots of similar charts on the growth of mobile device usage, and he delivered. If you need to make a case for mobile to reluctant stakeholders, check out &lt;a title=&quot;LukeW&quot; href=&quot;http://lukew.com&quot;&gt;his site&lt;/a&gt; for loads of powerful data. My notes here are on the rest of his talk.
+&lt;ul&gt;
+	&lt;li&gt;&lt;span style=&quot;line-height: 1.5;&quot;&gt;Top sites (by time spent in the US) are all write/read experiences (Facebook, Aol, Yahoo, Google, Youtube)&lt;/span&gt;
+&lt;ul&gt;
+	&lt;li&gt;They require users reading/writing to work. Ex. What is Facebook without people posting?&lt;/li&gt;
+	&lt;li&gt;They are now all mobile:&lt;/li&gt;
+	&lt;li&gt;Facebook 78% mobile. They’ve had flat growth on desktop but huge growth on mobile.&lt;/li&gt;
+	&lt;li&gt;Twitter 75% mobile.&lt;/li&gt;
+	&lt;li&gt;They had a &quot;Mobile moment&quot; when the balance shifted from more desktop to more mobile use.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Mobile is not just about consumption, creation is booming.
+&lt;ul&gt;
+	&lt;li&gt;Mobile used to be mostly entertainment but now real tasks are done on mobile.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;One hand use
+&lt;ul&gt;
+	&lt;li&gt;Input: Keep the keyboard away until necessary&lt;/li&gt;
+	&lt;li&gt;Smart defaults and smart suggestions/guesses&lt;/li&gt;
+	&lt;li&gt;Don&#39;t just shrink desktop UI patterns, actually design for the one thumb use case&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Focused flows
+&lt;ul&gt;
+	&lt;li&gt;Tim Cook: &lt;em&gt;“Creativity is not a process. It’s people who care enough to keep thinking about something until they find the simplest way to do it. They keep thinking about something until they find the best way to do it.&quot;&lt;/em&gt;&lt;/li&gt;
+	&lt;li&gt;But simplicity is not easy. It takes a lot of work to go small.&lt;/li&gt;
+	&lt;li&gt;Paradigm shift: Hotel Tonight simplified booking a hotel (on an app) to 8 sec. It’s competitor Hotels.com takes 108 sec to book. Hotel Tonight&#39;s CEO says this simplicity is their competitive advantage.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Just-in-time actions
+&lt;ul&gt;
+	&lt;li&gt;&lt;a title=&quot;Josh Clark&quot; href=&quot;https://twitter.com/globalmoxie&quot;&gt;Josh Clark&lt;/a&gt;: We learn in the moment&lt;/li&gt;
+	&lt;li&gt;Wrong approach: the instructional intro screen
+&lt;ul&gt;
+	&lt;li&gt;It’s skipped or forgotten by the time the user needs help.&lt;/li&gt;
+	&lt;li&gt;Instead teach in the moment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Actions can be in the moment as well: surface UI only when needed
+&lt;ul&gt;
+	&lt;li&gt;Ex.  G+ app feed - header/footer toolbars hide when you’re scrolling, then reappear when you pause at a post.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Content actions - Asking the user to do something (ex. find friends) from within the flow of the app instead of adding another menu item.
+&lt;ul&gt;
+	&lt;li&gt;After checking in to a location on Foursquare, they ask you to leave a &lt;i&gt;tip&lt;/i&gt; for other users. It’s shown&lt;i&gt; just in time&lt;/i&gt;, instead of adding another button in the toolbar for tips.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Don&#39;t get in people&#39;s way&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Multi Device World
+&lt;ul&gt;
+	&lt;li&gt;Sequential and simultaneous use between devices
+&lt;ul&gt;
+	&lt;li&gt;Synced place holding - ex. kindle or Chrome&lt;/li&gt;
+	&lt;li&gt;Use each device for what it&#39;s good for&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Control: use one device to control another
+&lt;ul&gt;
+	&lt;li&gt;Your TV is not good for input, design so that connected mobile devices can control it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Push: ex. Ebay’s desktop site connects to their mobile app so you can use your phone camera to capture photos instead of the arduous task of using a traditional digital camera and transferring the images.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&amp;nbsp;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Remember, it’s USER experience</title>
+   <link href="http://carletondesign.com/design/research/2013/11/12/remember-its-user-experience/"/>
+   <updated>2013-11-12T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/design/research/2013/11/12/remember-its-user-experience</id>
+   <content type="html">I just spent two days watching users pick apart my precious design concept. I&#39;ve had better nightmares. As a designer it’s easy to make assumptions, since that is part of our job, but when real user behavior doesn&#39;t agree, it’s time to let go of your precious and pay attention!
+
+Getting real user feedback, formal or guerilla, is critical to my success as a UX designer, but it’s hard. It’s much easier to dig into design software and spend far too long tweaking details in isolation. Even a brilliant, collaborative team can lose track of actual user motivation and behavior. Ignorance is bliss? Bliss will flee when the project explodes on the launchpad.
+
+So, don&#39;t forget the U in UX. Test early and often for best results. Next up: Fixing everything those &lt;del&gt;heartless&lt;/del&gt; perfect little users didn’t love.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>iOS 7 - Skeuomorphic & Flat</title>
+   <link href="http://carletondesign.com/design/2013/10/31/ios-7-skeuomorphic-flat/"/>
+   <updated>2013-10-31T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/design/2013/10/31/ios-7-skeuomorphic-flat</id>
+   <content type="html">&lt;p&gt;Ok, that title may sound like link bait but this topic needs just one more opinion. You may have heard about this year’s most polarizing design topic: the shift from “skeuomorphic” to “flat” design in the latest version of iOS. Like many designers, I’m an Apple devotee and like many designers, I have admired recent so-called ‘flat’ interfaces from competitors and was hoping Apple would make a big splash with this version of iOS. I upgraded to the iPhone 5s, from a 4s, and have lived with iOS 7 for a few weeks. I have some thoughts:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Skeuomorph#Digital_skeuomorphs&quot;&gt;Skeuomorphic&lt;/a&gt; design is misunderstood. It’s characterized by visual treatments like faux leather and woodgrain but thats only the visual style aspect, at it’s roots skeuomorphism is about creating interfaces that reference real world patterns. A simple example is an icon of an analog clock. Modern devices have no requirement to represent time using this ancient pattern from the physical realm, but because it’s so ubiquitous, it’s the perfect symbol for anything time related. The physical symbol makes the perfect digital symbol.&lt;/p&gt;
+&lt;p&gt;Over time Apple, and others, took this successful principle and went too far toward replicating realistic visual treatments. Does a calendar app function better when it visually mimics the one that used to be on your desk, replete with paper textures and torn edges? I don’t think so. As a reaction and to differentiate competitors choose a different approach that contrasts this visual style with something called &lt;em&gt;flat design&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Flat design, although often contrasted with skeuomorphic design, is not a its true opposite. Flat design is a reactive style that favors simplicity over embellishment, but it doesn&#39;t eliminate references to the physical realm. Instead of using detailed textures and elaborate shadows, it relies on simple graphic elements of color, grid, and typography to convey meaning to the user.&lt;/p&gt;
+&lt;p&gt;My take is that iOS 7 is both skeuomorphic and flat. The big news was that Apple made a dramatic switch. Yes, the overwrought textures are gone (with a few exceptions) but the untold story is that many realistic symbols remain. The clock icon is still analog. The calendar app still uses the familiar grids established long ago to layout years, months, and weeks. The container where your email goes is still called the &lt;em&gt;inbox&lt;/em&gt;. These are skeumorphs of the real world, yet they can be used without the corresponding visual style, as evidenced in iOS 7.&lt;/p&gt;
+&lt;p&gt;So everyone calm down and find something new to debate. Skeuomorphic and flat design can get along just fine.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Simple Applications</title>
+   <link href="http://carletondesign.com/design/development/2013/09/27/simply-focused/"/>
+   <updated>2013-09-27T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/design/development/2013/09/27/simply-focused</id>
+   <content type="html">A discussion about simple interfaces with &lt;a href=&quot;http://bitbyteyum.com/articles/2013/09/26/interface-fixation/&quot;&gt;Brian Anderson&lt;/a&gt; and &lt;a href=&quot;http://initwithtyler.com/post/62175810773/thoughts-on-feature-design-and-product-ux&quot;&gt;Tyler Bell&lt;/a&gt; got me thinking. So I jumped on &lt;a href=&quot;http://editorially.com&quot;&gt;Editorially&lt;/a&gt; and started typing this post. Editorially is an example of a new breed of software where the interface isn’t in-your-face (see what I did there?). It’s designed to let your content be the focus while providing a refined set of features, available when you need them, instead of the usual heap of icons lumped in ribbons and tabs. This philosophy is also evident in &lt;a href=&quot;http://iawriter.com&quot;&gt;IA Writer&lt;/a&gt;, &lt;a href=&quot;http://ghost.org/&quot;&gt;Ghost&lt;/a&gt;, and &lt;a href=&quot;https://medium.com/i-m-h-o/3bc1a10ea0a5&quot;&gt;Medium&lt;/a&gt;. Sure, you can’t use these to mail-merge, but when you want to write, they let you. Simplicity is a beautiful thing.
+
+Then I thought about more complex tasks. Do we lose the efficiency which these narrow focused tools provide when you end up having to use four simple tools to replace one broad one? Of course I don’t want one tool that does everything. The thought of a Pages-Photoshop-Espresso-CodeKit-Terminal-Chrome mutant makes me seasick. So what’s the optimal balance? Can we hope for a future of few, focused apps or will we cycle back toward the comfort of bloated suites?
+
+Now I will publish this using Wordpress, an example of software that does too much, except when you need that one extra feature.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Podcasts</title>
+   <link href="http://carletondesign.com/design/development/websites/2013/09/10/podcasts/"/>
+   <updated>2013-09-10T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/design/development/websites/2013/09/10/podcasts</id>
+   <content type="html">Podcasting seems to be in a phase of growth. Suddenly there are dozens of good shows about the web and creative industries. It&#39;s not a new medium so maybe the growth has been more steady and I hadn&#39;t noticed until now but I&#39;m loving the results. I grew up with talk radio on around the house which I think gave me a special interest in listening to a good conversation. I love good music but I seem to crave podcasts more than tunes these days; call me weird. I love being able to learn something new about a design legend or discovering how the creators of a hot new app built an idea from scratch, all while driving my short commute. I end up educated, inspired, and entertained. It&#39;s a great way to bookend the workday. So without further adieu, here are my current favorites:
+
+&lt;img class=&quot;alignright&quot; alt=&quot;99 % Invisible&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2013/08/99percent.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
+&lt;h3&gt;99% Invisible&lt;/h3&gt;
+I love this show so much that each episode seems too short. Where else am I going to learn about the guy who created the area code, an otherworldly pavilion that attract teenagers at night, or where jay walkers got their name.  If all public radio was this good, we wouldn&#39;t be debating budgets, people would gladly pay to hear it. &lt;a href=&quot;http://99percentinvisible.org/&quot;&gt;99percentinvisible.org&lt;/a&gt; | &lt;a href=&quot;https://itunes.apple.com/podcast/99-invisible/id394775318&quot;&gt;iTunes&lt;/a&gt;
+
+&lt;img class=&quot;alignright&quot; alt=&quot;Happy Monday&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2013/08/happymonday.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
+&lt;h3&gt;Happy Monday&lt;/h3&gt;
+There is no better way to start your Monday than with a short burst of inspiration from Josh Long and Sarah Parmenter and their guests. &lt;a href=&quot;http://happymondaypodcast.com/&quot; target=&quot;_blank&quot;&gt;happymondaypodcast.com&lt;/a&gt; | &lt;a href=&quot;https://itunes.apple.com/gb/podcast/happy-monday/id586131811?mt=2&quot; target=&quot;_blank&quot;&gt;iTunes&lt;/a&gt;
+
+&lt;img class=&quot;alignright&quot; alt=&quot;execute&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2013/08/execute.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
+&lt;h3&gt;Execute&lt;/h3&gt;
+Jealous of those people who think of a product idea and then just make it happen? It doesn&#39;t take special powers, just read &lt;a href=&quot;http://executebook.com/&quot; target=&quot;_blank&quot;&gt;Execute&lt;/a&gt; and then listen to the Execute podcast and you&#39;ll be that person in no time. Maybe I should execute my own podcast. &lt;a href=&quot;http://executebook.com/&quot; target=&quot;_blank&quot;&gt;Execute&lt;/a&gt; &lt;a href=&quot;theindustry.cc/2013/04/05/execute-podcast-1-oak-studios/&quot; target=&quot;_blank&quot;&gt;theindustry.cc&lt;/a&gt; | &lt;a href=&quot;http://itun.es/i6JW5Dd&quot; target=&quot;_blank&quot;&gt;iTunes&lt;/a&gt;
+
+&lt;img class=&quot;alignright&quot; alt=&quot;bigwebshow&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2013/08/bigwebshow.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
+&lt;h3&gt;The Big Web Show&lt;/h3&gt;
+As the Godfather of the Web, Jeffery Zeldman can get an interview with anyone. I met &quot;Mr Ziggy&quot; once and although his stature is small, his knowledge is larger than life. I took a picture if you want to see it. :) &lt;a href=&quot;http://www.muleradio.net/thebigwebshow/&quot; target=&quot;_blank&quot;&gt;The Big Web Show&lt;/a&gt; | &lt;a href=&quot;http://5by5.tv/bigwebshow&quot; target=&quot;_blank&quot;&gt;Archives on 5by5&lt;/a&gt; | &lt;a href=&quot;http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewPodcast?id=370445683&amp;amp;partnerId=30&amp;amp;siteID=GfpxbBXXpXE-y3gfJGyOQcSr2tOpkzD12A&quot; target=&quot;_blank&quot;&gt;iTunes&lt;/a&gt;
+
+&lt;img class=&quot;alignright&quot; alt=&quot;designmatters&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2013/08/designmatters.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
+&lt;h3&gt;Design Matters&lt;/h3&gt;
+Debbie Milman has been interviewing influencers in art and design for years. Check the archives for a design education by ear. &lt;a href=&quot;http://observermedia.designobserver.com/show_designmatters.html&quot; target=&quot;_blank&quot;&gt;observermedia.designobserver.com&lt;/a&gt; | &lt;a href=&quot;https://itunes.apple.com/us/podcast/design-matters-debbie-millman/id328074695&quot; target=&quot;_blank&quot;&gt;iTunes&lt;/a&gt;
+
+&lt;img class=&quot;alignright&quot; alt=&quot;foundation&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2013/08/foundation.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
+&lt;h3&gt;Foundation&lt;/h3&gt;
+I keep up with hat&#39;s hot in the startup culture that surrounds me here in Silicon Valley via Kevin Rose. &lt;a href=&quot;http://foundation.bz/&quot; target=&quot;_blank&quot;&gt;foundation.kr&lt;/a&gt;  | &lt;a href=&quot;https://itunes.apple.com/us/podcast/foundation-hd-mp4-30fps/id412887856&quot; target=&quot;_blank&quot;&gt;iTunes&lt;/a&gt;
+
+&lt;img class=&quot;alignright&quot; alt=&quot;thegentlymad&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2013/08/thegentlymad.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
+&lt;h3&gt;The Gently Mad&lt;/h3&gt;
+Another quality design interview show that is new to my list. Adam Clark brings a fresh approach to the interview format. &lt;a href=&quot;http://thegentlymad.com/&quot; target=&quot;_blank&quot;&gt;thegentlymad.com&lt;/a&gt; | &lt;a href=&quot;https://itunes.apple.com/us/podcast/the-gently-mad/id594419508&quot; target=&quot;_blank&quot;&gt;iTunes&lt;/a&gt;
+
+&lt;img class=&quot;alignright&quot; alt=&quot;originstory&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2013/08/originstory.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
+&lt;h3&gt;Origin Story&lt;/h3&gt;
+This is different take on the interview format, asking the guest to start from childhood and work toward the present. The lesson is you can overcome anything with passion. &lt;a href=&quot;http://www.unitedpixelworkers.com/pages/podcast&quot; target=&quot;_blank&quot;&gt;unitedpixelworkers.com&lt;/a&gt; | &lt;a href=&quot;https://itunes.apple.com/us/podcast/origin-story/id599168818?mt=2&amp;amp;ign-mpt=uo%3D2&quot; target=&quot;_blank&quot;&gt;iTunes&lt;/a&gt;
+
+&lt;img class=&quot;alignright&quot; alt=&quot;businessology&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2013/08/businessology.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
+&lt;h3&gt;The Businessology Show&lt;/h3&gt;
+Dan Mall and Jason Blumer get into the nitty gritty of running a creative business. Don&#39;t miss &lt;a href=&quot;http://businessologyshow.biz/wordpress/value-pricing-with-daniel-mall-and-jason-blumer/&quot; target=&quot;_blank&quot;&gt;episode 4&lt;/a&gt; on value pricing, it changed my mindset on client work completely. That topic deserves it&#39;s own blog post. In the meantime, &lt;a href=&quot;http://breakingthetimebarrier.freshbooks.com/&quot; target=&quot;_blank&quot;&gt;read this&lt;/a&gt;. &lt;a href=&quot;http://businessologyshow.biz/wordpress/&quot; target=&quot;_blank&quot;&gt;businessologyshow.biz | &lt;/a&gt;&lt;a href=&quot;https://itunes.apple.com/us/podcast/the-businessology-show/id595500099?mt=2&quot; target=&quot;_blank&quot;&gt;iTunes&lt;/a&gt;
+
+&lt;img class=&quot;alignright&quot; alt=&quot;radiolab&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2013/08/radiolab.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
+&lt;h3&gt;RadioLab&lt;/h3&gt;
+This ones not design specific but it&#39;s a great source for learning something new. &lt;a href=&quot;http://www.radiolab.org/series/podcasts/&quot; target=&quot;_blank&quot;&gt;radiolab.org | &lt;/a&gt;&lt;a href=&quot;http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewPodcast?id=152249110&quot; target=&quot;_blank&quot;&gt;iTunes&lt;/a&gt;
+
+&lt;img class=&quot;alignright&quot; alt=&quot;pixelrecess&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2013/08/pixelrecess.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
+&lt;h3&gt;Pixel Recess&lt;/h3&gt;
+I don&#39;t know what&#39;s going on here but I&#39;m hooked. Just try a little bit. &lt;a href=&quot;http://pixelrecess.com/&quot; target=&quot;_blank&quot;&gt;pixelrecess.com&lt;/a&gt; | &lt;a href=&quot;https://itunes.apple.com/us/podcast/pixel-recess-design-podcast/id646799869?mt=2&quot; target=&quot;_blank&quot;&gt;iTunes&lt;/a&gt;
+&lt;h2&gt;Start Listening&lt;/h2&gt;
+So start listening. I will update this as I find new favorites. Let me know what you discover in the comments.
+
+Updates:
+9/24/13 &lt;a href=&quot;http://www.muleradio.net/thebigwebshow/&quot; target=&quot;_blank&quot;&gt;The Big Web Show&lt;/a&gt; has moved to Mule Radio.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Design is never the same</title>
+   <link href="http://carletondesign.com/design/2013/08/30/design-is-never-the-same/"/>
+   <updated>2013-08-30T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/design/2013/08/30/design-is-never-the-same</id>
+   <content type="html">Design is a chameleon and I love it. One day &lt;em&gt;design&lt;/em&gt; is a piece of paper with text, a moment later &lt;em&gt;design&lt;/em&gt; is an ephemeral atmospheric expression. There is so much in the world that craves thoughtful arrangement that the need for &lt;em&gt;design&lt;/em&gt; is endless and dynamic.
+
+My niche of design is especially volatile. The web changes every second, and as the technologies evolve so must the designer. This forces designers to be excellent at adapting, ready to jump on an idea before we really know what’s involved. Frank reminded me of this today:
+&lt;blockquote&gt;I learned to make websites because I agreed to do something that I didn’t know how to do and then I had to figure out how to do it. That seems to be a pattern…because nobody knows how to do what was invented last week. You have to say you know how, then figure it out under the gun.&lt;/blockquote&gt; - Frank Chimero via [&lt;a href=&quot;http://thegreatdiscontent.com/frank-chimero&quot;&gt;The Great Discontent&lt;/a&gt;]
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Icon Fonts</title>
+   <link href="http://carletondesign.com/design/development/2012/09/16/icon-fonts/"/>
+   <updated>2012-09-16T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/design/development/2012/09/16/icon-fonts</id>
+   <content type="html">&lt;h2&gt;The facts&lt;/h2&gt;
+Icon fonts are simply fonts that have symbols and glyphs (e.g. arrows, folders, magnifying glasses) instead of standard alphanumeric characters. Icon fonts are like dingbat fonts, but are designed specifically for UIs. Icon fonts, like other web fonts, use the CSS @font-face rule to display icons in web browsers. (Wikipedia)
+
+&lt;strong&gt;Advantages&lt;/strong&gt;
+&lt;ul&gt;
+	&lt;li&gt;Resolution Agnostic: Crisp at any resolution, even Retina&lt;/li&gt;
+	&lt;li&gt;Simple Styling: Edit the styling easily with CSS (color, size, gradient, shadow). Styling can even adjust on the fly.&lt;/li&gt;
+	&lt;li&gt;Great Performance: Smaller file than image sprites, good for mobile&lt;/li&gt;
+	&lt;li&gt;Cross-browser support (even IE) &lt;a href=&quot;http://caniuse.com/#feat=fontface&quot;&gt;Details&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://css-tricks.com/examples/IconFont/&quot;&gt;Demo&lt;/a&gt; by CSS-Tricks.com&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://fortawesome.github.com/Font-Awesome/#examples&quot;&gt;Examples&lt;/a&gt; from Font Awesome&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5&gt;Icon Font Sources&lt;/h5&gt;
+General Icon Fonts
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;http://thedesignoffice.org/project/modern-pictograms/&quot;&gt;Modern Pictograms&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.entypo.com/&quot;&gt;Entypo&lt;/a&gt; (also available in vector)&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://tipogram.com/&quot;&gt;Tipogram&lt;/a&gt; (also available in vector)&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.tenbytwenty.com/sosa.php&quot;&gt;Sosa&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://xperiments.es/blog/en/free-pulsarjs-fontface-iconfont/&quot;&gt;Pulsar&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://icons.marekventur.de/&quot;&gt;Raphaël&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://somerandomdude.com/work/iconic/&quot;&gt;Iconic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+Customizable Icon Font Sets
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;https://www.shifticons.com/&quot;&gt;Shifticons&lt;/a&gt; Build your own icon font from a variety of authors&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://pictos.cc/server/&quot;&gt;Pictos&lt;/a&gt; Build your own icon font&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://fontello.com/&quot;&gt;Fontello&lt;/a&gt; Build your own icon font from several different libraries&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://keyamoon.com/icomoon/#toHome&quot;&gt;IcoMoon&lt;/a&gt; Build your own icon font and &lt;em&gt;add your own&lt;/em&gt; icons&lt;/li&gt;
+&lt;/ul&gt;
+Icon Fonts for Frameworks
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;http://fortawesome.github.com/Font-Awesome/#overview&quot;&gt;Font Awesome&lt;/a&gt; Icon font for Twitter Bootstrap (or other sites)&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.zurb.com/playground/foundation-icons&quot;&gt;Foundation Icons&lt;/a&gt; Icon font for Zurb Foundation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5&gt;Build your own from scratch&lt;/h5&gt;
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;https://github.com/blog/1135-the-making-of-octicons&quot;&gt;The Making of Oticons&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://itunes.apple.com/us/app/glyphs-mini/id469036911?mt=12&quot;&gt;Glyphs Font Software&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5&gt;Variant: Symbol Fonts&lt;/h5&gt;
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;http://symbolset.com/&quot;&gt;Symbolset&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5&gt;More info:&lt;/h5&gt;
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;https://gimmebar.com/collection/4fb3e167aac422094a000005/icon-fonts&quot;&gt;Collection of links from Trent Walton&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Should I use Icon Fonts?&lt;/h2&gt;
+&lt;strong&gt;Would you enjoy these benefits?&lt;/strong&gt;
+&lt;ul&gt;
+	&lt;li&gt;Resolution Agnostic: Crisp at any resolution, even Retina&lt;/li&gt;
+	&lt;li&gt;Simple Styling: Edit the styling easily with CSS (color, size, gradient, shadow). Styling can even adjust on the fly.&lt;/li&gt;
+	&lt;li&gt;Great Performance: Smaller file than image sprites, good for mobile&lt;/li&gt;
+	&lt;li&gt;Cross-browser support (even IE) &lt;a href=&quot;http://caniuse.com/#feat=fontface&quot;&gt;Details&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;strong&gt;Can you overcome these challenges?&lt;/strong&gt;
+&lt;ul&gt;
+	&lt;li&gt;Limited icon icon set: Will a pre arranged set of icons cover your needs or will you need to create your own custom font?&lt;/li&gt;
+	&lt;li&gt;Not willing to be limited? Try using a stock set with a few custom additions, via &lt;a href=&quot;http://keyamoon.com/icomoon/#toHome&quot;&gt;IcoMoon&lt;/a&gt;.&lt;/li&gt;
+	&lt;li&gt;If your design requires multiple color icons, icon fonts may not work. Continue using traditional methods, such as image sprites.&lt;/li&gt;
+	&lt;li&gt;Work-around for multi-color icons: Joel Gillman demonstrates &lt;a title=&quot;Multi Piece Icon Fonts&quot; href=&quot;http://frontendjerk.com/2012/10/multi-piece-icon-fonts/&quot; target=&quot;_blank&quot;&gt;how to stack several icon pieces together&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Get Going&lt;/h2&gt;
+The great thing about the web is that it&#39;s so easy to try out new ideas like this. You can quickly this feature onto  your site and see it action. Go on, try it out!
+</content>
+ </entry>
+ 
+ <entry>
+   <title>An Event Apart: With Great Power Comes Great Responsibility</title>
+   <link href="http://carletondesign.com/design/learning/2011/12/28/an-event-apart-with-great-power-comes-great-responsibility/"/>
+   <updated>2011-12-28T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/design/learning/2011/12/28/an-event-apart-with-great-power-comes-great-responsibility</id>
+   <content type="html">&lt;em&gt;This is part of a series of posts summarizing my notes from the extraordinary conference &lt;a href=&quot;http://aneventapart.com/&quot;&gt;An Event Apart&lt;/a&gt;, held December 12-14, 2011 at The Palace Hotel in San Francisco.&lt;/em&gt;
+
+&lt;strong&gt;With Great Power Comes Great Responsibility&lt;/strong&gt;
+
+&lt;a href=&quot;https://twitter.com/#!/elliotjaystocks&quot;&gt;@elliotjaystocks&lt;/a&gt; Designer, Author
+
+&lt;strong&gt;Description&lt;/strong&gt;
+
+Recent developments in web technologies like HTML5 and CSS3 have allowed us to build a richer web, full of advanced visual treatments like web fonts, animations, transformations, and drop-shadows. But have we got carried away with our new toys? Just because we can use a drop-shadow doesn’t mean we have to. In this new and often controversial talk, Elliot looks at solid design principles that will turn a good website into a great website, examines the scenarios where it’s better to stay away from unnecessary visual effects, and attempts to find the sweet spot in between the two extremes. “With great power comes great responsibility,” said Uncle Ben, and Spidey hadn’t even used border-radius!
+
+&lt;strong&gt;Notes&lt;/strong&gt;
+
+Introduction
+
+Don&#39;t always focus on the latest tech, tools and trends. While useful, they don&#39;t automatically make good design.
+
+*So much good stuff out there...*
+&lt;a href=&quot;http://nikebetterworld.com&quot;&gt;Nike Better World&lt;/a&gt;
+&lt;a href=&quot;http://onotakehiko.com/webkitclock/&quot;&gt;Webkit clock&lt;/a&gt;
+&lt;a href=&quot;http://nizoapp.com&quot;&gt;Nizo for iPhone&lt;/a&gt;
+
+*... and so much bad stuff, too*
+
+Destroy the Web 2.0 look
+&lt;ul&gt;
+	&lt;li&gt;Designers jumped on the trend for image gradients, gloss, rounded corners, etc. to make things look &quot;real&quot;&lt;/li&gt;
+	&lt;li&gt;Attention to detail is much more important than visual trends&lt;/li&gt;
+&lt;/ul&gt;
+Distraction of the &quot;Real&quot;
+&lt;ul&gt;
+	&lt;li&gt;Grunge textures, post-it notes, coffee stains, wooden backgrounds, ect.&lt;/li&gt;
+	&lt;li&gt;Wrong 3d effects - impossible shadows, gradients, texture, backgrounds&lt;/li&gt;
+	&lt;li&gt;Styling effects hiding bad basic design - grid, typography, composition&lt;/li&gt;
+&lt;/ul&gt;
+*Dan Norman&#39;s &lt;a href=&quot;http://bit.ly/affordance_design&quot;&gt;Affordances and Design&lt;/a&gt;*
+&lt;blockquote&gt;What the designer cares about is whether the user perceives that some action is possible (or in the case of perceived non-affordances, not possible).&lt;/blockquote&gt;
+&lt;blockquote&gt;In product design...there can be both real and perceived affordances, and the two need not be the same. In graphical, screen-based interfaces, all that the designer has available is control over perceived affordances.&lt;/blockquote&gt;
+&lt;ul&gt;
+	&lt;li&gt;Real and perceived affordances communicate interaction.&lt;/li&gt;
+	&lt;li&gt;Ex. If you are designing to look 3d, get it right. Otherwise people expect behaviors that don&#39;t exist in your design.&lt;/li&gt;
+	&lt;li&gt;Consider the context when deciding to make something look like a real-world object. (neg ex. Address Book on Lion)&lt;/li&gt;
+&lt;/ul&gt;
+Typography is (Almost) Everything
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;http://8faces.com/&quot;&gt;8 Faces&lt;/a&gt; - You only need a small number of fonts to do a lot.&lt;/li&gt;
+	&lt;li&gt;Learning from Print Design&lt;/li&gt;
+	&lt;li&gt;Try print work to inspire design principles on the web&lt;/li&gt;
+	&lt;li&gt;Working from the type outwards, allows you to focus on content first.
+Tim Brown: &lt;a href=&quot;http://vimeo.com/17079380&quot;&gt;More perfect Typography&lt;/a&gt;
+Typograph: &lt;a href=&quot;http://lamb.cc/typograph/&quot;&gt;Scale &amp;amp; Rhythm&lt;/a&gt;
+&lt;a href=&quot;http://typecastapp.com&quot;&gt;Typecastapp&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;Typography details make a much bigger impact on design than visual effects.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;If 2010 was the webfont&#39;s incunabula, then it looks as though 2011 will mark its coming of age.
+-&lt;a href=&quot;http://ilovetypography.com/sayonara-2010/&quot;&gt;John Boardley&lt;/a&gt;&lt;/blockquote&gt;
+&lt;ul&gt;
+	&lt;li&gt;Type has made strides recently, but there is still work to be done to make them look great everywhere.&lt;/li&gt;
+&lt;/ul&gt;
+It&#39;s a Journey
+Get inspired
+&lt;ul&gt;
+	&lt;li&gt;Go outside, read books, look outside the web&lt;/li&gt;
+	&lt;li&gt;Don&#39;t limit yourself to web galleries of other people&#39;s work&lt;/li&gt;
+	&lt;li&gt;The latest tech wont make you a better designer, outside inspiration will.&lt;/li&gt;
+&lt;/ul&gt;
+Constant journey of learning
+&lt;ul&gt;
+	&lt;li&gt;Trying&lt;/li&gt;
+	&lt;li&gt;Failing&lt;/li&gt;
+	&lt;li&gt;Trying Again&lt;/li&gt;
+&lt;/ul&gt;
+Use new power responsibly
+&lt;ul&gt;
+	&lt;li&gt;New tools are amazing, use them wisely&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;With Great Power Comes Great Responsibility. Act Accordingly.&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>An Event Apart: The Dimensions of a Good Experience</title>
+   <link href="http://carletondesign.com/design/learning/2011/12/28/an-event-apart-the-dimensions-of-a-good-experience/"/>
+   <updated>2011-12-28T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/design/learning/2011/12/28/an-event-apart-the-dimensions-of-a-good-experience</id>
+   <content type="html">&lt;em&gt;This is part of a series of posts summarizing my notes from the extraordinary conference &lt;a href=&quot;http://aneventapart.com/&quot;&gt;An Event Apart&lt;/a&gt;, held December 12-14, 2011 at The Palace Hotel in San Francisco.&lt;/em&gt;
+
+&lt;strong&gt;&lt;a href=&quot;https://twitter.com/#!/ladylexy&quot; rel=&quot;nofollow&quot;&gt;Alexa Andrzejewski&lt;/a&gt;&lt;/strong&gt;
+Founder - &lt;a href=&quot;http://foodspotting.com/&quot; rel=&quot;nofollow&quot;&gt;Foodspotting&lt;/a&gt;
+
+&lt;strong&gt;Description&lt;/strong&gt;
+
+Good designs are useful, usable and desirable. But what is a good experience? While crafting the experience of her own startup, Foodspotting, Alexa Andrzejewski found answers in urban design. Asking the same question about urban experiences, Kevin Lynch, author of “Good City Form,” extracted a set of dimensions for evaluating experiences. By applying these principles to interactive experiences, you can identify what kind of experience you’re creating for users: Is it adaptable? Does it tell a story? Are there signs of life? You’ll leave with a set of guidelines that, unlike traditional heuristics, will enable you to evaluate the experiential qualities of your designs.
+
+&lt;strong&gt;Quotes&lt;/strong&gt;
+&lt;blockquote&gt;There are no stupid users, only stupid interaction designers.&lt;/blockquote&gt;
+&lt;strong&gt;Notes&lt;/strong&gt;
+
+&lt;strong&gt;Learning from Urban Design
+&lt;/strong&gt;
+Learning from cities - urban landscape experience
+Principles from urban design can give us new ways at looking at our mobile and web designs.
+Source: Kevin Lynch, &lt;a href=&quot;http://www.amazon.com/Good-City-Form-Kevin-Lynch/dp/0262620464&quot; rel=&quot;nofollow&quot;&gt;Good City Form&lt;/a&gt;
+Example - Transparency - open vs private
+We know hot to evaluate usability, but how do we evaluate experiences?
+&lt;ol&gt;
+	&lt;li&gt;Sense of Meaning
+&lt;ul&gt;
+	&lt;li&gt;Does it tell a story? How does it reflect values? Can users read the environment?&lt;/li&gt;
+	&lt;li&gt;Urban example: Visual cues&lt;/li&gt;
+	&lt;li&gt;Digital example: Foodspotting Homepage&lt;/li&gt;
+	&lt;li&gt;What story do you want to tell and how can you use the language of design to communicate it? How is your information architecture structured to support the story?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Sense of Place
+&lt;ul&gt;
+	&lt;li&gt;Does it leave an impression on the senses? Is it memorable?&lt;/li&gt;
+	&lt;li&gt;Urban example: distinct neighborhoods&lt;/li&gt;
+	&lt;li&gt;Sensory experiences are memorable&lt;/li&gt;
+	&lt;li&gt;Smell, see, hear &amp;lt;=&amp;gt; visuals, video, sound, copy writing - all contribute to a user&#39;s memory of a site&lt;/li&gt;
+	&lt;li&gt;This helps attract a different kind of user (through the design). Focus on key moments to make memorable.&lt;/li&gt;
+	&lt;li&gt;What moments do you want users to remember and how can you make them memorable?&lt;/li&gt;
+	&lt;li&gt;Show a new user a homepage and ask if they understand the value of the service - how well are you communicating?&lt;/li&gt;
+	&lt;li&gt;Digital example: &lt;a href=&quot;https://www.tumblr.com/&quot; rel=&quot;nofollow&quot;&gt;tubmlr&lt;/a&gt;,&lt;a rel=&quot;nofollow&quot;&gt;scoutmob&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Sense of Structure
+&lt;ul&gt;
+	&lt;li&gt;Can you wrap your mind around the structure? Does the design yield accurate mental maps?&lt;/li&gt;
+	&lt;li&gt;When things fit together, you feel in control and the sense of place is integrated.&lt;/li&gt;
+	&lt;li&gt;Urban example: subway system&lt;/li&gt;
+	&lt;li&gt;Digital example:&lt;a href=&quot;https://path.com/&quot; rel=&quot;nofollow&quot;&gt;Path App&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;If you look at a page or screen in isolation, is it evident where it fits into the bigger picture? Are their visual clues that can orient you? Ask users to sketch a map.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Sense of Unfolding
+&lt;ul&gt;
+	&lt;li&gt;Does it get better the more you explore? Is the first time experience tempered so as not to be overwhelming?&lt;/li&gt;
+	&lt;li&gt;A good place is one that gets better as you explore.&lt;/li&gt;
+	&lt;li&gt;Urban Example: Big plazas, small alleys&lt;/li&gt;
+	&lt;li&gt;Digital Example: &lt;a href=&quot;http://www.foodily.com/&quot; rel=&quot;nofollow&quot;&gt;Foodily&lt;/a&gt; Adds features, as user increases usage&lt;/li&gt;
+	&lt;li&gt;What is the #1 thing you want people to do on their first visit? Their second? Their third? Can you unlock features as you explore the app/site?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Sense of Transparency
+&lt;ul&gt;
+	&lt;li&gt;Can you see signs of life on the inside from the outside?&lt;/li&gt;
+	&lt;li&gt;Urban Example: Fish market - seeing where restaurants get their food, Sidewalk cafe&#39;s - open to public view&lt;/li&gt;
+	&lt;li&gt;Digital Example: &lt;a href=&quot;http://www.pinterest.com&quot; rel=&quot;nofollow&quot;&gt;Pinterest&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;What activities do you want users to engage in? Are people able to learn by example? Can people help each other learn how to use things?&lt;/li&gt;
+	&lt;li&gt;Different communities value different amounts of transparency. Design the level of transparency to fit your audience.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Fit
+&lt;ul&gt;
+	&lt;li&gt;Does the design of a place anticipate and facilitate people&#39;s desired actions so seamlessly that it makes you feel competent and smart?&lt;/li&gt;
+	&lt;li&gt;Urban Example: Staircase directional signs, bike ramp&lt;/li&gt;
+	&lt;li&gt;Digital Example: &lt;a href=&quot;http://hashable.com/&quot; rel=&quot;nofollow&quot;&gt;Hashable&lt;/a&gt; contact sharing interaction starts with just an email or twitter username&lt;/li&gt;
+	&lt;li&gt;Observe user behavior and ask user questions: Is there any evidence of misfit? Where are people abandoning?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Adaptability
+&lt;ul&gt;
+	&lt;li&gt;Can users modify or adapt the structure to increase fit?&lt;/li&gt;
+	&lt;li&gt;Build things open-ended and learn from real behaviors.&lt;/li&gt;
+	&lt;li&gt;Urban Example: Adhoc parks and meeting spots&lt;/li&gt;
+	&lt;li&gt;Digital Example: hacked facebook and twitter profile pages&lt;/li&gt;
+	&lt;li&gt;Have you noticed any surprising adaptions or workarounds in how users interact with your site or app? What can you learn form them?&lt;/li&gt;
+	&lt;li&gt;Observe what your users are doing, then learn form their adaptions. Can you support them? (paving cow paths)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Access
+&lt;ul&gt;
+	&lt;li&gt;How much and what range of choices are presented to a user at a given time? Is it too many or too few?&lt;/li&gt;
+	&lt;li&gt;Urban Example: Subway Stations&lt;/li&gt;
+	&lt;li&gt;Digital Example: &lt;a href=&quot;http://fab.com&quot; rel=&quot;nofollow&quot;&gt;Fab&lt;/a&gt; Curated, temporary selection of products. Compare with everything possible on Amazon.&lt;/li&gt;
+	&lt;li&gt;When are users presented with palettes of choices? Are there any choices you could take away? A/B test fewer choices, see how behavior changes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Responsibility
+&lt;ul&gt;
+	&lt;li&gt;Do the users of a place feel a sense of ownership and responsibility for the experience?&lt;/li&gt;
+	&lt;li&gt;Engage your users to help manage content.&lt;/li&gt;
+	&lt;li&gt;Urban Example: Community gardens&lt;/li&gt;
+	&lt;li&gt;Digital Example: Gowalla spot fixer, Facebook comments, &lt;a href=&quot;http://quora.com&quot; rel=&quot;nofollow&quot;&gt;Quora&lt;/a&gt; reputation&lt;/li&gt;
+	&lt;li&gt;Real names, reputations produce good behavior.&lt;/li&gt;
+	&lt;li&gt;How can you increase users&#39; sense of responsibility?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Certainty
+&lt;ul&gt;
+	&lt;li&gt;Can people trust in the system of control? Does the environment act in predicable ways? (Especially when they are not in control)&lt;/li&gt;
+	&lt;li&gt;Urban Example: Transit Information&lt;/li&gt;
+	&lt;li&gt;Digital Example: &lt;a href=&quot;http://mint.com&quot; rel=&quot;nofollow&quot;&gt;Mint&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;What are the most anxiety-introducing moments in your site or app? What sights/sounds/interactions could reduce this anxiety?&lt;/li&gt;
+	&lt;li&gt;Reassure users, build confidence in your product.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;strong&gt;Use these as a tool&lt;/strong&gt;
+Evaluate your experiences with these lenses and learn from the results.
+&lt;ol&gt;
+	&lt;li&gt;Sense of Meaning: Does the design tell a story?&lt;/li&gt;
+	&lt;li&gt;Sense of Place: Is it memorable or are there memorable moments?&lt;/li&gt;
+	&lt;li&gt;Sense of Structure: Can you tell how the pieces and parts fit together?&lt;/li&gt;
+	&lt;li&gt;Sense of Unfolding: Are options revealed over time vs. thrown at users all at once?&lt;/li&gt;
+	&lt;li&gt;Sense of Transparency: Can you observe and learn by observation?&lt;/li&gt;
+	&lt;li&gt;Fit: Does it make people feel competent? Is there any evidence of misfit?&lt;/li&gt;
+	&lt;li&gt;Adaptability: Can it be repurposed in novel ways?&lt;/li&gt;
+	&lt;li&gt;Access: Are people confronted with the right number of choices at the right time?&lt;/li&gt;
+	&lt;li&gt;Responsibility: Do people feel ownership of the experience?&lt;/li&gt;
+	&lt;li&gt;Certainty: Can people trust in the system?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;Now go forth and create great experiences!&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>An Event Apart: Design Principles</title>
+   <link href="http://carletondesign.com/development/learning/2011/12/27/an-event-apart-design-principles/"/>
+   <updated>2011-12-27T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/development/learning/2011/12/27/an-event-apart-design-principles</id>
+   <content type="html">&lt;em&gt;This is part of a series of posts summarizing my notes from the extraordinary conference &lt;a href=&quot;http://aneventapart.com/&quot;&gt;An Event Apart&lt;/a&gt;, held December 12-14, 2011 at The Palace Hotel in San Francisco.&lt;/em&gt;
+
+&lt;strong&gt;Design Principles&lt;/strong&gt;
+
+&lt;a href=&quot;https://twitter.com/#!/adactio&quot;&gt;Jeremy Keith&lt;/a&gt; - Author
+
+&lt;strong&gt;Description&lt;/strong&gt;
+
+All software is inherently political, reflecting the biases and beliefs of the people behind it. These beliefs can be made explicit through the publication of design principles: pragmatic rules of thumb that underpin a shared endeavor. Find out how important good design principles are to any project, whether it’s a website, a framework, or the World Wide Web itself.
+
+&lt;strong&gt;Quotes&lt;/strong&gt;
+&lt;blockquote&gt;Design Principle: Be conservative in what you send and liberal in what you accept (ex. forgiving input forms)&lt;/blockquote&gt;
+&lt;blockquote&gt;HTML5 degradation is like Inception in your browser.&lt;/blockquote&gt;
+&lt;blockquote&gt;Design principles are not about pleasing everybody. Pick a side and plant your flag.&lt;/blockquote&gt;
+&lt;strong&gt;Notes&lt;/strong&gt;
+
+&lt;strong&gt;Design Principles&lt;/strong&gt;
+*Principles, Goals, and Patterns*
+* Design Principles are the tenets for a project. They help create consensus, determine the best approach to a problem.
+** Design Goals -&amp;gt; Why?
+** Design Principles -&amp;gt; How?
+** Design Patterns -&amp;gt; What?
+** These influence each other
+&lt;blockquote&gt;Pretty much any endeavor in human history has had this pattern of design goals, principles, and patterns.&lt;/blockquote&gt;
+** You can&#39;t prevent your philosophies from showing in your work.
+&lt;blockquote&gt;Software, like all technologies, is inherently political. Code inevitably reflects the choices, biases and desires of its creators. -Jamais Cascio&lt;/blockquote&gt;
+Web &amp;amp; Design Principles
+* Emergent design principles of the web: Rough consensus and running code
+* The Web is agreement, bottom-up effort
+* CSS core pattern
+&lt;code&gt;selector {property:value;}&lt;/code&gt;
+** fail proof - skips unknown elements
+* Principle: fault tolerant behavior, allows evolution of patterns
+&lt;blockquote&gt;Be conservative in what you send and liberal in what you accept.&lt;/blockquote&gt;
+HTML5 &amp;amp; Design Principles
+* Compatibility, utility, interoperability
+* Browser graceful degradation allows quick adoption of new features
+* Input types - hints mobile browsers to use keyboard types
+* Browser Goal: Backward compatibility
+* Design Principle: Progressive enhancement (connected to graceful degradation)
+* Ex: HTML5 Video - video tag can contain code to a flash movie as a fallback.
+&lt;blockquote&gt;Levels of fallback in html5 is like inception in your browser&lt;/blockquote&gt;
+*Javascript &amp;amp; Design Principles*
+* Metcalf&#39;s law
+bq. The value of a network is proportional to the square of the number of connected users in the system.
+* Javasrcript is everywhere. Competitors fight Metcalf&#39;s law.
+* Unobtrusive Javascript: chose a framework based on philosophy
+* Jquery: find stuff, do stuff to it.
+** ex: star rating input actually a form selector instead of links. Selector is transformed into linked starts with js.
+** Look for fundamental task
+** Look at anti-patterns.
+* Principles can be informed by goals that are malicious. You can develop designs that are likewise malicious.
+** ex: Rynair used a cookie to double the fair price on a return visit.
+* Not about pleasing everyone
+
+Big picture Principles
+* Goals lead down to principles; principles lead down to patterns.
+* Fewer principles help focus the task.
+* Pareto Principle.
+&lt;blockquote&gt;Design for the 80%&lt;/blockquote&gt;
+** Instead of solving for everything, aim for the bigger group
+* Support universal access - principles that bring life to websites that work across all devices.
+
+For more info, see &lt;a href=&quot;http://principles.adactio.com/&quot;&gt;Design Principles&lt;/a&gt;.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>An Event Apart: Content First</title>
+   <link href="http://carletondesign.com/design/learning/websites/2011/12/27/an-event-apart-content-first/"/>
+   <updated>2011-12-27T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/design/learning/websites/2011/12/27/an-event-apart-content-first</id>
+   <content type="html">&lt;em&gt;This is the first in a series of posts summarizing my notes from the extraordinary conference &lt;a href=&quot;http://aneventapart.com/&quot;&gt;An Event Apart&lt;/a&gt;, held December 12-14, 2011 at The Palace Hotel in San Francisco.&lt;/em&gt;
+
+&lt;strong&gt;Jeffery Zeldman&lt;/strong&gt;: Legendary Web Standards Guru, &lt;a href=&quot;https://twitter.com/#!/zeldman&quot;&gt;@zeldman&lt;/a&gt;, &lt;a href=&quot;http://zeldman.com/&quot;&gt;Zeldman.com&lt;/a&gt;, Author: &lt;a href=&quot;http://www.amazon.com/Designing-Web-Standards-Jeffrey-Zeldman/dp/0321616952/ref=sr_1_1?ie=UTF8&amp;amp;qid=1325724920&amp;amp;sr=8-1&quot;&gt;Designing with Web Standards&lt;/a&gt;, Co-Founder: &lt;a href=&quot;http://aneventapart.com/&quot;&gt;An Event Apart&lt;/a&gt;, Founder: &lt;a href=&quot;http://happycog.com/&quot;&gt;Happy Cogg&lt;/a&gt;, Founder: &lt;a href=&quot;http://alistapart.com&quot;&gt;A List Apart&lt;/a&gt;, Publisher: &lt;a href=&quot;http://abookapart.com&quot;&gt;A Book Apart&lt;/a&gt;.
+
+&lt;strong&gt;Description&lt;/strong&gt;
+
+The rules of design engagement are changing. You may no longer be in control of the user’s visual experience. Learn the number one job of every web designer, how to persuade clients and bosses not to subject users to dark patterns, why the days of “Best Viewed With…” are finally behind us, and how a mobile (or small screen) strategy can help you improve your content, rethink your web experience, and put the user first.
+
+&lt;strong&gt;Quotes&lt;/strong&gt;
+&lt;blockquote&gt;Design that does not serve people does not serve business.&lt;/blockquote&gt;
+&lt;blockquote&gt;Responsive design is progressive enhancement taken to the next level&lt;/blockquote&gt;
+&lt;blockquote&gt;Content is a design problem&lt;/blockquote&gt;
+&lt;blockquote&gt;Design in the absence of Content is not Design, it&#39;s decoration&lt;/blockquote&gt;
+&lt;em&gt;Notes&lt;/em&gt;
+&lt;ul&gt;
+	&lt;li&gt;Content is a design problem&lt;/li&gt;
+	&lt;li&gt;Sites are often hostile to content
+&lt;ul&gt;
+	&lt;li&gt;Plan for contingencies, overall ux&lt;/li&gt;
+	&lt;li&gt;Often an afterthought to relates links, seo, nav, etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;strong&gt;We can&#39;t control the display&lt;/strong&gt;
+&lt;ul&gt;
+	&lt;li&gt;We&#39;ve been in a consensual hallucination that designers control the display.&lt;/li&gt;
+	&lt;li&gt;The days of &quot;Best viewed with..&quot; are over&lt;/li&gt;
+	&lt;li&gt;Your content will live outside your precise design, if it&#39;s not readable, users will find a way&lt;/li&gt;
+	&lt;li&gt;ex: Instapaper/Readability/Flipbook, accessibility tools (screen reader, text zoom)&lt;/li&gt;
+	&lt;li&gt;Users fitting content they way they want to experience it (time, style)&lt;/li&gt;
+&lt;/ul&gt;
+What&#39;s the designers job then?
+&lt;ul&gt;
+	&lt;li&gt;Still to server the customer&lt;/li&gt;
+	&lt;li&gt;User experience design not designer experience&lt;/li&gt;
+	&lt;li&gt;Design that doesn&#39;t server people doesn&#39;t serve business!&lt;/li&gt;
+	&lt;li&gt;Don&#39;t spam users, don&#39;t create misleading interfaces, no tricks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;strong&gt;Content BEFORE design&lt;/strong&gt;
+&lt;ul&gt;
+	&lt;li&gt;Design without content is decoration&lt;/li&gt;
+	&lt;li&gt;How do you make a cake if you don&#39;t know if its for a wedding or a funeral&lt;/li&gt;
+	&lt;li&gt;Design succeeds when it supports the content,&lt;/li&gt;
+&lt;/ul&gt;
+&lt;strong&gt;Solutions&lt;/strong&gt;
+&lt;ul&gt;
+	&lt;li&gt;Progressive Enhancement &amp;amp; Responsive Web Design
+&lt;ul&gt;
+	&lt;li&gt;PE is a universal smart default.&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://easy-readers.net/books/adaptive-web-design/&quot;&gt;Adaptive Web Design&lt;/a&gt; by Aaron Gustafson and &lt;a href=&quot;http://www.abookapart.com/products/responsive-web-design&quot;&gt;Responsive Web Design&lt;/a&gt; by Ethan Marcotte&lt;/li&gt;
+	&lt;li&gt;Today&#39;s web has many devices with many ways to interact with content&lt;/li&gt;
+	&lt;li&gt;RWD is PE taken to the next level. Layouts adapt to devices.&lt;/li&gt;
+	&lt;li&gt;Fluid grids, flexible media, media queries are just one way to implement the idea.&lt;/li&gt;
+	&lt;li&gt;Responsive sites react to the needs of the user through screen size and other contingencies&lt;/li&gt;
+	&lt;li&gt;RWD is small screen design vs. a mobile strategy&lt;/li&gt;
+	&lt;li&gt;e by Luke W&lt;/li&gt;
+	&lt;li&gt;Content Strategy: What did they come here for? Get rid of the rest&lt;/li&gt;
+	&lt;li&gt;Half our users are on a mobile browser&lt;/li&gt;
+	&lt;li&gt;Mobile browsers are advanced, webkit/HTML5/CSS3&lt;/li&gt;
+	&lt;li&gt;Limited screen size and utility force us to put user needs first.&lt;/li&gt;
+	&lt;li&gt;Explore your existing search activity to see what users are looking for.&lt;/li&gt;
+	&lt;li&gt;Users expect and accept a different experience on mobile.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+	&lt;li&gt;Typical workflow vs. Content First workflow.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+	&lt;li&gt;Existing workflow is backwards, leaving content till the end.&lt;/li&gt;
+	&lt;li&gt;We should start with and experience and content strategy instead of a turf battle over technology and features.&lt;/li&gt;
+	&lt;li&gt;The result is better content, and design tailored to that content.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Real Fonts on the Web</title>
+   <link href="http://carletondesign.com/design/learning/typography/websites/2011/04/27/web-fonts/"/>
+   <updated>2011-04-27T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/design/learning/typography/websites/2011/04/27/web-fonts</id>
+   <content type="html">&lt;img class=&quot;alignnone size-full wp-image-324&quot; title=&quot;webfonts&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2011/04/webfonts.gif&quot; alt=&quot;&quot; width=&quot;400&quot; height=&quot;165&quot; /&gt;
+
+&lt;strong&gt;Backstory&lt;/strong&gt;
+Fonts on the web have been limited by licensing restrictions setup for the print era by the font foundries who create them. Only a few limiting choices have been available to designers, while print licenced fonts remained untouchable (except in images/flash).
+
+As a result, we&#39;ve been working in the &quot;web safe&quot; range of fonts, Times, Arial, Georgia, etc. The work around was using other fonts in images, wich comes at the cost of site speed, SEO, and flexibility.
+
+&lt;strong&gt;Breakthroughs&lt;/strong&gt;
+Several solutions have emerged that allow a great variety of fonts to be legally used on the web.
+
+Open licenses
+&lt;ul&gt;
+	&lt;li&gt;Free unlimited use&lt;/li&gt;
+	&lt;li&gt;Limited options&lt;/li&gt;
+	&lt;li&gt;Doesn’t $upport typographers&lt;/li&gt;
+	&lt;li&gt;Sources:
+&lt;ul&gt;
+	&lt;li&gt;&lt;a title=&quot;The League of Moveable Type&quot; rel=&quot;nofollow&quot; href=&quot;http://www.theleagueofmoveabletype.com&quot; target=&quot;_blank&quot;&gt;The League of Moveable Type&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Google Webfonts&quot; rel=&quot;nofollow&quot; href=&quot;http://www.google.com/webfonts&quot; target=&quot;_blank&quot;&gt;Google Webfonts&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Font Squirrel&quot; rel=&quot;nofollow&quot; href=&quot;http://www.fontsquirrel.com/fontface&quot; target=&quot;_blank&quot;&gt;Font Squirrel&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+Middlemen Services
+&lt;ul&gt;
+	&lt;li&gt;They worry about the licensing&lt;/li&gt;
+	&lt;li&gt;Huge selection&lt;/li&gt;
+	&lt;li&gt;Simplifies the compatibility mess&lt;/li&gt;
+	&lt;li&gt;Fixed Fee or Subscription cost&lt;/li&gt;
+	&lt;li&gt;Services:
+&lt;ul&gt;
+	&lt;li&gt;&lt;a title=&quot;Typekit&quot; rel=&quot;nofollow&quot; href=&quot;http://typekit.com/&quot; target=&quot;_blank&quot;&gt;Typekit&lt;/a&gt;
+Free/Paid Subscription ($0-100/year)
+Provides a wide selection of fonts, including Adobe&#39;s library.&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Font Spring&quot; rel=&quot;nofollow&quot; href=&quot;http://www.fontspring.com/&quot; target=&quot;_blank&quot;&gt;Fontspring&lt;/a&gt;
+One-time fee ($0-50 per font), unlimited use.&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Web Type&quot; rel=&quot;nofollow&quot; href=&quot;http://www.webtype.com/&quot; target=&quot;_blank&quot;&gt; WebType&lt;/a&gt;
+Free Trial, Paid Subscription ($10-100/year)&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Fonts.com&quot; rel=&quot;nofollow&quot; href=&quot;http://webfonts.fonts.com/&quot; target=&quot;_blank&quot;&gt; Fonts.com&lt;/a&gt;
+Free or paid subscription ($10-100/year)
+Also provides a local copy for your mockups.&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Font Deck&quot; rel=&quot;nofollow&quot; href=&quot;http://fontdeck.com/&quot; target=&quot;_blank&quot;&gt; Font Deck&lt;/a&gt;
+Free trial, Pay per font, per year ($7.50 average)&lt;/li&gt;
+	&lt;li&gt;For even more options, visit &lt;a title=&quot;Web Font Services&quot; rel=&quot;nofollow&quot; href=&quot;http://sprungmarker.de/wp-content/uploads/webfont-services/&quot; target=&quot;_blank&quot;&gt;this great comparison by Sylvia Egger&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;strong&gt;How to use @font-face&lt;/strong&gt;
+This simple CSS rule references the font file. Modify size, weight, color, line-height, shadow, etc. The font stack allows fallback to safe fonts in browsers without support.
+
+Example CSS:
+&lt;code&gt;@font-face {
+font-family: yourfontname;
+src: url(http://www.yourfontfile);
+}
+p {
+font-family: yourfontname, Helvetica, Arial, sans-serif;
+}&lt;/code&gt;
+
+@font-face is supported by these browsers (and newer versions):
+&lt;ul&gt;
+	&lt;li&gt;Internet Explorer 5&lt;/li&gt;
+	&lt;li&gt;Firefox 3.5&lt;/li&gt;
+	&lt;li&gt;Safari 3.1&lt;/li&gt;
+	&lt;li&gt;Chrome 4.0.249.4&lt;/li&gt;
+	&lt;li&gt;Opera 10.54 (Windows &amp;amp; Mac OS)&lt;/li&gt;
+	&lt;li&gt;iPad and iPhone iOS 3.1&lt;/li&gt;
+&lt;/ul&gt;
+@font-face file types vary by browser:
+&lt;ul&gt;
+	&lt;li&gt;Internet Explorer only supports EOT&lt;/li&gt;
+	&lt;li&gt;Mozilla browsers support OTF and TTF&lt;/li&gt;
+	&lt;li&gt;Safari and Opera support OTF, TTF and SVG&lt;/li&gt;
+	&lt;li&gt;Chrome supports TTF and SVG.&lt;/li&gt;
+&lt;/ul&gt;
+Services deliver the correct files for each browser, no mess.
+If you host your own, you&#39;ll need some help:
+&lt;ul&gt;
+	&lt;li&gt;&lt;a title=&quot;Font Face Generator&quot; rel=&quot;nofollow&quot; href=&quot;http://www.fontsquirrel.com/fontface/generator&quot; target=&quot;_blank&quot;&gt;http://www.fontsquirrel.com/fontface/generator&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Bullet Proof Font Face Impletemenation&quot; rel=&quot;nofollow&quot; href=&quot;http://paulirish.com/2009/bulletproof-font-face-implementation-syntax/&quot; target=&quot;_blank&quot;&gt;http://paulirish.com/2009/bulletproof-font-face-implementation-syntax/&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Ffffallback&quot; rel=&quot;nofollow&quot; href=&quot;http://ffffallback.com/&quot; target=&quot;_blank&quot;&gt;http://ffffallback.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+So, that all sound great, but what does it look like?
+Check out these fonts in action:
+&lt;ul&gt;
+	&lt;li&gt;&lt;a rel=&quot;nofollow&quot; href=&quot;http://typekit.com/about&quot; target=&quot;_blank&quot;&gt;http://typekit.com/about&lt;/a&gt;
+Typekit&#39;s own website showcases some great fonts&lt;/li&gt;
+	&lt;li&gt;&lt;a rel=&quot;nofollow&quot; href=&quot;http://www.onyourwayhere.com/&quot; target=&quot;_blank&quot;&gt;http://www.onyourwayhere.com/&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a rel=&quot;nofollow&quot; href=&quot;http://lostworldsfairs.com/&quot; target=&quot;_blank&quot;&gt;http://lostworldsfairs.com/&lt;/a&gt;
+A really fun demo of various fonts.&lt;/li&gt;
+	&lt;li&gt;&lt;a rel=&quot;nofollow&quot; href=&quot;http://www.kiva.org/&quot; target=&quot;_blank&quot;&gt;http://www.kiva.org/&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a rel=&quot;nofollow&quot; href=&quot;http://weareelixir.com/&quot; target=&quot;_blank&quot;&gt;http://weareelixir.com/&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a rel=&quot;nofollow&quot; href=&quot;http://carletondesign.com/&quot; target=&quot;_blank&quot;&gt;http://carletondesign.com/&lt;/a&gt;
+(This site uses typekit)&lt;/li&gt;
+	&lt;li&gt;&lt;a rel=&quot;nofollow&quot; href=&quot;http://forabeautifulweb.com/&quot; target=&quot;_blank&quot;&gt;http://forabeautifulweb.com/&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a rel=&quot;nofollow&quot; href=&quot;http://www.webfontsgallery.com/&quot; target=&quot;_blank&quot;&gt;http://www.webfontsgallery.com/&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a rel=&quot;nofollow&quot; href=&quot;http://www.webfontawards.com/&quot; target=&quot;_blank&quot;&gt;http://www.webfontawards.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+Even more info:
+&lt;ul&gt;
+	&lt;li&gt;&lt;a title=&quot;Zeldman&quot; rel=&quot;nofollow&quot; href=&quot;http://www.zeldman.com/2010/03/22/my-lovehate-affair-with-typekit/&quot; target=&quot;_blank&quot;&gt;Zeldman.com: My Love Hate Affair with Typekit&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;The Big Web Show&quot; rel=&quot;nofollow&quot; href=&quot;http://5by5.tv/bigwebshow/1&quot; target=&quot;_blank&quot;&gt;The Big Web Show: Web Fonts&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Font Face Tutorials&quot; rel=&quot;nofollow&quot; href=&quot;http://www.awwwards.com/font-face-tutorials.html&quot; target=&quot;_blank&quot;&gt;Font Face Tutorials&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Web Typography&quot; rel=&quot;nofollow&quot; href=&quot;http://webtypography.net/intro/&quot; target=&quot;_blank&quot;&gt;Web Typography&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Web Font Services&quot; href=&quot;http://sprungmarker.de/wp-content/uploads/webfont-services/&quot; target=&quot;_blank&quot;&gt;Web Font Services&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;strong&gt;So, what are you waiting for?&lt;/strong&gt; Go explore the new world of real fonts on the web!
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Rework</title>
+   <link href="http://carletondesign.com/learning/2011/01/26/rework/"/>
+   <updated>2011-01-26T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/learning/2011/01/26/rework</id>
+   <content type="html">[caption id=&quot;&quot; align=&quot;alignnone&quot; width=&quot;343&quot; caption=&quot;&#39;Meetings are toxic.&#39; by Mike Rohde (Image property of 37signals)&quot;]&lt;a href=&quot;http://www.flickr.com/photos/37s/4418288411/in/set-72157623458720373/&quot;  target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img alt=&quot;Meetings are Toxic&quot; src=&quot;http://farm5.static.flickr.com/4018/4418288411_8bc279667e.jpg&quot; title=&quot;Meetings are Toxic&quot; width=&quot;343&quot; height=&quot;500&quot; /&gt;&lt;/a&gt;[/caption]
+
+I hardly shout at all, but I have to make an exception. GET THIS BOOK!!!!!! Seriously!
+
+Rework, by Jason Fried and David Heinemeier Hansson is a must-read. I won&#39;t try to summarize it, you need to experience every word. I will note some of my favorite parts:
+&lt;blockquote&gt;&quot;Workaholics aren’t heroes. They don’t save the day, they just use it up. The real hero is already home because she figured out a faster way to get things done.&quot; &lt;/blockquote&gt;
+&lt;blockquote&gt;&quot;Working without a plan may seem scary. But blindly following a plan that has no relationship with reality is even scarier.&quot;&lt;/blockquote&gt;
+&lt;blockquote&gt;&quot;Interruption is the enemy of productivity. The worst interruptions of all are meetings. Meetings are toxic.&quot;&lt;/blockquote&gt;
+&lt;blockquote&gt;&quot;When everything needs constant approval, you create a culture of non-thinkers.&quot;&lt;/blockquote&gt;
+There is so much more, you just have to read it. It&#39;s general enough that anyone with a job can apply it but it also has specific wisdom for those starting a new venture. The &lt;a href=&quot;http://www.flickr.com/photos/37s/sets/72157623458720373/with/4418288411/&quot;  target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;amazing artwork&lt;/a&gt; by Mike Rohde is the icing on this cake of business wisdom. Yum.
+
+To get a feel for the book, visit &lt;a href=&quot;http://37signals.com/rework/&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;http://37signals.com/rework/&lt;/a&gt;
+
+Get your own copy:
+[caption id=&quot;attachment_275&quot; align=&quot;alignnone&quot; width=&quot;106&quot; caption=&quot;Rework by Jason Fried &amp; David Heinemeier Hansson&quot;]&lt;a href=&quot;http://www.amazon.com/gp/product/0307463745?ie=UTF8&amp;amp;tag=t00e2-20&amp;amp;linkCode=as2&amp;amp;camp=1789&amp;amp;creative=390957&amp;amp;creativeASIN=0307463745&quot;  target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;http://carletondesign.com/blog/wp-content/uploads/2011/01/rework_cover.jpg&quot; alt=&quot;Rework&quot; title=&quot;Rework&quot; width=&quot;106&quot; height=&quot;160&quot; class=&quot;size-full wp-image-275&quot; /&gt;&lt;/a&gt;[/caption]
+
+UPDATE: In response to Rework, Happy Cog has published &lt;a href=&quot;http://cognition.happycog.com/article/an-open-letter-to-37-signals&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;An Open Letter to 37signals&lt;/a&gt; calling for better meetings, instead of throwing them out.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Just Released</title>
+   <link href="http://carletondesign.com/design/graphics/websites/2011/01/25/just-released/"/>
+   <updated>2011-01-25T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/design/graphics/websites/2011/01/25/just-released</id>
+   <content type="html">I have completed a redesign of my personal portfolio website. Visit &lt;a href=&quot;www.carletondesign.com&quot;&gt;carletondesign.com&lt;/a&gt; to check it out. 
+[caption id=&quot;attachment_265&quot; align=&quot;alignnone&quot; width=&quot;400&quot; caption=&quot;The new carletondesign.com&quot;]&lt;a href=&quot;http://carletondesign.com/&quot;&gt;&lt;img src=&quot;http://carletondesign.com/blog/wp-content/uploads/2011/01/carletondesigncom_sm.jpg&quot; alt=&quot;The new carletondesign.com&quot; title=&quot;The new carletondesign.com&quot; width=&quot;400&quot; height=&quot;360&quot; class=&quot;size-full wp-image-265&quot; /&gt;&lt;/a&gt;[/caption]
+
+I thought I would let you in on the design and development decisions behind the project.
+
+&lt;strong&gt;Design&lt;/strong&gt;
+First, let me say designing a site for yourself can be a bigger challenge than pleasing your pickiest clients. I went through multiple iterations of several different design directions before settling on the final styling. The earlier versions had fine details, textures, and color tones that were really nice, but the problem was, I was making more work for myself than necessary. I realized that my site doesn&#39;t have to showcase my finest details or adhear to the latests design trends. Instead, I turned toward simplicity. I cut the personal monogram that perfectly balanced positive and negative space which boasted a brushed metal texture and realistic highlights and shadows. I cut the multi-state navigation menu that had a mechanical feeling I loved. Instead, I thought, what would the site look like if I used zero graphics (other than the portfolio images) and only text. This self imposed constraint roped in my creativity and allowed me to focus on getting it done. I had the design comp done in a half hour, and I loved it. The layout is simple, the details are subtle and it&#39;s designed to focus the visitor on my work and the calls to action. I also designed the copy to reinforce the simple, get to the point style, that is me.
+
+&lt;strong&gt;Development&lt;/strong&gt;
+The simplicity of the styling inspired a simplicity in the code. I worked to keep the code clean and flexible. It validates!. The layout&#39;s simplicity also hides it&#39;s best feature: flexibilty. If you didn&#39;t notice, go back and resize the broweser window. Watch the site adapt acordingly. Thanks to some inspiration from &lt;a href=&quot;http://unstoppablerobotninja.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;Ethan Marcotte&lt;/a&gt;, the images and layout scale based on the size of the browser window. I&#39;ll be digging deeper into these strategies and making further improvements, but I love how it works so far. I first coded the site without the CSS3 drop shadows, transparency or fonts. Once the foundation was laid, and tested, the embellishments were added. I have the advantage of focusing on an audience that uses the latest browsers, so I took a vacation from the usual struggles of browser compatibility and had fun with some nice features. The most visual feature is the custom font, Museo sans from &lt;a href=&quot;http://typekit.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;Typekit&lt;/a&gt;. I love typography and have been folowing the boom in web fonts closely. I&#39;ve used @font-face before but thought I would find out what all the hype around Typekit was about. Now I&#39;m a believer. In a matter of minutes, I had a cross-browser/platform solution that enabled me to use a wide variety of high-quality fonts on my site. Wow, thinks sure have changed.
+
+Like most websites, it&#39;s never done, but reaching this point feels great. I enjoyed designing and developing this new site and hope you enjoy browsing it.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Learn to Code</title>
+   <link href="http://carletondesign.com/websites/2011/01/20/learn-to-code/"/>
+   <updated>2011-01-20T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/websites/2011/01/20/learn-to-code</id>
+   <content type="html">Friends have asked how to get started learning web development. The good news is that it&#39;s pretty simple to get started building websites. Like anything, it takes a lot more time to develop your skill to a professional level. Here are a few resources to get anyone started in the right direction.  
+
+&lt;a href=&quot;http://www.w3schools.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;W3 Schools&lt;/a&gt; is a comprehensive guide to web codes. Guided lessons and quick reference for html and css makes this very helpful tool for newbies and pros. 
+
+Editors
+There are a wide variety of HTML editors but your can start with any simple program like Notepad or TextEdit. More elaborate programs such a Dreamweaver can write code for you but such WYSIWYG applications can slow down your learning and become a crutch. Although simple to use, the code they generate is often not semantic or efficient. I suggest learning to do it yourself, the time investment will pay off in better results.
+
+W3C
+Once you get into the code how to you know your doing it right? Easily check your programming with W3C&#39;s &lt;a href=&quot;http://validator.w3.org/&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;html&lt;/a&gt; and &lt;a href=&quot;http://jigsaw.w3.org/css-validator/&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;css&lt;/a&gt; validators. These tools check your code against the official standards and even suggests improvements.
+
+Books
+There are countless books that can guide you through development of a simple sample site. I recommend getting books by experts in the industry: Jeffery Zeldman, Eric Meyer, Dan Cederholm, Jeremy Keith, and others. (I&#39;m working on a specific list.)
+
+Once you get started you can follow blogs such as &lt;a href=&quot;http://www.alistapart.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;A List Apart&lt;/a&gt;, &lt;a href=&quot;http://net.tutsplus.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;Nettuts&lt;/a&gt;, &lt;a href=&quot;http://www.smashingmagazine.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;Smashing mag&lt;/a&gt;, &lt;a href=&quot;http://www.netmagazine.com&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;.net mag&lt;/a&gt;, and more to keep up with the latest techniques.
+
+Have fun! Start with a project you&#39;re really excited about, instead of the one thats due tomorrow.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Labs</title>
+   <link href="http://carletondesign.com/design/graphics/websites/2010/12/21/labs/"/>
+   <updated>2010-12-21T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/design/graphics/websites/2010/12/21/labs</id>
+   <content type="html">What do you think of when you see a beaker full of unknown liquids? Scientific experimentation comes to mind. I&#39;ve noticed a rise in logos and illustrations which contain scientific symbols, such as beakers or test tubes, used to represent the experimental qualities of web/software companies. Here are a few examples that work well:
+
+[caption id=&quot;attachment_254&quot; align=&quot;alignnone&quot; width=&quot;600&quot;]&lt;img class=&quot;size-full wp-image-254&quot; title=&quot;labs_collage&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2010/12/labs_collage.jpg&quot; alt=&quot;&quot; width=&quot;600&quot; height=&quot;600&quot; /&gt; Trend: Lab equipment logos[/caption]
+
+(Images property of their respective owners.)
+I like the idea of borrowing the symbols from a traditional field to represent something new in technology. I used the term &#39;lab&#39; as part of a name for a friend&#39;s new &lt;a title=&quot;Ames CoLab&quot; href=&quot;http://amescolab.com/&quot; target=&quot;blank&quot;&gt;co-working space&lt;/a&gt; and love how it symbolizes groundbreaking ideas in action.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Progressive Enrichment</title>
+   <link href="http://carletondesign.com/websites/2010/11/23/progressive-enrichment/"/>
+   <updated>2010-11-23T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/websites/2010/11/23/progressive-enrichment</id>
+   <content type="html">&lt;!-- p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica} p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px} span.s1 {letter-spacing: 0.0px} --&gt;There are some great new features rolling out with CSS3 and HTML5 that will make life fun for web designers/programmers. Simple rounded corners, integrated video and fancy transitions are just a few of the many new options provided to developers. To varying degrees, browser makers are bolstering their support for these advancements in their latest versions.
+
+Whenever new browser versions arrive, the question is raised on what features are widespread enough to take advantage of, and what level to design for. Users have many options for browsers, and then many versions of each browser. Some keep updated to the latest versions, others lag behind.
+
+How do you know if your visitors will have the capability to experience the fancy new additions you spent so much time building? You could target the most common browser and avoid creating anything that isn’t compatible. Instead, I want to suggest and idea proposed by &lt;a title=&quot;Simplebits&quot; href=&quot;http://simplebits.com/&quot; target=&quot;blank&quot;&gt;people smarter than me&lt;/a&gt;, called &lt;strong&gt;progressive enrichment&lt;/strong&gt;. I love this idea.
+
+In his book &lt;em&gt;&lt;a title=&quot;Handcrafted CSS&quot; href=&quot;http://www.amazon.com/gp/product/0321658531?ie=UTF8&amp;tag=t00e2-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321658531&quot; target=&quot;blank&quot;&gt;Handcrafted CSS&lt;/a&gt;&lt;/em&gt;, Dan Cederholm skillfully asks, “Do Websites Need to Look Exactly the Same in Every Browser?” His answer is no. Instead of being disappointed that the new features don’t show up in older browsers, shift your thinking to the standpoint that newer browsers are rewarded with enhanced features. Think about benefits instead of problems. This may be a big change in thinking for decision makers who expect one design to be rendered exactly the same in all browsers. If properly built, the layout, readability, and features could be developed similarly in each browser, but the finer details would differ as browsers support them.
+
+Dan also suggests that the degree of your progressive enrichment should be tempered by your site’s specific stats. He quotes another smart guy, Eric Meyer who said it doesn’t matter what the global stats are for a browser, but it does matter what your specific site’s stats are. If your particular audience is full of early adopters, you have more freedom to enhance the site with the latest and greatest. However, if many of your site’s visitors are on earlier browser versions, you should focus on more widely supported features.
+
+So if you&#39;re skimming this, here is my point: Because there is a delay between the release of new browser features and the adoption of browser software, you can’t simply develop sites dependent on advance features. On the other hand you shouldn’t develop to the lowest common denominator. I suggest using progressive enhancement to enable advanced browsers to enjoy new features while still providing a great experience to lesser browsers.
+
+Further Reading:
+
+[caption id=&quot;attachment_141&quot; align=&quot;alignnone&quot; width=&quot;115&quot; caption=&quot;Handcrafted CSS&quot;]&lt;a href=&quot;http://www.amazon.com/Handcrafted-CSS-Bulletproof-Essentials-DVD/dp/0321658124/ref=ntt_at_ep_dpt_5&quot; target=&quot;_blank&quot;&gt;&lt;img class=&quot;size-full wp-image-141&quot; title=&quot;Handcrafted CSS&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2010/11/Handcrafted_CSS.jpg&quot; alt=&quot;Handcrafted CSS&quot; width=&quot;115&quot; height=&quot;115&quot; /&gt;&lt;/a&gt;[/caption]
+
+[caption id=&quot;attachment_142&quot; align=&quot;alignnone&quot; width=&quot;115&quot; caption=&quot;Designing with Progressive Enhancement&quot;]&lt;a href=&quot;http://www.amazon.com/gp/product/0321658884?ie=UTF8&amp;tag=t00e2-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321658884&quot; target=&quot;_blank&quot;&gt;&lt;img class=&quot;size-full wp-image-142&quot; title=&quot;Designing with Progressive Enhancement&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2010/11/Progressive_enhancement.jpg&quot; alt=&quot;Designing with Progressive Enhancement&quot; width=&quot;115&quot; height=&quot;115&quot; /&gt;&lt;/a&gt;[/caption]
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Solo to Specialized</title>
+   <link href="http://carletondesign.com/learning/websites/2010/11/18/solo-to-specialized/"/>
+   <updated>2010-11-18T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/learning/websites/2010/11/18/solo-to-specialized</id>
+   <content type="html">I recently transitioned from being a self employed consultant, to a corporate employee. I went from wide responsibility of all aspects of my own business into a specialized cog at a big, high speed corporation.
+
+&lt;img class=&quot;alignnone size-full wp-image-237&quot; title=&quot;blog_solo-specila&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2010/11/blog_solo-specila.gif&quot; alt=&quot;&quot; width=&quot;480&quot; height=&quot;261&quot; /&gt;
+
+I enjoyed the freedom of working on my own schedule, choosing my own priorities, and moving in the direction I choose. Freedom is liberating, but a challenge to sustain. You can’t rely on anyone else to carry you. It takes determination and endurance to conquer each unique task that arises in your work projects and business administration. Not an expert on tax law? Time to learn quick or hire a consultant. Need to take a vacation? Your projects won’t get done with out you. It’s all you, the good and the bad. Some days go well, others don’t, but your task is to sustain your quest toward your own definition of success.
+
+In contrast, the corporate environment is organized and optimized. I was hired to be one part of a larger team, which is in a larger department in a larger company with multiple locations, with an international reach. Instead of balancing an array of responsibilities, I’m focused on one set of tasks which I apply repeatedly to a specific type of project in an exact timeframe, during business hours, in the company’s facility. Working in a team of specialists that are focused, toward carefully planned goals, has benefits in efficiency and productivity. Each member of the organization is able to focus on their specific task and rely on others to provide their complimentary piece of the puzzle. The organization is appropriately rigid and strategically focused on its specific measure of success, while the individuals seek further development/advancement for themselves.
+
+I don’t know which I prefer, there are benefits and challenges to each. I like taking the afternoon off on a whim. I also like the camaraderie a group provides. I like making a big impact on small projects, but it’s also rewarding to make a small impact on a big scale. I’m grateful for the option to try each work environment and I aim to learn from each situation.
+
+For the moment, the idea of a small, diverse team of specialists that collaborate in a creative and flexible environment seems like the most attractive arrangement. It can combine flexibility of being solo with the productivity of a team, while retaining a size that allows greater ownership of the work than a bigger company can foster.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Optimized for Search</title>
+   <link href="http://carletondesign.com/websites/2010/10/16/optimized-for-search/"/>
+   <updated>2010-10-16T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/websites/2010/10/16/optimized-for-search</id>
+   <content type="html">&lt;a href=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/05/seo.jpg&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-149&quot; title=&quot;seo&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/05/seo-300x197.jpg&quot; alt=&quot;seo&quot; width=&quot;300&quot; height=&quot;197&quot; /&gt;&lt;/a&gt;
+
+Search engine optimization is the voodoo of web marketing. Many people claim to be experts at getting your site to the top of Google&#39;s results, but wont disclose their magic tricks. When search engines and the internet were new, promoting your site was simple. Things have changed but the basic principles can still be conquered. Dump the voodoo and get going on the basics:
+
+1) Skip the tricks, build it right
+You can&#39;t trick Google into to higher search placement. Don&#39;t try it. Shortcuts don&#39;t work. I&#39;ll admit that in 1999 I built a site with SEO tricks, it seemed smart at the time, but I&#39;ve learned better. Instead of tricks, rely on website code that is clean, lean, organized, and valid (meets web standards).
+
+2) Keep it real
+A site&#39;s content is it&#39;s best SEO tool. In the planning stage, decide what keywords your site should have based on how users search. Next, write good text content that contains those words. Talk about those keywords in your site, use them in your domain name, page titles, and headlines. You might have heard about keywords and meta tags. Meta tags are code in your site that is there just for search engines. While it&#39;s not as important as they used to be, it still helps.
+
+3) Do what search engines suggest.
+Search providers are open about their requirements if not their exact methods. Many will promote their paid services but there are plenty of free steps you should take to make your site findable. If your starting from scratch, submit your site to &lt;a title=&quot;Yahoo&quot; href=&quot;http://dir.yahoo.com/&quot; target=&quot;_blank&quot;&gt;Yahoo&#39;s Directory&lt;/a&gt; and the &lt;a href=&quot;http://dmoz.org/&quot;&gt;Open Directory Project&lt;/a&gt;. XML sitemaps can be used to help search engines navigate more complex websites.
+
+4) Spread the news
+Links from related sites are valuable for SEO. Reviews, articles, and press releases about your site help build your credibility and increase paths to your site.
+
+4) Be patient
+Don&#39;t expect overnight results. If your building a new site it will take time for your site to be indexed by search engines. Stay focused on the long term goals instead of instant gratification.
+
+These basics are a great start to getting good search result for your site, but there are, of course, many more details you can delve into, even as a career. As complex as it gets, it boils down to creating a well built site that has quality content.
+
+More info:
+&lt;a title=&quot;Wikipedia&quot; href=&quot;http://en.wikipedia.org/wiki/Search_engine_optimization&quot; target=&quot;_blank&quot;&gt;Wikipedia: SEO&lt;/a&gt;
+&lt;a title=&quot;Google&quot; href=&quot;http://www.google.com/support/webmasters/bin/answer.py?hl=en&amp;amp;answer=35291&quot; target=&quot;_blank&quot;&gt;Google&#39;s Guide to SEO&lt;/a&gt;
+&lt;a href=&quot;http://www.456bereastreet.com/archive/200502/basics_of_search_engine_optimisation/&quot; target=&quot;_blank&quot;&gt;Basics of SEO&lt;/a&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Inspiration</title>
+   <link href="http://carletondesign.com/general/2010/04/29/inspiration/"/>
+   <updated>2010-04-29T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/general/2010/04/29/inspiration</id>
+   <content type="html">&lt;a href=&quot;http://work.frankchimero.com/#34058/Inspirational-Design-Posters&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-224&quot; title=&quot;productivity&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2010/04/productivity-236x300.jpg&quot; alt=&quot;Buy this from Frank Chimero&quot; width=&quot;236&quot; height=&quot;300&quot; /&gt;&lt;/a&gt;
+
+Sometimes a wise word is just what you need. I recently &lt;a title=&quot;Quotes&quot; href=&quot;http://designwashere.com/80-inspiring-quotes-about-design/&quot; target=&quot;_blank&quot;&gt;stumbled&lt;/a&gt; on these gems of knowledge:
+&lt;blockquote&gt;People ignore design that ignores people.
+
+— &lt;a title=&quot;Frank Chimero&quot; href=&quot;http://work.frankchimero.com/&quot; target=&quot;_blank&quot;&gt;Frank Chimero&lt;/a&gt;, Graphic Designer (Check out his &lt;a title=&quot;Posters&quot; href=&quot;http://work.frankchimero.com/#34058/Inspirational-Design-Posters&quot; target=&quot;_blank&quot;&gt;awesome poster series&lt;/a&gt;)&lt;/blockquote&gt;
+&lt;blockquote&gt;Content precedes design. Design in the absence of content is not design, it’s decoration.
+
+— &lt;a title=&quot;Jeffery Zeldman&quot; href=&quot;http://www.zeldman.com/&quot; target=&quot;_blank&quot;&gt;Jeffrey Zeldman&lt;/a&gt;, Web Genius&lt;/blockquote&gt;
+&lt;blockquote&gt;If design isn’t profitable, then it’s art.
+
+— &lt;a title=&quot;Henrik Fiskar&quot; href=&quot;http://en.wikipedia.org/wiki/Henrik_Fisker&quot; target=&quot;_blank&quot;&gt;Henrik Fiskar&lt;/a&gt;, Automobile Designer&lt;/blockquote&gt;
+&lt;blockquote&gt;Always design a thing by considering it in its next larger context - a chair in a room, a room in a house, a house in an environment, an environment in a city plan.
+
+— &lt;a title=&quot;Eliel Saarinen&quot; href=&quot;http://en.wikipedia.org/wiki/Eliel_Saarinen&quot; target=&quot;_blank&quot;&gt;Eliel Saarinen&lt;/a&gt; Architect&lt;/blockquote&gt;
+&lt;blockquote&gt;The most innovative designers consciously reject the standard option box and cultivate an appetite for thinking wrong.
+
+— &lt;a title=&quot;Marty Neumeier&quot; href=&quot;http://www.neutronllc.com/neutron/who&quot; target=&quot;_blank&quot;&gt;Marty Neumeier&lt;/a&gt;, Graphic/Brand Designer&lt;/blockquote&gt;
+&lt;blockquote&gt;Design is the application of intent - the opposite of happenstance, and an antidote to accident.
+
+— &lt;a title=&quot;Robert L. Peters&quot; href=&quot;http://en.wikipedia.org/wiki/Robert_L._Peters&quot; target=&quot;_blank&quot;&gt;Robert L. Peters&lt;/a&gt;, Graphic Designer&lt;/blockquote&gt;
+&lt;blockquote&gt;Math is easy; design is hard.
+
+— &lt;a title=&quot;Jeffrey Veen&quot; href=&quot;http://www.veen.com/jeff/index.html&quot; target=&quot;_blank&quot;&gt;Jeffrey Veen&lt;/a&gt;, Web Design&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>The Wrapping Banner</title>
+   <link href="http://carletondesign.com/design/websites/2009/10/27/the-wrapping-banner/"/>
+   <updated>2009-10-27T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/design/websites/2009/10/27/the-wrapping-banner</id>
+   <content type="html">I&#39;ve noticed this wrap-around or folding banner thing showing up around the web. I like it. Simple effects like this add layer and depth to the flat images on screen.
+
+[caption id=&quot;attachment_206&quot; align=&quot;alignnone&quot; width=&quot;590&quot; caption=&quot;The Wrapping Banner&quot;]&lt;a href=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/10/foldover1.jpg&quot;&gt;&lt;img src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/10/foldover1.jpg&quot; alt=&quot;The Wrapping Banner&quot; title=&quot;foldover&quot; width=&quot;590&quot; height=&quot;350&quot; class=&quot;size-full wp-image-206&quot; /&gt;&lt;/a&gt;[/caption]
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Museum of Today</title>
+   <link href="http://carletondesign.com/design/2009/10/06/museum-of-today/"/>
+   <updated>2009-10-06T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/design/2009/10/06/museum-of-today</id>
+   <content type="html">If you have ever been to a science museum, you know what to expect: wild animals preserved in threatening poses, strange bugs from across the planet and, if you&#39;re lucky, some dinosaur bones. Things have changed a bit at the California Academy of Sciences. Last year they completed a major overhaul to their facility in Golden Gate Park in San Francisco, and transformed it into the greenest museum in the world (LEED Platinum). The usual bugs and bones remain, but the exhibits have been designed to increase visibility and interaction. You can walk through a four-story glass orb that contains the rainforest exhibit, explore the amazing aquarium, stare at the night sky in the planetarium, or watch researchers do their actual work in front of you.
+
+[caption id=&quot;attachment_816&quot; align=&quot;alignnone&quot; width=&quot;500&quot; caption=&quot;California Academy of Sciences, San Francisco&quot;]&lt;img class=&quot;size-full wp-image-816&quot; title=&quot;calacademy&quot; src=&quot;http://tjcaia.com/blog/wp-content/uploads/2009/10/calacademy.jpg&quot; alt=&quot;California Academy of Sciences, San Francisco&quot; width=&quot;500&quot; height=&quot;245&quot; /&gt;[/caption]
+
+My favorite exhibit is the building itself. It is packed with green features but none are obtrusive. The average visitor may not notice the solar array, computer-controlled natural ventilation, or rainwater collection, but they will definitely notice the result: a beautiful, light-filled, comfortable museum which prompts you to spend the day learning. The grandest green feature it its 2.5 acre green roof which looks like a green carpet floating above the whole museum. Architect Renzo Piano sketched it with one undulating line. From the observation deck you can enjoy an impressive view of the native plantings and species that call the roof their home, as well as the rest of the park and city beyond. I wish my office was up there; it is amazing.
+
+-James
+
+More info:
+&lt;a title=&quot;California Academy of Sciences&quot; href=&quot;http://www.calacademy.org/academy/building/&quot; target=&quot;_blank&quot;&gt; California Academy of Sciences&lt;/a&gt;
+&lt;a title=&quot;Inhabitat&quot; href=&quot;http://www.inhabitat.com/2008/09/22/california-academy-of-sciences-unveiled/&quot; target=&quot;_blank&quot;&gt; Inhabitat&lt;/a&gt; article about Cal Academy
+
+(Note: Article republished from &lt;a title=&quot;TJCAIA&quot; href=&quot;http://tjcaia.com/blog/2009/10/modern-museum/&quot; target=&quot;_blank&quot;&gt;Thomas J Carleton Architecture&lt;/a&gt;)
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Crafting 2.0</title>
+   <link href="http://carletondesign.com/art/general/websites/2009/09/09/crafting-2-0/"/>
+   <updated>2009-09-09T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/art/general/websites/2009/09/09/crafting-2-0</id>
+   <content type="html">The term &lt;em&gt;crafting&lt;/em&gt; brings to mind the knitted sweaters my aunt made for Christmas gifts. Those weren&#39;t worn much after that day. The old stereotypes of crafts are being redefined by a new generation of creative people. Today&#39;s crafts are functional, stylish or cute creations that appeal to a new audience who are tired of massed produced options from the mega store. 
+
+If you appreciate hand made items, you used to visit your local craft fair. The halls were filled with knit pot holders, yarn haired dolls and jewelry made from &quot;friendly&quot; plastic.  Today, crafting is back and it&#39;s high-tech.  Creative folks have turned to the web for inspiration, instruction and customers. 
+
+&lt;a href=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/09/etsy_sample.jpg&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-181&quot; title=&quot;etsy_sample&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/09/etsy_sample-283x300.jpg&quot; alt=&quot;etsy_sample&quot; width=&quot;283&quot; height=&quot;300&quot; /&gt;&lt;/a&gt;
+
+Websites like &lt;a href=&quot;http://etsy.com&quot; target=&quot;_blank&quot;&gt;Etsy.com&lt;/a&gt; (rhymes with Betsy) are built as a marketplace for crafters. Customer can buy a wide range of items from talented crafters without leaving their couch, while crafters get a worldwide audience for their specialized creations. Several of &lt;a href=&quot;http://mypaperhabit.etsy.com&quot; target=&quot;_blank&quot;&gt;my&lt;/a&gt; &lt;a href=&quot;http://blessedbyit.etsy.com&quot; target=&quot;_blank&quot;&gt;family&lt;/a&gt; and &lt;a href=&quot;http://kristinsanchez.etsy.com&quot; target=&quot;_blank&quot;&gt;friends&lt;/a&gt; have gotten into it the craft business with the help of Etsy.
+
+Feel like creating something unique? Share it with the world. Love hand-made items? Have fun shopping. Crafting 2.0 has arrived.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>New Collaboration</title>
+   <link href="http://carletondesign.com/design/my%20projects/websites/2009/08/12/new-collaboration/"/>
+   <updated>2009-08-12T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/design/my%20projects/websites/2009/08/12/new-collaboration</id>
+   <content type="html">&lt;a href=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/08/EJDesign.jpg&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-170&quot; title=&quot;E&amp;amp;J Design&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/08/EJDesign-300x278.jpg&quot; alt=&quot;E&amp;amp;J Design&quot; width=&quot;300&quot; height=&quot;278&quot; /&gt;&lt;/a&gt;
+
+After two nights of intense design and development, a new site has been released for E&amp;amp;J Design, a collaboration between Eric Ritchey and myself. Nothing like a deadline to motivate! We&#39;re stoked to have it live, but have more in the works for the future. Take it for a spin: &lt;a href=&quot;http://eandjdesign.com/&quot; target=&quot;_new&quot;&gt;www.eandjdesign.com&lt;/a&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Up and Away</title>
+   <link href="http://carletondesign.com/learning/2009/08/09/up-and-away/"/>
+   <updated>2009-08-09T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/learning/2009/08/09/up-and-away</id>
+   <content type="html">I love learning how things work. Every mechanical device has a great story behind it. I think this interest comes from some primal desire to construct.
+
+Perfect example: My interest in &lt;a href=&quot;http://blog.airshipventures.com/&quot;&gt;Airship Ventures&lt;/a&gt;, the company who brought a Zeppelin Airship to the Moffett Field. It&#39;s the first of its kind in the US and the first time in 70 years that the average citizen has has a chance to experience flight in a dirigible.
+
+I love that we can follow along as they share their trailblazing journey. We don&#39;t have to read about it years later in a book at the library, or travel to a special museum far away to learn exactly how an airship works on a daily basis. Their blog tells us in real time. Twitter followers snap pictures of the Zeppelin flying over their homes and share them instantly. Their GPS tracker shows us it&#39;s flight path.
+
+I love the access the internet enables to things like this. It&#39;s a great time to be curious about how things work.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Technology & Design</title>
+   <link href="http://carletondesign.com/graphics/learning/websites/2009/06/04/technology-design/"/>
+   <updated>2009-06-04T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/graphics/learning/websites/2009/06/04/technology-design</id>
+   <content type="html">It is amazing to watch a child grow up with technology as normal while the older generation is still figuring it out how to adjust to it. My one year old spends most of the day pushing buttons, opening doors, or trying to take things apart. Hopefully, that desire to learn how things work will last a lifetime. I can only wonder what the future will be like. The world is changing fast. I wonder if anyone predicted that information would be so accessible though the internet. It is simple to learn so many things that previously were confined to trained professionals. Websites and online tools allow you to manage your banking and investments, publish a book, sell your original music and much more.
+
+Open access to vast knowledge has eliminated the traditional barriers to entry into many fields of work. Web design is a field that has no such barriers. Anything you need to know about web design is available online and can be self-taught. Many professionals started out tinkering and then developed their new skills into a career.
+
+Why it is valuable to pay for professional web design if it&#39;s so easy to do?
+&lt;ul&gt;
+	&lt;li&gt;Time: Web design basics are simple, but it quickly gets complex and takes a lot of time to develop professional level skills.&lt;/li&gt;
+	&lt;li&gt;Experience: Like any profession, there is immense value in practical experience.&lt;/li&gt;
+	&lt;li&gt;Standards: Professional web sites should be built to web standards. These standards are a benchmark that separate professionals from amateurs.&lt;/li&gt;
+	&lt;li&gt;Style: This aspect is subjective.  Generally, professionals have a higher quality of aesthetic style.&lt;/li&gt;
+&lt;/ul&gt;
+So if you need a professional website, hire a pro. If you&#39;re a technology sponge, start learning and soon you may have a new career.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Rock Stars of the Web</title>
+   <link href="http://carletondesign.com/learning/websites/2009/05/27/rock-star-of-standards/"/>
+   <updated>2009-05-27T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/learning/websites/2009/05/27/rock-star-of-standards</id>
+   <content type="html">Intel has a commercial portraying Ajay Bhatt, co-inventor of the USB, as if he was a rock star. Check it out:
+
+&lt;object width=&quot;480&quot; height=&quot;385&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/uw39qxcjiMk?fs=1&amp;amp;hl=en_US&quot;&gt;&lt;/param&gt;&lt;param name=&quot;allowFullScreen&quot; value=&quot;true&quot;&gt;&lt;/param&gt;&lt;param name=&quot;allowscriptaccess&quot; value=&quot;always&quot;&gt;&lt;/param&gt;&lt;embed src=&quot;http://www.youtube.com/v/uw39qxcjiMk?fs=1&amp;amp;hl=en_US&quot; type=&quot;application/x-shockwave-flash&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot; width=&quot;480&quot; height=&quot;385&quot;&gt;&lt;/embed&gt;&lt;/object&gt;
+
+If the web industry had it&#39;s own rock star commercial it would have to feature &lt;a href=&quot;http://en.wikipedia.org/wiki/Jeffrey_Zeldman&quot;&gt;Jeffrey Zeldman&lt;/a&gt; or &lt;a href=&quot;http://en.wikipedia.org/wiki/Eric_Meyer&quot; target=&quot;_blank&quot;&gt;Eric Meyer&lt;/a&gt;. Both are well known for starting the movement to create standard practices for web sites and making sure browsers supported those standards.
+
+&lt;ul&gt;
+	&lt;li&gt;Zeldman is the co-founder of the &lt;a href=&quot;http://www.webstandards.org/&quot; target=&quot;_blank&quot;&gt;Web Standards Project &lt;/a&gt;(WaSP), started &lt;a href=&quot;http://alistapart.com/&quot; target=&quot;_blank&quot;&gt;A List Apart&lt;/a&gt; and his own &lt;a href=&quot;http://www.happycog.com/&quot; target=&quot;_blank&quot;&gt;studio&lt;/a&gt;, has authored several books and lectures on the topic of web standards. He was recently called &quot;the godfather of web standards&quot; by &lt;a href=&quot;http://www.netmag.co.uk/zine/discover-interview/jeffrey-zeldman&quot; target=&quot;_blank&quot;&gt;.net Magazine&lt;/a&gt;.&lt;/li&gt;
+
+	&lt;li&gt;Meyer is famous for his standards evangelism at Netscape, authoring numerous books on CSS, and lecturing on CSS and web standards.&lt;/li&gt;
+&lt;/ul&gt;
+
+The official web standards are maintained by the &lt;a href=&quot;http://www.w3.org/&quot; target=&quot;_blank&quot;&gt;World Wide Web Consortium&lt;/a&gt; (W3C). These standards have become an integral part of professional web development, thanks to the pioneering work of Meyer and Zeldman. Standards ensure a website&#39;s audience is viewing the site as the designer intended and also provide a benchmark for quality work. Thanks rock stars, rock on!
+
+Further Reading:
+
+[caption id=&quot;attachment_141&quot; align=&quot;alignnone&quot; width=&quot;115&quot; caption=&quot;Jeffery Zeldman&quot;]&lt;a href=&quot;http://www.amazon.com/gp/redirect.html?ie=UTF8&amp;location=http%3A%2F%2Fwww.amazon.com%2Fs%3Fie%3DUTF8%26redirect%3Dtrue%26search-type%3Dss%26index%3Dbooks%26ref%3Dntt%255Fathr%255Fdp%255Fsr%255F1%26field-author%3DJeffrey%2520Zeldman&amp;tag=t00e2-20&amp;linkCode=ur2&amp;camp=1789&amp;creative=390957&quot; target=&quot;_blank&quot;&gt;&lt;img class=&quot;size-full wp-image-141&quot; title=&quot;Designing with Web Standards&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/05/zeldman.jpg&quot; alt=&quot;Designing with Web Standards&quot; width=&quot;115&quot; height=&quot;115&quot; /&gt;&lt;/a&gt;[/caption]
+
+[caption id=&quot;attachment_142&quot; align=&quot;alignnone&quot; width=&quot;115&quot; caption=&quot;Eric Meyer&quot;]&lt;a href=&quot;http://www.amazon.com/gp/redirect.html?ie=UTF8&amp;location=http%3A%2F%2Fwww.amazon.com%2Fs%3Fie%3DUTF8%26redirect%3Dtrue%26search-type%3Dss%26index%3Dbooks%26ref%3Dntt%255Fathr%255Fdp%255Fsr%255F1%26field-author%3DEric%2520Meyer&amp;tag=t00e2-20&amp;linkCode=ur2&amp;camp=1789&amp;creative=390957&quot; target=&quot;_blank&quot;&gt;&lt;img class=&quot;size-full wp-image-142&quot; title=&quot;Eric Meyer&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/05/ericmeyer.jpg&quot; alt=&quot;Eric Meyer&quot; width=&quot;115&quot; height=&quot;115&quot; /&gt;&lt;/a&gt;[/caption]
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Browser Wars, Part Deux</title>
+   <link href="http://carletondesign.com/animation/design/photography/websites/2009/05/13/browser-wars-part-deux/"/>
+   <updated>2009-05-13T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/animation/design/photography/websites/2009/05/13/browser-wars-part-deux</id>
+   <content type="html">Remember when everyone had AOL, prodigy, or Compuserve? Those were the days of the original browser wars. Internet Explorer battled it out with Netscape Navigator while websites proudly displayed badges to support their chosen weapon.
+
+&lt;img class=&quot;alignnone size-full wp-image-116&quot; title=&quot;browsers&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/05/browsers.png&quot; alt=&quot;browsers&quot; width=&quot;263&quot; height=&quot;58&quot; /&gt;
+
+While that debate has faded, there is a new browser war going on, this time it&#39;s &lt;em&gt;Web Designers vs. Internet Explorer 6&lt;/em&gt;. You don&#39;t have to look far to find blog posts by designers and developers using vile words to describe IE6. For the un-initiated, IE6 has issues displaying websites built to current standards. This makes make building websites that work for the majority of users much more difficult. Advancements have been made by Microsoft in subsequent releases of IE 7 &amp;amp; 8, but there are still far too many users that have not upgraded to modern browsers. Most power users have moved on from IE to Firefox, Safari or others that are built to facilitate standards based web design, but the IE6 contingency is unfortunately too large to ignore.
+
+What&#39;s a designer to do? Some have taken elitist stance of serving an empty page to IE6 users with a message to upgrade. Others provide a stripped down text only version of their site. This may be justified from the designer&#39;s perspective but isolates IE6 users, many of whom are stuck with it by enterprise IT departments. Sites that must cater to a wide audience go through the tedious effort of adding IE6 specific tweaks to make things work. These tweaks add extra cost and complexity to the development process, resulting in increased distain for the enemy browser.
+
+Some interesting new approaches have emerged that are gentler than the forced methods and bring needed attention to the issue. &lt;a href=&quot;http://www.IE6update.com&quot; target=&quot;_blank&quot;&gt;IE6update.com&lt;/a&gt; and &lt;a href=&quot;http://www.pushuptheweb.com/&quot; target=&quot;_blank&quot;&gt;pushuptheweb.com&lt;/a&gt; have devised tools that attach a message to your site that is only viewed by users of IE6. This message suggests the user upgrade their browser to get the maximum experience. I prefer this kinder approach to bringing users up to speed instead of punishing them for being out of date.
+
+&lt;a href=&quot;http://www.IE6update.com&quot;&gt;&lt;img class=&quot;alignnone size-full wp-image-114&quot; title=&quot;ie6update&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/05/ie6update.png&quot; alt=&quot;ie6update&quot; width=&quot;543&quot; height=&quot;27&quot; /&gt;&lt;/a&gt;
+
+&lt;a href=&quot;http://www.pushuptheweb.com/&quot;&gt;&lt;img class=&quot;alignnone size-full wp-image-115&quot; title=&quot;pushuptheweb&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/05/pushtheweb.png&quot; alt=&quot;pushuptheweb&quot; width=&quot;253&quot; height=&quot;58&quot; /&gt;&lt;/a&gt;
+
+Despite these methods, IE6 isn&#39;t going to die as fast as designers would like, so we have to deal with it for now. It helps to reminisce about the progress that has been made in the past years thanks to the web standards movement. Be glad we are past the time when every site had a flashing &quot;under construction&quot; graphic, and a 56k modem was cutting edge.
+
+More info:
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.IE6update.com&quot; target=&quot;_blank&quot;&gt;IE6update.com&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.pushuptheweb.com/&quot; target=&quot;_blank&quot;&gt;pushuptheweb.com&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Two Versions Behind&quot; href=&quot;http://www.twoversionsbehind.com/&quot; target=&quot;_blank&quot;&gt;twoversionsbehind.com&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;IE6 Upgrade&quot; href=&quot;http://code.google.com/p/ie6-upgrade-warning/&quot; target=&quot;_blank&quot;&gt;Upgrade Warning: Google Code&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Stop Living in the Past&quot; href=&quot;http://www.stoplivinginthepast.com/&quot; target=&quot;_blank&quot;&gt;stoplivinginthepast.com&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a title=&quot;Usability Post&quot; href=&quot;http://www.usabilitypost.com/2008/09/05/drop-ie6-support-give-people-a-reason-to-upgrade/&quot; target=&quot;_blank&quot;&gt;usabilitypost.com: Drop IE6 Support&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Challenge or Opportunity?</title>
+   <link href="http://carletondesign.com/general/2009/03/21/challenge-or-opportunity/"/>
+   <updated>2009-03-21T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/general/2009/03/21/challenge-or-opportunity</id>
+   <content type="html">&lt;a href=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/03/biz_growth_illustration.jpg&quot;&gt;&lt;img src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/03/biz_growth_illustration-300x146.jpg&quot; alt=&quot;biz_growth_illustration&quot; title=&quot;biz_growth_illustration&quot; width=&quot;300&quot; height=&quot;146&quot; class=&quot;alignnone size-medium wp-image-106&quot; /&gt;&lt;/a&gt;
+
+Taking an idea and making it a successful business is a struggle. Not only do you have to manage internal factors like productivity, customer service, and accounting, you are also subject to external factors like competition, market volatility, and fickle customers. Recently I was surprised with a legal challenge which required big changes to one of my websites and its products. Challenges like these bring the entrepreneur to a crossroads. &lt;strong&gt;Do you allow the challenge to be a stumbling block or a launching point?&lt;/strong&gt; It&#39;s easy to be discouraged, but it takes endurance and hope to turn a setback into an opportunity for success. There is always more to learn or a fresh way to approach your challenge. In this case, the abrupt legal issue has lead to a renewed marketing effort and careful planning for the future of this small business.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Live Strong Art</title>
+   <link href="http://carletondesign.com/art/graphics/2009/03/02/live-strong-art/"/>
+   <updated>2009-03-02T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/art/graphics/2009/03/02/live-strong-art</id>
+   <content type="html">[caption id=&quot;&quot; align=&quot;alignnone&quot; width=&quot;301&quot; caption=&quot;Live Strong by James Jean&quot;]&lt;a href=&quot;http://www.supertouchart.com/2009/03/02/lastreet-lifejames-jean-for-lance-armstrongs-open-roads-livestrong-chalk-art-campaign/&quot;&gt;&lt;img title=&quot;LiveStrong&quot; src=&quot;http://www.supertouchart.com/wp-content/uploads/2009/03/lvstrg22809-112.jpg&quot; alt=&quot;Live Strong by James Jean&quot; width=&quot;301&quot; height=&quot;446&quot; /&gt;&lt;/a&gt;[/caption]
+
+My recent interest in pro cycling has led me back to the design world in a round-about way. I discovered this amazing chalk mural created in support of &lt;a title=&quot;Live Strong&quot; href=&quot;http://livestrong.org/&quot; target=&quot;_blank&quot;&gt;Live Strong&lt;/a&gt; from a  post on  &lt;a title=&quot;Twitter&quot; href=&quot;http://twitter.com/lancearmstrong&quot; target=&quot;_blank&quot;&gt;Lance Armstrong&#39;s twitter&lt;/a&gt;. Nice work James Jean! More details at &lt;a title=&quot;SuperTouchArt.com&quot; href=&quot;http://www.supertouchart.com/2009/03/02/lastreet-lifejames-jean-for-lance-armstrongs-open-roads-livestrong-chalk-art-campaign/&quot; target=&quot;_blank&quot;&gt;SuperTouchArt.com&lt;/a&gt;.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Photography</title>
+   <link href="http://carletondesign.com/design/learning/photography/websites/2009/02/15/photography/"/>
+   <updated>2009-02-15T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/design/learning/photography/websites/2009/02/15/photography</id>
+   <content type="html">I love photography. Life would not be nearly as fun without cameras. Photos can quickly explain a product, express an quality of a company, or provide personal connection to an experience. When designing websites or printed materials, I utilize both stock and custom photography.
+
+Stock photography is an easy and inexpensive way to get high quality images on a huge array of topics. Instead of hiring a photographer to take specific pictures you can quickly find numerous examples online for a fraction of the cost. An example would be the three stock images I selected for the intro page design of &lt;a title=&quot;Omni Law Group&quot; href=&quot;http://www.omnillp.com/&quot; target=&quot;_blank&quot;&gt;Omni Law Group&lt;/a&gt;. This firm was seeking a graphic representation of it&#39;s marketing message. The challenge with stock photography is selecting the right photo from the expanse of options. An overall vision of the project&#39;s styling goals is required in order to ensure a cohesive result.
+
+[caption id=&quot;attachment_76&quot; align=&quot;alignnone&quot; width=&quot;300&quot; caption=&quot;Stock Photography - Omni Law Group&quot;]&lt;a href=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/02/omni_pics1.jpg&quot;&gt;&lt;img class=&quot;size-medium wp-image-76&quot; title=&quot;Omni Law Group&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/02/omni_pics1-300x157.jpg&quot; alt=&quot;Omni Law Group&quot; width=&quot;300&quot; height=&quot;157&quot; /&gt;&lt;/a&gt;[/caption]
+
+Custom photography is best for specific photos, such as a portraits, product shots, projects, or capture events. I recently assisted entrepreneurs at BhatiaOne with custom package designs. Once the designs were printed, I photographed the finished products for use in their marketing presentations. This was a cost effective way to quickly get a new product to a professional level, ready for presentation to buyers. I have also worked with several professional photographers whose talent, training, and experience provide amazing results. The quality of the photography directly impacts the quality of the overall design.
+
+[caption id=&quot;attachment_77&quot; align=&quot;alignnone&quot; width=&quot;300&quot; caption=&quot;Product Photography - BhatiaOne&quot;]&lt;a href=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/02/bhatiaone_a.jpg&quot;&gt;&lt;img class=&quot;size-medium wp-image-77&quot; title=&quot;BhatiaOne&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/02/bhatiaone_a-300x230.jpg&quot; alt=&quot;Product Photography - BhatiaOne&quot; width=&quot;300&quot; height=&quot;230&quot; /&gt;&lt;/a&gt;[/caption]
+
+Stock and custom photos can be a strong design element on web and print media. Creating a cohesive appealing design requires careful selection of photos and coordinating design. The end result can be a powerful image, worth thousands of words.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Custom Flash Animation</title>
+   <link href="http://carletondesign.com/animation/learning/websites/2009/02/06/custom-flash-animation/"/>
+   <updated>2009-02-06T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/animation/learning/websites/2009/02/06/custom-flash-animation</id>
+   <content type="html">I recently completed an elaborate flash animation now online at &lt;a title=&quot;End Fossil Fuels&quot; href=&quot;http://endfossilfuels.com&quot; target=&quot;_blank&quot;&gt;endfossilfuels.com&lt;/a&gt; (see &quot;What is a Carbon Offset?&quot;). Working with a script developed by my client at &lt;a title=&quot;Comcast Spotlight SF&quot; href=&quot;http://sf.comcastspotlight.com/sites/default.aspx?siteid=109&quot; target=&quot;_blank&quot;&gt;Comcast Spotlight SF&lt;/a&gt;, I developed a set of themed icons which were animated to narration and sound effects. The resulting animation is an effective sales tool which educates website visitors about carbon offsets.
+
+[caption id=&quot;attachment_71&quot; align=&quot;alignnone&quot; width=&quot;300&quot; caption=&quot;Custom Flash Animation (Click to Play)&quot;]&lt;a href=&quot;http://jrcid.com/projects/Comcast_EFF/&quot;&gt;&lt;img class=&quot;size-medium wp-image-71&quot; title=&quot;eff_ani1&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/02/eff_ani1-300x204.jpg&quot; alt=&quot;Custom Flash Animation (Click to Play)&quot; width=&quot;300&quot; height=&quot;204&quot; /&gt;&lt;/a&gt;[/caption]
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Co-Working at Ames CoLab</title>
+   <link href="http://carletondesign.com/3d%20modeling/2009/02/05/co-working-at-ames-colab/"/>
+   <updated>2009-02-05T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/3d%20modeling/2009/02/05/co-working-at-ames-colab</id>
+   <content type="html">&lt;img class=&quot;size-full wp-image-56&quot; title=&quot;initiallogo-horizontal-300x1001&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/02/initiallogo-horizontal-300x1001.png&quot; alt=&quot;CoLab&quot; width=&quot;300&quot; height=&quot;100&quot; /&gt;
+
+&lt;dd class=&quot;wp-caption-dd&quot;&gt;&lt;/dd&gt;I love watching a good idea become reality. Good friends Sean Barber and Brian Anderson developed the concept of creating a co-working space in Ames, IA. Co-working is the idea of several professionals sharing a workspace. It&#39;s perfect for freelancers, tele-commuters, and consultants that need an office away from home. The main purpose of a co-working space is to provide professional office conveniences for little overhead cost. The secondary goal is to foster interdisciplinary interaction between users of the space. The unique mix of users can create beneficial interaction. For example a photographer and graphic designer who work independently can discover that their work is complimentary and begin sharing clients. This interaction is a great benefit for freelancers, and small businesses who don&#39;t have the resources internally.
+
+I have enjoyed contributing to the project and watching it develop into a physical reality. I assisted CoLab in their design phase, creating some 3D models and renderings of the space for concept visualization and presentation. 3D Models are powerful tools for designing and explaining architectural concepts.
+
+[caption id=&quot;attachment_50&quot; align=&quot;alignnone&quot; width=&quot;300&quot; caption=&quot;CoLab Rendering&quot;]&lt;a href=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/02/colab2k.jpg&quot;&gt;&lt;img class=&quot;size-medium wp-image-50&quot; title=&quot;CoLab Rendering1&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/02/colab2k-300x135.jpg&quot; alt=&quot;CoLab Rendering&quot; width=&quot;300&quot; height=&quot;135&quot; /&gt;&lt;/a&gt;[/caption]
+
+[caption id=&quot;attachment_61&quot; align=&quot;alignnone&quot; width=&quot;300&quot; caption=&quot;CoLab Rendering&quot;]&lt;a href=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/02/colab2c.jpg&quot;&gt;&lt;img class=&quot;size-medium wp-image-61&quot; title=&quot;CoLab Rendering 2&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/02/colab2c-300x135.jpg&quot; alt=&quot;CoLab Rendering&quot; width=&quot;300&quot; height=&quot;135&quot; /&gt;&lt;/a&gt;[/caption]
+
+[caption id=&quot;attachment_68&quot; align=&quot;alignnone&quot; width=&quot;300&quot; caption=&quot;Under Construction&quot;]&lt;a href=&quot;http://www.flickr.com/photos/banderson623/3254221262/&quot;&gt;&lt;img class=&quot;size-medium wp-image-68&quot; title=&quot;Constuction pic&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/02/colabconst-300x114.jpg&quot; alt=&quot;Under Construction&quot; width=&quot;300&quot; height=&quot;114&quot; /&gt;&lt;/a&gt;[/caption]
+
+More info about Ames CoLab:
+
+&lt;a title=&quot;Ames CoLab&quot; href=&quot;http://www.amescolab.com/&quot; target=&quot;_blank&quot;&gt;AmesCoLab.com&lt;/a&gt;
+
+&lt;a title=&quot;Twitter&quot; href=&quot;http://twitter.com/amescolab&quot; target=&quot;_blank&quot;&gt;Twitter.com/amescolab
+&lt;/a&gt;
+
+&lt;a title=&quot;Blog&quot; href=&quot;http://blog.waytohustle.com/&quot; target=&quot;_blank&quot;&gt;Brian&#39;s blog&lt;/a&gt; about CoLab
+
+&lt;a title=&quot;CoLab Video&quot; href=&quot;http://www.youtube.com/watch?v=6Mf8enS2AfI&quot; target=&quot;_blank&quot;&gt;Video of CoLab&lt;/a&gt; under construction
+</content>
+ </entry>
+ 
+ <entry>
+   <title>American Vision</title>
+   <link href="http://carletondesign.com/design/graphics/2009/01/18/american-vision/"/>
+   <updated>2009-01-18T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/design/graphics/2009/01/18/american-vision</id>
+   <content type="html">I&#39;m currently collaborating with Elias at &lt;a title=&quot;AVW&quot; href=&quot;http://www.americanvisionwindows.com/&quot; target=&quot;_blank&quot;&gt;American Vision Windows&lt;/a&gt; (plus Kitchens &amp;amp; Baths) to create a power point presentation for their sales team. His goal is to provide the team with better tools to quickly communicate the uniqueness of their company to potential clients. For example: AVW&#39;s mission is,“to revolutionize the home improvement industry one customer at a time, while changing the lives of our employees for the better.” It&#39;s not often a company focuses its success on its own employees instead of its bottom line. The in-home appointment requires our presentation to be quick, clear, and effective. To facilitate the wide audience of the presentation, we will be organizing the presentation so the salesperson can quickly jump to various sections as needed, instead of following a fixed path through the information.
+
+&lt;img class=&quot;size-full wp-image-20 alignnone&quot; title=&quot;avw_screen1&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/01/avw_screen1.jpg&quot; alt=&quot;avw_screen1&quot; width=&quot;240&quot; height=&quot;180&quot; /&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Welcome!</title>
+   <link href="http://carletondesign.com/general/2009/01/16/welcome/"/>
+   <updated>2009-01-16T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/general/2009/01/16/welcome</id>
+   <content type="html">Welcome to the blog of James Carleton Design. I will be posting articles on my work and the design world at large.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>History of the Internet</title>
+   <link href="http://carletondesign.com/animation/design/2009/01/16/history-of-the-internet/"/>
+   <updated>2009-01-16T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/animation/design/2009/01/16/history-of-the-internet</id>
+   <content type="html">I love this video! This beautifully illustrated animation explains the history of the internet. It&#39;s a great example of how a technical lesson can be communicated effectively through skilled information design.
+&lt;object width=&quot;400&quot; height=&quot;225&quot; data=&quot;http://vimeo.com/moogaloop.swf?clip_id=2696386&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1&quot; type=&quot;application/x-shockwave-flash&quot;&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;allowscriptaccess&quot; value=&quot;always&quot; /&gt;&lt;param name=&quot;src&quot; value=&quot;http://vimeo.com/moogaloop.swf?clip_id=2696386&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1&quot; /&gt;&lt;/object&gt;
+&lt;a href=&quot;http://vimeo.com/&quot;&gt;History of the Internet&lt;/a&gt; from &lt;a href=&quot;http://vimeo.com/picol&quot;&gt;PICOL&lt;/a&gt; on &lt;a href=&quot;http://vimeo.com&quot;&gt;Vimeo&lt;/a&gt;.
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Current Projects</title>
+   <link href="http://carletondesign.com/design/my%20projects/websites/2009/01/16/current-projects/"/>
+   <updated>2009-01-16T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/design/my%20projects/websites/2009/01/16/current-projects</id>
+   <content type="html">&lt;a href=&quot;http://www.quicksnapper.com/fwg001/image/site-concept-6e-0000&quot;&gt;&lt;img class=&quot;size-full wp-image-12 alignnone&quot; title=&quot;jcd_screen&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/01/jcd_screen.png&quot; alt=&quot;jcd_screen&quot; width=&quot;400&quot; height=&quot;344&quot; /&gt;&lt;/a&gt;
+
+I&#39;m currently in the process of creating &lt;a title=&quot;James Carleton Design&quot; href=&quot;http://CarletonDesign.com&quot; target=&quot;_self&quot;&gt;CarletonDesign.com&lt;/a&gt; (this blog is part of it) as my new portfolio site to replace &lt;a title=&quot;JRCID&quot; href=&quot;http://jrcid.com&quot; target=&quot;_blank&quot;&gt;jrcid.com&lt;/a&gt;.
+
+I can&#39;t wait to convert the design to CSS/HTML so I can insert the new content. I have some great ideas. Now that the design concept is settled, I&#39;m finalizing textures and colors.
+
+I also have been working with Eric at &lt;a title=&quot;E&amp;amp;J&quot; href=&quot;http://www.eandjdesign.com/&quot; target=&quot;_blank&quot;&gt;E &amp;amp; J Design&lt;/a&gt; on the next version of &lt;a title=&quot;LEEDstudy&quot; href=&quot;http://LEEDstudy.com&quot; target=&quot;_blank&quot;&gt;LEEDstudy.com&lt;/a&gt;. Check out that design, it&#39;s still a work in progress.
+
+&lt;a href=&quot;http://www.quicksnapper.com/fwg001/image/ls-conceptfusion&quot;&gt;&lt;img class=&quot;size-full wp-image-13 alignnone&quot; title=&quot;ls_screen&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/01/ls_screen.png&quot; alt=&quot;ls_screen&quot; width=&quot;400&quot; height=&quot;343&quot; /&gt;&lt;/a&gt;
 </content>
  </entry>
  

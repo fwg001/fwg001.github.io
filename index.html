@@ -6,7 +6,7 @@ title: Home
 
 <h3><a href="/bio">Bio</a></h3>
 <p class="message">
-  “I love creating engaging user experiences that simplify powerful technologies. When done well, the user enjoys a seamless experience, without realizing all the work that went into it.” 
+  “I love creating engaging user experiences that simplify powerful technologies. When done well, the user enjoys a seamless experience, without realizing all the work that went into it.”
 </p>
 
 <h3><a href="/portfolio">Portfolio</a></h3>
@@ -16,8 +16,11 @@ title: Home
 </ul>
 
 <h3><a href="/blog">Blog</a></h3>
+<b>Recent Posts</b>
+<div class="posts">
   {% for post in paginator.posts %}
   <div class="post">
     {{ post.date | date_to_string }} | <a href="{{ post.url }}">{{ post.title }}</a>
   </div>
   {% endfor %}
+</div>
