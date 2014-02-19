@@ -17,6 +17,12 @@ title: Realtor.com Local
 *School Report Card*
 <img src="/assets/rdc_local/school_card.jpg" style="width: 100%;" alt="School Report Card" />
 
+*Neighborhood Page - Current*
+<img src="/assets/rdc_local/geo1.jpg" style="width: 100%;" alt="Neighborhood Page" />
+
+*User Flow*
+<img src="/assets/rdc_local/flow.jpg" style="width: 100%;" alt="User Flow Diagram" />
+
 *Current Status*
 
 - 2013 - Architecture established, concept design, user testing - [Live version](http://www.realtor.com/local) 

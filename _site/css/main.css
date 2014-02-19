@@ -122,9 +122,9 @@ a:visited { color: #a0a; }
   border: 0;
 }
 
-.folio img {
+img {
   width: 100%;
-  display: block;
+  display: block;  
 }
 
 /*****************************************************************************/
