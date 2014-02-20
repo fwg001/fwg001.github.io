@@ -4,8 +4,11 @@ title: SeniorHousingNet
 
 carousel1:
  - image: /assets/shn/mockup_devices.jpg
+ - caption: some caption1
  - image: /assets/shn/qa_mobile.jpg
+ - caption: some caption2
  - image: /assets/shn/sketches.jpg
+ - caption: some caption3
 
 carousel2:
  - image: /assets/shn/mock1.jpg
@@ -24,7 +27,10 @@ carousel2:
 <div class="flexslider1">
   <ul class="slides">
     {% for slides in page.carousel1 %}
-      <li><img src="{{ slides.image }}"></li>
+      <li>
+        <img src="{{ slides.image }}">
+        <span class="caption">{{ slides.caption }}</span>
+      </li>
     {% endfor %}
   </ul>
 </div>
