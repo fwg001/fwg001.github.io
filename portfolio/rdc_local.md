@@ -5,8 +5,7 @@ title: Realtor.com Local
 
 <p class="message">Data should tell a clear story to its users.</p>
 
-- *Product*: Realtor.com
-- *Project*: New Local section
+- *Project*: Realtor.com - New Local section
 - *Roles*: Lead UX Designer (Visual & Interaction)
 - *Constraints*: Data sources, Brand guidelines
 - *Dates*: 2013-2014
