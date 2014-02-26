@@ -2,14 +2,6 @@
 layout: portfolio
 title: SeniorHousingNet
 
-carousel1:
- - image: /assets/shn/mockup_devices.jpg
- - image: /assets/shn/qa_mobile.jpg
- - image: /assets/shn/sketches.jpg
-
-carousel2:
- - image: /assets/shn/mock1.jpg
- - image: /assets/shn/mock2.jpg
 
 ---
 <p class="message">I love how a small motivated team can make a really big impact.</p>
@@ -18,24 +10,6 @@ carousel2:
 - *Roles*: Lead UX Designer (Visual & Interaction), Tech Advisor, QA
 - *Constraints*: photo sizes, color palate & branding
 - *Dates*: 2012, 2014
-
-
-
-<div class="flexslider1">
-  <ul class="slides">
-    {% for slides in page.carousel1 %}
-      <li><img src="{{ slides.image }}"></li>
-    {% endfor %}
-  </ul>
-</div>
-
-<div class="flexslider2">
-  <ul class="slides">
-    {% for slides in page.carousel2 %}
-      <li><img src="{{ slides.image }}"></li>
-    {% endfor %}
-  </ul>
-</div>
 
 <!--
 *Responsive Listing Pages*

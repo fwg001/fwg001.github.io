@@ -4,17 +4,29 @@ $(window).load(function() {
     animation: "fade",
     controlNav: false,
     directionNav: true,
-    slideshowSpeed: 1000,
-    animationSpeed: 100,
-    touch: true
+    slideshowSpeed: 3000,
+    animationSpeed: 500,
+    touch: true,
+    directionNav: true,             //Boolean: Create navigation for previous/next navigation? (true/false)
+    prevText: "Previous",           //String: Set the text for the "previous" directionNav item
+    nextText: "Next"  
   });
 
   $('.flexslider2').flexslider({
     animation: "fade",
     controlNav: false,
     directionNav: true,
-    slideshowSpeed: 5000,
-    animationSpeed: 600,
+    slideshowSpeed: 3000,
+    animationSpeed: 500,
     touch: true
   });
+
+	$('.flexslider3').flexslider({
+	 animation: "fade",
+	 controlNav: false,
+	 directionNav: true,
+	 slideshowSpeed: 3000,
+	 animationSpeed: 500,
+	 touch: true
+   });
 });

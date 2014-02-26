@@ -9,7 +9,7 @@ title: Bio
 
 ## About
 
-I’ve been working toward this goal most recently at Move Inc. and am ready to work in a new arena. The perfect spot for me is on a talented team of creative individuals that can bring strong critique as well as laugh at the latest meme. I thrive on the challenge of leading interaction and visual design efforts with product and development staff toward results that meet business and UX goals. I strive to take every opportunity to grow through teammates, trainings, industry events and online resources.
+I’ve been working toward this goal most recently at Move Inc. The perfect spot for me is on a talented team of creative individuals that can bring strong critique as well as laugh at the latest meme. I thrive on the challenge of leading interaction and visual design efforts with product and development staff toward results that meet business and UX goals. I strive to take every opportunity to grow through teammates, trainings, industry events and online resources.
 
 I continually test emerging tools and methods to find the most effective workflow. After years of designing and developing the interwebs, I know my PNGs, PSDs, CLI, Git, IA, UI, UX and UAT. My days are lived in white board sketches, flows, wireframes, mockups, wiki pages, test results, and of course Web Inspector. I admire multi-device strategy, design thinking, user testing, agile dev, and lean UX. I avoid vague meetings, hasty reactions and deadly scope creep.
 
@@ -17,7 +17,8 @@ I continually test emerging tools and methods to find the most effective workflo
 ## Experience
 
 **2011 to Present - Move Inc./Realtor.com**
-User Experience Designer, Consumer UX group 
+User Experience Designer, Consumer UX group
+ 
 - Lead designer for new *Local* section of Realtor.com - including interactive maps, data visualization and responsive design
 - Lead designer for redesign and re-platform of SeniorHousingNet.com - including faceted search, lead gen and multi-device responsive design
 - Designer for Realtor.com map search redesign

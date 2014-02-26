@@ -4,6 +4,7 @@
 - Built on [Jekyll](http://jekyllrb.com)
 - Theme based on [Hyde/Poole](http://getpoole.com)
 - Hosted on [Github pages](http://pages.github.com/)
+- Pattern by [Julien Renvoye](http://thepatternlibrary.com/#shattered-island)
 - Fonts by [Typekit](http://www.typekit.com)
 
 
