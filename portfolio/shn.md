@@ -11,7 +11,6 @@ title: SeniorHousingNet
 - *Constraints*: photo sizes, color palate & branding
 - *Dates*: 2012, 2014
 
-<!--
 *Responsive Listing Pages*
 <img src="/assets/shn/mockup_devices.jpg" style="width: 100%;" alt="New Responsive Listings Pages" />
 
@@ -28,7 +27,7 @@ title: SeniorHousingNet
 
 *QA Testing*
 <img src="/assets/shn/qa_mobile.jpg" style="width: 100%;" alt="Mobile QA Testing" />
- -->
+
 *Current Status*
 
 - 2012 - Listings Pages released [Live version](http://www.seniorhousingnet.com/seniorliving-detail/grandview-palms_4061-grandview-blvd_los-angeles_ca_90066-562183)
