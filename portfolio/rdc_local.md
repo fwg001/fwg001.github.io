@@ -3,11 +3,14 @@ layout: portfolio
 title: Realtor.com Local
 ---
 
+![Realtor.com Local](/assets/rdc_local/rdc_local.jpg)
+
 <p class="message">Data should tell a clear story to its users.</p>
 
 - *Project*: Realtor.com - New Local section
+- *Description*: Transforming raw data into an experience with a story
 - *Roles*: Lead UX Designer (Visual & Interaction)
-- *Constraints*: Data sources, Brand guidelines
+- *Constraints*: Data, Platforms, Brand styleguide
 - *Dates*: 2013-2014
 
 *US State menu*

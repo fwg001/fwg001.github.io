@@ -1,17 +1,19 @@
 ---
 layout: portfolio
 title: SeniorHousingNet
-
-
 ---
+
+![SeniorHousingNet](/assets/shn/shn.jpg)
+
 <p class="message">I love how a small motivated team can make a really big impact.</p>
 
 - *Project*: SeniorHousingNet.com - Responsive Redesign
+- *Description*: I helped our small team make big waves in the company with a trailblazing responsive redesign for our senior living community pages.
 - *Roles*: Lead UX Designer (Visual & Interaction), Tech Advisor, QA
 - *Constraints*: photo sizes, color palate & branding
 - *Dates*: 2012, 2014
 
-*Responsive Listing Pages*
+*New - Responsive Listing Pages*
 <img src="/assets/shn/mockup_devices.jpg" style="width: 100%;" alt="New Responsive Listings Pages" />
 
 *Before - Listing Pages*
@@ -35,7 +37,7 @@ title: SeniorHousingNet
 
 *Description*
 
-SeniorHousingNet.com is a product of Realtor.com/Move Inc. specific to senior living facility listings. It may not get notoriety around the office, but it’s a pretty big deal in this growing market segment.
+SeniorHousingNet.com is a product of Realtor.com/Move Inc. specific to senior living facility listings. It may not get notoriety around the office, but it’s a pretty big deal in this growing market segment (1.4 million UUs/month).
 
 Instead of embracing the status quo, this small team decided to make big waves. We aimed to blaze a new trail with a responsive redesign, the first use in the company history. Looking back, it seems obvious but at the time it was risky. Our mobile usage numbers were small but growing, especially on tablets. A few months earlier I had attended AEA and soaked up everything LukeW said about mobile. This proved to be great timing, since we jumped into creating a dual template responsive redesign for our *community pages* that brought a great experience to both desktop and mobile users.
 
