@@ -4,13 +4,28 @@
  <title>James Carleton</title>
  <link href="http://carletondesign.com/atom.xml" rel="self"/>
  <link href="http://carletondesign.com/"/>
- <updated>2014-02-25T21:43:29-08:00</updated>
+ <updated>2014-04-05T22:16:01-07:00</updated>
  <id>http://carletondesign.com</id>
  <author>
    <name>James Carleton</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>App Design Tools</title>
+   <link href="http://carletondesign.com/2014/03/20/app-design-tools/"/>
+   <updated>2014-03-20T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/2014/03/20/app-design-tools</id>
+   <content type="html">&lt;p&gt;Working on a native app project has allowed me to experiment with new design tools. Here are a few of my favorites:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;a href=&quot;http://www.zambetti.com/projects/liveview/&quot;&gt;LiveView&lt;/a&gt;&lt;/em&gt; lets you display anything from your Mac onto your iPhone/iPad. You simply overlay a window frame on your design file and boom your design is projected on your device screen. This is great for visual tests like font size, touch target sizes, and color contrast. I’ve used it for responsive design projects as well. &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;a href=&quot;http://bjango.com/mac/skalapreview/&quot;&gt;Skala Preview&lt;/a&gt;&lt;/em&gt; is similar to LiveView but instead of using a window frame, it connects to Photoshop directly to mirror your file onto the device. It supports Android and iOS.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;a href=&quot;https://www.flinto.com/&quot;&gt;Flinto&lt;/a&gt;&lt;/em&gt; is a great app for making a super quick interactive prototype from your wireframes. You just add your image files and then easily add hot spots for navigation, select transitions and setup fixed headers/footers. It works on iOS/Android phones/tablets and is amazingly intuitive to use. The benefits of seeing your early design concepts on the device, with realistic interaction are huge. It enables better user flow, navigation and interaction decisions at the beginning of a project, instead of waiting for dev to make it real and then discovering issues.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Focus</title>
