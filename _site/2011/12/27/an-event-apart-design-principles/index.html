@@ -1,0 +1,64 @@
+<p><em>This is part of a series of posts summarizing my notes from the extraordinary conference <a href="http://aneventapart.com/">An Event Apart</a>, held December 12-14, 2011 at The Palace Hotel in San Francisco.</em></p>
+
+<strong>Design Principles</strong>
+
+<a href="https://twitter.com/#!/adactio">Jeremy Keith</a> - Author
+
+<strong>Description</strong>
+
+<p>All software is inherently political, reflecting the biases and beliefs of the people behind it. These beliefs can be made explicit through the publication of design principles: pragmatic rules of thumb that underpin a shared endeavor. Find out how important good design principles are to any project, whether it’s a website, a framework, or the World Wide Web itself.</p>
+
+<strong>Quotes</strong>
+<blockquote>Design Principle: Be conservative in what you send and liberal in what you accept (ex. forgiving input forms)</blockquote>
+<blockquote>HTML5 degradation is like Inception in your browser.</blockquote>
+<blockquote>Design principles are not about pleasing everybody. Pick a side and plant your flag.</blockquote>
+<strong>Notes</strong>
+
+<strong>Design Principles</strong>
+*Principles, Goals, and Patterns*
+* Design Principles are the tenets for a project. They help create consensus, determine the best approach to a problem.
+** Design Goals -&gt; Why?
+** Design Principles -&gt; How?
+** Design Patterns -&gt; What?
+** These influence each other
+<blockquote>Pretty much any endeavor in human history has had this pattern of design goals, principles, and patterns.</blockquote>
+** You can't prevent your philosophies from showing in your work.
+<blockquote>Software, like all technologies, is inherently political. Code inevitably reflects the choices, biases and desires of its creators. -Jamais Cascio</blockquote>
+Web &amp; Design Principles
+* Emergent design principles of the web: Rough consensus and running code
+* The Web is agreement, bottom-up effort
+* CSS core pattern
+<code>selector {property:value;}</code>
+** fail proof - skips unknown elements
+* Principle: fault tolerant behavior, allows evolution of patterns
+<blockquote>Be conservative in what you send and liberal in what you accept.</blockquote>
+HTML5 &amp; Design Principles
+* Compatibility, utility, interoperability
+* Browser graceful degradation allows quick adoption of new features
+* Input types - hints mobile browsers to use keyboard types
+* Browser Goal: Backward compatibility
+* Design Principle: Progressive enhancement (connected to graceful degradation)
+* Ex: HTML5 Video - video tag can contain code to a flash movie as a fallback.
+<blockquote>Levels of fallback in html5 is like inception in your browser</blockquote>
+*Javascript &amp; Design Principles*
+* Metcalf's law
+bq. The value of a network is proportional to the square of the number of connected users in the system.
+* Javasrcript is everywhere. Competitors fight Metcalf's law.
+* Unobtrusive Javascript: chose a framework based on philosophy
+* Jquery: find stuff, do stuff to it.
+** ex: star rating input actually a form selector instead of links. Selector is transformed into linked starts with js.
+** Look for fundamental task
+** Look at anti-patterns.
+* Principles can be informed by goals that are malicious. You can develop designs that are likewise malicious.
+** ex: Rynair used a cookie to double the fair price on a return visit.
+* Not about pleasing everyone
+
+Big picture Principles
+* Goals lead down to principles; principles lead down to patterns.
+* Fewer principles help focus the task.
+* Pareto Principle.
+<blockquote>Design for the 80%</blockquote>
+** Instead of solving for everything, aim for the bigger group
+* Support universal access - principles that bring life to websites that work across all devices.
+
+For more info, see <a href="http://principles.adactio.com/">Design Principles</a>.

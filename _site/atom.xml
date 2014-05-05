@@ -4,7 +4,7 @@
  <title>James Carleton</title>
  <link href="http://carletondesign.com/atom.xml" rel="self"/>
  <link href="http://carletondesign.com/"/>
- <updated>2014-05-04T10:37:55-07:00</updated>
+ <updated>2014-05-05T12:51:36-07:00</updated>
  <id>http://carletondesign.com</id>
  <author>
    <name>James Carleton</name>
@@ -53,9 +53,9 @@
  
  <entry>
    <title>Focus</title>
-   <link href="http://carletondesign.com/Focus"/>
+   <link href="http://carletondesign.com/2014/01/30/focus/"/>
    <updated>2014-01-30T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/focus</id>
+   <id>http://carletondesign.com/2014/01/30/focus</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/posts/distractions.png&quot; alt=&quot;Distractions&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;I’ve been working on focus. We live in a world of distractions and it’s way too easy to lose time to things that are in front of us instead of what’s a real priority. Smart devices have multiplied and so have their power to get our attention. Each notification is a clever pull for your attention. You have new messages, you have an appointment tomorrow, someone likes something. Sure it’s great to be informed, but it’s killing my focus. Why am I acting like each notification is a critical situation requiring my immediate and full attention? Instead of responding to a text/email/im/whatever, I should be considering its priority and dealing with it at the right time. If I immediately respond, I’m moving it to the top of my list. Is it more important than what I was doing? Sometimes it may be, but most of the time it’s just a distraction. I owe my friends/family/employer better focus. So, I’m striving to be disciplined instead of distracted.&lt;/p&gt;
@@ -63,10 +63,10 @@
  </entry>
  
  <entry>
-   <title>It's a Write/Read Mobile Web: Luke W</title>
-   <link href="http://carletondesign.com/design/development/learning/websites/2014/01/22/its-a-write-read-web-luke-w/"/>
+   <title>Its A Write Read Web Luke W</title>
+   <link href="http://carletondesign.com/2014/01/22/its-a-write-read-web-luke-w/"/>
    <updated>2014-01-22T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/design/development/learning/websites/2014/01/22/its-a-write-read-web-luke-w</id>
+   <id>http://carletondesign.com/2014/01/22/its-a-write-read-web-luke-w</id>
    <content type="html">&lt;img class=&quot;aligncenter size-large wp-image-451&quot; alt=&quot;LukeW&quot; src=&quot;/assets/posts/D+G_LukeW1-1024x883.jpg&quot; width=&quot;604&quot; height=&quot;520&quot; /&gt;
 
 &lt;p&gt;I recently attended &lt;a title=&quot;Designers+Geeks&quot; href=&quot;http://www.designersandgeeks.com/events/its-a-write-read-mobile-web&quot;&gt;Designers+Geeks&lt;/a&gt;, at Yelp HQ in SF, and took some notes on &lt;a title=&quot;LukeW&quot; href=&quot;http://lukew.com&quot;&gt;LukeW&lt;/a&gt;&#39;s great talk, &lt;em&gt;It&#39;s a Write/Read &lt;del&gt;Mobile&lt;/del&gt; Multi-Device Web&lt;/em&gt;.&lt;/p&gt;
@@ -146,9 +146,9 @@
  
  <entry>
    <title>Remember, it’s USER experience</title>
-   <link href="http://carletondesign.com/design/research/2013/11/12/remember-its-user-experience/"/>
+   <link href="http://carletondesign.com/2013/11/12/remember-its-user-experience/"/>
    <updated>2013-11-12T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/design/research/2013/11/12/remember-its-user-experience</id>
+   <id>http://carletondesign.com/2013/11/12/remember-its-user-experience</id>
    <content type="html">&lt;p&gt;I just spent two days watching users pick apart my precious design concept. I&#39;ve had better nightmares. As a designer it’s easy to make assumptions, since that is part of our job, but when real user behavior doesn&#39;t agree, it’s time to let go of your precious and pay attention!&lt;/p&gt;
 
 &lt;p&gt;Getting real user feedback, formal or guerilla, is critical to my success as a UX designer, but it’s hard. It’s much easier to dig into design software and spend far too long tweaking details in isolation. Even a brilliant, collaborative team can lose track of actual user motivation and behavior. Ignorance is bliss? Bliss will flee when the project explodes on the launchpad.&lt;/p&gt;
@@ -159,9 +159,9 @@
  
  <entry>
    <title>iOS 7 - Skeuomorphic & Flat</title>
-   <link href="http://carletondesign.com/design/2013/10/31/ios-7-skeuomorphic-flat/"/>
+   <link href="http://carletondesign.com/2013/10/31/ios-7-skeuomorphic-flat/"/>
    <updated>2013-10-31T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/design/2013/10/31/ios-7-skeuomorphic-flat</id>
+   <id>http://carletondesign.com/2013/10/31/ios-7-skeuomorphic-flat</id>
    <content type="html">&lt;p&gt;Ok, that title may sound like link bait but this topic needs just one more opinion. You may have heard about this year’s most polarizing design topic: the shift from “skeuomorphic” to “flat” design in the latest version of iOS. Like many designers, I’m an Apple devotee and like many designers, I have admired recent so-called ‘flat’ interfaces from competitors and was hoping Apple would make a big splash with this version of iOS. I upgraded to the iPhone 5s, from a 4s, and have lived with iOS 7 for a few weeks. I have some thoughts:&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Skeuomorph#Digital_skeuomorphs&quot;&gt;Skeuomorphic&lt;/a&gt; design is misunderstood. It’s characterized by visual treatments like faux leather and woodgrain but thats only the visual style aspect, at it’s roots skeuomorphism is about creating interfaces that reference real world patterns. A simple example is an icon of an analog clock. Modern devices have no requirement to represent time using this ancient pattern from the physical realm, but because it’s so ubiquitous, it’s the perfect symbol for anything time related. The physical symbol makes the perfect digital symbol.&lt;/p&gt;
 &lt;p&gt;Over time Apple, and others, took this successful principle and went too far toward replicating realistic visual treatments. Does a calendar app function better when it visually mimics the one that used to be on your desk, replete with paper textures and torn edges? I don’t think so. As a reaction and to differentiate competitors choose a different approach that contrasts this visual style with something called &lt;em&gt;flat design&lt;/em&gt;.&lt;/p&gt;
@@ -173,9 +173,9 @@
  
  <entry>
    <title>Simple Applications</title>
-   <link href="http://carletondesign.com/design/development/2013/09/27/simply-focused/"/>
+   <link href="http://carletondesign.com/2013/09/27/simply-focused/"/>
    <updated>2013-09-27T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/design/development/2013/09/27/simply-focused</id>
+   <id>http://carletondesign.com/2013/09/27/simply-focused</id>
    <content type="html">&lt;p&gt;A discussion about simple interfaces with &lt;a href=&quot;http://bitbyteyum.com/articles/2013/09/26/interface-fixation/&quot;&gt;Brian Anderson&lt;/a&gt; and &lt;a href=&quot;http://initwithtyler.com/post/62175810773/thoughts-on-feature-design-and-product-ux&quot;&gt;Tyler Bell&lt;/a&gt; got me thinking. So I jumped on &lt;a href=&quot;http://editorially.com&quot;&gt;Editorially&lt;/a&gt; and started typing this post. Editorially is an example of a new breed of software where the interface isn’t in-your-face (see what I did there?). It’s designed to let your content be the focus while providing a refined set of features, available when you need them, instead of the usual heap of icons lumped in ribbons and tabs. This philosophy is also evident in &lt;a href=&quot;http://iawriter.com&quot;&gt;IA Writer&lt;/a&gt;, &lt;a href=&quot;http://ghost.org/&quot;&gt;Ghost&lt;/a&gt;, and &lt;a href=&quot;https://medium.com/i-m-h-o/3bc1a10ea0a5&quot;&gt;Medium&lt;/a&gt;. Sure, you can’t use these to mail-merge, but when you want to write, they let you. Simplicity is a beautiful thing.&lt;/p&gt;
 
 &lt;p&gt;Then I thought about more complex tasks. Do we lose the efficiency which these narrow focused tools provide when you end up having to use four simple tools to replace one broad one? Of course I don’t want one tool that does everything. The thought of a Pages-Photoshop-Espresso-CodeKit-Terminal-Chrome mutant makes me seasick. So what’s the optimal balance? Can we hope for a future of few, focused apps or will we cycle back toward the comfort of bloated suites?&lt;/p&gt;
@@ -188,9 +188,9 @@
  
  <entry>
    <title>Podcasts</title>
-   <link href="http://carletondesign.com/design/development/websites/2013/09/10/podcasts/"/>
+   <link href="http://carletondesign.com/2013/09/10/podcasts/"/>
    <updated>2013-09-10T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/design/development/websites/2013/09/10/podcasts</id>
+   <id>http://carletondesign.com/2013/09/10/podcasts</id>
    <content type="html">Podcasting seems to be in a phase of growth. Suddenly there are dozens of good shows about the web and creative industries. It&#39;s not a new medium so maybe the growth has been more steady and I hadn&#39;t noticed until now but I&#39;m loving the results. I grew up with talk radio on around the house which I think gave me a special interest in listening to a good conversation. I love good music but I seem to crave podcasts more than tunes these days; call me weird. I love being able to learn something new about a design legend or discovering how the creators of a hot new app built an idea from scratch, all while driving my short commute. I end up educated, inspired, and entertained. It&#39;s a great way to bookend the workday. So without further adieu, here are my current favorites:
 
 &lt;img class=&quot;alignright&quot; alt=&quot;99 % Invisible&quot; src=&quot;/assets/posts/99percent.png&quot; width=&quot;132&quot; height=&quot;132&quot; /&gt;
@@ -246,9 +246,9 @@ Updates:
  
  <entry>
    <title>Design is never the same</title>
-   <link href="http://carletondesign.com/design/2013/08/30/design-is-never-the-same/"/>
+   <link href="http://carletondesign.com/2013/08/30/design-is-never-the-same/"/>
    <updated>2013-08-30T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/design/2013/08/30/design-is-never-the-same</id>
+   <id>http://carletondesign.com/2013/08/30/design-is-never-the-same</id>
    <content type="html">&lt;p&gt;Design is a chameleon and I love it. One day &lt;em&gt;design&lt;/em&gt; is a piece of paper with text, a moment later &lt;em&gt;design&lt;/em&gt; is an ephemeral atmospheric expression. There is so much in the world that craves thoughtful arrangement that the need for &lt;em&gt;design&lt;/em&gt; is endless and dynamic.&lt;/p&gt;
 
 &lt;p&gt;My niche of design is especially volatile. The web changes every second, and as the technologies evolve so must the designer. This forces designers to be excellent at adapting, ready to jump on an idea before we really know what’s involved. Frank reminded me of this today:
@@ -258,9 +258,9 @@ Updates:
  
  <entry>
    <title>Icon Fonts</title>
-   <link href="http://carletondesign.com/design/development/2012/09/16/icon-fonts/"/>
+   <link href="http://carletondesign.com/2012/09/16/icon-fonts/"/>
    <updated>2012-09-16T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/design/development/2012/09/16/icon-fonts</id>
+   <id>http://carletondesign.com/2012/09/16/icon-fonts</id>
    <content type="html">&lt;h2&gt;The facts&lt;/h2&gt;
 &lt;p&gt;Icon fonts are simply fonts that have symbols and glyphs (e.g. arrows, folders, magnifying glasses) instead of standard alphanumeric characters. Icon fonts are like dingbat fonts, but are designed specifically for UIs. Icon fonts, like other web fonts, use the CSS @font-face rule to display icons in web browsers. (Wikipedia)&lt;/p&gt;
 
@@ -330,10 +330,10 @@ Icon Fonts for Frameworks
  </entry>
  
  <entry>
-   <title>An Event Apart: With Great Power Comes Great Responsibility</title>
-   <link href="http://carletondesign.com/design/learning/2011/12/28/an-event-apart-with-great-power-comes-great-responsibility/"/>
+   <title>An Event Apart With Great Power Comes Great Responsibility</title>
+   <link href="http://carletondesign.com/2011/12/28/an-event-apart-with-great-power-comes-great-responsibility/"/>
    <updated>2011-12-28T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/design/learning/2011/12/28/an-event-apart-with-great-power-comes-great-responsibility</id>
+   <id>http://carletondesign.com/2011/12/28/an-event-apart-with-great-power-comes-great-responsibility</id>
    <content type="html">&lt;p&gt;&lt;em&gt;This is part of a series of posts summarizing my notes from the extraordinary conference &lt;a href=&quot;http://aneventapart.com/&quot;&gt;An Event Apart&lt;/a&gt;, held December 12-14, 2011 at The Palace Hotel in San Francisco.&lt;/em&gt;&lt;/p&gt;
 
 &lt;strong&gt;With Great Power Comes Great Responsibility&lt;/strong&gt;
@@ -414,10 +414,10 @@ Use new power responsibly
  </entry>
  
  <entry>
-   <title>An Event Apart: The Dimensions of a Good Experience</title>
-   <link href="http://carletondesign.com/design/learning/2011/12/28/an-event-apart-the-dimensions-of-a-good-experience/"/>
+   <title>An Event Apart The Dimensions Of A Good Experience</title>
+   <link href="http://carletondesign.com/2011/12/28/an-event-apart-the-dimensions-of-a-good-experience/"/>
    <updated>2011-12-28T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/design/learning/2011/12/28/an-event-apart-the-dimensions-of-a-good-experience</id>
+   <id>http://carletondesign.com/2011/12/28/an-event-apart-the-dimensions-of-a-good-experience</id>
    <content type="html">&lt;p&gt;&lt;em&gt;This is part of a series of posts summarizing my notes from the extraordinary conference &lt;a href=&quot;http://aneventapart.com/&quot;&gt;An Event Apart&lt;/a&gt;, held December 12-14, 2011 at The Palace Hotel in San Francisco.&lt;/em&gt;&lt;/p&gt;
 
 &lt;strong&gt;&lt;a href=&quot;https://twitter.com/#!/ladylexy&quot; rel=&quot;nofollow&quot;&gt;Alexa Andrzejewski&lt;/a&gt;&lt;/strong&gt;
@@ -551,10 +551,10 @@ Evaluate your experiences with these lenses and learn from the results.
  </entry>
  
  <entry>
-   <title>An Event Apart: Design Principles</title>
-   <link href="http://carletondesign.com/development/learning/2011/12/27/an-event-apart-design-principles/"/>
+   <title>An Event Apart Design Principles</title>
+   <link href="http://carletondesign.com/2011/12/27/an-event-apart-design-principles/"/>
    <updated>2011-12-27T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/development/learning/2011/12/27/an-event-apart-design-principles</id>
+   <id>http://carletondesign.com/2011/12/27/an-event-apart-design-principles</id>
    <content type="html">&lt;p&gt;&lt;em&gt;This is part of a series of posts summarizing my notes from the extraordinary conference &lt;a href=&quot;http://aneventapart.com/&quot;&gt;An Event Apart&lt;/a&gt;, held December 12-14, 2011 at The Palace Hotel in San Francisco.&lt;/em&gt;&lt;/p&gt;
 
 &lt;strong&gt;Design Principles&lt;/strong&gt;
@@ -623,10 +623,10 @@ For more info, see &lt;a href=&quot;http://principles.adactio.com/&quot;&gt;Desi
  </entry>
  
  <entry>
-   <title>An Event Apart: Content First</title>
-   <link href="http://carletondesign.com/design/learning/websites/2011/12/27/an-event-apart-content-first/"/>
+   <title>An Event Apart Content First</title>
+   <link href="http://carletondesign.com/2011/12/27/an-event-apart-content-first/"/>
    <updated>2011-12-27T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/design/learning/websites/2011/12/27/an-event-apart-content-first</id>
+   <id>http://carletondesign.com/2011/12/27/an-event-apart-content-first</id>
    <content type="html">&lt;p&gt;&lt;em&gt;This is the first in a series of posts summarizing my notes from the extraordinary conference &lt;a href=&quot;http://aneventapart.com/&quot;&gt;An Event Apart&lt;/a&gt;, held December 12-14, 2011 at The Palace Hotel in San Francisco.&lt;/em&gt;&lt;/p&gt;
 
 &lt;strong&gt;Jeffery Zeldman&lt;/strong&gt;: Legendary Web Standards Guru, &lt;a href=&quot;https://twitter.com/#!/zeldman&quot;&gt;@zeldman&lt;/a&gt;, &lt;a href=&quot;http://zeldman.com/&quot;&gt;Zeldman.com&lt;/a&gt;, Author: &lt;a href=&quot;http://www.amazon.com/Designing-Web-Standards-Jeffrey-Zeldman/dp/0321616952/ref=sr_1_1?ie=UTF8&amp;amp;qid=1325724920&amp;amp;sr=8-1&quot;&gt;Designing with Web Standards&lt;/a&gt;, Co-Founder: &lt;a href=&quot;http://aneventapart.com/&quot;&gt;An Event Apart&lt;/a&gt;, Founder: &lt;a href=&quot;http://happycog.com/&quot;&gt;Happy Cogg&lt;/a&gt;, Founder: &lt;a href=&quot;http://alistapart.com&quot;&gt;A List Apart&lt;/a&gt;, Publisher: &lt;a href=&quot;http://abookapart.com&quot;&gt;A Book Apart&lt;/a&gt;.
@@ -703,9 +703,9 @@ What&#39;s the designers job then?
  
  <entry>
    <title>Real Fonts on the Web</title>
-   <link href="http://carletondesign.com/design/learning/typography/websites/2011/04/27/web-fonts/"/>
+   <link href="http://carletondesign.com/2011/04/27/web-fonts/"/>
    <updated>2011-04-27T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/design/learning/typography/websites/2011/04/27/web-fonts</id>
+   <id>http://carletondesign.com/2011/04/27/web-fonts</id>
    <content type="html">&lt;img class=&quot;alignnone size-full wp-image-324&quot; title=&quot;webfonts&quot; src=&quot;http://carletondesign.com/blog/wp-content/uploads/2011/04/webfonts.gif&quot; alt=&quot;&quot; width=&quot;400&quot; height=&quot;165&quot; /&gt;
 
 &lt;strong&gt;Backstory&lt;/strong&gt;
@@ -818,9 +818,9 @@ Even more info:&lt;/p&gt;
  
  <entry>
    <title>Rework</title>
-   <link href="http://carletondesign.com/learning/2011/01/26/rework/"/>
+   <link href="http://carletondesign.com/2011/01/26/rework/"/>
    <updated>2011-01-26T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/learning/2011/01/26/rework</id>
+   <id>http://carletondesign.com/2011/01/26/rework</id>
    <content type="html">&lt;a href=&quot;http://www.flickr.com/photos/37s/4418288411/in/set-72157623458720373/&quot;  target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img alt=&quot;Meetings are Toxic&quot; src=&quot;http://farm5.static.flickr.com/4018/4418288411_8bc279667e.jpg&quot; title=&quot;Meetings are Toxic&quot; width=&quot;343&quot; height=&quot;500&quot; /&gt;&lt;/a&gt;
 
 
@@ -845,9 +845,9 @@ UPDATE: In response to Rework, Happy Cog has published &lt;a href=&quot;http://c
  
  <entry>
    <title>Just Released</title>
-   <link href="http://carletondesign.com/design/graphics/websites/2011/01/25/just-released/"/>
+   <link href="http://carletondesign.com/2011/01/25/just-released/"/>
    <updated>2011-01-25T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/design/graphics/websites/2011/01/25/just-released</id>
+   <id>http://carletondesign.com/2011/01/25/just-released</id>
    <content type="html">&lt;p&gt;I have completed a redesign of my personal portfolio website. Visit &lt;a href=&quot;www.carletondesign.com&quot;&gt;carletondesign.com&lt;/a&gt; to check it out. 
 &lt;a href=&quot;http://carletondesign.com/&quot;&gt;&lt;img src=&quot;/assets/posts/carletondesigncom_sm.jpg&quot; alt=&quot;The new carletondesign.com&quot; title=&quot;The new carletondesign.com&quot; width=&quot;400&quot; height=&quot;360&quot; class=&quot;size-full wp-image-265&quot; /&gt;&lt;/a&gt;
 &lt;/p&gt;
@@ -870,9 +870,9 @@ Like most websites, it&#39;s never done, but reaching this point feels great. I 
  
  <entry>
    <title>Learn to Code</title>
-   <link href="http://carletondesign.com/websites/2011/01/20/learn-to-code/"/>
+   <link href="http://carletondesign.com/2011/01/20/learn-to-code/"/>
    <updated>2011-01-20T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/websites/2011/01/20/learn-to-code</id>
+   <id>http://carletondesign.com/2011/01/20/learn-to-code</id>
    <content type="html">&lt;p&gt;Friends have asked how to get started learning web development. The good news is that it&#39;s pretty simple to get started building websites. Like anything, it takes a lot more time to develop your skill to a professional level. Here are a few resources to get anyone started in the right direction.  &lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://www.w3schools.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;W3 Schools&lt;/a&gt;&lt;/strong&gt; is a comprehensive guide to web codes. Guided lessons and quick reference for html and css makes this very helpful tool for newbies and pros. &lt;/p&gt;
@@ -894,9 +894,9 @@ Like most websites, it&#39;s never done, but reaching this point feels great. I 
  
  <entry>
    <title>Labs</title>
-   <link href="http://carletondesign.com/design/graphics/websites/2010/12/21/labs/"/>
+   <link href="http://carletondesign.com/2010/12/21/labs/"/>
    <updated>2010-12-21T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/design/graphics/websites/2010/12/21/labs</id>
+   <id>http://carletondesign.com/2010/12/21/labs</id>
    <content type="html">&lt;p&gt;What do you think of when you see a beaker full of unknown liquids? Scientific experimentation comes to mind. I&#39;ve noticed a rise in logos and illustrations which contain scientific symbols, such as beakers or test tubes, used to represent the experimental qualities of web/software companies. Here are a few examples that work well:&lt;/p&gt;
 
 &lt;img class=&quot;size-full wp-image-254&quot; title=&quot;labs_collage&quot; src=&quot;/assets/posts/labs_collage.jpg&quot; alt=&quot;&quot; width=&quot;600&quot; height=&quot;600&quot; /&gt; &lt;em&gt;Trend: Lab equipment logos&lt;/em&gt; (Images property of their respective owners.)
@@ -908,9 +908,9 @@ I like the idea of borrowing the symbols from a traditional field to represent s
  
  <entry>
    <title>Progressive Enrichment</title>
-   <link href="http://carletondesign.com/websites/2010/11/23/progressive-enrichment/"/>
+   <link href="http://carletondesign.com/2010/11/23/progressive-enrichment/"/>
    <updated>2010-11-23T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/websites/2010/11/23/progressive-enrichment</id>
+   <id>http://carletondesign.com/2010/11/23/progressive-enrichment</id>
    <content type="html">&lt;p&gt;There are some great new features rolling out with CSS3 and HTML5 that will make life fun for web designers/programmers. Simple rounded corners, integrated video and fancy transitions are just a few of the many new options provided to developers. To varying degrees, browser makers are bolstering their support for these advancements in their latest versions.&lt;/p&gt;
 
 &lt;p&gt;Whenever new browser versions arrive, the question is raised on what features are widespread enough to take advantage of, and what level to design for. Users have many options for browsers, and then many versions of each browser. Some keep updated to the latest versions, others lag behind.&lt;/p&gt;
@@ -933,9 +933,9 @@ I like the idea of borrowing the symbols from a traditional field to represent s
  
  <entry>
    <title>Solo to Specialized</title>
-   <link href="http://carletondesign.com/learning/websites/2010/11/18/solo-to-specialized/"/>
+   <link href="http://carletondesign.com/2010/11/18/solo-to-specialized/"/>
    <updated>2010-11-18T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/learning/websites/2010/11/18/solo-to-specialized</id>
+   <id>http://carletondesign.com/2010/11/18/solo-to-specialized</id>
    <content type="html">&lt;p&gt;I recently transitioned from being a self employed consultant, to a corporate employee. I went from wide responsibility of all aspects of my own business into a specialized cog at a big, high speed corporation.&lt;/p&gt;
 
 &lt;img class=&quot;alignnone size-full wp-image-237&quot; title=&quot;blog_solo-specila&quot; src=&quot;/assets/posts/blog_solo-specila.gif&quot; alt=&quot;&quot; width=&quot;480&quot; height=&quot;261&quot; /&gt;
@@ -952,10 +952,10 @@ I like the idea of borrowing the symbols from a traditional field to represent s
  
  <entry>
    <title>Optimized for Search</title>
-   <link href="http://carletondesign.com/websites/2010/10/16/optimized-for-search/"/>
+   <link href="http://carletondesign.com/2010/10/16/optimized-for-search/"/>
    <updated>2010-10-16T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/websites/2010/10/16/optimized-for-search</id>
-   <content type="html">&lt;a href=&quot;/assets/posts/seo.jpg&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-149&quot; title=&quot;seo&quot; src=&quot;/assets/posts/seo-300x197.jpg&quot; alt=&quot;seo&quot; width=&quot;300&quot; height=&quot;197&quot; /&gt;&lt;/a&gt;
+   <id>http://carletondesign.com/2010/10/16/optimized-for-search</id>
+   <content type="html">&lt;img class=&quot;alignnone size-medium wp-image-149&quot; title=&quot;seo&quot; src=&quot;/assets/posts/seo-300x197.jpg&quot; alt=&quot;seo&quot; width=&quot;300&quot; height=&quot;197&quot; /&gt;
 
 &lt;p&gt;Search engine optimization is the voodoo of web marketing. Many people claim to be experts at getting your site to the top of Google&#39;s results, but wont disclose their magic tricks. When search engines and the internet were new, promoting your site was simple. Things have changed but the basic principles can still be conquered. Dump the voodoo and get going on the basics:&lt;/p&gt;
 &lt;ol&gt;
@@ -988,9 +988,9 @@ More info:
  
  <entry>
    <title>Inspiration</title>
-   <link href="http://carletondesign.com/general/2010/04/29/inspiration/"/>
+   <link href="http://carletondesign.com/2010/04/29/inspiration/"/>
    <updated>2010-04-29T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/general/2010/04/29/inspiration</id>
+   <id>http://carletondesign.com/2010/04/29/inspiration</id>
    <content type="html">&lt;a href=&quot;http://work.frankchimero.com/#34058/Inspirational-Design-Posters&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-224&quot; title=&quot;productivity&quot; src=&quot;/assets/posts/productivity-236x300.jpg&quot; alt=&quot;Buy this from Frank Chimero&quot; width=&quot;236&quot; height=&quot;300&quot; /&gt;&lt;/a&gt;
 
 Sometimes a wise word is just what you need. I recently &lt;a title=&quot;Quotes&quot; href=&quot;http://designwashere.com/80-inspiring-quotes-about-design/&quot; target=&quot;_blank&quot;&gt;stumbled&lt;/a&gt; on these gems of knowledge:
@@ -1020,20 +1020,19 @@ Sometimes a wise word is just what you need. I recently &lt;a title=&quot;Quotes
  
  <entry>
    <title>The Wrapping Banner</title>
-   <link href="http://carletondesign.com/design/websites/2009/10/27/the-wrapping-banner/"/>
+   <link href="http://carletondesign.com/2009/10/27/the-wrapping-banner/"/>
    <updated>2009-10-27T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/design/websites/2009/10/27/the-wrapping-banner</id>
+   <id>http://carletondesign.com/2009/10/27/the-wrapping-banner</id>
    <content type="html">&lt;p&gt;I&#39;ve noticed this wrap-around or folding banner thing showing up around the web. I like it. Simple effects like this add layer and depth to the flat images on screen.&lt;/p&gt;
 
-&lt;a href=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/10/foldover1.jpg&quot;&gt;&lt;img src=&quot;/assets/posts/foldover1.jpg&quot; alt=&quot;The Wrapping Banner&quot; title=&quot;foldover&quot; width=&quot;590&quot; height=&quot;350&quot; class=&quot;size-full wp-image-206&quot; /&gt;&lt;/a&gt;
-</content>
+&lt;img src=&quot;/assets/posts/foldover1.jpg&quot; alt=&quot;The Wrapping Banner&quot; title=&quot;foldover&quot; width=&quot;590&quot; height=&quot;350&quot; class=&quot;size-full wp-image-206&quot; /&gt;</content>
  </entry>
  
  <entry>
    <title>Museum of Today</title>
-   <link href="http://carletondesign.com/design/2009/10/06/museum-of-today/"/>
+   <link href="http://carletondesign.com/2009/10/06/museum-of-today/"/>
    <updated>2009-10-06T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/design/2009/10/06/museum-of-today</id>
+   <id>http://carletondesign.com/2009/10/06/museum-of-today</id>
    <content type="html">&lt;p&gt;If you have ever been to a science museum, you know what to expect: wild animals preserved in threatening poses, strange bugs from across the planet and, if you&#39;re lucky, some dinosaur bones. Things have changed a bit at the California Academy of Sciences. Last year they completed a major overhaul to their facility in Golden Gate Park in San Francisco, and transformed it into the greenest museum in the world (LEED Platinum). The usual bugs and bones remain, but the exhibits have been designed to increase visibility and interaction. You can walk through a four-story glass orb that contains the rainforest exhibit, explore the amazing aquarium, stare at the night sky in the planetarium, or watch researchers do their actual work in front of you.&lt;/p&gt;
 
 &lt;img class=&quot;size-full wp-image-816&quot; title=&quot;calacademy&quot; src=&quot;/assets/posts/calacademy.jpg&quot; alt=&quot;California Academy of Sciences, San Francisco&quot; width=&quot;500&quot; height=&quot;245&quot; /&gt;
@@ -1051,14 +1050,14 @@ More info:
  
  <entry>
    <title>Crafting 2.0</title>
-   <link href="http://carletondesign.com/art/general/websites/2009/09/09/crafting-2-0/"/>
+   <link href="http://carletondesign.com/2009/09/09/crafting-2-0/"/>
    <updated>2009-09-09T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/art/general/websites/2009/09/09/crafting-2-0</id>
+   <id>http://carletondesign.com/2009/09/09/crafting-2-0</id>
    <content type="html">&lt;p&gt;The term &lt;em&gt;crafting&lt;/em&gt; brings to mind the knitted sweaters my aunt made for Christmas gifts. Those weren&#39;t worn much after that day. The old stereotypes of crafts are being redefined by a new generation of creative people. Today&#39;s crafts are functional, stylish or cute creations that appeal to a new audience who are tired of massed produced options from the mega store.&lt;/p&gt; 
 
 &lt;p&gt;If you appreciate hand made items, you used to visit your local craft fair. The halls were filled with knit pot holders, yarn haired dolls and jewelry made from &quot;friendly&quot; plastic.  Today, crafting is back and it&#39;s high-tech.  Creative folks have turned to the web for inspiration, instruction and customers. &lt;/p&gt;
 
-&lt;a href=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/09/etsy_sample.jpg&quot;&gt;&lt;img class=&quot;alignnone size-medium wp-image-181&quot; title=&quot;etsy_sample&quot; src=&quot;/assets/posts/etsy_sample-283x300.jpg&quot; alt=&quot;etsy_sample&quot; width=&quot;283&quot; height=&quot;300&quot; /&gt;&lt;/a&gt;
+&lt;img class=&quot;alignnone size-medium wp-image-181&quot; title=&quot;etsy_sample&quot; src=&quot;/assets/posts/etsy_sample-283x300.jpg&quot; alt=&quot;etsy_sample&quot; width=&quot;283&quot; height=&quot;300&quot; /&gt;
 
 &lt;p&gt;Websites like &lt;a href=&quot;http://etsy.com&quot; target=&quot;_blank&quot;&gt;Etsy.com&lt;/a&gt; (rhymes with Betsy) are built as a marketplace for crafters. Customer can buy a wide range of items from talented crafters without leaving their couch, while crafters get a worldwide audience for their specialized creations. Several of &lt;a href=&quot;http://mypaperhabit.etsy.com&quot; target=&quot;_blank&quot;&gt;my&lt;/a&gt; &lt;a href=&quot;http://blessedbyit.etsy.com&quot; target=&quot;_blank&quot;&gt;family&lt;/a&gt; and &lt;a href=&quot;http://kristinsanchez.etsy.com&quot; target=&quot;_blank&quot;&gt;friends&lt;/a&gt; have gotten into it the craft business with the help of Etsy.&lt;/p&gt;
 
@@ -1068,9 +1067,9 @@ More info:
  
  <entry>
    <title>New Collaboration</title>
-   <link href="http://carletondesign.com/design/my%20projects/websites/2009/08/12/new-collaboration/"/>
+   <link href="http://carletondesign.com/2009/08/12/new-collaboration/"/>
    <updated>2009-08-12T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/design/my%20projects/websites/2009/08/12/new-collaboration</id>
+   <id>http://carletondesign.com/2009/08/12/new-collaboration</id>
    <content type="html">&lt;img class=&quot;alignnone size-medium wp-image-170&quot; title=&quot;E&amp;amp;J Design&quot; src=&quot;/assets/posts/EJDesign-300x278.jpg&quot; alt=&quot;E&amp;amp;J Design&quot; width=&quot;300&quot; height=&quot;278&quot; /&gt;
 
 &lt;p&gt;After two nights of intense design and development, a new site has been released for E&amp;amp;J Design, a collaboration between Eric Ritchey and myself. Nothing like a deadline to motivate! We&#39;re stoked to have it live, but have more in the works for the future. Take it for a spin: &lt;a href=&quot;http://eandjdesign.com/&quot; target=&quot;_new&quot;&gt;www.eandjdesign.com&lt;/a&gt;&lt;/p&gt;
@@ -1079,9 +1078,9 @@ More info:
  
  <entry>
    <title>Up and Away</title>
-   <link href="http://carletondesign.com/learning/2009/08/09/up-and-away/"/>
+   <link href="http://carletondesign.com/2009/08/09/up-and-away/"/>
    <updated>2009-08-09T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/learning/2009/08/09/up-and-away</id>
+   <id>http://carletondesign.com/2009/08/09/up-and-away</id>
    <content type="html">&lt;p&gt;I love learning how things work. Every mechanical device has a great story behind it. I think this interest comes from some primal desire to construct.&lt;/p&gt;
 
 &lt;p&gt;Perfect example: My interest in &lt;a href=&quot;http://blog.airshipventures.com/&quot;&gt;Airship Ventures&lt;/a&gt;, the company who brought a Zeppelin Airship to the Moffett Field. It&#39;s the first of its kind in the US and the first time in 70 years that the average citizen has has a chance to experience flight in a dirigible.&lt;/p&gt;
@@ -1094,9 +1093,9 @@ More info:
  
  <entry>
    <title>Technology & Design</title>
-   <link href="http://carletondesign.com/graphics/learning/websites/2009/06/04/technology-design/"/>
+   <link href="http://carletondesign.com/2009/06/04/technology-design/"/>
    <updated>2009-06-04T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/graphics/learning/websites/2009/06/04/technology-design</id>
+   <id>http://carletondesign.com/2009/06/04/technology-design</id>
    <content type="html">&lt;p&gt;It is amazing to watch a child grow up with technology as normal while the older generation is still figuring it out how to adjust to it. My one year old spends most of the day pushing buttons, opening doors, or trying to take things apart. Hopefully, that desire to learn how things work will last a lifetime. I can only wonder what the future will be like. The world is changing fast. I wonder if anyone predicted that information would be so accessible though the internet. It is simple to learn so many things that previously were confined to trained professionals. Websites and online tools allow you to manage your banking and investments, publish a book, sell your original music and much more.&lt;/p&gt;
 
 &lt;p&gt;Open access to vast knowledge has eliminated the traditional barriers to entry into many fields of work. Web design is a field that has no such barriers. Anything you need to know about web design is available online and can be self-taught. Many professionals started out tinkering and then developed their new skills into a career.&lt;/p&gt;
@@ -1114,9 +1113,9 @@ More info:
  
  <entry>
    <title>Rock Stars of the Web</title>
-   <link href="http://carletondesign.com/learning/websites/2009/05/27/rock-star-of-standards/"/>
+   <link href="http://carletondesign.com/2009/05/27/rock-star-of-standards/"/>
    <updated>2009-05-27T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/learning/websites/2009/05/27/rock-star-of-standards</id>
+   <id>http://carletondesign.com/2009/05/27/rock-star-of-standards</id>
    <content type="html">&lt;p&gt;Intel has a commercial portraying Ajay Bhatt, co-inventor of the USB, as if he was a rock star. Check it out:&lt;/p&gt;
 
 &lt;object width=&quot;480&quot; height=&quot;385&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/uw39qxcjiMk?fs=1&amp;amp;hl=en_US&quot;&gt;&lt;/param&gt;&lt;param name=&quot;allowFullScreen&quot; value=&quot;true&quot;&gt;&lt;/param&gt;&lt;param name=&quot;allowscriptaccess&quot; value=&quot;always&quot;&gt;&lt;/param&gt;&lt;embed src=&quot;http://www.youtube.com/v/uw39qxcjiMk?fs=1&amp;amp;hl=en_US&quot; type=&quot;application/x-shockwave-flash&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot; width=&quot;480&quot; height=&quot;385&quot;&gt;&lt;/embed&gt;&lt;/object&gt;
@@ -1141,9 +1140,9 @@ More info:
  
  <entry>
    <title>Browser Wars, Part Deux</title>
-   <link href="http://carletondesign.com/animation/design/photography/websites/2009/05/13/browser-wars-part-deux/"/>
+   <link href="http://carletondesign.com/2009/05/13/browser-wars-part-deux/"/>
    <updated>2009-05-13T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/animation/design/photography/websites/2009/05/13/browser-wars-part-deux</id>
+   <id>http://carletondesign.com/2009/05/13/browser-wars-part-deux</id>
    <content type="html">&lt;p&gt;Remember when everyone had AOL, prodigy, or Compuserve? Those were the days of the original browser wars. Internet Explorer battled it out with Netscape Navigator while websites proudly displayed badges to support their chosen weapon.&lt;/p&gt;
 
 &lt;img class=&quot;alignnone size-full wp-image-116&quot; title=&quot;browsers&quot; src=&quot;/assets/posts/browsers.png&quot; alt=&quot;browsers&quot; width=&quot;263&quot; height=&quot;58&quot; /&gt;
@@ -1174,9 +1173,9 @@ More info:
  
  <entry>
    <title>Challenge or Opportunity?</title>
-   <link href="http://carletondesign.com/general/2009/03/21/challenge-or-opportunity/"/>
+   <link href="http://carletondesign.com/2009/03/21/challenge-or-opportunity/"/>
    <updated>2009-03-21T00:00:00-07:00</updated>
-   <id>http://carletondesign.com/general/2009/03/21/challenge-or-opportunity</id>
+   <id>http://carletondesign.com/2009/03/21/challenge-or-opportunity</id>
    <content type="html">&lt;a href=&quot;/assets/posts/biz_growth_illustration.jpg&quot;&gt;&lt;img src=&quot;http://carletondesign.com/blog/wp-content/uploads/2009/03/biz_growth_illustration-300x146.jpg&quot; alt=&quot;biz_growth_illustration&quot; title=&quot;biz_growth_illustration&quot; width=&quot;300&quot; height=&quot;146&quot; class=&quot;alignnone size-medium wp-image-106&quot; /&gt;&lt;/a&gt;
 
 &lt;p&gt;Taking an idea and making it a successful business is a struggle. Not only do you have to manage internal factors like productivity, customer service, and accounting, you are also subject to external factors like competition, market volatility, and fickle customers. Recently I was surprised with a legal challenge which required big changes to one of my websites and its products. Challenges like these bring the entrepreneur to a crossroads. &lt;strong&gt;Do you allow the challenge to be a stumbling block or a launching point?&lt;/strong&gt; It&#39;s easy to be discouraged, but it takes endurance and hope to turn a setback into an opportunity for success. There is always more to learn or a fresh way to approach your challenge. In this case, the abrupt legal issue has lead to a renewed marketing effort and careful planning for the future of this small business.&lt;/p&gt;
@@ -1185,9 +1184,9 @@ More info:
  
  <entry>
    <title>Photography</title>
-   <link href="http://carletondesign.com/design/learning/photography/websites/2009/02/15/photography/"/>
+   <link href="http://carletondesign.com/2009/02/15/photography/"/>
    <updated>2009-02-15T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/design/learning/photography/websites/2009/02/15/photography</id>
+   <id>http://carletondesign.com/2009/02/15/photography</id>
    <content type="html">&lt;p&gt;I love photography. Life would not be nearly as fun without cameras. Photos can quickly explain a product, express an quality of a company, or provide personal connection to an experience. When designing websites or printed materials, I utilize both stock and custom photography.&lt;/p&gt;
 
 &lt;p&gt;Stock photography is an easy and inexpensive way to get high quality images on a huge array of topics. Instead of hiring a photographer to take specific pictures you can quickly find numerous examples online for a fraction of the cost. An example would be the three stock images I selected for the intro page design of &lt;a title=&quot;Omni Law Group&quot; href=&quot;http://www.omnillp.com/&quot; target=&quot;_blank&quot;&gt;Omni Law Group&lt;/a&gt;. This firm was seeking a graphic representation of it&#39;s marketing message. The challenge with stock photography is selecting the right photo from the expanse of options. An overall vision of the project&#39;s styling goals is required in order to ensure a cohesive result.&lt;/p&gt;
@@ -1204,9 +1203,9 @@ More info:
  
  <entry>
    <title>Co-Working at Ames CoLab</title>
-   <link href="http://carletondesign.com/3d%20modeling/2009/02/05/co-working-at-ames-colab/"/>
+   <link href="http://carletondesign.com/2009/02/05/co-working-at-ames-colab/"/>
    <updated>2009-02-05T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/3d%20modeling/2009/02/05/co-working-at-ames-colab</id>
+   <id>http://carletondesign.com/2009/02/05/co-working-at-ames-colab</id>
    <content type="html">&lt;img class=&quot;size-full wp-image-56&quot; title=&quot;initiallogo-horizontal-300x1001&quot; src=&quot;/assets/posts/initiallogo-horizontal-300x1001.png&quot; alt=&quot;CoLab&quot; width=&quot;300&quot; height=&quot;100&quot; /&gt;
 
 &lt;p&gt;I love watching a good idea become reality. Good friends Sean Barber and Brian Anderson developed the concept of creating a co-working space in Ames, IA. Co-working is the idea of several professionals sharing a workspace. It&#39;s perfect for freelancers, tele-commuters, and consultants that need an office away from home. The main purpose of a co-working space is to provide professional office conveniences for little overhead cost. The secondary goal is to foster interdisciplinary interaction between users of the space. The unique mix of users can create beneficial interaction. For example a photographer and graphic designer who work independently can discover that their work is complimentary and begin sharing clients. This interaction is a great benefit for freelancers, and small businesses who don&#39;t have the resources internally.&lt;/p&gt;
@@ -1234,9 +1233,9 @@ More info about Ames CoLab:
  
  <entry>
    <title>History of the Internet</title>
-   <link href="http://carletondesign.com/animation/design/2009/01/16/history-of-the-internet/"/>
+   <link href="http://carletondesign.com/2009/01/16/history-of-the-internet/"/>
    <updated>2009-01-16T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/animation/design/2009/01/16/history-of-the-internet</id>
+   <id>http://carletondesign.com/2009/01/16/history-of-the-internet</id>
    <content type="html">&lt;p&gt;I love this video! This beautifully illustrated animation explains the history of the internet. It&#39;s a great example of how a technical lesson can be communicated effectively through skilled information design.&lt;/p&gt;
 &lt;object width=&quot;400&quot; height=&quot;225&quot; data=&quot;http://vimeo.com/moogaloop.swf?clip_id=2696386&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1&quot; type=&quot;application/x-shockwave-flash&quot;&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;allowscriptaccess&quot; value=&quot;always&quot; /&gt;&lt;param name=&quot;src&quot; value=&quot;http://vimeo.com/moogaloop.swf?clip_id=2696386&amp;amp;server=vimeo.com&amp;amp;show_title=1&amp;amp;show_byline=1&amp;amp;show_portrait=0&amp;amp;color=&amp;amp;fullscreen=1&quot; /&gt;&lt;/object&gt;
 &lt;a href=&quot;http://vimeo.com/&quot;&gt;History of the Internet&lt;/a&gt; from &lt;a href=&quot;http://vimeo.com/picol&quot;&gt;PICOL&lt;/a&gt; on &lt;a href=&quot;http://vimeo.com&quot;&gt;Vimeo&lt;/a&gt;.
@@ -1245,9 +1244,9 @@ More info about Ames CoLab:
  
  <entry>
    <title>Current Projects</title>
-   <link href="http://carletondesign.com/design/my%20projects/websites/2009/01/16/current-projects/"/>
+   <link href="http://carletondesign.com/2009/01/16/current-projects/"/>
    <updated>2009-01-16T00:00:00-08:00</updated>
-   <id>http://carletondesign.com/design/my%20projects/websites/2009/01/16/current-projects</id>
+   <id>http://carletondesign.com/2009/01/16/current-projects</id>
    <content type="html">&lt;img class=&quot;size-full wp-image-12 alignnone&quot; title=&quot;jcd_screen&quot; src=&quot;/assets/posts/jcd_screen.png&quot; alt=&quot;jcd_screen&quot; width=&quot;400&quot; height=&quot;344&quot; /&gt;
 
 &lt;p&gt;I&#39;m currently in the process of creating &lt;a title=&quot;James Carleton Design&quot; href=&quot;http://CarletonDesign.com&quot; target=&quot;_self&quot;&gt;CarletonDesign.com&lt;/a&gt; (this blog is part of it) as my new portfolio site to replace &lt;a title=&quot;JRCID&quot; href=&quot;http://jrcid.com&quot; target=&quot;_blank&quot;&gt;jrcid.com&lt;/a&gt;.&lt;/p&gt;

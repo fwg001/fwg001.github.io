@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Thinking on my feet"
+title:  Thinking on my feet
 ---
 ## A year ago I stood up. 
 I hacked together a standup desk using cheap parts and a little imagination. I was determined to avoid the detriments of a sedentary work life. The quickest way to try this new work style was to follow one of many Ikea hacks.  For hardly any money, I was able to combine parts that worked for my wide, side-by-side MacBook Pro and Thunderbolt Display setup. I kept part of my cube as normal so I can still switch to a sit down position occasionally, but my primary standing spot has been working great. For extra comfort, a gel mat softens the floor. I transitioned gradually, but now standing is normal and sitting is the exception.

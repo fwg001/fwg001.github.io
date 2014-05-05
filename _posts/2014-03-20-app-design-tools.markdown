@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "App Design Tools"
+title: App Design Tools
 ---
 
 Working on a native app project has allowed me to experiment with new design tools. Here are a few of my favorites:
