@@ -11,5 +11,6 @@ Standing doesn't eliminate procrastination and distraction, but to some degree I
 ## So stop sitting.
 - [Learn why sitting hurts](http://www.businessweek.com/magazine/content/10_19/b4177071221162.htm)
 - [Check out the inspirational hack](http://iamnotaprogrammer.com/Ikea-Standing-desk-for-22-dollars.html)
+- [Don't forget an anti-fatigue mat](http://thewirecutter.com/reviews/best-standing-desk-mat/)
 - [Kickstart an affordable sit/stand desk](https://www.kickstarter.com/projects/2036834894/the-most-affordable-automatic-sit-to-stand-desk)
 - [Take it to another level with a treadmill](http://www.instructables.com/id/Treadmill-Desk/)
