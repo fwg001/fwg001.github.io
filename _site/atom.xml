@@ -4,13 +4,31 @@
  <title>James Carleton</title>
  <link href="http://carletondesign.com/atom.xml" rel="self"/>
  <link href="http://carletondesign.com/"/>
- <updated>2014-06-09T22:59:00-07:00</updated>
+ <updated>2014-06-22T21:44:36-07:00</updated>
  <id>http://carletondesign.com</id>
  <author>
    <name>James Carleton</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Design Symbol</title>
+   <link href="http://carletondesign.com/2014/06/22/design-symbol/"/>
+   <updated>2014-06-22T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/2014/06/22/design-symbol</id>
+   <content type="html">&lt;p&gt;Thinking about the design process for a set of icons I&amp;#39;m working on, I realized it felt very familiar. Icons are a great analogy for design as a whole. &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A good icon is simple, clear, and almost obvious.&lt;/li&gt;
+&lt;li&gt;A good icon hides the effort and skill that led to its existence. &lt;/li&gt;
+&lt;li&gt;A good icon doesn&amp;#39;t make you think.&lt;/li&gt;
+&lt;li&gt;A good icon spans context and culture.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ditto for &lt;em&gt;UI/UX/interaction/web/app/logo/branding/product/etc&lt;/em&gt; design.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Thinking on my feet</title>
