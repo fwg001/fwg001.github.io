@@ -44,4 +44,8 @@ The app went from concept to release in record time and I enjoyed every stage of
  **Try it yourself**
  
   [![AppStore](/assets/mortgage_app/download_appstore.png)](https://itunes.apple.com/us/app/mortgage-calculator-mortgage/id875060754?mt=8)[![Google Play Store](/assets/mortgage_app/download_play.png)](https://play.google.com/store/apps/details?id=com.move.mortgage)
+  
+  
+**Behind the Scenes**
 
+For more about my design process, see what I wrote [over here](/2014/06/14/app-designer/).
