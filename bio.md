@@ -17,17 +17,25 @@ I continually test emerging tools and methods to find the most effective workflo
 ## Experience
 
 **2011 to Present - Move Inc./Realtor.com**
-User Experience Designer, Consumer UX group
+
+Sr. User Experience Designer, Consumer UX group
  
-- Lead designer for new *Local* section of Realtor.com - including interactive maps, data visualization and responsive design
-- Lead designer for redesign and re-platform of SeniorHousingNet.com - including faceted search, lead gen and multi-device responsive design
-- Lead designer for upcoming iOS/Android mobile app
-- Designer for Realtor.com map search redesign
-- Designer for Realtor.com mobile web app (m.realtor.com) rentals integration
-- Frequent contributor to UX peer reviews, forums, and design documentation
-- Integrated user research and analytics into project process
-- Familiarity with HTML/CSS has increased my capability to collaborate with developers and prototype designs in the browser
-- Samples available upon request
+Projects:
+
+- Lead/sole designer for Realtor.com's new Mortgage App on iOS & Android from concept to launch, and upcoming revisions
+- Lead designer for Realtor.com map search experience (good things to come)
+- Lead designer for new Local section of Realtor.com - including interactive maps, data visualization, and comparison tools
+- Lead/sole designer for redesign/rebrand of SeniorHousingNet.com - including faceted search, lead gen and multi-device responsive design
+
+Process:
+
+- Frequent contributor to team peer reviews, forums, and design documentation
+- Helping to evolve our design process to better interface with agile development teams
+- Experience with HTML/CSS is enabling improved collaboration with front-end developers
+- Collaborating with user researcher staff to design and execute in-lab and remote usability testing - Integrating findings back into project work 
+- Spokesperson for utilizing modern front end frameworks, responsive design, living style guides and pattern libraries
+- Spokesperson for utilizing modern prototyping tools in the team’s process (InVision, Proto.io, QC/Origami etc)
+- Continually seeking knowledge from industry events, lectures, conferences, books, blogs, etc.
 
 **1997 to Present - James Carleton Design / E&J Design**
 
