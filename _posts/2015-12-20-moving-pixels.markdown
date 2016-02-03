@@ -9,7 +9,7 @@ I love exploring new avenues for creativity. After years of working on stationar
 
 I've been working with the owner of a local prototyping shop for many years on their various branding and marketing efforts. They transform drawings from engineers into realistic product prototypes made of metals and plastics. So a conversation about their website redesign project sparked an interesting idea about video. It sounded like a great format to express the character of the company and its value to potential clients. 
 
-I knew exactly who to contact. My talented friend and photographer [Manus Chau](http://manuschauphotography.com/blog) was perfect for the job. 
+I knew exactly who to contact. My talented friend and photographer [Manus Chau](http://www.manuschauphotography.com/weblog/) was perfect for the job. 
 
 We jumped in with a lively brainstorming session with the client, and came out with the green light for the project. As usual, we started with design goals. It had to be succinct, it had to describe their range of services and it had to be engaging enough to keep the viewer entertained. We sketched storyboards to plan out each shot of the employees, facility, and its capabilities. Then we developed interview questions and detailed shot lists to prepare for the shoot.
 
