@@ -37,7 +37,7 @@ Process:
 - Spokesperson for utilizing modern prototyping tools in the team’s process (InVision, Proto.io, QC/Origami etc)
 - Continually seeking knowledge from industry events, lectures, conferences, books, blogs, etc.
 
-**1997 to Present - James Carleton Design / E&J Design**
+**1997 to Present - James Carleton Design / [E&J Design](http://eandjdesign.com/)**
 
 - Freelance designer providing design/dev services to a variety of businesses and organizations, large and small.
 - Sold, managed, and delivered a range of consulting services. Later formed E&J Design with expanded staff and service capacity
@@ -47,7 +47,11 @@ Process:
 
 - Front End Developer for two booming e-commerce stationery brands: tinyprints.com and weddingpaperdivas.com
 - Programmed HTML/CSS for website re-brand, seasonal edits, SEO and marketing emails
+- As I left they were acquired by Shutterfly. Coincidence?
 
+**Previous Jobs**
+
+- Lots of stuff from pizza delivery to 3d modeling
 
 ## Education
 
@@ -55,12 +59,19 @@ Process:
 
 - San Jose State University
 - Scholarship winner, student IDSA member/officer
+- Spent many nights in the workshop
 
 **1996 to 1998 - Associates: Art**
 
 - Hartnell College
+- Took all the art & design classes offered
 
+**Growing up**
+- Took apart electronics
+- Fixed hot rods
+- Geocities webmaster
 
 ## More
  
-I like to keep things simple, but can provide more details as needed. Just let me know, thanks!
+I like to keep things simple, but can provide more details as needed. 
+Let's talk :)
