@@ -12,5 +12,5 @@ You've heard these stories. A mechanical engineer reconfigured into a design str
 What is it about creativity that is so easily overlooked when careers are prescribed? Is it the cultural impression of starving artists, or the perceived comfort of proven path to 'success' that keep us from exploring a different calling? It's probably many things. But even if we try to avoid it, creativity often finds its way out of us. Suddenly we're jumping off the well worn path and trying something new. We see where this goes, up, down, around the corner, we just follow it. Eventually, it leads to a creative output that makes our calling complete.  
 Are you there yet? If not, keep chasing your calling. Once you find it, stop and look back. That jagged, winding path behind you is a great adventure story, designed by you.
 
-###Update: 
+Update: 
 Check out Elle Luna's book, [The Crossroads of Should and Must: Find and Follow Your Passion](http://smile.amazon.com/Crossroads-Should-Must-Follow-Passion/dp/0761184880/ref=sr_1_1?s=digital-text&ie=UTF8&qid=1454826106&sr=8-1&keywords=choose+must). It fits this article's point perfectly.

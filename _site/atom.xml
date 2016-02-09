@@ -4,13 +4,31 @@
  <title>James Carleton</title>
  <link href="http://carletondesign.com/atom.xml" rel="self"/>
  <link href="http://carletondesign.com/"/>
- <updated>2016-02-06T22:29:20-08:00</updated>
+ <updated>2016-02-08T23:19:44-08:00</updated>
  <id>http://carletondesign.com</id>
  <author>
    <name>James Carleton</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Patterns</title>
+   <link href="http://carletondesign.com/2016/01/12/patterns/"/>
+   <updated>2016-01-12T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/2016/01/12/patterns</id>
+   <content type="html">&lt;p&gt;As a designer, I love patterns. From nature to technology, they make the world go ‘round. 
+UX Design teams collect patterns in different forms, from style guides to design wikis to sticker sheets, they all aim to unify the work of a group of people. To be productive as a team, we need a cohesive direction, and the pattern library is our attempt. Its a place where anyone on the team can see what our established patterns are and use them as a springboard for their project.&lt;/p&gt;
+
+&lt;p&gt;The benefit of a well kept pattern library is clear, we all save time and stay coordinated across our various projects. It helps us avoid re-designing a checkbox ten times. Less details to worry about means more design time/effort goes toward the project goals.&lt;/p&gt;
+
+&lt;p&gt;So this is a great system in theory, but people are messy. The artist/maker brain of the designer steers them to create uniqueness, leaving the baggage of old patterns behind. Meanwhile the analytical brain of the designer craves order and predictability that established and tested patterns provide. Then you have opinions from Product and Engineering stakeholders. Keeping peace between these frenemies is where design teams struggle. Is something new immediately a pattern? When is a pattern adapted and when is it replaced? Not so clear cut is it? This is a design problem wrapped in a design problem. My head may explode.&lt;/p&gt;
+
+&lt;p&gt;I’ve become the patterns guy on our design team so I’ve been thinking about this topic, maybe too much. It’s nice to have one person dedicated to pattern maintenance, but it’s also everyone’s responsibility to contribute. There is benefit when one person has the accountability, but anyone who crafts a mockup is utilizing or evolving a pattern. Each designer should pay it forward by adding their work to our pattern library. The more contributors we have, the more accurate and useful of a tool it will become for the team.&lt;/p&gt;
+
+&lt;p&gt;So yea, patterns play a vital role in design team organization. Be kind, help manage your team’s patterns.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Moving Pixels</title>
@@ -49,8 +67,8 @@
 &lt;p&gt;What is it about creativity that is so easily overlooked when careers are prescribed? Is it the cultural impression of starving artists, or the perceived comfort of proven path to ‘success’ that keep us from exploring a different calling? It’s probably many things. But even if we try to avoid it, creativity often finds its way out of us. Suddenly we’re jumping off the well worn path and trying something new. We see where this goes, up, down, around the corner, we just follow it. Eventually, it leads to a creative output that makes our calling complete.&lt;br /&gt;
 Are you there yet? If not, keep chasing your calling. Once you find it, stop and look back. That jagged, winding path behind you is a great adventure story, designed by you.&lt;/p&gt;
 
-&lt;h3 id=&quot;update&quot;&gt;Update:&lt;/h3&gt;
-&lt;p&gt;Check out Elle Luna’s book, &lt;a href=&quot;http://smile.amazon.com/Crossroads-Should-Must-Follow-Passion/dp/0761184880/ref=sr_1_1?s=digital-text&amp;amp;ie=UTF8&amp;amp;qid=1454826106&amp;amp;sr=8-1&amp;amp;keywords=choose+must&quot;&gt;The Crossroads of Should and Must: Find and Follow Your Passion&lt;/a&gt;. It fits this article’s point perfectly.&lt;/p&gt;
+&lt;p&gt;Update: 
+Check out Elle Luna’s book, &lt;a href=&quot;http://smile.amazon.com/Crossroads-Should-Must-Follow-Passion/dp/0761184880/ref=sr_1_1?s=digital-text&amp;amp;ie=UTF8&amp;amp;qid=1454826106&amp;amp;sr=8-1&amp;amp;keywords=choose+must&quot;&gt;The Crossroads of Should and Must: Find and Follow Your Passion&lt;/a&gt;. It fits this article’s point perfectly.&lt;/p&gt;
 </content>
  </entry>
  

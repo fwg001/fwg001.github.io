@@ -1,0 +1,14 @@
+---
+layout: post
+title:  Patterns
+---
+As a designer, I love patterns. From nature to technology, they make the world go 'round. 
+UX Design teams collect patterns in different forms, from style guides to design wikis to sticker sheets, they all aim to unify the work of a group of people. To be productive as a team, we need a cohesive direction, and the pattern library is our attempt. Its a place where anyone on the team can see what our established patterns are and use them as a springboard for their project. 
+
+The benefit of a well kept pattern library is clear, we all save time and stay coordinated across our various projects. It helps us avoid re-designing a checkbox ten times. Less details to worry about means more design time/effort goes toward the project goals.
+
+So this is a great system in theory, but people are messy. The artist/maker brain of the designer steers them to create uniqueness, leaving the baggage of old patterns behind. Meanwhile the analytical brain of the designer craves order and predictability that established and tested patterns provide. Then you have opinions from Product and Engineering stakeholders. Keeping peace between these frenemies is where design teams struggle. Is something new immediately a pattern? When is a pattern adapted and when is it replaced? Not so clear cut is it? This is a design problem wrapped in a design problem. My head may explode.
+
+I've become the patterns guy on our design team so I've been thinking about this topic, maybe too much. It's nice to have one person dedicated to pattern maintenance, but it's also everyone's responsibility to contribute. There is benefit when one person has the accountability, but anyone who crafts a mockup is utilizing or evolving a pattern. Each designer should pay it forward by adding their work to our pattern library. The more contributors we have, the more accurate and useful of a tool it will become for the team.
+
+So yea, patterns play a vital role in design team organization. Be kind, help manage your team's patterns.
