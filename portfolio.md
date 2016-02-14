@@ -3,11 +3,14 @@ layout: page
 title: Portfolio
 
 ---
+
+[![Realtor.com Responsive Design](/assets/)](/portfolio/rdc_responsive/)
+
+[![ni:dle - Concept Design](/assets/)](/portfolio/ni-dle/)
+
+[![Realtor.com Maps](/assets/rdc_map/)](/portfolio/rdc_maps/)
+
+[![Realtor.com Patterns](/assets/rdc_patterns/rcd_patterns.png)](/portfolio/rdc_patterns/)
+
 [![Mortgage App](/assets/mortgage_app/mortgage_app.png)](/portfolio/mortgage_app/)
-
-<!--[![SeniorHousingNet](/assets/shn/shn.jpg)](/portfolio/shn/)
- 
-[![Realtor.com Local](/assets/rdc_local/rdc_local.jpg)](/portfolio/rdc_local/)-->
-
-[![Realtor.com Maps](/assets/rdc_map/rdc_map.jpg)](/portfolio/rdc_maps/)
 

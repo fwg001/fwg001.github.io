@@ -3,14 +3,14 @@ layout: portfolio
 title: Mortgage App
 ---
 
-![Realtor.com Local](/assets/mortgage_app/mortgage_app.png)
+![Mortgage App](/assets/mortgage_app/mortgage_app.png)
 
 <p class="message">A fun calculator? It encourages play, and hides the algebra.</p>
 
 - *Project*: Mortgage & Finance App by Realtor.com
 - *Description*: New rapid development hybrid native/web app for iOS/Android
 - *Roles*: Lead UX Designer (Visual & Interaction)
-- *Dates*: June 9, 2014 - Release 1.0 
+- *Dates*: Released June 2014 
 
 
 **Making math fun**
@@ -44,7 +44,7 @@ The app went from concept to release in record time and I enjoyed every stage of
  **Try it yourself**
  
   [![AppStore](/assets/mortgage_app/download_appstore.png)](https://itunes.apple.com/us/app/mortgage-calculator-mortgage/id875060754?mt=8)[![Google Play Store](/assets/mortgage_app/download_play.png)](https://play.google.com/store/apps/details?id=com.move.mortgage)
-  
+ 
   
 **Behind the Scenes**
 
