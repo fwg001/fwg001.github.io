@@ -4,13 +4,13 @@ title: Portfolio
 
 ---
 
-[![Realtor.com Responsive Design](/assets/)](/portfolio/rdc_responsive/)
+[![ni:dle - Concept Design](/assets/ni-dle/ni-dle.png)](/portfolio/ni-dle/)
 
-[![ni:dle - Concept Design](/assets/)](/portfolio/ni-dle/)
+[![Realtor.com Responsive Design](/assets/rdc_responsive/rdc_responsive.png)](/portfolio/rdc_responsive/)
 
-[![Realtor.com Maps](/assets/rdc_map/)](/portfolio/rdc_maps/)
+[![Realtor.com Maps](/assets/rdc_maps/rdc_maps.png)](/portfolio/rdc_maps/)
 
-[![Realtor.com Patterns](/assets/rdc_patterns/rcd_patterns.png)](/portfolio/rdc_patterns/)
+[![Realtor.com Patterns](/assets/rdc_patterns/rdc_patterns.png)](/portfolio/rdc_patterns/)
 
 [![Mortgage App](/assets/mortgage_app/mortgage_app.png)](/portfolio/mortgage_app/)
 

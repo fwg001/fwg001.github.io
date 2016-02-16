@@ -2,7 +2,7 @@
 layout: portfolio
 title: Realtor.com Patterns
 ---
-![Realtor.com Patterns](/assets/rdc_patterns/rcd_patterns.png)
+![Realtor.com Patterns](/assets/rdc_patterns/rdc_patterns.png)
 
 **OVERVIEW**
 
@@ -30,7 +30,7 @@ I took on the role of pattern manager. I collected and organized all available p
 
 This was an instant success for our team. Even the first draft with limited patterns was useful to team members. Several versions later, we are now able to grab our standard parts and compose a mockup in record speed. 
 
-Instead of wasting time re-designing basic elements or trying to find specs for a repeated element, we can cut/paste from the pattern library. As our styles and patterns evolve for new projects, the library will evolve in step. 
+>Instead of wasting time re-designing basic elements or trying to find specs for a repeated element, we can cut/paste from the pattern library. As our styles and patterns evolve for new projects, the library will evolve in step. 
 
 In addition to the efficiency, the team also gained a new perspective by being able to view all our patterns together. Previously we had partial documentation of styles that quickly became obsolete and abandoned. This new pattern library is flexible enough to encourage maintenance with minimal effort. Today one design file can provide the overview of our design patterns so each designer knows the context for their work. 
 
