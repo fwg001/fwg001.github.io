@@ -32,7 +32,7 @@ Two of my teammates on this project, Joyce Leung and Jeremy Taylor, were intervi
  
 **FULL STORY**
 
-Realtor.com's desktop optimized website has been successful for many years. As mobile exploded and we developed industry leading native apps, a gap appeared between these two experiences. This disconnect  was a disservice to users of tablets and mobile devices. There were also SEO and engineering maintenance benefits to moving to a responsive front end.
+Realtor.com's desktop optimized website has been successful for many years. As mobile exploded and we developed industry leading native apps, a gap appeared between these two experiences. This disconnect  was a disservice to users of tablets and mobile devices.
 
 *Collaboration Required*
 
@@ -42,18 +42,37 @@ To make this big goal happen we designed and built a new responsive framework, b
 
 Our core real estate search product consist of 3 parts, Homepage, Search Results and Detail pages. I led the Search Results UX, which includes the listing result page, the search filters (faceted search), and maps ([details over here](/portfolio/rdc_maps). My teammates, Jeff Boissier and Paulus Trisnadi, led the homepage and property detail pages respectively. 
 
+![Search Results Mockups](/assets/rdc_responsive/srp_mocks.png)
+
 *Facets of Complexity*
 
 The most complex aspect of our search results page (my area of focus) is the faceted search UI. This allows users to dial in exactly what type of home they are looking for. We have two layers, the exposed set which includes price, beds, baths and then the 'more' options. Designing these for a wide range of devices was challenging. We needed touchable, mobile friendly controls without sacrificing the functionality that power users enjoy. 
 
->We couldn't cut features to make a responsive layout work. 
+> We couldn't cut features to make a responsive layout work. 
 
 *Ask the Users*
 
-I developed numerous variations of the facet layout and worked with the product manager to slim down our previous generation of facets to gain a more approachable interface.
-Next we crafted concepts and wired them together for an in-lab usability test with our UX research staff. Watching users compare the layouts is powerful and humbling. Ego quickly goes out the window (or 2-way mirror) and the hidden flaws come to light. We measure preferences and assign qualitative scores that guide our design refinements.
+I developed variations of the faceted search layout and worked with the product manager to pair the legacy requirements to their core. We then wired mockups together for an in-lab usability test by our UX research staff. Watching users compare the layouts is powerful and humbling. Ego quickly goes out the window (or 2-way mirror) and the hidden flaws come to light. 
 
->I love learning from users and iterating toward an improved product design.
+> UX research is essential. Observing user studies lets me see the product from their perspective, which otherwise is difficult to understand. 
+
+Our research learnings helped us choose a design direction for the faceted search UI. I then worked with UX developers to iteratively implement the features, adjusting the design with their input and planning for various use cases and sad paths.
+
+![Search Facets](/assets/rdc_responsive/facets.png)
+
+*Launch time*
+
+With a careful phased rollout, we launched the new responsive site, including my work on search results, maps and faceted search to full traffic in December 2015. 
+
+>We celebrated our hard work and ate cake 🍰. 
+
+The next month we hit our all time record of Unique Users per month, 50 Million! We continue to iterate on the site each sprint, adding features and squashing bugs. 
+
+View it live at [realtor.com](http://www.realtor.com) on all your devices.
 
 ![Realtor.com Responsive](/assets/rdc_responsive/responsive-sizes.png)
+
+----
+Next Project: [Realtor.com Maps](/portfolio/rdc_maps/)
+
 
