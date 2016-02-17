@@ -49,3 +49,6 @@ The app went from concept to release in record time and I enjoyed every stage of
 **Behind the Scenes**
 
 For more about my design process, see what I wrote [over here](/2014/06/14/app-designer/).
+
+----
+Next Project: [Realtor.com Responsive](/portfolio/rdc_responsive/)
