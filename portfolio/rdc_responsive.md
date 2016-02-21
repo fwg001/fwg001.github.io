@@ -25,8 +25,8 @@ title: Realtor.com Responsive
 
 **NEWS**
 
-Two of my teammates on this project, Joyce Leung and Jeremy Taylor, were interviewed about the project on the [Responsive Web Design Podcast](http://responsivewebdesign.com/podcast/) with Ethan Marcotte and Karen McGrane. This is kind of a big deal in the industry!
-![RWD](/assets/rdc_responsive/RWD.png)
+Two of my teammates on this project, Joyce Leung and Jeremy Taylor, were interviewed about the project on the [Responsive Web Design Podcast](http://responsivewebdesign.com/podcast/) with Karen McGrane and Ethan Marcotte. 🎙 This is kind of a big deal in the industry! 💯
+[![RWD](/assets/rdc_responsive/RWD.png)](http://responsivewebdesign.com/podcast/)
 
 
  

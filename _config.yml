@@ -23,4 +23,8 @@ version:          2.0.0
 github:
   repo:           https://github.com/fwg001/fwg001.github.io
   
+slideshow:
+  width: 150
+  height: 100
+  
  
