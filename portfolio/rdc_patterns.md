@@ -2,7 +2,8 @@
 layout: portfolio
 title: Realtor.com Patterns
 ---
-![Realtor.com Patterns](/assets/rdc_patterns/rdc_patterns.png)
+
+<img src="/assets/rdc_patterns/patterns1.png" style="width: 100%;" alt="Pattern Library" />
 
 **OVERVIEW**
 
@@ -10,7 +11,6 @@ title: Realtor.com Patterns
 - This library gave everyone on our design team quick access to all existing patterns for their projects.
 - It was a huge win for our efficiency as well as awareness of our complete design system.
 
-<img src="/assets/rdc_patterns/patterns1.png" style="width: 100%;" alt="Pattern Library" />
 
 **LESSONS LEARNED**
 
