@@ -22,19 +22,21 @@ Sr. User Experience Designer, Consumer UX group
  
 Projects:
 
-- Lead/sole designer for Realtor.com's new Mortgage App on iOS & Android from concept to launch, and upcoming revisions
-- Lead designer for Realtor.com map search experience (good things to come)
-- Lead designer for new Local section of Realtor.com - including interactive maps, data visualization, and comparison tools
-- Lead/sole designer for redesign/rebrand of SeniorHousingNet.com - including faceted search, lead gen and multi-device responsive design
+- Lead designer for Realtor.com responsive search results experience project
+- Lead designer for Realtor.com map search redesign
+- Lead designer for Realtor.com pattern library
+- Lead designer for Realtor.com Mortgage iOS/Android mobile app
+- Samples available upon request
 
 Process:
 
-- Frequent contributor to team peer reviews, forums, and design documentation
-- Helping to evolve our design process to better interface with agile development teams
-- Experience with HTML/CSS is enabling improved collaboration with front-end developers
+- Frequent contributor to UX team design reviews, forums, and design documentation
+- Agile scrum trained, worked closely with developers in agile sprints
+- Recently added interaction/animation/motion design prototyping skills
+- Familiarity with HTML/CSS has increased my capability to collaborate with developers
 - Collaborating with user researcher staff to design and execute in-lab and remote usability testing - Integrating findings back into project work 
-- Spokesperson for utilizing modern front end frameworks, responsive design, living style guides and pattern libraries
-- Spokesperson for utilizing modern prototyping tools in the team’s process (InVision, Proto.io, QC/Origami etc)
+- Advocate for utilizing modern front end frameworks, responsive design, living style guides and pattern libraries
+- Advocate for utilizing modern prototyping tools in the team’s process (Sketch, InVision, Principle, etc)
 - Continually seeking knowledge from industry events, lectures, conferences, books, blogs, etc.
 
 **1997 to Present - James Carleton Design / [E&J Design](http://eandjdesign.com/)**
