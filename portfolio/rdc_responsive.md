@@ -50,6 +50,8 @@ The most complex aspect of our search results page (my area of focus) is the fac
 
 > We couldn't cut features to make a responsive layout work. 
 
+![Search Facet concepts](/assets/rdc_responsive/facets_sketch1.png)
+
 *Ask the Users*
 
 I developed variations of the faceted search layout and worked with the product manager to pair the legacy requirements to their core. We then wired mockups together for an in-lab usability test by our UX research staff. Watching users compare the layouts is powerful and humbling. Ego quickly goes out the window (or 2-way mirror) and the hidden flaws come to light. 
