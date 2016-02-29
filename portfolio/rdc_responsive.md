@@ -50,7 +50,7 @@ The most complex aspect of our search results page (my area of focus) is the fac
 
 > We couldn't cut features to make a responsive layout work. 
 
-![Search Facet concepts](/assets/rdc_responsive/facets_sketch.png)
+![Search Facet concepts](/assets/rdc_responsive/facets_sketch1.png)
 
 *Ask the Users*
 
