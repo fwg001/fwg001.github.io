@@ -5,7 +5,7 @@ title:  Moving Pixels
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/UGPTNCj_hOA" frameborder="0" allowfullscreen></iframe>
 
-I love exploring new avenues for creativity. After years of working on stationary pixels it was great to play with some moving pixels for a change. I just completed a video project. Here is the story... 
+I love exploring new avenues for creativity. After years of working on stationary pixels it was great to play with some moving pixels for a change. I just completed a video project. Here is the story... <!--more-->
 
 I've been working with the owner of a local prototyping shop for many years on their various branding and marketing efforts. They transform drawings from engineers into realistic product prototypes made of metals and plastics. So a conversation about their website redesign project sparked an interesting idea about video. It sounded like a great format to express the character of the company and its value to potential clients. 
 

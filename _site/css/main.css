@@ -50,6 +50,7 @@ a:visited { color: #a0a; }
   font-size: 80%;
 }
 
+
 /*****************************************************************************/
 /*
 /* Site
@@ -169,6 +170,10 @@ img {
 	width: 100%;
 }
 
+
+.post a {
+   font-weight: 600;
+}
 
 /* Icon Fonts from icomoon.io*/
 

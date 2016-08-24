@@ -3,7 +3,7 @@ layout: post
 title:  Design your adventure
 ---
 
-Creative people often have a story to tell about the adventurous path they took from where they started to where they ended up. I love hearing them describe their unique adventure, with its ups, downs, and surprises.
+Creative people often have a story to tell about the adventurous path they took from where they started to where they ended up. I love hearing them describe their unique adventure, with its ups, downs, and surprises.<!--more-->
 
 Finding your creative calling and matching it to a sustainable career is a complex design challenge, and its process is never linear. It often starts with a naive student studying a traditional vocation, living in a coma of convention. One day they serendipitously stumble into a rabbit hole that opens their eyes to a new world of creative possibilities. Or it’s someone who kicks off their intended career and finds they can’t stand the drudges of a corporation. Either way, it takes some self discovery, trial and error, and a lucky break, before they find a new perspective on what they want for themselves. Of course it takes hard work to get there, but soon they are living their creative calling and sharing their talent with the world. Sometime this journey is a gently flowing course, but often its full of surprising cliffs, big boulders, and dead ends.
 

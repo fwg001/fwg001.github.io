@@ -1,0 +1,16 @@
+---
+layout: post
+title:  Designer Hacks
+---
+![Hack by Ben Barry](/assets/posts/hack_poster_ben_barry.png)
+*Poster by [Ben Barry](http://experimental.designforfun.com/)*
+
+ `Hack` has become the buzzword mantra in the valley. It symbolizes the scrappy working style of a startup trying to build something new with very little time or resources. Startups may hack out of necessity, but now big companies can hack too. 
+ <!--more-->
+ Hackathons provide a format where quick and creative projects can be born. Each time I have joined this tech-company tradition, it has been a great experience, even without touching a line of code. I'm sure you're picturing pizza scarfing programmers mashing lines of code into their keyboards late into the night. While that may be typical, I take a different approach as a designer. I join or start a team that is ready to create something innovative. 
+
+>Hackathons - not just for programmers
+ 
+Hackathons are a great way to explore a fresh idea. The time constraint provides intense focus and teaches quick decision making skills. 
+
+Most recently I used the opportunity to team up with another designer and create a new type of app with a startup mentality.  The concept we designed, prototyped, and presented [won a trophy](/portfolio/ni-dle/). I loved the chance to learn Principle App, which enabled us to demonstrate the concept as if it was coded, complete with animated transitions.

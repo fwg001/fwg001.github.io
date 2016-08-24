@@ -57,8 +57,8 @@ html {
   text-align: center;
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
-  background-color: #202020;
-  background-image: url('/assets/shattered-island.gif');
+  background-color: #000;
+  /*background-image: url('/assets/shattered-island.gif');*/
 }
 @media (min-width: 48rem) {
   .sidebar {
@@ -78,7 +78,7 @@ html {
 
 /* About section */
 .sidebar-about h1 {
-  color: #3ab6e9;
+  color: #fff;
   margin-top: 0;
   font-family: "museo-slab",serif;
   font-size: 3.25rem;

@@ -4,7 +4,7 @@ title:  App Designer
 ---
 
 ##TL;DR
-Mobile apps are fun. I got to design my first one. Prototyping is essential. Mr. Developer is your friend. Go download it.
+Mobile apps are fun. I got to design my first one. Prototyping is essential. Mr. Developer is your friend. Go download it.<!--more-->
 
 ##Full Story
 So if you want to read the whole story, this may take a while. Lets start with the wide view. The mobile movement is no longer new. I've been a smartphone user since the original iPhone and remember things before the AppStore. Fast forward six years and smart devices are essential part of our lives. We check our notifications before getting out of bed. We track calories, photoblog our lunch, and book vacations with our thumbs. We replace any idle moments with brain challenging puzzlers and streaming cat cuteness.

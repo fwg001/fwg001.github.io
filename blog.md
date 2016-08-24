@@ -4,12 +4,14 @@ title: Blog
 ---
 <div class="posts">
 <ul>
-  {% for post in site.posts %}
+  {% for post in site.posts %}   
     <li>
-      {{ post.date | date_to_string }} | <a href="{{ post.url }}">{{ post.title }}</a>
+      <div class="post">
+      	<a href="{{ post.url }}">{{ post.title }}</a> | {{ post.date | date_to_string }}
+      	<p>{{ post.excerpt | strip_html }}</p>
+      </div>
     </li>
   {% endfor %}
-</ul>
-</div>
+</ul></div>
 
 
