@@ -7,6 +7,8 @@ title: Bio
   “I <span style="color: red;">love</span> designing <b>elegant</b> and <b>engaging</b> product experiences for <b>humans</b>.” 
 </p>
 
+<img src="/assets/meandpostits.png">
+
 ## About
 
 I’ve been working toward this goal most recently at Move Inc./Realtor.com. The perfect spot for me is on a talented team of creative individuals that can bring strong critique as well as laugh at the latest meme. I thrive on the challenge of leading interaction and visual design efforts with product and development staff toward results that meet business and UX goals. I strive to take every opportunity to grow through teammates, trainings, industry events and online resources.
