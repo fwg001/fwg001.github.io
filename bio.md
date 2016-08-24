@@ -4,7 +4,7 @@ title: Bio
 ---
 
 <p class="message">
-  “I love creating engaging user experiences that simplify powerful technologies. When done well, the user enjoys a seamless experience, without realizing all the work that went into it.” 
+  “I <span style="color: red;">love</span> designing <b>elegant</b> and <b>engaging</b> product experiences for <b>humans</b>.” 
 </p>
 
 ## About
@@ -69,7 +69,7 @@ Process:
 - Took all the art & design classes offered
 
 **Growing up**
-- Took apart electronics
+- Took apart electronics, sometimes fixed them
 - Fixed hot rods
 - Geocities webmaster
 

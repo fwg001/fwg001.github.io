@@ -4,7 +4,7 @@
  <title>James Carleton</title>
  <link href="http://carletondesign.com/atom.xml" rel="self"/>
  <link href="http://carletondesign.com/"/>
- <updated>2016-02-28T21:09:13-08:00</updated>
+ <updated>2016-08-23T21:45:31-07:00</updated>
  <id>http://carletondesign.com</id>
  <author>
    <name>James Carleton</name>
@@ -13,12 +13,34 @@
 
  
  <entry>
+   <title>Designer Hacks</title>
+   <link href="http://carletondesign.com/2016/02/24/hack/"/>
+   <updated>2016-02-24T00:00:00-08:00</updated>
+   <id>http://carletondesign.com/2016/02/24/hack</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/posts/hack_poster_ben_barry.png&quot; alt=&quot;Hack by Ben Barry&quot; /&gt;
+&lt;em&gt;Poster by &lt;a href=&quot;http://experimental.designforfun.com/&quot;&gt;Ben Barry&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Hack&lt;/code&gt; has become the buzzword mantra in the valley. It symbolizes the scrappy working style of a startup trying to build something new with very little time or resources. Startups may hack out of necessity, but now big companies can hack too. 
+ &lt;!--more--&gt;
+ Hackathons provide a format where quick and creative projects can be born. Each time I have joined this tech-company tradition, it has been a great experience, even without touching a line of code. I’m sure you’re picturing pizza scarfing programmers mashing lines of code into their keyboards late into the night. While that may be typical, I take a different approach as a designer. I join or start a team that is ready to create something innovative.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Hackathons - not just for programmers&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Hackathons are a great way to explore a fresh idea. The time constraint provides intense focus and teaches quick decision making skills.&lt;/p&gt;
+
+&lt;p&gt;Most recently I used the opportunity to team up with another designer and create a new type of app with a startup mentality.  The concept we designed, prototyped, and presented &lt;a href=&quot;/portfolio/ni-dle/&quot;&gt;won a trophy&lt;/a&gt;. I loved the chance to learn Principle App, which enabled us to demonstrate the concept as if it was coded, complete with animated transitions.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Patterns</title>
    <link href="http://carletondesign.com/2016/01/12/patterns/"/>
    <updated>2016-01-12T00:00:00-08:00</updated>
    <id>http://carletondesign.com/2016/01/12/patterns</id>
    <content type="html">&lt;p&gt;As a designer, I love patterns. From nature to technology, they make the world go ‘round. 
-UX Design teams collect patterns in different forms, from style guides to design wikis to sticker sheets, they all aim to unify the work of a group of people. To be productive as a team, we need a cohesive direction, and the pattern library is our attempt. Its a place where anyone on the team can see what our established patterns are and use them as a springboard for their project.&lt;/p&gt;
+UX Design teams collect patterns in different forms, from style guides to design wikis to sticker sheets, they all aim to unify the work of a group of people.&lt;!--more--&gt; To be productive as a team, we need a cohesive direction, and the pattern library is our attempt. Its a place where anyone on the team can see what our established patterns are and use them as a springboard for their project.&lt;/p&gt;
 
 &lt;p&gt;The benefit of a well kept pattern library is clear, we all save time and stay coordinated across our various projects. It helps us avoid re-designing a checkbox ten times. Less details to worry about means more design time/effort goes toward the project goals.&lt;/p&gt;
 
@@ -37,7 +59,7 @@ UX Design teams collect patterns in different forms, from style guides to design
    <id>http://carletondesign.com/2015/12/20/moving-pixels</id>
    <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/UGPTNCj_hOA&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;I love exploring new avenues for creativity. After years of working on stationary pixels it was great to play with some moving pixels for a change. I just completed a video project. Here is the story…&lt;/p&gt;
+&lt;p&gt;I love exploring new avenues for creativity. After years of working on stationary pixels it was great to play with some moving pixels for a change. I just completed a video project. Here is the story… &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;I’ve been working with the owner of a local prototyping shop for many years on their various branding and marketing efforts. They transform drawings from engineers into realistic product prototypes made of metals and plastics. So a conversation about their website redesign project sparked an interesting idea about video. It sounded like a great format to express the character of the company and its value to potential clients.&lt;/p&gt;
 
@@ -58,7 +80,7 @@ UX Design teams collect patterns in different forms, from style guides to design
    <link href="http://carletondesign.com/2015/01/08/design-your-adventure/"/>
    <updated>2015-01-08T00:00:00-08:00</updated>
    <id>http://carletondesign.com/2015/01/08/design-your-adventure</id>
-   <content type="html">&lt;p&gt;Creative people often have a story to tell about the adventurous path they took from where they started to where they ended up. I love hearing them describe their unique adventure, with its ups, downs, and surprises.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Creative people often have a story to tell about the adventurous path they took from where they started to where they ended up. I love hearing them describe their unique adventure, with its ups, downs, and surprises.&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;Finding your creative calling and matching it to a sustainable career is a complex design challenge, and its process is never linear. It often starts with a naive student studying a traditional vocation, living in a coma of convention. One day they serendipitously stumble into a rabbit hole that opens their eyes to a new world of creative possibilities. Or it’s someone who kicks off their intended career and finds they can’t stand the drudges of a corporation. Either way, it takes some self discovery, trial and error, and a lucky break, before they find a new perspective on what they want for themselves. Of course it takes hard work to get there, but soon they are living their creative calling and sharing their talent with the world. Sometime this journey is a gently flowing course, but often its full of surprising cliffs, big boulders, and dead ends.&lt;/p&gt;
 
@@ -96,7 +118,7 @@ Check out Elle Luna’s book, &lt;a href=&quot;http://smile.amazon.com/Crossroad
    <updated>2014-06-14T00:00:00-07:00</updated>
    <id>http://carletondesign.com/2014/06/14/app-designer</id>
    <content type="html">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-&lt;p&gt;Mobile apps are fun. I got to design my first one. Prototyping is essential. Mr. Developer is your friend. Go download it.&lt;/p&gt;
+&lt;p&gt;Mobile apps are fun. I got to design my first one. Prototyping is essential. Mr. Developer is your friend. Go download it.&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;full-story&quot;&gt;Full Story&lt;/h2&gt;
 &lt;p&gt;So if you want to read the whole story, this may take a while. Lets start with the wide view. The mobile movement is no longer new. I’ve been a smartphone user since the original iPhone and remember things before the AppStore. Fast forward six years and smart devices are essential part of our lives. We check our notifications before getting out of bed. We track calories, photoblog our lunch, and book vacations with our thumbs. We replace any idle moments with brain challenging puzzlers and streaming cat cuteness.&lt;/p&gt;
