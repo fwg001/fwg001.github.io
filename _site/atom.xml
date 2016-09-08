@@ -4,13 +4,106 @@
  <title>James Carleton</title>
  <link href="http://carletondesign.com/atom.xml" rel="self"/>
  <link href="http://carletondesign.com/"/>
- <updated>2016-08-24T15:23:57-07:00</updated>
+ <updated>2016-09-07T22:11:13-07:00</updated>
  <id>http://carletondesign.com</id>
  <author>
    <name>James Carleton</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>UX Design News</title>
+   <link href="http://carletondesign.com/2016/09/07/ux-design-news/"/>
+   <updated>2016-09-07T00:00:00-07:00</updated>
+   <id>http://carletondesign.com/2016/09/07/ux-design-news</id>
+   <content type="html">&lt;p&gt;I love sharing good design news and articles with my design friends and colleagues. Ask anyone in our slack channel, hah.  Where do I get all these great links? Well, I consume a lot of stuff, maybe too much. I’m jumping between Slack groups full of designers, email newsletters that curate links and Medium articles on anything design. Let me share my sources…&lt;/p&gt;
+
+&lt;p&gt;&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;slack-groups&quot;&gt;Slack Groups&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.designerhangout.co/&quot;&gt;Designer Hangout&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://spec.fm/slack&quot;&gt;Spec Network&lt;/a&gt; (you need to be a &lt;a href=&quot;spec.fm/podcasts/design-details&quot;&gt;Design Details&lt;/a&gt; listener)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://designsystems.herokuapp.com/&quot;&gt;Design Systems&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;blogs--newsletters&quot;&gt;Blogs &amp;amp; Newsletters&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://design.blog/&quot;&gt;Design.Blog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://designweekly.atomic.io/&quot;&gt;Design Weekly&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hackingui.com/sign-up/&quot;&gt;Hacking UI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hackerdesignernews.com/&quot;&gt;Hacker Designer News&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://char.gd/&quot;&gt;Charged&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.swiss-miss.com/&quot;&gt;Swiss Miss&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.subtraction.com/&quot;&gt;Subtraction&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nuzzel.com/&quot;&gt;Nuzzel&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://vrar.inside.com/&quot;&gt;VR/AR Inside&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.smashingmagazine.com/the-smashing-newsletter/&quot;&gt;Smashing Mag&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://thegreatdiscontent.com/&quot;&gt;The Great Discontent&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.producthunt.com/&quot;&gt;Product Hunt&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sansfrancis.co/&quot;&gt;Sans Francisco&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;medium&quot;&gt;Medium&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://uxdesign.cc/&quot;&gt;UX Design CC&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/the-year-of-the-looking-glass&quot;&gt;Year of the Looking Glass&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/sketch-app&quot;&gt;Sketch App news&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/google-design&quot;&gt;Google Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/facebook-design&quot;&gt;Facebook Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/alistapart&quot;&gt;A List Apart&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/designer-hangout&quot;&gt;Designer Hangout&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/airbnb-design&quot;&gt;Airbnb Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/net-magazine&quot;&gt;.net Mag&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/bridge-collection&quot;&gt;Bridge Collection&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/product-people&quot;&gt;Product People&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://uxplanet.org/&quot;&gt;UX Planet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/humane-tech&quot;&gt;Humane Tech&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://design.lyft.com/&quot;&gt;Lyft Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/readwrite-iot&quot;&gt;Read Write IOT&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/shyp-design&quot;&gt;Shyp Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.design/&quot;&gt;Medium Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/sketch-app-sources&quot;&gt;Sketch App Sources&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://library.gv.com/&quot;&gt;GV Library&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.prototypr.io/&quot;&gt;Prototypr&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://thedesignteam.io/&quot;&gt;The Design Team&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/figma-design&quot;&gt;Figma Design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@InVisionApp&quot;&gt;InVision App&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@slackhq&quot;&gt;Slack&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@jessicahische&quot;&gt;Jessica Hische&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@Dropbox&quot;&gt;Dropbox&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://thedesignteam.io/&quot;&gt;The Design Team (satire)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I could go on…but that should keep you busy for a while.&lt;/p&gt;
+
+&lt;p&gt;Send me any suggestions for this list:
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  //&amp;lt;![CDATA[
+  &lt;!--
+  var x=&quot;function f(x){var i,o=\&quot;\&quot;,l=x.length;for(i=0;i&lt;l;i+=2) {if(i+1&lt;l)o+=&quot; +
+  &quot;x.charAt(i+1);try{o+=x.charAt(i);}catch(e){}}return o;}f(\&quot;ufcnitnof x({)av&quot; +
+  &quot; r,i=o\\\&quot;\\\&quot;o,=l.xelgnhtl,o=;lhwli(e.xhcraoCedtAl(1/)3=!59{)rt{y+xx=l;=+;&quot; +
+  &quot;lc}tahce({)}}of(r=i-l;1&gt;i0=i;--{)+ox=c.ahAr(t)i};erutnro s.buts(r,0lo;)f}\\&quot; +
+  &quot;\&quot;(6),7\\\&quot;\\\\)!&gt;#+4&lt;u}.nyHc)2eVfa@k_&amp;d?nl\\\\\\\\24\\\\00\\\\01\\\\\\\\X[&quot; +
+  &quot;5%02\\\\\\\\30\\\\05\\\\02\\\\\\\\2[03\\\\\\\\24\\\\03\\\\03\\\\\\\\02\\\\0&quot; +
+  &quot;5\\\\02\\\\\\\\0+00\\\\\\\\02\\\\00\\\\03\\\\\\\\16\\\\06\\\\00\\\\\\\\33\\&quot; +
+  &quot;\\0t\\\\\\\\\\\\F$10\\\\03\\\\01\\\\\\\\20\\\\06\\\\00\\\\\\\\(~99\\\&quot;\\\\\\&quot;+
+  &quot;\\\\\\=:23\\\\0s\\\\)8,-7&amp;1300\\\\\\\\UQ0[03\\\\\\\\UZ]YNIIFGPlLy}sX(y77\\\\&quot;+
+  &quot;1z\\\\c`ki^&amp;3=03\\\\\\\\36\\\\03\\\\01\\\\\\\\37\\\\0U\\\\22\\\\0M\\\\EM05\\&quot;+
+  &quot;\\05\\\\00\\\\\\\\02\\\\01\\\\02\\\\\\\\\\\\n3\\\\02\\\\\\\\s(7/822&amp;) \\\&quot;\\&quot;+
+  &quot;\\f(;} ornture;}))++(y)^(iAtdeCoarchx.e(odrChamCro.fngriSt+=;o27=1y%+;y+6)&lt;&quot; +
+  &quot;7(iif){++;i&lt;l;i=0(ior;fthnglex.l=\\\\,\\\\\\\&quot;=\\\&quot;,o iar{vy)x,f(n ioctun\\&quot; +
+  &quot;\&quot;f)\&quot;)&quot;                                                                     ;
+  while(x=eval(x));
+  //--&gt;
+  //]]&amp;gt;
+  &lt;/script&gt;
+   | &lt;a href=&quot;http://www.twitter.com/jamescarleton&quot; title=&quot;Twitter Profile&quot;&gt;@jamescarleton&lt;/a&gt;&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Designer Hacks</title>
