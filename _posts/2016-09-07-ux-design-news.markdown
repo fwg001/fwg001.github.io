@@ -8,7 +8,7 @@ I love sharing good design news and articles with my design friends and colleagu
  
 ## Slack Groups
 - [Designer Hangout](https://www.designerhangout.co/)
-- [Spec Network](https://spec.fm/slack) (you need to be a [Design Details](spec.fm/podcasts/design-details) listener)
+- [Spec Network](https://spec.fm/slack) (BTW [Design Details](spec.fm/podcasts/design-details) is great for your ears)
 - [Design Systems](http://designsystems.herokuapp.com/)
 
 ## Blogs & Newsletters
