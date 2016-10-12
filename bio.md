@@ -11,14 +11,22 @@ title: Bio
 
 ## About
 
-I’ve been working toward this goal most recently at Move Inc./Realtor.com. The perfect spot for me is on a talented team of creative individuals that can bring strong critique as well as laugh at the latest meme. I thrive on the challenge of leading interaction and visual design efforts with product and development staff toward results that meet business and UX goals. I strive to take every opportunity to grow through teammates, trainings, industry events and online resources.
+I’ve been working toward this goal most recently at PayPal Inc. I love working with creative individuals that can bring strong critique as well as laugh at the latest meme. I thrive on the challenge of leading interaction and visual design efforts with product and development staff toward results that meet business and UX goals. I strive to take every opportunity to grow through teammates, trainings, industry events and online resources.
 
 I continually test emerging tools and methods to find the most effective workflow. After years of designing and developing the interwebs, I know my PNGs, PSDs, CLI, Git, IA, UI, UX and UAT. My days are lived in white board sketches, flows, wireframes, mockups, wiki pages, test results, and of course Web Inspector. I admire multi-device strategy, design thinking, user testing, agile dev, and lean UX. I avoid vague meetings, hasty reactions and deadly scope creep.
 
-
 ## Experience
 
-**2011 to Present - Move Inc./Realtor.com**
+**2016 to Present - PayPal Inc.**
+
+Sr. User Experience Designer, Foundations
+ 
+Projects:
+
+- Establishing design system artifacts and processes to improve design across the range of product design groups at PayPal.
+
+
+**2011 to 2016 - Move Inc./Realtor.com**
 
 Sr. User Experience Designer, Consumer UX group
  
