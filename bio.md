@@ -4,10 +4,10 @@ title: Bio
 ---
 
 <p class="message">
-  “I <span style="color: red;">love</span> designing <b>elegant</b> and <b>engaging</b> product experiences for <b>humans</b>.” 
+  “I <span style="color: red;">love</span> designing <b>elegant</b> and <b>engaging</b> product experiences for <b>humans</b>.”
 </p>
 
-<img src="/assets/meandpostits.png">
+<!--<img src="/assets/meandpostits.png">-->
 
 ## About
 
@@ -20,7 +20,7 @@ I continually test emerging tools and methods to find the most effective workflo
 **2016 to Present - PayPal Inc.**
 
 Sr. User Experience Designer, Foundations
- 
+
 Projects:
 
 - Establishing design system artifacts and processes to improve design across the range of product design groups at PayPal.
@@ -29,7 +29,7 @@ Projects:
 **2011 to 2016 - Move Inc./Realtor.com**
 
 Sr. User Experience Designer, Consumer UX group
- 
+
 Projects:
 
 - Lead designer for Realtor.com responsive search results experience project
@@ -44,7 +44,7 @@ Process:
 - Agile scrum trained, worked closely with developers in agile sprints
 - Recently added interaction/animation/motion design prototyping skills
 - Familiarity with HTML/CSS has increased my capability to collaborate with developers
-- Collaborating with user researcher staff to design and execute in-lab and remote usability testing - Integrating findings back into project work 
+- Collaborating with user researcher staff to design and execute in-lab and remote usability testing - Integrating findings back into project work
 - Advocate for utilizing modern front end frameworks, responsive design, living style guides and pattern libraries
 - Advocate for utilizing modern prototyping tools in the team’s process (Sketch, InVision, Principle, etc)
 - Continually seeking knowledge from industry events, lectures, conferences, books, blogs, etc.
@@ -84,6 +84,6 @@ Process:
 - Geocities webmaster
 
 ## More
- 
-I like to keep things simple, but can provide more details as needed. 
+
+I like to keep things simple, but can provide more details as needed.
 Let's talk :)
