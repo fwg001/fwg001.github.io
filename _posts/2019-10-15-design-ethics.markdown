@@ -2,7 +2,7 @@
 layout: post
 title:  Design Ethics
 ---
-* Tech Gone Wrong
+# Tech Gone Wrong
 Attention tech workers, innovators, computer nerds! We’ve all enjoyed the spoils of this booming industry we love so much,  But I have bad news..tech has gone wrong.
 
 Everyone should have noticed the headlines by now. The list of tech companies behaving poorly is growing. You’ve seen the results:
@@ -23,13 +23,13 @@ We’ve been living in the 'move fast and break things' world of short term thin
 Our seemingly small decisions result in manipulation and long-term harm to the humans behind the screens. 
 Looking back from the highs of the recent tech era, we’ve lost track of the utopia we once envisioned. Sure we’ve gained many advantages from tech, but we can no longer ignore the costs that come with it.
 
-* Ethics are not optional
+#Ethics are not optional
 In this new world, product teams of PMs, designers and engineers have a huge influence on how people behave in their daily lives. Together we are all making design decisions, not just those with the title of designer. 
 With that power comes...responsibility. We should be examining the ethics of each design decision as much as we study the engagement metrics. 
 Designing and building products includes inherent ethical decisions. Ethical design is simply practicing design (and development) with the intent to do good. To designers, ethical design is nothing new, we already know this as User Centered Design.
 If you’re part of a team making a tech product, your work is out there, representing your ethics, good or bad. Think about it, are you proud of those ethics? Are you intentional about how the product influences real people?
 
-* But [my company] isn’t evil...
+#But [my company] isn’t evil...
 I know what you’re thinking…"My company isn’t evil, we have principles! We are disrupting industries and bringing power to the people!”
 Ok, so does that mission statement show up in your product work? Is that code living your values? How do you design for your principles and ethics? Prove me wrong, but my guess is these lofty missions are not actually impacting your users. If they are, spread your knowledge so we can learn from it. 
 
@@ -42,7 +42,7 @@ Right now, can you think of an example of questionable ethics in your companies'
 Have you heard these quotes? “Oh that’s a customer service issue", “Well, that’s what the PM wants”, “I can’t change that now, wait for the next version” 
 Don't let these common reactions sweep over your responsibilities.
 
-* We can do better!
+#We can do better!
 
 We have the influence - we are more integrated into the structure of these tech companies than ever before. One by one we can lead the industry toward better ethics. Are you inspired and ready for action? These examples should get you thinking:
  
@@ -60,14 +60,14 @@ Ask tough questions: Who are we excluding with our products? Does this product w
 
 Example 3) We design for the happy path through our flows, and sometimes examine potential sad paths, but what about tragic paths? Don’t hide the process to close an account or delete data. Think about the whole lifecycle of a customer, not just the onboarding. Do we consider people rebuilding their lives after a tragedy, disaster or war? The middle of a family crisis is not a good time for verifying your ID. We should prioritize features for these so called edge cases instead of pushing them off to version 2.0, because that “fast follow” probably won’t happen.
 
-* The industry is waking up 
+#The industry is waking up 
 
 The good news is that our industry is finally talking about ethics. In Ruined by Design, Mike Montiero outlines all the ways design has damaged the world. He proposes a design licensing system, similar to architects, lawyers or doctors. He points out we have a similar duty to protect the customer like they do, but its not formalized so we don’t have leverage to push back on our employers. 
 In a similar vein, Ethan Marcotte’s essay and talk, The World Wide Work (https://ethanmarcotte.com/wrote/the-world-wide-work/) artfully explains how we went from the bright utopian ideals of the early web to the dark dysfunction we live with today. He proposes that a tech workers union could protect employees from automation and give us power to say no to assignments with poor ethics.
 Tatiana Mac explored the history of embedded exclusion and racism in our culture. From civic planning that intentionally segregated races, to interfaces that make dangerous assumptions the default..
 Hopefully the growing discussion and awareness will help push the industry toward more ethical practices, but don’t wait for it to change on its own.
 
-* You must care, right now!
+#You must care, right now!
 
 Here are my bullet points that we can act on today:
 Managers -
