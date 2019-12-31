@@ -8,10 +8,8 @@ title: Blog
     <li>
       <div class="post">
       	<a href="{{ post.url }}">{{ post.title }}</a> | {{ post.date | date_to_string }}
-      	<p>{{ post.excerpt | strip_html }}</p>
+      	<p>{{ post.excerpt | strip_html }}...</p>
       </div>
     </li>
   {% endfor %}
 </ul></div>
-
-
