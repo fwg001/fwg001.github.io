@@ -29,6 +29,8 @@ With that power comes...responsibility. We should be examining the ethics of eac
 Designing and building products includes inherent ethical decisions. Ethical design is simply practicing design (and development) with the intent to do good. To designers, ethical design is nothing new, we already know this as User Centered Design.
 If you’re part of a team making a tech product, your work is out there, representing your ethics, good or bad. Think about it, are you proud of those ethics? Are you intentional about how the product influences real people?
 
+![Your work is out there, representing your ethics.](/assets/posts/Quote-represent.png)
+
 ## But [my company] isn’t evil...
 I know what you’re thinking…"My company isn’t evil, we have principles! We are disrupting industries and bringing power to the people!”
 Ok, so does that mission statement show up in your product work? Is that code living your values? How do you design for your principles and ethics? Prove me wrong, but my guess is these lofty missions are not actually impacting your users. If they are, spread your knowledge so we can learn from it. 
@@ -45,7 +47,9 @@ Don't let these common reactions sweep over your responsibilities.
 ## We can do better!
 
 We have the influence - we are more integrated into the structure of these tech companies than ever before. One by one we can lead the industry toward better ethics. Are you inspired and ready for action? These examples should get you thinking:
- 
+
+![Lead your product team to ethical solutions.](/assets/posts/Quote-lead.png)
+
 Example 1) Data collection
 Before we ask a customer for a seemingly simple data point, evaluate the long term consequences to the human. What does this reveal about them beyond the surface? How would the person feel if they were defined by this data point? Would they be harmed if it was leaked to the public? Are we furthering a prejudice in the way we define people? For example, ethnicity and race are much more complicated than a choice between five labels.
 
@@ -76,6 +80,8 @@ Managers -
 - Hire employees with a track record on ethics. 
 - Train your teams in ethics, talk about it in reviews. 
 
+![You were hired to influence, not just follow.](/assets/posts/Quote-hired.png)
+
 Individual contributors - you can be leaders!
 - Push back - you’re the expert! 
 - Don’t be afraid to say NO! 
@@ -83,6 +89,8 @@ Individual contributors - you can be leaders!
 - Think about the whole experience (UX), not just your few screens in isolation. This is human centered design, for humans. 
 - New rule: Don’t mock-up or build anything you don’t believe in. 
 - We should all talk to our teams and start connecting our missions to our daily work.
+
+![Don't mockup anything you don't belive in.](/assets/posts/Quote-mockup.png)
 
 Now that you’re enlightened and motivated, lets go change things!
 
