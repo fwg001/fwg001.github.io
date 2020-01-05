@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Design Ethics
+title:  Design Ethics - Reality and Responsibility
 ---
 ## Tech Gone Wrong
 Attention tech workers, innovators, computer nerds! We’ve all enjoyed the spoils of this booming industry we love so much,  but I have bad news...tech has gone wrong.
