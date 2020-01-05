@@ -33,4 +33,5 @@ Soon the fateful day came and our baby entered the reality of the app stores. I 
 ## Try it now
 Then send me your feedback.
 
-[AppStore](https://itunes.apple.com/us/app/mortgage-calculator-mortgage/id875060754?mt=8) | [Google Play Store](https://play.google.com/store/apps/details?id=com.move.mortgage)
+---
+Update: The app is no longer available.
