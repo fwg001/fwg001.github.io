@@ -67,9 +67,9 @@ Example 3) We design for the happy path through our flows, and sometimes examine
 
 ## The industry is waking up 
 
-The good news is that our industry is finally talking about ethics. In Ruined by Design, Mike Montiero outlines all the ways design has damaged the world. He proposes a design licensing system, similar to architects, lawyers or doctors. He points out we have a similar duty to protect the customer like they do, but it's not formalized so we don’t have leverage to push back on our employers. 
-In a similar vein, Ethan Marcotte’s essay and talk, The World Wide Work (https://ethanmarcotte.com/wrote/the-world-wide-work/) artfully explains how we went from the bright utopian ideals of the early web to the dark dysfunction we live with today. He proposes that a tech workers union could protect employees from automation and give us power to say no to assignments with poor ethics.
-Tatiana Mac explored the history of embedded exclusion and racism in our culture. From civic planning that intentionally segregated races, to interfaces that make dangerous assumptions the default.
+The good news is that our industry is finally talking about ethics. [In Ruined by Design](https://www.ruinedby.design/), Mike Montiero outlines all the ways design has damaged the world. He proposes a design licensing system, similar to architects, lawyers or doctors. He points out we have a similar duty to protect the customer like they do, but it's not formalized so we don’t have leverage to push back on our employers. 
+In a similar vein, Ethan Marcotte’s essay and talk, [The World Wide Work](https://ethanmarcotte.com/wrote/the-world-wide-work/) artfully explains how we went from the bright utopian ideals of the early web to the dark dysfunction we live with today. He proposes that a tech workers union could protect employees from automation and give us power to say no to assignments with poor ethics.
+[Tatiana Mac](https://www.clarityconf.com/people/tatiana-mac) has explored the history of embedded exclusion and racism in our culture. From civic planning that intentionally segregated races, to interfaces that make dangerous assumptions the default.
 Hopefully, the growing discussion and awareness will help push the industry toward more ethical practices, but don’t wait for it to change on its own.
 
 ## You must care, right now!
