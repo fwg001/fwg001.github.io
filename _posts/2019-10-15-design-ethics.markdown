@@ -99,6 +99,5 @@ Let’s all stand up for what we believe in so we can stand out from that tech t
 
 Thank you.
 
-
 ...
-This post was taken from my speaking notes presented to 200 of my collegaues and our internal UX conference in 2019. More on that story soon.
+This post was crafted from a lighting talk I shared with 200 of my colleagues/friends at our internal UX conference in September 2019. More about that story coming soon.
