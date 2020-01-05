@@ -3,7 +3,7 @@ layout: post
 title:  Design Ethics - Reality and Responsibility
 ---
 ## Tech Gone Wrong
-Attention tech workers, innovators, computer nerds! We’ve all enjoyed the spoils of this booming industry we love so much,  but I have bad news...tech has gone wrong.
+Attention tech workers, innovators, computer nerds! We’ve all enjoyed the spoils of this booming industry we love so much,  but I have bad news...tech has gone wrong.<!--more-->
 
 Everyone should have noticed the headlines by now. The list of tech companies behaving poorly is growing. You’ve seen the results:
 - It’s now standard practice to sell user data for profit
@@ -32,6 +32,7 @@ In this new world, product teams of PMs, designers, and engineers have a huge in
 
 
 ## But [my company] isn’t evil...
+
 I know what you’re thinking…"My company isn’t evil, we have principles! We are disrupting industries and bringing power to the people!”
 Ok, so does that mission statement show up in your product work? Is that code living your values? How do you design for your principles and ethics? Prove me wrong, but my guess is these lofty missions are not actually impacting your users. If they are, spread your knowledge so we can learn from it. 
 
