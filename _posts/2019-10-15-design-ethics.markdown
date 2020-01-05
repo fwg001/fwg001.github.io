@@ -98,3 +98,6 @@ Now that you’re enlightened and motivated, let's go change things!
 Let’s all stand up for what we believe in so we can stand out from that tech that’s gone wrong.
 
 Thank you.
+
+...
+This post was crafted from a lighting talk I shared with 200 of my colleagues/friends at our internal UX conference in September 2019. More about that story coming soon.
