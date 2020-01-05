@@ -18,6 +18,8 @@ Everyone should have noticed the headlines by now. The list of tech companies be
 Why am I giving you this list?
 Let's get to the point: *This is our fault*.
 
+![This is our fault.](/assets/posts/Quote-fault.png)
+
 We, collectively the tech industry, created this mess by making decisions about these product experiences. This tech was designed by teams of professionals like us. We may not have expected or intended to cause these negative outcomes, but they are still the result of our decisions. 
 We’ve been living in the 'move fast and break things' world of short term thinking. Yes we moved fast and built impressive things, but...unfortunately we are breaking more than software, we are breaking PEOPLE. 
 Our seemingly small decisions result in manipulation and long-term harm to the humans behind the screens. 
@@ -26,9 +28,7 @@ Looking back from the highs of the recent tech era, we’ve lost track of the ut
 ## Ethics are not optional
 In this new world, product teams of PMs, designers, and engineers have a huge influence on how people behave in their daily lives. Together we are all making design decisions, not just those with the title of designer. With that power comes…responsibility. We should be examining the ethics of each design decision as much as we study the engagement metrics. Designing and building products include inherent ethical decisions. Ethical design is simply practicing design (and development) with the intent to do good. To designers, ethical design is nothing new, we already know this as User-Centered Design. If you're part of a team making a tech product, your work is out there, representing your ethics, good or bad. Think about it, are you proud of those ethics? Are you intentional about how the product influences real people?
 
-
 ![Your work is out there, representing your ethics.](/assets/posts/Quote-represent.png)
-
 
 
 ## But [my company] isn’t evil...
@@ -48,9 +48,7 @@ Don't let these common reactions sweep over your responsibilities.
 
 We have the influence - we are more integrated into the structure of these tech companies than ever before. One by one we can lead the industry toward better ethics. Are you inspired and ready for action? These examples should get you thinking:
 
-
 ![Lead your product team to ethical solutions.](/assets/posts/Quote-lead.png)
-
 
 Example 1) Data collection
 Before we ask a customer for a seemingly simple data point, evaluate the long term consequences to the human. What does this reveal about them beyond the surface? How would the person feel if they were defined by this data point? Would they be harmed if it was leaked to the public? Are we furthering a prejudice in the way we define people? For example, ethnicity and race are much more complicated than a choice between five labels.
@@ -82,9 +80,7 @@ Managers -
 - Hire employees with a track record on ethics. 
 - Train your teams in ethics, talk about it in reviews. 
 
-
 ![You were hired to influence, not just follow.](/assets/posts/Quote-hired.png)
-
 
 Individual contributors - you can be leaders!
 - Push back - you’re the expert! 
@@ -94,9 +90,7 @@ Individual contributors - you can be leaders!
 - New rule: Don’t mock-up or build anything you don’t believe in. 
 - We should all talk to our teams and start connecting our missions to our daily work.
 
-
 ![Don't mockup anything you don't belive in.](/assets/posts/Quote-mockup.png)
-
 
 Now that you’re enlightened and motivated, let's go change things!
 
