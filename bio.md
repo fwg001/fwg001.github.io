@@ -15,15 +15,18 @@ I’ve been working toward this goal most recently at PayPal Inc. I love working
 
 I continually test emerging tools and methods to find the most effective workflow. After years of designing and developing the interwebs, I know my PNGs, PSDs, CLI, Git, IA, UI, UX and UAT. My days are lived in white board sketches, flows, wireframes, mockups, wiki pages, test results, and of course Web Inspector. I admire multi-device strategy, design thinking, user testing, agile dev, and lean UX. I avoid vague meetings, hasty reactions and deadly scope creep.
 
+
 ## Experience
 
 **2016 to Present - PayPal Inc.**
 
-Sr. User Experience Designer, Foundations
+Sr. User Experience Designer, Design Systems & Accessibility
 
 Projects:
 
-- Establishing design system artifacts and processes to improve design across the range of product design groups at PayPal.
+- Establishing design system artifacts and processes to improve design across the range of product design groups at PayPal
+- Collaborating to raise the bar on accessiblity in design and engineering, integrating standards into the design system
+- Internal mentoring and speaking, building UX culture
 
 
 **2011 to 2016 - Move Inc./Realtor.com**
