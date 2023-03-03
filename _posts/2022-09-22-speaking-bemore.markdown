@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Speaking: Mentoring Builds Leadership Skills
+title:  Speaking - Mentoring Builds Leadership Skills
 ---
 
 ## Conference speaking recap: BeMore 2022
