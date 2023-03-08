@@ -4,6 +4,8 @@ title: A roller coaster called Design Systems
 ---
 
 ![Giant Dipper Roller Coaster](/assets/posts/rollercoaster.png)
+*The Giant Dipper, by [Daniel J. Schwarz](https://unsplash.com/@danieljschwarz) via Unsplash*
+
 There is a famous wooden roller coaster, [The Giant Dipper](https://en.wikipedia.org/wiki/Giant_Dipper), built-in 1924 at Santa Cruz Beach Boardwalk that still entertains visitors today. The classic up-and-down action is enough to thrill you every time. 
 
 Like this roller coaster, there are many ups and downs in building a design system at a corporate scale. 
