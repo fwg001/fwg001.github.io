@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A roller coaster called Design Systems
+title: A Roller Coaster Called Design Systems
 ---
 
 ![Giant Dipper Roller Coaster](/assets/posts/rollercoaster.png)
