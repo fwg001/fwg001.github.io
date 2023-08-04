@@ -20,11 +20,11 @@ Sliders can work in a similar way for digital controls like the one on a MacBook
 
 Sliders can be effective in cases where the control doesn’t require precision. In the Mac volume example, there isn’t a need for a precise setting. It's a range between zero and max volume with no labels or presets in between the extremes. As a result, its impossible to set the volume to a specific amount. Imprecise control is acceptable in this use case for most users. 
 
-![Slider1.png](/assets/posts/Slider-volume.png)
+![Simple volume slider](/assets/posts/Slider-volume.png)
 
 If we tried to use this same slider on a control that does require precision, like how many tacos you want to buy, it would fail. More precision would be required to get to the desired amount since a vague result would be undesirable. But who doesn't love tacos?
 
-![Slider2.png](/assets/posts/Slider-tacos1.png)
+![Slider: How many tacos? Range of Some to All of them](/assets/posts/Slider-tacos1.png)
 
 ## Improving precision
 
@@ -34,9 +34,9 @@ Can we fix it? There are a few approaches for adding precision to sliders.
 2. Add a precise control onto the slider. A text input next to the slider would let the user input their exact number desired. The trade off is we’ve made the interface more complex. Is this combination now better than just a text input alone? Maybe not. 
 3. Instead of an open range that lets you select any value between the ends of the range, we can set defined steps. 1, 5, 10, 15, 20. This removes some flexibility by limiting the options available, but it benefits from adding precision and confidence for the user. Make sure the use case supports the limited options. For example, the user couldn’t choose 12 in this case. With this trade off, is the slider more functional than other inputs like a dropdown menu of preset options? Probably not.
 
-![Slider3.png](/assets/posts/Slider-tacos2.png)
+![Slider: How many tacos? Range of 1, 5, 10, 15, 20.](/assets/posts/Slider-tacos2.png)
 
-![Slider4.png](/assets/posts/Slider-tacos3.png)
+![Slider: How many tacos? with Stepper buttons](/assets/posts/Slider-tacos3.png)
 
 Each of these modifications has a trade-off for complexity or flexibility. In the volume case, simplicity was the priority, not precision. Examine what's most important for your use case and test it with humans. Next time you order tacos, or shoes, or anything you pay for, check out the UI. Simple, common inputs abound, because they are precise and easy to understand.
 
