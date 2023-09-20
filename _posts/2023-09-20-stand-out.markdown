@@ -4,18 +4,20 @@ title: Stand Out With Your Story
 ---
 
 ![Title Slide: Stand Out with Your Story](/assets/posts/Stand1.png)
-Here are my slides and notes from my talk at ADPList.org's BeMore Conference 2023
-- [See the Figma slides](https://www.figma.com/proto/naFH2VJ7is5JuvsTSlO1KY/Stand-Out-With-Your-Story?page-id=0%3A1&type=design&node-id=418-10&viewport=3330%2C-350%2C0.16&t=cN51GumrcMek91D3-1&scaling=min-zoom&starting-point-node-id=418%3A10&mode=design)
+<br/><br/>Slides and notes from my talk at ADPList.org's BeMore Conference on September 20th, 2023
+- [Figma slides](https://www.figma.com/proto/naFH2VJ7is5JuvsTSlO1KY/Stand-Out-With-Your-Story?page-id=0%3A1&type=design&node-id=418-10&viewport=3330%2C-350%2C0.16&t=cN51GumrcMek91D3-1&scaling=min-zoom&starting-point-node-id=418%3A10&mode=design)
 <!--more-->
 Speaking notes:
-
+<br/><br/>
 ## Hello! I'm James
-I don’t know everything...
+### I don’t know everything...
 - My career has not been a straight line. I studied Industrial Design in college, worked at design agencies, side work on web dev, switched to architecture, then later a startup where found UX and then happily ever after
 - These days design systems are my jam, mixing in some accessibility too.
 - ADP list mentoring - love to learn and help others
-I know some things...
-- Journeys are individual, the things I did wont work for everyone. 
+
+### I know some things...
+
+- Journeys are individual, the things I did wont work for everyone.
 - Your life to this point has not been a copy of someone else.
 - I will share some things I’ve learned from both sides of the hiring process
 - You need to interpret how to use this guidance in your life
@@ -44,54 +46,53 @@ I’m going to cover three challenges you need to take on:
 - Make it clear you get things done, this is attractive at all levels of skill or experience.
 - Some ideas for building early experience:
     - Best experience is team based, based on real world challenges
+<br/><br/>
 1. Donate your time
 - Free: Volunteer your services for a non-profit, then share the story
-    - Do you care about Kittens? Cancer patients? Green cities? 
-    Many charities could use your design skills for promotion, products, processes and by working with them you can gain experience by donating your time to something that matches your values. 
-    Show up for something you care about, see where it goes. Write the story into a case study.
+    - Do you care about Kittens? Cancer patients? Green cities?
+    - Many charities could use your design skills for promotion, products, processes and by working with them you can gain experience by donating your time to something that matches your values.
+    - Show up for something you care about, see where it goes. Write the story into a case study.
     - Shows values, initiative, action, flexibility
-
+<br/><br/>
 2. Be your own boss
 - Fiction: Self-initiate a project to showcase your skill and passion
-    - Use inspiration from your life, pain points you see, hobbies you enjoy. 
-    Some free ideas: Outdoorsy? Design Arbnb for kayaks, mountain bikes, surfboards. New parent? Baby care training like Duolingo. 
-    Just take something you know and start designing. 
-    Use your friends for research. 
-    Craft the story around the design process. 
-    Maybe use a friend or freelancer to build it for real.
+    - Use inspiration from your life, pain points you see, hobbies you enjoy.
+    - Some free ideas: Outdoorsy? Design Arbnb for kayaks, mountain bikes, surfboards. New parent? Baby care training like Duolingo.
+    - Just take something you know and start designing. Use your friends for research.
+    - Craft the story around the design process.
+    - Maybe use a friend or freelancer to build it for real.
     - Shows values, initiative, action, adaptability
-    
+<br/><br/>    
 3. Take Gigs
     - Paid: Freelance/agencies/contracting
         - Big companies that cut back roles often turn to outsourced talent
         - Don’t lock yourself into expecting a FT role at a big corporation - its not the only or best option for starting your career.
         - Look for small agencies, look at early startups, the wide variety and fast paced work can help you refine your skills and find your favorite parts of the design process.
-
-### Challenge 2: Stand out from the sea of candidates
+<br/>
+## Challenge 2: Stand out from the sea of candidates
 
 - Use your experience to tell a special story we wont forget
 - You are special, so make your portfolio special. Know what sets you apart from other UX designers.
 - Design your personal brand to reflect you as a unique person. 
-    Don’t be generic and forgettable. 
-    Hiring teams see way too many boring portfolios that are easily forgettable. 
-    We don’t want to hire boring people, that would make boring products. 
-    Inspire us to care about you and the perspective you could add to our team.
+   - Don’t be generic and forgettable.
+   - Hiring teams see way too many boring portfolios that are easily forgettable.
+   - We don’t want to hire boring people, that would make boring products.
+   - Inspire us to care about you and the perspective you could add to our team.
 - Go beyond the standard template and tell a good story about you and your work.
-        - Of course make your portfolio easy to navigate, read, scan, browse, but that doesn’t mean it needs to be boring. Function plus beauty.
-        - Don’t just give me boring data, tell me a story thats memorable
-        - Share your journey:  How you got into design. Where are you now. What do you love most. What you care about. Where do you want to be?
+    - Of course make your portfolio easy to navigate, read, scan, browse, but that doesn’t mean it needs to be boring. Function plus beauty.
+    - Don’t just give me boring data, tell me a story thats memorable
+    - Share your journey:  How you got into design. Where are you now. What do you love most. What you care about. Where do you want to be?
 - Ask yourself, what part of design gets you most excited? 
-    Where are your passions and values? 
-    Find a area you enjoy or care about. 
-    It could be anything you can relate back to your career. 
-    Some examples: social justice, accessibility/disability rights, design ethics, new design tools, brainstorming processes, design sprints, minorities in tech, international innovation, ethnographic research, sustainable tech, empathetic design etc...
-        - Use that topic as a framework to demonstrate your skills (see self initiated work above) and showcase it in your personal brand in all your materials: portfolio, writing, social, videos, podcasts, etc
-        - **Become known for a specialty, passion or cause.** 
-        Takes storytelling and repetition
-        - Hiring teams don’t have time to dig through your entire portfolio and find out who you are and what you care about. 
-        Bring that story to the front of your materials so its easy for us to learn and remember. Be memorable.
+    - Where are your passions and values? 
+    - Find a area you enjoy or care about. 
+    - It could be anything you can relate back to your career. 
+    - Some examples: social justice, accessibility/disability rights, design ethics, new design tools, brainstorming processes, design sprints, minorities in tech, international innovation, ethnographic research, sustainable tech, empathetic design etc...
+    - Use that topic as a framework to demonstrate your skills (see self initiated work above) and showcase it in your personal brand in all your materials: portfolio, writing, social, videos, podcasts, etc
+    - **Become known for a specialty, passion or cause.** 
+    - Hiring teams don’t have time to dig through your entire portfolio and find out who you are and what you care about. 
+    - Bring that story to the front of your materials so its easy for us to learn and remember. Be memorable.
 
-### Challenge 3: Learn to sell yourself
+## Challenge 3: Learn to sell yourself
 
 This doesn’t come natural to most designers but you need to practice selling yourself.
 
@@ -117,27 +118,29 @@ This doesn’t come natural to most designers but you need to practice selling y
 
 - Rejection is not a failure.
     - It was not the right fit or timing. 
-    This does not mean your are not good enough. 
-    You could be just as qualified as the chosen candidate.
+    - This does not mean your are not good enough. 
+    - You could be just as qualified as the chosen candidate.
     - There are so many factors that are out of your control so don’t put it all on yourself.
 - Stay confident and look for new opportunities.
     - Maybe your next role will be a pivot you didn’t plan for, but will lead to greater things.
-- A big name company is not the only/best way to start your career. 
-Look for mentors and teammates in any size/type of company.
+    - A big name company is not the only/best way to start your career. 
+- Look for mentors and teammates in any size/type of company.
 - Take what you learn and and improve your story, so you are ready for the next one. 
-Your journey will continue.
+- Your journey will continue.
 
 ## So remember these take aways
 
-1.  Don’t wait for opportunity, work for it.
+1. Don’t wait for opportunity, work for it.
 - There are no shortcuts for a successful design career. 
 - Put in the effort to get the rewards. 
 - It takes work to find what you are good at, build a unique portfolio, find roles that fit, and sell your skills to the hiring teams.
 
 2. Don’t limit yourself, try different paths
-    - There are many ways toward your goals
-    - Be willing to experiment and learn with your career
+- There are many ways toward your goals
+- Be willing to experiment and learn with your career
 3. Tell a great story about who you are, in every touchpoint and conversation you get
 4. Stay engaged, teachable, so you can adapt to the ups and downs of career progression
 
 ## Lets go!
+
+Add your ideas and questions in the comments.
