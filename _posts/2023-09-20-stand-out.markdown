@@ -13,26 +13,26 @@ Speaking notes:
 
 ## Hello! I'm James
 ### I don’t know everything...
-- My career has not been a straight line. I studied Industrial Design in college, worked at design agencies, side work on web dev, switched to architecture, then later a startup where found UX and then happily ever after
-- These days design systems are my jam, mixing in some accessibility too.
-- ADP list mentoring - love to learn and help others
+- My career has not been a straight line. I studied Industrial Design in college, worked at design agencies, did side work on web dev, and tjem switched to architecture. Next, I joined a startup where I found UX and loved it, so I switched roles to make that my focus.
+- These days I'm deep in design systems, product UX, and accessibility. I love improving patterns and processes to build better products for himans.
+- ADP list mentoring - I love to learn and help others grow their careers.
 
 ### I know some things...
 
-- Journeys are individual, the things I did wont work for everyone.
+- Journeys are individual, the things I did won't work for everyone.
 - Your life to this point has not been a copy of someone else.
-- I will share some things I’ve learned from both sides of the hiring process
-- You need to interpret how to use this guidance in your life
+- I will share some things I’ve learned from both sides of the hiring process.
+- You need to interpret how to use this guidance in your life.
 
 <br/><br/>
 ![Slide: What can new designers do?](/assets/posts/Stand2.png)
 
 ## So the big question: What can new UX designers do to get a job?
 
-- Applies to many roles in UX, marketing, research, content
+- Note this can apply to many roles in UX, marketing, research, and content.
 - When the job market is on the downturn, lower experience/entry level roles dry up first. 
 
-### How does someone get through the stack of candidates competing for the remaining fewer roles?
+How does someone get through the stack of candidates competing for the remaining fewer roles?
 
 I’m going to cover three challenges you need to take on:
 1. Demonstrate your experience
@@ -52,11 +52,11 @@ I’m going to cover three challenges you need to take on:
 
 - Creativity in action is rare, many can talk about it but few dig in and demonstrate it. Be a person of action. 
 - Make it clear you get things done, this is attractive at all levels of skill or experience.
-- Some ideas for building early experience:
-    - Best experience is team based, based on real world challenges
+
+Some ideas for building early experience:
 
 #### 1. Donate your time
-- Free: Volunteer your services for a non-profit, then share the story
+- Free: Volunteer your services for a non-profit, then share the story.
     - Do you care about Kittens? Cancer patients? Green cities?
     - Many charities could use your design skills for promotion, products, processes and by working with them you can gain experience by donating your time to something that matches your values.
     - Show up for something you care about, see where it goes. Write the story into a case study.
@@ -68,11 +68,11 @@ I’m going to cover three challenges you need to take on:
     - Just take something you know and start designing. Use your friends for research.
     - Craft the story around the design process.
     - Maybe use a friend or freelancer to build it for real.
-    - Shows values, initiative, action, adaptability
+    - Shows values, initiative, action, adaptability.
     
 #### 3. Take Gigs
 - Paid: Freelance/agencies/contracting
-    - Big companies that cut back roles often turn to outsourced talent
+    - Big companies that cut back roles often turn to outsourced talent.
     - Don’t lock yourself into expecting a FT role at a big corporation - its not the only or best option for starting your career.
     - Look for small agencies, look at early startups, the wide variety and fast paced work can help you refine your skills and find your favorite parts of the design process.
 
@@ -81,7 +81,7 @@ I’m going to cover three challenges you need to take on:
 
 ## Challenge 2: Stand out from the sea of candidates
 
-- Use your experience to tell a special story we wont forget
+- Use your experience to tell a special story we won't forget
 - You are special, so make your portfolio special. Know what sets you apart from other UX designers.
 - Design your personal brand to reflect you as a unique person. 
    - Don’t be generic and forgettable.
@@ -89,16 +89,16 @@ I’m going to cover three challenges you need to take on:
    - We don’t want to hire boring people, that would make boring products.
    - Inspire us to care about you and the perspective you could add to our team.
 - Go beyond the standard template and tell a good story about you and your work.
-    - Of course make your portfolio easy to navigate, read, scan, browse, but that doesn’t mean it needs to be boring. Function plus beauty.
-    - Don’t just give me boring data, tell me a story thats memorable
+    - Of course make your portfolio easy to navigate, read, scan, and browse, but that doesn’t mean it needs to be boring. Function plus beauty.
+    - Don’t just give me boring data, tell me a story thats memorable.
     - Share your journey:  How you got into design. Where are you now. What do you love most. What you care about. Where do you want to be?
 - Ask yourself, what part of design gets you most excited? 
     - Where are your passions and values? 
     - Find a area you enjoy or care about. 
     - It could be anything you can relate back to your career. 
-    - Some examples: social justice, accessibility/disability rights, design ethics, new design tools, brainstorming processes, design sprints, minorities in tech, international innovation, ethnographic research, sustainable tech, empathetic design etc...
+    - Some examples are social justice, accessibility/disability rights, design ethics, new design tools, brainstorming processes, design sprints, minorities in tech, international innovation, ethnographic research, sustainable tech, empathetic design etc...
     - Use that topic as a framework to demonstrate your skills (see self initiated work above) and showcase it in your personal brand in all your materials: portfolio, writing, social, videos, podcasts, etc
-    - **Become known for a specialty, passion or cause.** 
+**Become known for a specialty, passion or cause.** 
     - Hiring teams don’t have time to dig through your entire portfolio and find out who you are and what you care about. 
     - Bring that story to the front of your materials so its easy for us to learn and remember. Be memorable.
 
@@ -111,52 +111,50 @@ This doesn’t come natural to most designers but you need to practice selling y
 
 ### Be ready for a callback
 
-- Practice presenting your story in-person/phone/zoom interviews and presentations
-    - What makes you special? What are you passionate about? Be ready to share why it matters to you - have you talking points down
-    - Don’t talk about tiny project details, talk about your design decisions, how you got to the solution is way more important than the results
-    - Share roadblocks and pivots, tell how you overcome obstacles
-    - Demonstrate collaboration, design is a team sport so tell us how you play together
-    - Adjust your story to fit your audience with various levels of detail (recruiter, hiring manager, senior leader)
-- Practice answering interview questions
-    - Learn behavioral interviewing and practice your answers, have a friend or mentor (ADPList) mock interview you
+- Practice presenting your story in-person/phone/zoom interviews and presentations.
+    - What makes you special? What are you passionate about? Be ready to share why it matters to you - have you talking points down.
+    - Don’t talk about tiny project details, talk about your design decisions, how you got to the solution is way more important than the results.
+    - Share roadblocks and pivots, tell how you overcome obstacles.
+    - Demonstrate collaboration, design is a team sport so tell us how you play together.
+    - Adjust your story to fit your audience with various levels of detail (recruiter, hiring manager, senior leader).
+- Practice answering interview questions.
+    - Learn behavioral interviewing and practice your answers, have a friend or mentor (ADPList) mock interview you.
 - Practice asking questions back to the hiring team. Always have question for them when they ask.
-    - Be ready to ask about their team structure, company culture, leadership vision, how the could use you
+    - Be ready to ask about their team structure, company culture, leadership vision, how the could use you.
 - The more you practice, the better you will be able to sell what makes you unique.
-    - Introverts don’t like this naturally but its essential to getting the right job. 
-    Get support if you need to learn presentation/speaking skills.
-    - Don’t expect to be a great speaker if you have never trained for it. 
-    Find training - courses, clubs (Toastmasters), meetups, apps etc.
+    - Introverts don’t like this naturally but its essential to getting the right job. Get support if you need to learn presentation/speaking skills.
+    - Don’t expect to be a great speaker if you have never trained for it. Find training - courses, clubs (Toastmasters), meetups, apps etc.
 
 ### Be ready for rejection
 
 - Rejection is not a failure.
     - It was not the right fit or timing. 
-    - This does not mean your are not good enough. 
+    - This does not mean you are not good enough. 
     - You could be just as qualified as the chosen candidate.
     - There are so many factors that are out of your control so don’t put it all on yourself.
 - Stay confident and look for new opportunities.
-    - Maybe your next role will be a pivot you didn’t plan for, but will lead to greater things.
-    - A big name company is not the only/best way to start your career. 
+    - Maybe your next role will be a pivot you didn’t plan for but will lead to greater things.
+    - A big-name company is not the only/best way to start your career. 
 - Look for mentors and teammates in any size/type of company.
-- Take what you learn and and improve your story, so you are ready for the next one. 
+- Take what you learn and improve your story, so you are ready for the next one. 
 - Your journey will continue.
 
 
 <br/><br/>
 ![Slide: My takeaways for you](/assets/posts/Stand6.png)
 
-## So remember these take aways
+## So remember these takeaways
 
-1. Don’t wait for opportunity, work for it.
+1. Don’t wait for an opportunity, work for it.
 - There are no shortcuts for a successful design career. 
 - Put in the effort to get the rewards. 
 - It takes work to find what you are good at, build a unique portfolio, find roles that fit, and sell your skills to the hiring teams.
 
-2. Don’t limit yourself, try different paths
+2. Don’t limit yourself, try different paths.
 - There are many ways toward your goals
 - Be willing to experiment and learn with your career
-3. Tell a great story about who you are, in every touchpoint and conversation you get
-4. Stay engaged, teachable, so you can adapt to the ups and downs of career progression
+3. Tell a great story about who you are, in every touchpoint and conversation you can.
+4. Stay engaged and teachable, so you can adapt to the ups and downs of career progression.
 
 ## Go share your story!
 
