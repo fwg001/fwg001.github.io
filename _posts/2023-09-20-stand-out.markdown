@@ -8,7 +8,7 @@ title: Stand Out With Your Story
 - [Figma slides](https://www.figma.com/proto/naFH2VJ7is5JuvsTSlO1KY/Stand-Out-With-Your-Story?page-id=0%3A1&type=design&node-id=418-10&viewport=3330%2C-350%2C0.16&t=cN51GumrcMek91D3-1&scaling=min-zoom&starting-point-node-id=418%3A10&mode=design)
 <!--more-->
 Speaking notes:
-<br/><br/>
+
 ## Hello! I'm James
 ### I don’t know everything...
 - My career has not been a straight line. I studied Industrial Design in college, worked at design agencies, side work on web dev, switched to architecture, then later a startup where found UX and then happily ever after
@@ -52,15 +52,14 @@ I’m going to cover three challenges you need to take on:
 - Make it clear you get things done, this is attractive at all levels of skill or experience.
 - Some ideas for building early experience:
     - Best experience is team based, based on real world challenges
-<br/><br/>
-1. Donate your time
+
+#### 1. Donate your time
 - Free: Volunteer your services for a non-profit, then share the story
     - Do you care about Kittens? Cancer patients? Green cities?
     - Many charities could use your design skills for promotion, products, processes and by working with them you can gain experience by donating your time to something that matches your values.
     - Show up for something you care about, see where it goes. Write the story into a case study.
     - Shows values, initiative, action, flexibility
-<br/><br/>
-2. Be your own boss
+#### 2. Be your own boss
 - Fiction: Self-initiate a project to showcase your skill and passion
     - Use inspiration from your life, pain points you see, hobbies you enjoy.
     - Some free ideas: Outdoorsy? Design Arbnb for kayaks, mountain bikes, surfboards. New parent? Baby care training like Duolingo.
@@ -68,12 +67,12 @@ I’m going to cover three challenges you need to take on:
     - Craft the story around the design process.
     - Maybe use a friend or freelancer to build it for real.
     - Shows values, initiative, action, adaptability
-<br/><br/>    
-3. Take Gigs
-    - Paid: Freelance/agencies/contracting
-        - Big companies that cut back roles often turn to outsourced talent
-        - Don’t lock yourself into expecting a FT role at a big corporation - its not the only or best option for starting your career.
-        - Look for small agencies, look at early startups, the wide variety and fast paced work can help you refine your skills and find your favorite parts of the design process.
+    
+#### 3. Take Gigs
+- Paid: Freelance/agencies/contracting
+    - Big companies that cut back roles often turn to outsourced talent
+    - Don’t lock yourself into expecting a FT role at a big corporation - its not the only or best option for starting your career.
+    - Look for small agencies, look at early startups, the wide variety and fast paced work can help you refine your skills and find your favorite parts of the design process.
 
 <br/><br/>
 ![Slide: Stand out](/assets/posts/Stand4.png)
@@ -158,5 +157,3 @@ This doesn’t come natural to most designers but you need to practice selling y
 4. Stay engaged, teachable, so you can adapt to the ups and downs of career progression
 
 ## Lets go!
-
-Add your ideas and questions in the comments.
