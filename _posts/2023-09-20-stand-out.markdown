@@ -22,6 +22,9 @@ Speaking notes:
 - I will share some things I’ve learned from both sides of the hiring process
 - You need to interpret how to use this guidance in your life
 
+<br/><br/>
+![Slide: What can new designers do?](/assets/posts/Stand2.png)
+
 ## So the big question: What can new UX designers do to get a job?
 
 - Applies to many roles in UX, marketing, research, content
@@ -35,6 +38,9 @@ I’m going to cover three challenges you need to take on:
 3. Learn to sell yourself
 
 #### So lets go…
+
+<br/><br/>
+![Slide: Demonstrate your experience](/assets/posts/Stand3.png)
 
 ## Challenge 1: Demonstrate your experience
 
@@ -68,7 +74,10 @@ I’m going to cover three challenges you need to take on:
         - Big companies that cut back roles often turn to outsourced talent
         - Don’t lock yourself into expecting a FT role at a big corporation - its not the only or best option for starting your career.
         - Look for small agencies, look at early startups, the wide variety and fast paced work can help you refine your skills and find your favorite parts of the design process.
-<br/>
+
+<br/><br/>
+![Slide: Stand out](/assets/posts/Stand4.png)
+
 ## Challenge 2: Stand out from the sea of candidates
 
 - Use your experience to tell a special story we wont forget
@@ -92,11 +101,14 @@ I’m going to cover three challenges you need to take on:
     - Hiring teams don’t have time to dig through your entire portfolio and find out who you are and what you care about. 
     - Bring that story to the front of your materials so its easy for us to learn and remember. Be memorable.
 
+<br/><br/>
+![Slide: Learn to sell yourself](/assets/posts/Stand5.png)
+
 ## Challenge 3: Learn to sell yourself
 
 This doesn’t come natural to most designers but you need to practice selling yourself.
 
-### Be ready for a callback**
+### Be ready for a callback
 
 - Practice presenting your story in-person/phone/zoom interviews and presentations
     - What makes you special? What are you passionate about? Be ready to share why it matters to you - have you talking points down
@@ -114,7 +126,7 @@ This doesn’t come natural to most designers but you need to practice selling y
     - Don’t expect to be a great speaker if you have never trained for it. 
     Find training - courses, clubs (Toastmasters), meetups, apps etc.
 
-### Be ready for rejection**
+### Be ready for rejection
 
 - Rejection is not a failure.
     - It was not the right fit or timing. 
@@ -127,6 +139,10 @@ This doesn’t come natural to most designers but you need to practice selling y
 - Look for mentors and teammates in any size/type of company.
 - Take what you learn and and improve your story, so you are ready for the next one. 
 - Your journey will continue.
+
+
+<br/><br/>
+![Slide: My takeaways for you](/assets/posts/Stand6.png)
 
 ## So remember these take aways
 
