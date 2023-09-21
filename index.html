@@ -21,8 +21,7 @@ title: Home
 <a href="/portfolio/mortgage_app"><img src="/assets/mortgage_app/mortgage_app_sm.png"></a>
 </div>-->
 
-<h3 class="clearboth">
-<a href="/blog">Writing</a></h3>
+<h3 class="clearboth"><a href="/blog">Writing</a></h3>
 <b>Recent Posts</b>
 <div class="posts">
   {% for post in paginator.posts %}
@@ -30,4 +29,16 @@ title: Home
     {{ post.date | date_to_string }} | <a href="{{ post.url }}">{{ post.title }}</a>
   </div>
   {% endfor %}
+</div>
+<h3 class="clearboth">Speaking</h3>
+<div class="posts">
+  <div class="post">
+    <a href="/2023/09/20/stand-out/">ADPList BeMore Conference 2023</a>
+  </div>
+  <div class="post">
+    <a href="/2022/11/23/podcast-research-labs/">ResearchLabs Podcast</a>
+  </div>
+  <div class="post">
+    <a href="/2022/09/22/speaking-bemore/">ADPList BeMore Conference 2022</a>
+  </div>
 </div>
