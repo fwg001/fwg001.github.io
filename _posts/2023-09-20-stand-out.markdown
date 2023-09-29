@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Stand Out With Your Story
+title: Speaking - Stand Out With Your Story
 ---
 
 ![Title Slide: Stand Out with Your Story](/assets/posts/Stand1.png)
