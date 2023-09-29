@@ -5,11 +5,13 @@ title: Stand Out With Your Story
 
 ![Title Slide: Stand Out with Your Story](/assets/posts/Stand1.png)
 <br/><br/>
-Slides and notes from my talk at ADPList.org's [BeMore Conference](https://bemore.adplist.org/) on September 20th, 2023
-- [Figma slides](https://www.figma.com/proto/naFH2VJ7is5JuvsTSlO1KY/Stand-Out-With-Your-Story?page-id=0%3A1&type=design&node-id=418-10&viewport=3330%2C-350%2C0.16&t=cN51GumrcMek91D3-1&scaling=min-zoom&starting-point-node-id=418%3A10&mode=design)
-- Illustrations by [Blush](https://blush.design)
-<!--more-->
-Speaking notes:
+Video, slides and notes from my talk at ADPList.org's [BeMore Conference](https://bemore.adplist.org/) on September 20th, 2023
+
+- Video: [![Video](/assets/posts/BeMore2023-video.png 'Screenshot of video recording: Stand Out with Your Story')](https://drive.google.com/file/d/1xQnOXZFn6_S9JGZNR3DLxt6WMBWaliD0/view?usp=drivesdk)
+
+<!--more--> 
+- [Figma slides](https://www.figma.com/proto/naFH2VJ7is5JuvsTSlO1KY/Stand-Out-With-Your-Story?page-id=0%3A1&type=design&node-id=418-10&viewport=3330%2C-350%2C0.16&t=cN51GumrcMek91D3-1&scaling=min-zoom&starting-point-node-id=418%3A10&mode=design) with illustrations by [Blush](https://blush.design)
+- Speaking notes:
 
 ## Hello! I'm James
 ### I don’t know everything...
