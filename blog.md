@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Blog
+title: Writing
 ---
 <div class="posts">
 <ul>
