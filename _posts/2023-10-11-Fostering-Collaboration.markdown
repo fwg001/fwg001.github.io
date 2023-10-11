@@ -4,8 +4,8 @@ title: Fostering collaboration in design systems
 ---
 ![Title Slide: Fostering collaboration in design systems](/assets/posts/fostering/1-Title.png)
 
-Note: This article is adpated from my talk at [GOV.UK Design System Day](https://design-system.service.gov.uk/community/design-system-day/) on October 11th 2023.
-[Full slides on Figma](https://www.figma.com/file/YD4Ubwb1ZCjbauQrV0wxJj/Fostering-Collaboration?type=design&node-id=502-164&mode=design&t=qW3jhB2gpbfEY0dI-4).
+Note: This article was adapted from my talk at [GOV.UK Design System Day](https://design-system.service.gov.uk/community/design-system-day/) on October 11th 2023.
+[Full slides on Figma](https://www.figma.com/file/YD4Ubwb1ZCjbauQrV0wxJj/Fostering-Collaboration?type=design&node-id=502-164&mode=design&t=qW3jhB2gpbfEY0dI-4) with illustrations by [Blush](https://blush.design).
 <br/><br/>
 
 
