@@ -12,12 +12,12 @@ Note: This article was adapted from my talk at [GOV.UK Design System Day](https:
 ## A collaboration journey
 ![Slide: A collaboration journey](/assets/posts/fostering/2-Overview.png)
 
-Like many types of projects, the creation of a design system has a story arc embedded in it. First we defining what we want to make, who its for and plan the goals. Next we kickoff an exciting startup phase to craft initial patterns and components. This leads to influencing teams and leaders so we can gain traction and garner support to continue growing. Soon an unexpected crisis appears, an outside influence forces a decision about how your system operates. Once you conquer that hiccup, you hit your stride in scaling and enhancing. There is not really a last step, lets call it ‘not the end’, because you are in this for the long term. Don’t expect to reach a place where the work is complete, it should continue to flex and evolve over time.
+Like many types of projects, the creation of a design system has a story arc embedded in it. First we define what we want to make, who its for and plan the goals. Next we kickoff an exciting startup phase to craft initial patterns and components. This leads to influencing teams and leaders so we can gain traction and garner support to continue growing. Soon an unexpected crisis appears, an outside influence forces a decision about how your system operates. Once you conquer that hiccup, you hit your stride in scaling and enhancing. There is not really a last step, lets call it ‘not the end’, because you are in this for the long term. Don’t expect to reach a place where the work is complete, it should continue to flex and evolve over time.
 
 At each stage in this journey you are making decisions that can improve collaboration with your community of people.
 <!--more--> 
 ## 1. Define
-![Slide: Define](/assets/posts/fostering/3-Define.png)
+![Slide: Define](/assets/posts/fostering/4-Define.png)
 
 What do you picture when you think about the word design systems? What comes to mind first? Frequent answers are design files, libraries, code, components, guidelines. These are key elements of course but they are all artifacts. A design system is more than just its parts. Josh Clark and Brad Frost remind us that “Design Systems are people!” If you included the people in your definition, congratulations you get bonus points. 
 
