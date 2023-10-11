@@ -5,16 +5,17 @@ title: Config 2023
 
 ![Congfig conference banner at Moscone Center San Francisco](/assets/posts/config1.jpg)
 
-<br/><br/>
-## Config2023
-I had a great time at Figma's annual Config conference June 21-23, 2023. This year it was huge! 8k+ fans at Moscone Center San Francisco and many more watching virtually.<!--more-->
+<br/>
+I had a great time at Figma's annual Config conference June 21-22, 2023. This year it was huge! 8k+ fans at Moscone Center San Francisco and many more watching virtually.<!--more-->
+<br/>
 The kick off was a great keynote revealing some mind blowing new features for design systems (tokens/variables), prototyping, and dev mode. Later sessions included really practical advice for designers on a wide range of topics as well as some deeply personal stories that challenged our brains and hearts. 
+<br/>
 I was joined by my teammate Vivek Gupta in person and the rest of our team was watching virtually. It was pretty amazing to see so many people excited about a design tool getting together and connecting over this common interest.
 
 ![Congfig conference lanyard with my name James Carleton](/assets/posts/config2.jpg)
 ![Config main stage inside Moscone Center](/assets/posts/config3.jpg)
 ## Looking back
-The company and userbase has grown so much in the past few years. Back in  August 2019, when Figma was a baby compay, I took this pic of their first major ad, a billboard in SF. Now it’s all grown up and packing 8k friends into Moscone center at #Config2023 .
+The company and userbase has grown so much in the past few years. Back in  August 2019, when Figma was a baby compay, I took this pic of their first major ad, a billboard in SF. Now four years later it’s all grown up and packing 8k friends into Moscone center, not far from that billboard.
 <br/><br/>
 Congrats Figma team!
 <br/><br/>
