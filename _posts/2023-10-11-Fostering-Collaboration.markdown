@@ -2,18 +2,22 @@
 layout: post
 title: Fostering collaboration in design systems
 ---
+![Title Slide: Fostering collaboration in design systems](/assets/posts/fostering/1-Title.png)
 
-Note: This article is adpated from my talk at GOV.UK Design System Day on October 11th 2023.
-[Browse my Figma slides](https://www.figma.com/file/YD4Ubwb1ZCjbauQrV0wxJj/Fostering-Collaboration?type=design&node-id=502-164&mode=design&t=qW3jhB2gpbfEY0dI-4).
+Note: This article is adpated from my talk at [GOV.UK Design System Day](https://design-system.service.gov.uk/community/design-system-day/) on October 11th 2023.
+[Full slides on Figma](https://www.figma.com/file/YD4Ubwb1ZCjbauQrV0wxJj/Fostering-Collaboration?type=design&node-id=502-164&mode=design&t=qW3jhB2gpbfEY0dI-4).
 <br/><br/>
 
+
 ## A collaboration journey
+![Slide: A collaboration journey](/assets/posts/fostering/2-Overview.png)
 
 Like many types of projects, the creation of a design system has a story arc embedded in it. First we defining what we want to make, who its for and plan the goals. Next we kickoff an exciting startup phase to craft initial patterns and components. This leads to influencing teams and leaders so we can gain traction and garner support to continue growing. Soon an unexpected crisis appears, an outside influence forces a decision about how your system operates. Once you conquer that hiccup, you hit your stride in scaling and enhancing. There is not really a last step, lets call it ‘not the end’, because you are in this for the long term. Don’t expect to reach a place where the work is complete, it should continue to flex and evolve over time.
 
 At each stage in this journey you are making decisions that can improve collaboration with your community of people.
 <!--more--> 
 ## 1. Define
+![Slide: Define](/assets/posts/fostering/3-Define.png)
 
 What do you picture when you think about the word design systems? What comes to mind first? Frequent answers are design files, libraries, code, components, guidelines. These are key elements of course but they are all artifacts. A design system is more than just its parts. Josh Clark and Brad Frost remind us that “Design Systems are people!” If you included the people in your definition, congratulations you get bonus points. 
 
@@ -21,22 +25,26 @@ A design system can include people from different areas, the system team, the sy
 As you define goals for your system, look beyond the pieces and include people into your plan. Even the best design system with amazing patterns, components, documentation can fail if the culture is not crafted as intently as the work.
 
 ## 2. Startup
+![Slide: Startup](/assets/posts/fostering/5-Starup.png)
 
 Now that you have a plan its time to jam! Gather those passionate people and give them into the flow. This early progress feels so good, your nimble team is breaking new ground everyday and the results are energizing as the system comes together with ease. You’re tempted to stay isolated so you can keep up the quick work, but be sure to invite key system customers to help direct your decisions and keep it grounded in real use cases. Brainstorming workshops in this early stage helps set the tone for collaboration later and helps the community feel ownership over the system’s success. Those early collaborators will be come important champions for your design system as it grows.
 
 ## 3. Traction
+![Slide: Traction](/assets/posts/fostering/6-Traction.png)
 
 So your startup was exciting but now its time to mature the system. You need to get traction by to achieve your goals for growth and adoption. Network to find key leaders that can become your partners to influence the larger business. You wont be able to grow, gain influence, or scale without this key step. Start planning your adoption strategy, if your company is small its about aligning with the latest big project. If its a bigger company be smart about choosing which areas to focus on, you cant conquer them all at once. Find projects that are high visibility and work to integrate those. Then others will follow that lead.
 
 Collaboration is essential at this phase because the system needs to learn use cases from product teams and those teams will need your system for cohesion. If you’re not listening to feedback and catering to your internal customers, the system will quickly be sidelined, and soon forgotten. Like a car stuck in mud, if you don’t have traction your system will be stuck. Instead be prepared ready for change, provide clear ways for your community to ask questions, raise feedback, and contribute to its growth.
 
 ## 4. Crisis
+![Slide: Crisis](/assets/posts/fostering/7-Crisis.png)
 
 Just when you feel that traction moving the system forward a challenge will appear that will make or break the future of your system. It comes in different forms. It could be a key product team wants to take your components in new directions, it could be a product pivot that requires new directions for the system you didn’t expect. It could be a big rebrand, a new company acquired, or even layoffs. Any of these surprises could disrupt all your hard work.
 
 How will you react to this new challenge? Stay the course or 
 
-### Choose your own adventure
+### Choose your adventure
+![Slide: Choose your adventure](/assets/posts/fostering/8-Choose.png)
 
 You have a strategic decision at this point. Will you:
 A. Stay focused on delivery - press on toward your initial goals without supporting the community
@@ -46,6 +54,7 @@ B. Pause and make a plan - build new methods for community engagement, find solu
 To help you answer that lets use some contrast to make a point. Design systems are easy to kill. Maybe you’ve even witnessed this tragedy.
 
 ### How to kill a design system
+![Slide: How to kill a design system](/assets/posts/fostering/10-Kill-2.png)
 
 First step is to mistreat your customers. Forget that you build this system to benefit them, its instead become more about you showing off your skills. Make it difficult to understand how the system works, don’t provide instructions or training. Next close your mind and reject all feedback because they can’t know how hard your job is. In fact to prevent feedback just stop communicating about progress or releases of the system. That will slow down their questions and concerns. 
 
@@ -53,7 +62,8 @@ Now your system is on life support. Time to pull the plug. Be controlling every 
 
 After that bleak story, you should see how vital the right approach to collaboration is to design system success.
 
-### How to f**oster collaboration**
+### How to foster collaboration
+![Slide: Foster collaboration](/assets/posts/fostering/11-Culture.png)
 
 A. Envision the culture you want to build. 
 
@@ -76,6 +86,7 @@ A majority of the design system team’s work is around serving its community an
 Recognize this in your team assignments so everyone has clear expectations and goals. I’ve heard some teams take week long turns on the customer service front while other teams are more fluid in how they share that assignment. Be a team of teachers, with good listening skills to match.
 
 ## 5. Hit your stride
+![Slide: Hit your stride](/assets/posts/fostering/15-Stride.png)
 
 Back to our journey storyline, after you survive the big crisis you should have a new perspective on how to keep collaboration in your system’s culture. Like a skilled runner you reach a great stride that you can maintain long term. You’re guided by principles, practicing collaborative habits and adjusting to inevitable changes that arise. Be driven forward but able to flex to meet any challenge.
 
@@ -95,7 +106,8 @@ Explain the *why* behind system decisions, be open to discuss options with the c
 
 Product teams wont adopt if they don't feel heard. Incentivize contribution to keep the system relevant to the product needs. Build ways to support explorations and innovations by the community. Fold learnings from research or experiments back into the core system.
 
-### Growing to scale
+### Bonus: Scaling Up
+![Slide: Scaling Up](/assets/posts/fostering/18-Community.png)
 
 How do you evolve and adapt the system to a large user base? As companies grow so does the complexity of infrastructure.
 
@@ -107,7 +119,8 @@ Reinforce your value with hands on work. Use office hours and reviews to share s
 
 Align design system goals with business goals - show the impact on the bottom line. Coordinate shared metrics like Objectives and Key Results (OKRs) with product teams. Be a support to their own goals.
 
-### Community building
+### Bonus: Community building
+![Slide: Community Building](/assets/posts/fostering/17-Community.png)
 
 So this community thing doesn’t come natural to an analytical, detail oriented, introvert? Well practicing soft skills is huge for your own career. Start with inviting teams early in the process to a feeling of ownership/investment in the final patterns. Emphasize they are the product experts, we require their input to do our jobs best. 
 
@@ -118,6 +131,7 @@ Be responsive. Triage feature requests quickly, responses are fair and encouragi
 Reward participation with incentives. Use existing internal recognition systems, virtual badges or tools that replay compliments, and include their managers for visibility. Tie design system participation into employee development structures like performance reviews. Lastly don’t forget the simple things like branded swag, stickers, shirts, mugs, hats. Make it fun to be part of your community and use FOMO to your advantage.
 
 ## 6. Not the end
+![Slide: Not the end](/assets/posts/fostering/19-End.png)
 
 The last step in this journey isn’t the end because design systems are never finished, the work continues. Keep going into the unknown, with your principles and adaptable methods.
 
