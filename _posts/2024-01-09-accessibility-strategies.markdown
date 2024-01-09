@@ -7,7 +7,7 @@ Building experiences that work well for a diverse range of customers is a key pa
 ## Accessibility + Design Systems
 - When I joined the company, often design systems and accessibility were in different orgs.  Design systems start with a design focus and accessibility starts as an engineering-focused program so they ended up in different areas.
 - I’ve seen our accessibility team support engineers with the technical implementation phase but also intentionally move up the work-stream to help inform the design phase as well. This helps improve the experiences designed and then avoid compromises later in the engineering phase.
-- The two specialties should be closely connected in daily practice. The two teams are symbiotic because the design system team can integrate accessible design to the core patterns and components, while the accessibility team can help build adoption for the design system as it demonstrates how do design and code with accessible practices. Today both teams are in the same org structure to reinforce their aligned goals.
+- The two specialties should be closely connected in daily practice. The two teams are symbiotic because the design system team can integrate accessible design into the core patterns and components, while the accessibility team can help build adoption for the design system as it demonstrates how to design and code with accessible practices. Today both teams are in the same org structure to reinforce their aligned goals.
 
 ## Methods
 As our two teams have connected we’ve evolved some strategic methods that raise the quality of our experiences and helped to build a community of accessibility at the company.
