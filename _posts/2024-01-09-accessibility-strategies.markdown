@@ -29,7 +29,7 @@ As our two teams have connected we’ve evolved some strategic methods that rais
     - My colleague Cindy Ta on our accessibility team has recently built a community inside the company called Accessibility Champions. This is a group of volunteers who have completed accessibility training modules. The first level module provides a basic understanding to anyone interested.
     - Members each serve as ambassadors to help spread awareness and training to their specific teams spread across the wider company. It started with our product team roles design, content, research, product management, engineering, and has expanded into areas like HR, marketing, and legal.
     - We meet monthly to share updates from the industry, describe what we are learning, and showcase progress on related projects. It’s really inspiring to see progress and collaboration in action.
-    - I love seeing this group grow from an idea to 150+ members in a short timeframe. I’ve been able to help with recruiting, hosting meetings and presentations, and have contributed to shaping the training modules.
+    - I love seeing this group grow from an idea to 100+ members in a short timeframe. I’ve been able to help with recruiting, hosting meetings and presentations, and have contributed to shaping the training modules.
     
 Using these methods we’ve made great progress in improving the strength of inclusive accessibility at the company. I hope we continue to add and expand our practices to even greater levels. I know the partnership between teams provides greater value than we could have separately. 
 
