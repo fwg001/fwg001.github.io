@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Book Notes: Design That Scales
+title: Book Notes - Design That Scales
 ---
 
 I’ve followed Dan Mall’s work for a long time and I’ve enjoyed watching him [share](https://linkedin.com/in/danmall) and [teach](https://designsystem.university/) what he’s learned about design systems. When I saw he was working on a book, I knew it would be filled with super smart guidance for design systems teams. 
