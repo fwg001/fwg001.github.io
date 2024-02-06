@@ -7,6 +7,8 @@ I’ve followed Dan Mall’s work for a long time and I’ve enjoyed watching hi
 <!--more-->
 If you haven’t already, go add [Design That Sales](https://rosenfeldmedia.com/books/design-that-scales/) to your cart right away. It’s 5 stars, two thumbs up, a must read. Anyone curious about Design Systems all the way to experts with lots of experience will enjoy this book.  It’s a great overview of how a design system is built but it also gets into practical methods for team structures, workflows, and measurement that can help you refine your design system (DS) practice.
 
+![Book cover: Design That Scales by Dan Mall](/assets/posts/book-design-that-scales.jpeg)
+
 ## Highlights
 
 ### Starting with product
