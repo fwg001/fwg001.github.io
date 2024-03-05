@@ -32,7 +32,12 @@
  */
 
 html {
-    font-family: "museo-sans", Helvetica, Arial, sans-serif;
+    font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "slnt" 0;
 }
 @media (min-width: 48rem) {
   html {
@@ -80,7 +85,12 @@ html {
 .sidebar-about h1 {
   color: #fff;
   margin-top: 0;
-  font-family: "museo-slab",serif;
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings:
+    "slnt" 0;
   font-size: 3.25rem;
 }
 
