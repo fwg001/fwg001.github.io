@@ -175,7 +175,7 @@ img {
    font-weight: 600;
 }
 
-/* Icon Fonts from icomoon.io*/
+/* Icon Fonts from icomoon.io
 
 @font-face {
 	font-family: 'icomoon';
@@ -197,7 +197,7 @@ img {
 	text-transform: none;
 	line-height: 1;
 
-	/* Better Font Rendering =========== */
+	/* Better Font Rendering ===========
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -218,6 +218,6 @@ img {
 	content: "\e604";
 }
 
-
+*/
 
 
