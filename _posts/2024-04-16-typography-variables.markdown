@@ -3,11 +3,15 @@ layout: post
 title: Typography Variables
 ---
 
-Tada! Figma just announced the release of Typography Variables at their [Framework event](https://www.linkedin.com/posts/figma_everything-we-announced-at-framework-2024-activity-7186046437510512640-AQw6?utm_source=share&utm_medium=member_desktop). 
+![Figma Framework event poster](/assets/posts/variables2.png)
+
+Tada!🎉 Figma just announced the release of Typography Variables at their [Framework event](https://www.linkedin.com/posts/figma_everything-we-announced-at-framework-2024-activity-7186046437510512640-AQw6?utm_source=share&utm_medium=member_desktop). 
 
 Design systems (DS) specialists have been waiting for this ever since they announced variables as their exciting new token feature at last year’s [Config conference](https://www.linkedin.com/posts/jamescarleton_config2023-activity-7077380858269077504-GBPl?utm_source=share&utm_medium=member_desktop). Sitting in that massive audience at Moscone Center, I knew variables would be a huge deal for DS teams like mine, but it was missing a key piece of the puzzle without support for type. We heard it was coming and our patience has finally paid off.
 <!--more-->
 To learn more about the new features, read [Figma’s article](http://bit.ly/3Jnm4Rs), and play with their updated [Variables Playground](https://www.figma.com/community/file/1234936397107899445/variables-playground) file. Luis Ouriach’s [Starter Kit](https://www.figma.com/community/file/1362098125068472724/typography-variables-starter-kit) is a great resource too.
+
+![Understanding variables for typography](/assets/posts/variables1.png)
 
 DS teams have been busy using variables for design tokens since their initial release last year. I helped our team integrate them into our Figma libraries for colors, spacing/grid, sizing, stroke, corner radius and more. This support in Figma has made our library management much easier than in the past where we were limited to styles or manually assigning values. Now our tokens framework connects directly in the design library brining it closer to our DS code.
 
