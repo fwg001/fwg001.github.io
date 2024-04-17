@@ -13,7 +13,7 @@ To learn more about the new features, read [Figma’s article](http://bit.ly/3Jn
 
 ![Understanding variables for typography](/assets/posts/variables1.png)
 
-DS teams have been busy using variables for design tokens since their initial release last year. I helped our team integrate them into our Figma libraries for colors, spacing/grid, sizing, stroke, corner radius and more. This support in Figma has made our library management much easier than in the past where we were limited to styles or manually assigning values. Now our tokens framework connects directly in the design library brining it closer to our DS code.
+DS teams have been busy using variables for design tokens since their initial release last year. I helped our team integrate them into our Figma libraries for colors, spacing/grid, sizing, stroke, corner radius, and more. This support in Figma has made our library management much easier than in the past when we were limited to styles or manually assigning values. Now our tokens framework connects directly in the design library bringing it closer to our DS code.
 
 If you are new to Design Tokens and Figma Variables it's easy to learn from the experts. You can start small and scale your approach as your system grows.
 
