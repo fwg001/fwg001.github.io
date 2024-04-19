@@ -62,13 +62,13 @@ Instead of a typical passive lecture, the Knapsack team created a very interacti
     - If you don’t agree on actions/scope you will have miss-matched expectations
     - Educate and align teams on what you expect with a “yes”
 - You only control what you control
-    - Don’t take it personally when you dont win all the battles, focus on your small wins
+    - Don’t take it personally when you don't win all the battles, focus on your small wins
 - Remember this when it’s your turn
-    - When new folks come in and have ideas, new ways of working be nice and remember when you where in their place
+    - When new folks come in and have ideas, new ways of working be nice and remember when you were in their place
 - A key measurement for executives is velocity
     - They want to ship innovations faster, show how the DS supports that
     - Know statistics, provide fuzzy math as evidence
-    - Knapsack said its often a 30% increase in velocity with DS
+    - Knapsack said it's often a 30% increase in velocity with DS
     
 
 ### Panel: Crafting adaptive design systems
@@ -79,14 +79,14 @@ Instead of a typical passive lecture, the Knapsack team created a very interacti
     - Align to requirements like accessibility, internationalization, rebrands, or other things the company needs to get done
 - Where does DS live in the org?
     - Arguments that it's a product, a service, a platform lead to different placements in a corporation’s org structure. They raised pros and cons of each approach.
-    - Its all of those things, but each company will need a different focus, it evolves over time
+    - It's all of those things, but each company will need a different focus, it evolves over time
 - Acquisitions and mergers with DS
     - Multi-brand with separate branded systems, can still share foundational layers and patterns
     - Monolithic, everything merged into one main system needs to balance needs of different product areas
     - Marketing DS and Product DS can share atoms but have different needs so built independent
 - Team ratios
     - Ideal is 1 designer to 1 engineer, but often 1:30 1:100 can be the case.
-    - Different raito needed compared to product teams at 1:6
+    - Different ratio needed compared to product teams at 1:6
     - Better to grow slower and carefully than over-invest
 
 ### Demo
