@@ -10,9 +10,9 @@ I had the opportunity to attend the **Design Systems Leadership Summit** by Knap
 
 ## Historic Venue
 
-The [SVB Experience Center](https://g.co/kgs/Kndq68U) is a great new iteration of this historic pavilion at One Bush Plaza. The small circular building contrasts with the massive nineteen story office tower across the Japanese inspired plaza. The complex, [built in 1959](https://www.tclf.org/landscapes/one-bush-plaza), was designed by Edward Charles Bassett of Skidmore, Owings & Merrill in the International Style. 
+The [SVB Experience Center](https://g.co/kgs/Kndq68U) is a great new iteration of this historic pavilion at One Bush Plaza. The small circular building contrasts with the massive nineteen-story office tower across the Japanese-inspired plaza. The complex, [built in 1959](https://www.tclf.org/landscapes/one-bush-plaza), was designed by Edward Charles Bassett of Skidmore, Owings & Merrill in the International Style. 
 
-In the mix of tall towers along Market Street you may walk by without noticing it today, but at the time it was a strong futuristic design statement. You can still see the original style in the restored building today, with its 360 degree glass walls, geometric ceiling structure, terrazzo floors, and spiral staircase. The lower level includes an imposing bank vault that our SVB host explained will store a wine collection for events. Its nice to see this interesting architecture preserved and open for use.
+In the mix of tall towers along Market Street, you may walk by without noticing it today, but at the time it was a strong futuristic design statement. You can still see the original style in the restored building today, with its 360-degree glass walls, geometric ceiling structure, terrazzo floors, and spiral staircase. The lower level includes an imposing bank vault that our SVB host explained will store a wine collection for events. It's nice to see this interesting architecture preserved and open for use.
 
 ![Leadership Summit photo](/assets/posts/summit2.png)
 
@@ -40,16 +40,16 @@ Instead of a typical passive lecture, the Knapsack team created a very interacti
     - Use tech requirements
     - Make the DS a required part of design workflows
 - Make it “everyone’s baby”
-    - If only the DS team cares, it wont get far, everyone needs to care about the DS’ success
+    - If only the DS team cares, it won't get far, everyone needs to care about the DS’ success
 - Don’t be a jerk
-    - The change required for DS can be slow and requires patience in working with with people and their timelines
+    - The change required for DS can be slow and requires patience in working with people and their timelines
     - Be friendly and light-hearted in your interactions, have a larger perspective
 - Always be selling
     - Having a major in DS requires a minor in Sales
     - People naturally diverge and disorganize so maintaining progress requires ongoing selling
     - Inject advocacy into all your processes
 - What is beautiful is usable
-    - Our natural bias draws us to consider appealing looking things as more effective and higher quality, even if they don’t need to be beautiful to function best
+    - Our natural bias draws us to consider appealing-looking things as more effective and higher quality, even if they don’t need to be beautiful to function best
     - Make your DS look good (docs, patterns, comms, etc), making sure it has substance as well
 - Facts matter
     - Measure adoption in design and engineering
@@ -78,16 +78,16 @@ Instead of a typical passive lecture, the Knapsack team created a very interacti
 - Tie your DS goals to company OKRs (as PJ mentioned)
     - Align to requirements like accessibility, internationalization, rebrands, or other things the company needs to get done
 - Where does DS live in the org?
-    - Arguments that its a product, a service, a platform lead to different placement in a corporation’s org structure. They raised pros and cons of each approach.
-    - Its all of those things, but each company will need different focus, it evolves over time
+    - Arguments that it's a product, a service, a platform lead to different placements in a corporation’s org structure. They raised pros and cons of each approach.
+    - Its all of those things, but each company will need a different focus, it evolves over time
 - Acquisitions and mergers with DS
-    - Multi brand with separate branded systems, can still share foundational layers and patterns
+    - Multi-brand with separate branded systems, can still share foundational layers and patterns
     - Monolithic, everything merged into one main system needs to balance needs of different product areas
     - Marketing DS and Product DS can share atoms but have different needs so built independent
 - Team ratios
     - Ideal is 1 designer to 1 engineer, but often 1:30 1:100 can be the case.
     - Different raito needed compared to product teams at 1:6
-    - Better to grow slower and carefully than over invest
+    - Better to grow slower and carefully than over-invest
 
 ### Demo
 
@@ -98,7 +98,7 @@ Knapsack’s [Chris Strahl](https://www.linkedin.com/in/chrisstrahl/), and [Evan
 To cap off the day, [Nick Hahn](https://www.linkedin.com/in/nickhahn/) led a sharing time for our stories on different DS topics. 
 
 - I liked the idea of having an onboarding rotation where new hires stay 2 weeks on 3 separate teams to get exposure to different products and groups. One rotation is the DS team where they get to see how things work, gain empathy for DS work.
-- Interacting with difficult teams came up and and idea shared was to have a fast track intake for teams you need to quickly build things for, along side the normal intake which takes more time. The fast track gives this team easy access and builds trust with them to get them to adopt.
+- Interacting with difficult teams came up and an idea shared was to have a fast-track intake for teams you need to quickly build things for, along side the normal intake which takes more time. The fast track gives this team easy access and builds trust with them to get them to adopt.
 - All the ideas and stories helped me consider how other teams solved similar problems and helped forecast some future issues that can arise.
 
 
@@ -107,6 +107,6 @@ To cap off the day, [Nick Hahn](https://www.linkedin.com/in/nickhahn/) led a sha
 
 ## A good day
 
-Overall it was a great experience, and a refreshing change from a typical conference or meetup. We had a small enough group to get the introverts like me talking and the focused content was easy to follow and learn from. Free food always helps as well :) 
+Overall it was a great experience and a refreshing change from a typical conference or meetup. We had a small enough group to get the introverts like me talking and the focused content was easy to follow and learn from. Free food always helps as well :) 
 
 Thanks to the [Knapsack](https://www.linkedin.com/company/knapsackcloud/) team for hosting us and including me. If you’re interested in joining a similar event, check out their future sessions across the US.
