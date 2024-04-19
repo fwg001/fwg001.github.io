@@ -9,7 +9,12 @@ Tada!🎉 Figma just announced the release of Typography Variables at their [Fra
 
 Design systems (DS) specialists have been waiting for this ever since they announced variables as their exciting new token feature at last year’s [Config conference](https://www.linkedin.com/posts/jamescarleton_config2023-activity-7077380858269077504-GBPl?utm_source=share&utm_medium=member_desktop). Sitting in that massive audience at Moscone Center, I knew variables would be a huge deal for DS teams like mine, but it was missing a key piece of the puzzle without support for type. We heard it was coming and our patience has finally paid off.
 <!--more-->
-To learn more about the new features, read [Figma’s article](http://bit.ly/3Jnm4Rs), and play with their updated [Variables Playground](https://www.figma.com/community/file/1234936397107899445/variables-playground) file. Luis Ouriach’s [Starter Kit](https://www.figma.com/community/file/1362098125068472724/typography-variables-starter-kit) is a great resource too.
+Learn more about the new features: 
+- Read [Figma’s article](http://bit.ly/3Jnm4Rs),
+- Play with their updated [Variables Playground](https://www.figma.com/community/file/1234936397107899445/variables-playground) 
+- Joey Banks [dives into the new variables](https://medium.com/@joeyabanks/typography-variables-in-figma-are-here-50eb8993274e)
+- Luis Ouriach’s [Starter Kit](https://www.figma.com/community/file/1362098125068472724/typography-variables-starter-kit) is a great resource
+
 
 ![Understanding variables for typography](/assets/posts/variables1.png)
 
