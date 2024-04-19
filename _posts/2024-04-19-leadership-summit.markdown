@@ -1,5 +1,3 @@
-
-
 ---
 layout: post
 title: DS Leadership Summit
