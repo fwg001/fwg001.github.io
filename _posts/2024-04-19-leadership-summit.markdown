@@ -18,7 +18,7 @@ In the mix of tall towers along Market Street, you may walk by without noticing 
 
 ## Interactive Sharing
 
-Instead of a typical passive lecture, the Knapsack team created a very interactive format where discussions were built into each session, encouraging participation from the whole group. It was really valuable to hear different experiences from many voices in the room. The small size of the group (30 folks?) also made it easier to speak up and share. 
+Instead of a typical passive lecture, the Knapsack team created a very interactive format where discussions were built into each session, encouraging participation from the whole group. It was really valuable to hear different experiences from many voices in the room. The small size of the group, 29 folks, also made it easier to speak up and share. 
 
 ![Leadership Summit photo](/assets/posts/summit1.png)
 
