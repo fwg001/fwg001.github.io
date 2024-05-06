@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Sounds in Motion
+title: Sound in Motion
 ---
 # Designing a soundscape
 
-As electric and hybrid vehicles have become more ubiquitous, I have noticed the sounds coming from them. Walking around our neighborhood grade school became a study in EVs and their drivers. <!--more--> As a safety feature car makers now add external speakers to play sounds that warn pedestrians and bicyclists that the quiet but fast cars are nearby. These sounds are called **Acoustic Vehicle Alerting Systems** (AVAS)**.** 
+As electric and hybrid vehicles have become more ubiquitous, I have noticed the sounds coming from them. Walking around our neighborhood grade school became a study of EVs and their drivers. <!--more--> As a safety feature car makers now add external speakers to play sounds that warn pedestrians and bicyclists that the quiet but fast cars are nearby. These sounds are called **Acoustic Vehicle Alerting Systems** (AVAS)**.** 
 
 ![Illustration of a vehicle shown from above with waves of sounds around it](/assets/posts/Rivian_sound1.png)
 
-The need to add sound presents an interesting design opportunity for automotive design teams. What should a quiet car sound like? How does this sound impact the surrounding environment of sounds? The goal of this sound is to be loud and distinct enough to be noticed by humans outside the car as an alert, but not be unpleasant or annoying to the larger environment. Some brands have done a better job at this sound design than others. From my subjective observations I have noticed that [Toyota’s sound](https://www.youtube.com/watch?v=yAbu3Jfu7x8) is annoyingly artificial sounding. It feels like a malfunctioning robot or an alien screech. I wish I knew what their designers where thinking. Tesla uses [a sound](https://www.youtube.com/watch?v=IjP7eZbCV3k) that is less stressful but still very sci-fi feeling. In a huge contrast, the Rivian’s [exterior sound](https://www.youtube.com/watch?v=d5HGgML6zXE) is delightfully pleasant and natural feeling.
+The need to add sound presents an interesting design opportunity for automotive design teams. What should a quiet car sound like? How does this sound impact the surrounding environment of sounds? The goal of this sound is to be loud and distinct enough to be noticed by humans outside the car as an alert, but not be unpleasant or annoying to the larger environment. Some brands have done a better job at this sound design than others. From my subjective observations, I have noticed that [Toyota’s sound](https://www.youtube.com/watch?v=yAbu3Jfu7x8) is annoyingly artificial sounding. It feels like a malfunctioning robot or an alien screech. I wish I knew what their designers were thinking. Tesla uses [a sound](https://www.youtube.com/watch?v=IjP7eZbCV3k) that is less stressful but still very sci-fi feeling. In a huge contrast, the Rivian’s [exterior sound](https://www.youtube.com/watch?v=d5HGgML6zXE) is delightfully pleasant and natural feeling.
 
 It turns out this was very intentional. Rivian’s design team put a lot of work into all the sounds of their vehicles and [shared their approach](https://stories.rivian.com/sounds-of-rivian) in detail. Reading about their sound design process is fascinating.
 
