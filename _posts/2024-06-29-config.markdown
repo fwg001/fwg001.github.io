@@ -2,12 +2,10 @@
 layout: post
 title: Config 2024
 ---
-# Config 2024
-
 ![My badge from the Figma Config conference](/assets/posts/config24_1.jpg)
 ![The Config sign across the exterior of Moscone Center in SF](/assets/posts/config24_4.jpg)
 
-Figma's Config 2024 was a crazy adventure. Moscone was packed with even more designers (12k?) than [last year](https://www.carletondesign.com/2023/06/23/config/) who were looking to get the scoop on new features, make connections with others, and get inspired by the range of great speakers.
+Figma's Config 2024 was a crazy adventure. Moscone was packed with even more designers (12k?) than [last year](https://www.carletondesign.com/2023/06/23/config/) who were looking to get the scoop on new features, make connections with others, and get inspired by the range of great speakers.<!--more-->
 
 My highlights were meeting my new team in person (hey eBay OX), connecting with several mentees from ADPList in the real world, and catching up with some old friends. 
 
@@ -40,7 +38,7 @@ Learn more from these articles:
 
 - [Principles for working with design systems in Figma](https://medium.com/@LouisMassuel/5min-read-part-1-figma-config-2024-design-systems-best-practices-da482b7c1fda)
 - [Insights gathered from the design system community](https://medium.com/@LouisMassuel/5min-read-part-2-figma-config-2024-design-systems-best-practices-2a416086624a)
-- [Design system best practices and features](https://medium.com/@LouisMassuel/5min-read-part-3-figma-config-2024-design-systems-best-practices-d1dfa7efe6a9)
+- [Figma best practices and features](https://medium.com/@LouisMassuel/5min-read-part-3-figma-config-2024-design-systems-best-practices-d1dfa7efe6a9)
 
 ## One more thing…
 
