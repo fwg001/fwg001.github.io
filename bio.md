@@ -30,7 +30,7 @@ new components in Figma, native iOS/Android, and web libraries to support produc
 - Lead designer for new visual language update (Sep 2023-Jan 2024) to consumer products, our small team delivered in just 3 weeks to meet deadlines by new exec leadership. App launched to public 1/20/24 with new design system colors, typography, assets, and architecture.
 - Contributed to the foundations of design and engineering libraries built over previous years which enabled rapid iteration of the DS to support new initiatives and features
 - Led support for various downstream teams to grow system and adoption across product and brand silos (Consumer, Merchant, Credit, Checkout, Marketing)
-- Built and led DS support efforts for our customers (internal design+eng) in cross-time zone office hours, slack channels, share-outs
+- Built and led DS support efforts for our customers (internal design+eng) in cross-time zone office hours, Slack channels, share-outs
 - Established and iterated DS team processes to improve design collaboration across the range of product design groups at PayPal
 - Supported UX Ops staff in tooling upgrades, pilots, and training efforts
 - Initiated efforts to raise the bar on accessibility in design and engineering, partnering with A11y staff to integrate standards into the design system, employee onboarding, and learning platforms. Helped kickstart internal accessibility champions network to spread influence across org lines
@@ -59,13 +59,13 @@ new components in Figma, native iOS/Android, and web libraries to support produc
 
 ## Education
 
-**1998 to 2003 - Bachelor of Science: Industrial Design**
+**Bachelor of Science: Industrial Design**
 
 - San Jose State University
 - Scholarship winner, student IDSA member/officer
 - Spent many nights in the workshop
 
-**1996 to 1998 - Associates: Art**
+**Associates: Art**
 
 - Hartnell College
 - Took all the art & design classes offered
