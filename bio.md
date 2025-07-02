@@ -13,9 +13,16 @@ title: Bio
 
 I have led big changes that start with small details using design systems and accessibility. These critical details add up to make a big impact on the experiences we build for our end customers. Collaboration is the thread I use to build a strong culture and productive teamwork.
 
-I love working with creative individuals that can bring strong critique as well as laugh at the latest meme. I thrive on the challenge of leading interaction and visual design efforts with product and development staff toward results that meet business and UX goals. I jump at the opportunity to grow through teammates, trainings, industry events and resources.
-
 ## Experience
+
+**2024 to 2025 - eBay Inc. - Staff Product Designer, Design Systems**
+
+
+- Created new design and accessibility guidelines as part of our team’s documentation site
+launch, first launched to internal teams and then to the public. See [playbook.ebay.com](https://playbook.ebay.com)
+- Collaborated across disciplines (design, engineering, accessibility, content, brand) to build
+new components in Figma, native iOS/Android, and web libraries to support product teams.
+- Led DS support efforts for our adopting product teams with frequent office hours, Slack channels, and direct collaborations.
 
 **2019 to 2024 - PayPal Inc. - Sr. User Experience Designer 2, Design Systems & Accessibility**
 
