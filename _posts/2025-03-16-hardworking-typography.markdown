@@ -9,4 +9,4 @@ Sometimes the internet feels like a dumpster fire but once in a while it feels l
 
 [Marcin Wichary](https://aresluna.org/) is a design director at Figma who you may know from [Config 2024](https://www.youtube.com/watch?v=SDI8ubVZi7w). He has crafted a beautifully written and illustrated article that goes deep into the history of a nameless font used on everything mechanical from elevators to typewriter keys. I recommend taking time to slowly absorb the essay, photos and interactive illustrations.
 
-### 📖 Read now: [The hardest working font in manhattan](https://aresluna.org/the-hardest-working-font-in-manhattan/)
+📖 Read now: [The hardest working font in Manhattan](https://aresluna.org/the-hardest-working-font-in-manhattan/)
