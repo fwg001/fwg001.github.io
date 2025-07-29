@@ -1,0 +1,133 @@
+---
+layout: post
+title: Design Systems with AI
+---
+# Design Systems with AI
+
+Artificial intelligence is a vast and complex thing, but it’s surprisingly easy to start playing with new AI tools.  I’ve been exploring these to find what's possible and practical to use in our everyday product design work. There is a lot of opportunity in the areas of user experience, product design, and design systems to bolster our capabilities with these new tools.<!--more-->
+
+## The quality bar
+
+Generating design or code with AI coding tools is very easy these days. It’s impressive to watch these tools build interactive web apps in mere seconds. Some even import Figma files so you don’t have to rely solely on text prompts to explain design intent. But generating code quickly doesn't mean it meets the level of design quality we expect for a good product experience.
+
+The current challenge these tools face is improving design quality. Often the tools produce functional but ugly and inconsistent results, which need a lot of fine-tuning before they can be considered ready to use with customers. What if AI models could reference design standards?
+
+## Design systems as guardrails
+
+My favorite use case for new AI tools is for creating interactive prototypes using a Design system as guardrails.  In product design, design systems have always been about crafting standards so humans can produce high-quality design work, but now those same standards can direct AI agents as well. Instead of the tool trying to guess what your design should be, your design system can provide the guidance. This is the exciting part for DS specialists like me because it amplifies our system work while improving the quality of AI output for product teams. Its exciting to see how new tools like Figma Make and its MCP server can help us amplify the value of a design system by providing consistency to AI output across an organization.
+
+Design system specialists become obsessed with naming things correctly (components, layers, properties), optimizing component structures, and fine-tuning variant properties. All of these things are intended to make a DS library in Figma more useful for the humans using it, but we now see that it’s very useful for the machines too. A nicely-organized system works much better than a messy one for giving context to an AI code editor.
+
+## Basic: Prompting in the dark
+
+The most basic way to use AI code gen is to describe what you want with text prompts to a tool like VS Code or similar. This approach quickly becomes limiting for designers because the results will feel generic and bland. To improve things, you can learn how to write prompts that the bots will understand best, but you’re still limited without providing any design context to the LLM. Thankfully, these tools have now evolved, and we don't have to live in a text-only world. Let’s add some design context to the mix.
+
+## Easy mode: Figma Make + your design system
+
+Figma’s Make product is their new AI code gen tool. Make is very approachable for designers just starting to explore AI since it’s integrated into the Figma product suite and eliminates extra setup. Like other AI tools it helps to learn how to write high-quality prompts and provide feedback to refine the results. Within a few minutes you can take a design mockup and generate a webpage to make it real.
+
+Figma recently added support for connecting Make to your design system library files. This is a logical step toward using all the work you’ve already put into your DS to help guide AI generation. This library context enables the LLM to provide code that better aligns to your DS in design and code quality.
+
+- Article: [Exploring Figma Make](https://help.figma.com/hc/en-us/articles/31304412302231-Explore-Figma-Make)
+- Demo: [DS Libraries in Figma Make](https://www.youtube.com/watch?v=YqZrVy7-5J8) by Holly Li
+
+## Level up: AI code editors + your design system
+
+AI code editors are evolving quickly in a very competitive market. Figma recently [announced a new MCP server](https://www.figma.com/blog/introducing-figmas-dev-mode-mcp-server/) that works with leading AI tools like VS Code, Cursor, Windsurf, and Claude Code.
+
+If you follow AI topics, you may have seen this MCP acronym before. It’s short for Model Context Protocol, which is a format for connecting apps (in this case Figma) to AI coding editors (like Cursor and many others). For this article, all you need to know is that Figma made one, and it gives designers way more control over AI output in those vibecode sessions everyone’s enjoying.
+
+AI tools could already generate realistic screens for your prompts before MCPs like Figma’s, but they were making guesses on design decisions, causing big fails in consistency and quality. After generating code and looking at the results, it was time for tedious cleanup and refinement. Now we can help AI editors understand more of the context around the design, including existing design system libraries and connected components.
+
+”[**Figma’s Dev Mode MCP server**](https://www.figma.com/blog/introducing-figmas-dev-mode-mcp-server/) introduces a structured, machine-readable layer of context that AI coding assistants can use to generate code. It reads from the actual design file, not a spec sheet or screenshot, and passes that context directly into your editor.” [TJ Pitre](https://southleft.com/insights/design-systems/figma-mcp-design-systems-and-generative-ui/)
+
+## Workflow Benefits
+
+It's pretty interesting to play with AI but what's the real benefit to your day-to-day workflow?
+
+- Building interactive prototypes without engineering experience: Instead of waiting for time with engineering partners, designers can be empowered to build it themselves.
+    - Self-testing many concepts quickly
+    - Testing interactive states of components
+    - Testing flows/interactions
+    - Quick setup for user testing (a11y code requirements)
+- Dev communication/handoff is streamlined
+    - Interactive examples of design ideas will communicate concepts much faster than mocks and annotations
+    - Prototypes add value when a flat mockup can’t represent a realistic experience: motion, flow, interaction (hover, focus, active), responsiveness
+    - If the MCP is connected to the DS code libraries, then it could potentially be a solid starting point for engineering partners to work from, kickstarting their workflow.
+- Testing our design decisions in a realistic interface helps us make better decisions and provide higher quality direction when it's handed to engineering partners
+    - Testing responsive components and layouts
+    - Testing languages in components
+    - Testing text resizing in components
+
+## Testing the idea
+
+With Figma Make or any other AI tool, the setup and prompt writing are keys to success. So imagine using your existing design system with Figma MCP to create a prototype in your favorite AI code editing tool.
+
+**Requirements**
+
+- Try this out with a sample design file from any fimga file that is connected to a design system. If you can’t use your company's real DS for testing, you can practice with something open source like Figma’s [Simple design system](https://www.figma.com/community/file/1380235722331273046/simple-design-system) as a playground.
+- Make sure to use variables, styles, and components on your mockup before starting this test.
+
+**Steps**
+
+1. Follow Figma’s [MCP setup instructions](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server) for VS Code, Cursor, Windsurf, or Claude Code. This will give the editor access to your Figma file.
+2. Start prompting your tool to build and include references to the design file.
+3. Profit :)
+
+**Prompts**
+Writing prompts takes practice, but try using a mix of specific details and general directions. 
+
+1. Button example from [Joey Banks](https://www.youtube.com/watch?v=MFGPCYi5du0):
+
+- Create a Button component based on the existing Button in our Figma file. It should:
+    - Mirror the same states (default, hover, focus, active), and include a new inactive state.
+    - Support four sizes:
+        - The current default (LR: 24px, TB: 16px)
+        - Two smaller sizes
+        - One larger size
+    - Use Figma Variables for padding, sizing, and colors
+    - Use Component Properties for selecting state and size
+    - Be built inside an interactive playground so I can preview and test all combinations
+    - Maintain naming consistency with our existing system
+
+Notice the various levels of detail, listing two exact pixel sizes for buttons but then leaving room for AI to define the requested smaller and larger ones.
+
+1. Prompt starters: Get started with these prompt ideas from [Romina Kavcic](https://www.youtube.com/watch?v=4nE_9g5zxeQ), while adding your own specific details.
+    - Design a mobile-first interface for [specific function] that prioritizes [key user action]. Consider thumb-friendly navigation and progressive disclosure.
+    - Extract all design tokens from the current Figma file and generate a complete token system. Create CSS custom properties, TypeScript definitions, and Tailwind config. Sync any changes back to Figma as styles.
+    - Create a [framework] component for [specific functionality] following [design system/style guide]. Include proper TypeScript types, error handling, and accessibility attributes.
+    - Create a prototype with comprehensive documentation: component specifications, interaction details, API requirements, and implementation notes for development handoff.
+
+Advanced: Leverage a chat AI as a prompt writing coach to help you describe the details specific to the outcome you want generated. For more complex things, you can build a project plan with AI. Ask it to interview you about the project so it can create detailed prompts for a staged approach to code generation.
+
+### Demos
+
+Check out these video demos:
+
+1. Joey Banks, Baseline Design: [Exploring Figma's Dev Mode MCP Server](https://www.youtube.com/watch?v=MFGPCYi5du0) 
+    - Joey’s demo shows how to take a simple button component in Figma and quickly build a real interactive demo page of all button variants, including new ones not in the design.
+2. Romina Kavcic, The Design System Guide: [Build clickable prototypes with Figma MCP and Cursor](https://www.youtube.com/watch?v=4nE_9g5zxeQ)
+    - This demo shows a more complex example of an interactive page.
+3. TJ Pitre, Southleft: [From Figma to front-end using AI](https://southleft.com/insights/design-systems/from-figma-to-front-end-using-ai-to-generate-real-code-in-seconds/)
+    - TJ has published a few articles on this topic and even created a custom MCP that aims to improve on Figma’s version.
+
+## What’s next/now?
+
+These details will change as the tools are evolving quickly, but here are some ways things could evolve to improve the usability of AI for designers:
+
+- Better tools:  The MCP connection process will become simplified, and the design system context will be more effective in shaping higher-quality code.
+    - Watch for competing MCPs for Figma, like TJ Pitre’s new [Figma Lint plugin](https://southleft.com/insights/design-systems/designing-for-developers-introducing-figmalint/).
+    - Figma’s own AI tool, Make, just [added library support](https://www.linkedin.com/posts/figma_new-in-figma-make-activity-7343768499296608256-oHuq?utm_source=share&utm_medium=member_ios&rcm=ACoAAAAsmnEBVSLMRB6XI9H7kwvOsntnOvcBtVk), which would bypass the need for MCPs and outside AI tools, much simpler for beginners.
+    - Lovable (AI tool) is adding a [libraries feature](https://www.linkedin.com/posts/haasfelix_%F0%9D%97%9F%F0%9D%97%B6%F0%9D%97%AF%F0%9D%97%BF%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%B6%F0%9D%97%B2%F0%9D%98%80-%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%B2-%F0%9D%97%B0%F0%9D%97%BC%F0%9D%97%BA%F0%9D%97%B6%F0%9D%97%BB%F0%9D%97%B4-%F0%9D%98%80-activity-7341489709312839682-Fqo7?utm_source=share&utm_medium=member_ios&rcm=ACoAAAAsmnEBVSLMRB6XI9H7kwvOsntnOvcBtVk) and other tools will follow with stronger design integrations.
+- Better workflows: Design isn’t a simple linear process, so I expect to see a more flexible flow.
+    - Figma Make is in a great position to enable two-way editing between the code prompts and design file edits
+    - MCP currently enables one direction (Figma design to AI editor), but both directions (AI editor to Figma design) could add more potential with these advanced tools.
+    - A hint at this direction is the [Cursor Talk to Figma Plugin](https://www.loom.com/share/09c6f02f6ba844c78523e43d81fb01e9).
+    - What if we could generate a complete Figma library based on a few mockups? Yeah, that's within sight too.
+    
+
+## Start experimenting today
+
+Using AI editors with MCPs and design systems work together unlock opportunities to improve our design and development processes. The tools are moving fast, but now is the right time to try your own experiments to understand where they add value to your design process. Jump in and try it yourself.
+
+Will AI replace designers/developers? Who knows, but I’m optimistic that the core talents of designers (creativity, curiosity, imagination, taste) will always be valuable. Let’s design the future together instead of watching it from the sidelines.
