@@ -128,6 +128,6 @@ These details will change as the tools are evolving quickly, but here are some w
 
 ## Start experimenting today
 
-Using AI editors with MCPs and design systems work together unlock opportunities to improve our design and development processes. The tools are moving fast, but now is the right time to try your own experiments to understand where they add value to your design process. Jump in and try it yourself.
+The tools are moving fast, but now is the right time to try your own experiments to understand where they add value to your design process. Jump in and try it yourself.
 
 Will AI replace designers/developers? Who knows, but I’m optimistic that the core talents of designers (creativity, curiosity, imagination, taste) will always be valuable. Let’s design the future together instead of watching it from the sidelines.
