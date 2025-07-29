@@ -2,8 +2,6 @@
 layout: post
 title: Design Systems with AI
 ---
-# Design Systems with AI
-
 Artificial intelligence is a vast and complex thing, but it’s surprisingly easy to start playing with new AI tools.  I’ve been exploring these to find what's possible and practical to use in our everyday product design work. There is a lot of opportunity in the areas of user experience, product design, and design systems to bolster our capabilities with these new tools.<!--more-->
 
 ## The quality bar
@@ -75,9 +73,10 @@ With Figma Make or any other AI tool, the setup and prompt writing are keys to s
 3. Profit :)
 
 **Prompts**
+
 Writing prompts takes practice, but try using a mix of specific details and general directions. 
 
-1. Button example from [Joey Banks](https://www.youtube.com/watch?v=MFGPCYi5du0):
+A. Button example from [Joey Banks](https://www.youtube.com/watch?v=MFGPCYi5du0):
 
 - Create a Button component based on the existing Button in our Figma file. It should:
     - Mirror the same states (default, hover, focus, active), and include a new inactive state.
@@ -92,11 +91,11 @@ Writing prompts takes practice, but try using a mix of specific details and gene
 
 Notice the various levels of detail, listing two exact pixel sizes for buttons but then leaving room for AI to define the requested smaller and larger ones.
 
-1. Prompt starters: Get started with these prompt ideas from [Romina Kavcic](https://www.youtube.com/watch?v=4nE_9g5zxeQ), while adding your own specific details.
-    - Design a mobile-first interface for [specific function] that prioritizes [key user action]. Consider thumb-friendly navigation and progressive disclosure.
-    - Extract all design tokens from the current Figma file and generate a complete token system. Create CSS custom properties, TypeScript definitions, and Tailwind config. Sync any changes back to Figma as styles.
-    - Create a [framework] component for [specific functionality] following [design system/style guide]. Include proper TypeScript types, error handling, and accessibility attributes.
-    - Create a prototype with comprehensive documentation: component specifications, interaction details, API requirements, and implementation notes for development handoff.
+B. Prompt starters: Get started with these prompt ideas from [Romina Kavcic](https://www.youtube.com/watch?v=4nE_9g5zxeQ), while adding your own specific details.
+- Design a mobile-first interface for [specific function] that prioritizes [key user action]. Consider thumb-friendly navigation and progressive disclosure.
+- Extract all design tokens from the current Figma file and generate a complete token system. Create CSS custom properties, TypeScript definitions, and Tailwind config. Sync any changes back to Figma as styles.
+- Create a [framework] component for [specific functionality] following [design system/style guide]. Include proper TypeScript types, error handling, and accessibility attributes.
+- Create a prototype with comprehensive documentation: component specifications, interaction details, API requirements, and implementation notes for development handoff.
 
 Advanced: Leverage a chat AI as a prompt writing coach to help you describe the details specific to the outcome you want generated. For more complex things, you can build a project plan with AI. Ask it to interview you about the project so it can create detailed prompts for a staged approach to code generation.
 
