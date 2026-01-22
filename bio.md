@@ -15,6 +15,12 @@ I have led big changes that start with small details using design systems and ac
 
 ## Experience
 
+
+**2025 to present - JPMorganChase - Staff Product Designer, Design Systems**
+
+- Supporting commercial banking product design system.
+
+
 **2024 to 2025 - eBay Inc. - Staff Product Designer, Design Systems**
 
 
