@@ -3,436 +3,680 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CPACC Study Quiz</title>
+<title>Axel · CPACC Quiz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:#F7F5F0; --surface:#FFFFFF; --surface2:#F0EDE6;
-    --border:rgba(0,0,0,0.09); --border2:rgba(0,0,0,0.15);
-    --text:#1A1916; --text2:#6B6860; --text3:#6E6B65;
-    --accent:#2563EB; --accent-bg:#EFF4FF; --accent-border:#BFCFFD;
-    --green:#00862D; --green-bg:#F0FDF4; --green-border:#86EFAC;
-    --red:#DA2424;   --red-bg:#FEF2F2;   --red-border:#FECACA;
-    --amber:#BA5800; --amber-bg:#FFFBEB; --amber-border:#FDE68A;
-    --d1-bg:#EFF4FF; --d1-text:#1D4ED8; --d1-border:#BFCFFD;
-    --d2-bg:#F0FDF4; --d2-text:#15803D; --d2-border:#86EFAC;
-    --d3-bg:#FAF5FF; --d3-text:#7C3AED; --d3-border:#DDD6FE;
-    --r:8px; --rl:14px;
-    --shadow:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.05);
+    /* Brand */
+    --coral:#FF6B4A; --coral-d:#E5532F; --coral-shadow:#C13D1F;
+    --teal:#34C9A1;  --teal-d:#1FA483;  --teal-shadow:#147A60;
+    --gold:#FFC83D;  --gold-shadow:#D49B0A;
+    --plum:#9B5DE5;  --plum-shadow:#6E36B5;
+    --sky:#3DB8FF;   --sky-shadow:#1683C4;
+    --rose:#FF4D8B;  --rose-shadow:#C82362;
+
+    /* Surfaces */
+    --bg:#FFF8F0; --surface:#FFFFFF; --surface2:#FFF1DD;
+    --ink:#2A2424; --ink2:#6B5F58; --ink3:#A89C95;
+    --line:#EFE2D2; --line2:#E2D2BC;
+
+    /* States */
+    --good:#34C9A1; --good-bg:#E0FAF1; --good-shadow:#147A60;
+    --bad:#FF5A5A;  --bad-bg:#FFE6E6;  --bad-shadow:#C13030;
+
+    --r:14px; --rl:22px; --rxl:28px;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
-  .shell{max-width:720px;margin:0 auto;padding:0 1rem 4rem}
-  header{padding:2rem 0 1.5rem;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
-  .header-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-  .wordmark{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--text);letter-spacing:-0.01em}
-  .wordmark span{color:var(--accent)}
-  .tagline{font-size:.75rem;color:var(--text3);font-weight:300;margin-top:2px;letter-spacing:.04em;text-transform:uppercase}
-  .user-chip{display:flex;align-items:center;gap:7px;padding:5px 11px;border-radius:20px;border:1px solid var(--border2);background:var(--surface);font-size:.75rem;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif}
-  .user-chip:hover{background:var(--surface2)}
-  .u-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
-  .u-dot.off{background:var(--text3)}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:'Nunito',system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+    line-height:1.5;
+    font-weight:600;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(255,107,74,0.06) 0%, transparent 35%),
+      radial-gradient(circle at 88% 92%, rgba(52,201,161,0.06) 0%, transparent 35%);
+  }
+  .display{font-family:'Fredoka',sans-serif;font-weight:600;letter-spacing:-0.01em}
+  .shell{max-width:760px;margin:0 auto;padding:0 1.25rem 5rem;position:relative}
+
+  /* ───── Top bar (gamified HUD) ───── */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.1rem 0 1rem;gap:.75rem;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .brand-mark{
+    width:42px;height:42px;border-radius:14px;
+    background:linear-gradient(160deg,#3DDDB0,#1FA483);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 0 var(--teal-shadow), 0 6px 14px rgba(31,164,131,.3);
+    flex-shrink:0;
+  }
+  .brand-text .name{font-family:'Fredoka',sans-serif;font-size:1.25rem;font-weight:700;letter-spacing:-.01em;color:var(--ink);line-height:1}
+  .brand-text .sub{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);font-weight:700;margin-top:3px}
+
+  .hud{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+  .hud-chip{
+    display:inline-flex;align-items:center;gap:.4rem;
+    padding:.45rem .75rem;border-radius:999px;
+    background:var(--surface);border:2px solid var(--line);
+    font-family:'Fredoka',sans-serif;font-weight:600;font-size:.9rem;color:var(--ink);
+  }
+  .hud-chip svg{flex-shrink:0}
+  .hud-chip.streak{background:#FFF6E0;border-color:#F5DC92;color:#A87A0E}
+  .hud-chip.hearts{background:#FFEAEC;border-color:#FFB8C0;color:#C82746}
+  .hud-chip.xp{background:#FFE9DD;border-color:#FFB89A;color:var(--coral-d)}
+  .hud-chip.user{cursor:pointer;font-size:.78rem}
+  .hud-chip.user:hover{background:var(--surface2)}
+  .u-dot{width:8px;height:8px;border-radius:50%;background:var(--good)}
+  .u-dot.off{background:var(--ink3)}
+
+  /* Hearts pulse on loss */
+  @keyframes heartLost{0%{transform:scale(1)}30%{transform:scale(1.4) rotate(-8deg)}60%{transform:scale(.85)}100%{transform:scale(1)}}
+  .heart-pop{animation:heartLost .5s ease}
+
+  /* ───── Tabs ───── */
+  .tabs{
+    display:flex;gap:.4rem;padding:.3rem;
+    background:var(--surface);border:2px solid var(--line);
+    border-radius:999px;width:fit-content;
+    box-shadow:0 3px 0 var(--line2);
+  }
+  .tab{
+    padding:.45rem 1rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:.88rem;
+    background:none;border:none;border-radius:999px;cursor:pointer;color:var(--ink2);
+    display:flex;align-items:center;gap:.4rem;
+  }
+  .tab.active{background:var(--coral);color:#fff;box-shadow:0 2px 0 var(--coral-shadow)}
+
+  .row-between{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:1.25rem 0}
+
+  /* ───── Big 3D button system ───── */
+  .b3d{
+    --bg-c:var(--coral); --shadow-c:var(--coral-shadow); --text-c:#fff;
+    position:relative;display:inline-flex;align-items:center;justify-content:center;
+    gap:.5rem;padding:.85rem 1.4rem;
+    background:var(--bg-c);color:var(--text-c);
+    border:none;border-radius:16px;
+    font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;
+    cursor:pointer;letter-spacing:.01em;
+    box-shadow:0 5px 0 var(--shadow-c);
+    transform:translateY(0);
+    transition:transform .08s ease, box-shadow .08s ease, filter .15s ease;
+    text-transform:uppercase;
+  }
+  .b3d:not(:disabled):hover{filter:brightness(1.05)}
+  .b3d:not(:disabled):active{transform:translateY(4px);box-shadow:0 1px 0 var(--shadow-c)}
+  .b3d:disabled{opacity:.45;cursor:default;box-shadow:0 3px 0 var(--shadow-c)}
+  .b3d.ghost{--bg-c:#fff;--shadow-c:var(--line2);--text-c:var(--ink2);border:2px solid var(--line2)}
+  .b3d.teal{--bg-c:var(--teal);--shadow-c:var(--teal-shadow)}
+  .b3d.gold{--bg-c:var(--gold);--shadow-c:var(--gold-shadow);--text-c:#3D2A00}
+  .b3d.sm{padding:.55rem .95rem;font-size:.82rem;border-radius:12px;box-shadow:0 4px 0 var(--shadow-c)}
+  .b3d.sm:not(:disabled):active{transform:translateY(3px);box-shadow:0 1px 0 var(--shadow-c)}
+
+  /* Settings pills */
+  .settings{
+    background:var(--surface);border:2px solid var(--line);
+    border-radius:var(--rl);
+    box-shadow:0 4px 0 var(--line2);
+    margin-bottom:1.25rem;
+    overflow:hidden;
+  }
+  .settings-toggle{
+    width:100%;display:flex;align-items:center;gap:.6rem;
+    padding:.7rem 1rem;background:none;border:none;cursor:pointer;
+    text-align:left;border-radius:var(--rl);
+  }
+  .settings-toggle:hover{background:var(--surface2)}
+  .st-left{display:flex;align-items:center;gap:.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:.95rem;color:var(--ink)}
+  .st-left svg{color:var(--coral-d)}
+  .st-summary{flex:1;font-size:.78rem;color:var(--ink2);font-weight:700;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+  .st-caret{color:var(--ink3);transition:transform .25s ease;flex-shrink:0}
+  .settings.open .st-caret{transform:rotate(180deg)}
+  .settings-body{
+    max-height:0;overflow:hidden;
+    transition:max-height .3s ease, padding .25s ease;
+    padding:0 1.1rem;
+  }
+  .settings.open .settings-body{
+    max-height:340px;
+    padding:.4rem 1.1rem 1rem;
+  }
+  .settings-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);font-weight:800;margin-bottom:.5rem}
+  .pill-row{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+  .pill{
+    padding:.45rem .9rem;border-radius:999px;
+    font-family:'Fredoka',sans-serif;font-weight:600;font-size:.82rem;
+    background:#fff;border:2px solid var(--line2);color:var(--ink2);cursor:pointer;
+    box-shadow:0 2px 0 var(--line2);
+    transition:transform .08s, box-shadow .08s;
+  }
+  .pill:active{transform:translateY(2px);box-shadow:0 0 0 var(--line2)}
+  .pill.on-mode{background:var(--coral);border-color:var(--coral-d);color:#fff;box-shadow:0 2px 0 var(--coral-shadow)}
+  .pill.on-d1{background:var(--sky);border-color:#1683C4;color:#fff;box-shadow:0 2px 0 var(--sky-shadow)}
+  .pill.on-d2{background:var(--teal);border-color:var(--teal-d);color:#fff;box-shadow:0 2px 0 var(--teal-shadow)}
+  .pill.on-d3{background:var(--plum);border-color:#7E45C5;color:#fff;box-shadow:0 2px 0 var(--plum-shadow)}
+  .vsep{width:2px;height:22px;background:var(--line);border-radius:1px;margin:0 .25rem}
+
+  /* Progress bar (XP-style) */
+  .xp-track{
+    height:18px;background:var(--surface);border:2px solid var(--line2);
+    border-radius:999px;overflow:hidden;position:relative;
+    box-shadow:inset 0 2px 0 rgba(0,0,0,.04);
+    margin:1.25rem 0 1.5rem;
+  }
+  .xp-fill{
+    height:100%;
+    background:linear-gradient(180deg,#FFD89A 0%,var(--coral) 50%,var(--coral-d) 100%);
+    border-radius:999px;position:relative;transition:width .5s cubic-bezier(.34,1.56,.64,1);
+    box-shadow:inset 0 -3px 0 rgba(0,0,0,.1), inset 0 2px 0 rgba(255,255,255,.5);
+    min-width:0;
+  }
+  .xp-fill::after{
+    content:'';position:absolute;top:3px;left:8px;right:30%;height:4px;
+    background:rgba(255,255,255,.55);border-radius:999px;
+  }
+
+  /* ───── Question card ───── */
+  .qcard{
+    background:var(--surface);border:2px solid var(--line);
+    border-radius:var(--rxl);padding:1.5rem 1.4rem 1.6rem;
+    box-shadow:0 5px 0 var(--line2);
+    margin-bottom:1.1rem;
+    position:relative;
+  }
+  .qhead{display:flex;align-items:center;gap:.65rem;margin-bottom:1rem;flex-wrap:wrap}
+  .badge{
+    display:inline-flex;align-items:center;gap:.35rem;
+    font-family:'Fredoka',sans-serif;font-weight:600;font-size:.72rem;
+    padding:.25rem .65rem;border-radius:999px;letter-spacing:.04em;
+    text-transform:uppercase;
+  }
+  .bd1{background:#E0F2FF;color:#1683C4;border:1.5px solid #ADDDFA}
+  .bd2{background:#E0FAF1;color:var(--teal-d);border:1.5px solid #97E8CD}
+  .bd3{background:#F1E5FF;color:#7E45C5;border:1.5px solid #D4B7F5}
+  .badge-fmt{background:var(--surface2);color:var(--ink2);border:1.5px solid var(--line2)}
+
+  .qstem{
+    font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.18rem;
+    color:var(--ink);line-height:1.4;margin-bottom:1.1rem;letter-spacing:-.005em;
+    text-wrap:pretty;
+  }
+
+  /* MC Options (chunky 3D) */
+  .options{display:flex;flex-direction:column;gap:.65rem}
+  .option{
+    width:100%;text-align:left;padding:.95rem 1rem;
+    background:#fff;border:2px solid var(--line2);
+    border-radius:16px;cursor:pointer;
+    font-family:'Nunito',sans-serif;font-weight:700;font-size:.95rem;color:var(--ink);
+    box-shadow:0 3px 0 var(--line2);
+    display:flex;align-items:center;gap:.75rem;
+    transition:transform .08s, box-shadow .08s, background .15s, border-color .15s;
+  }
+  .option:not(:disabled):hover{background:#FFFAF4;border-color:#D9C5A7}
+  .option:not(:disabled):active{transform:translateY(2px);box-shadow:0 1px 0 var(--line2)}
+  .o-key{
+    flex-shrink:0;width:30px;height:30px;border-radius:9px;
+    background:var(--surface2);border:2px solid var(--line2);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fredoka',sans-serif;font-weight:600;font-size:.85rem;color:var(--ink2);
+  }
+  .option.correct{background:var(--good-bg);border-color:var(--good);color:var(--teal-d);box-shadow:0 3px 0 var(--good-shadow)}
+  .option.correct .o-key{background:var(--good);color:#fff;border-color:var(--good-shadow)}
+  .option.incorrect{background:var(--bad-bg);border-color:var(--bad);color:var(--bad-shadow);box-shadow:0 3px 0 var(--bad-shadow)}
+  .option.incorrect .o-key{background:var(--bad);color:#fff;border-color:var(--bad-shadow)}
+  .option:disabled{cursor:default}
+
+  /* TF buttons (giant pair) */
+  .tf-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:.25rem}
+  .tf-btn{
+    padding:1.1rem;border-radius:18px;
+    background:#fff;border:2px solid var(--line2);
+    font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.1rem;color:var(--ink);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;
+    box-shadow:0 4px 0 var(--line2);
+    transition:transform .08s, box-shadow .08s, background .15s, border-color .15s;
+  }
+  .tf-btn:not(:disabled):hover{background:#FFFAF4;border-color:#D9C5A7}
+  .tf-btn:not(:disabled):active{transform:translateY(3px);box-shadow:0 1px 0 var(--line2)}
+  .tf-btn.true-btn:not(:disabled):hover{border-color:var(--good)}
+  .tf-btn.false-btn:not(:disabled):hover{border-color:var(--bad)}
+  .tf-btn.correct{background:var(--good-bg);border-color:var(--good);color:var(--teal-d);box-shadow:0 4px 0 var(--good-shadow)}
+  .tf-btn.incorrect{background:var(--bad-bg);border-color:var(--bad);color:var(--bad-shadow);box-shadow:0 4px 0 var(--bad-shadow)}
+  .tf-btn:disabled{cursor:default}
+
+  /* Explanation banner */
+  .expl{
+    margin-top:1rem;padding:.85rem 1rem;border-radius:14px;
+    font-size:.9rem;line-height:1.55;display:none;
+    font-weight:600;
+    border:2px solid;
+  }
+  .expl.show{display:flex;align-items:flex-start;gap:.6rem}
+  .expl.right{background:var(--good-bg);border-color:#A4E8CD;color:var(--teal-shadow)}
+  .expl.wrong{background:var(--bad-bg);border-color:#F5B5B5;color:var(--bad-shadow)}
+  .expl-icon{
+    flex-shrink:0;width:26px;height:26px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;
+  }
+  .expl.right .expl-icon{background:var(--good)}
+  .expl.wrong .expl-icon{background:var(--bad)}
+
+  /* ───── Flashcard 3D ───── */
+  .fc-scene{perspective:1200px;margin:0 0 1rem;cursor:pointer;user-select:none}
+  .fc-tilt{width:100%;transform-style:preserve-3d;will-change:transform}
+  .fc-inner{position:relative;display:grid;transform-style:preserve-3d;will-change:transform}
+  .fc-face{
+    grid-area:1/1;width:100%;min-height:280px;
+    backface-visibility:hidden;border-radius:var(--rxl);
+    padding:2rem 1.75rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    border:2px solid var(--line);
+    box-shadow:0 6px 0 var(--line2), 0 14px 30px rgba(0,0,0,.06);
+    background:#fff;overflow:hidden;position:relative;
+  }
+  .fc-face::after{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(circle, rgba(255,107,74,.05) 1px, transparent 1px);
+    background-size:24px 24px;pointer-events:none;
+  }
+  .fc-back{
+    transform:rotateY(180deg);
+    background:linear-gradient(165deg,#FFF1DD 0%,#FFE3BD 100%);
+    box-shadow:0 6px 0 #E2C9A1, 0 14px 30px rgba(0,0,0,.07);
+  }
+  .fc-back::after{display:none}
+  .fc-q{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.2rem;line-height:1.4;color:var(--ink);max-width:520px;position:relative;z-index:1;text-wrap:pretty}
+  .fc-a{font-family:'Nunito',sans-serif;font-weight:600;font-size:.97rem;line-height:1.6;color:var(--ink);max-width:520px;position:relative;z-index:1}
+  .fc-hint{
+    margin-top:1.2rem;display:inline-flex;align-items:center;gap:.4rem;
+    padding:.35rem .8rem;border-radius:999px;
+    background:var(--surface2);color:var(--coral-d);font-family:'Fredoka',sans-serif;font-weight:600;font-size:.7rem;
+    text-transform:uppercase;letter-spacing:.08em;position:relative;z-index:1;border:1.5px solid #F0D9B6;
+  }
+  .fc-hint svg{animation:hintBounce 1.6s ease-in-out infinite}
+  @keyframes hintBounce{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-3px) rotate(8deg)}}
+  @keyframes cardEnterRight{from{opacity:0;transform:rotateY(-12deg) translateX(40px)}to{opacity:1;transform:rotateY(0) translateX(0)}}
+  @keyframes cardEnterLeft{from{opacity:0;transform:rotateY(12deg) translateX(-40px)}to{opacity:1;transform:rotateY(0) translateX(0)}}
+  .fc-scene.enter-right .fc-tilt{animation:cardEnterRight .42s cubic-bezier(.22,1,.36,1) both}
+  .fc-scene.enter-left  .fc-tilt{animation:cardEnterLeft  .42s cubic-bezier(.22,1,.36,1) both}
+
+  /* Bottom nav */
+  .bottom-nav{
+    display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+    margin-top:.5rem;
+  }
+  .nav-counter{
+    font-family:'Fredoka',sans-serif;font-weight:600;font-size:.9rem;color:var(--ink2);
+    text-align:center;min-width:0;flex:1;
+  }
+  .nav-counter .small{display:block;font-size:.7rem;color:var(--ink3);margin-top:2px;letter-spacing:.04em}
+
+  /* ───── Mascot (Axel) — original blob character ───── */
+  .mascot-row{
+    display:flex;align-items:flex-end;gap:.9rem;margin-bottom:1rem;
+  }
+  .mascot{
+    width:78px;height:78px;flex-shrink:0;position:relative;
+    animation:mascotIdle 3s ease-in-out infinite;
+  }
+  @keyframes mascotIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .mascot.cheer{animation:mascotCheer .6s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes mascotCheer{0%{transform:translateY(0) rotate(0)}30%{transform:translateY(-14px) rotate(-8deg)}60%{transform:translateY(-8px) rotate(6deg)}100%{transform:translateY(0) rotate(0)}}
+  .mascot.sad{animation:mascotSad .5s ease}
+  @keyframes mascotSad{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(2px) rotate(-3deg)}75%{transform:translateY(2px) rotate(3deg)}}
+
+  .speech{
+    background:#fff;border:2px solid var(--line);border-radius:18px;
+    padding:.65rem .9rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:.92rem;
+    color:var(--ink);box-shadow:0 3px 0 var(--line2);position:relative;flex:1;min-width:0;
+  }
+  .speech::before{
+    content:'';position:absolute;left:-9px;bottom:14px;
+    width:14px;height:14px;background:#fff;border-left:2px solid var(--line);border-bottom:2px solid var(--line);
+    transform:rotate(45deg);
+  }
+
+  /* ───── Session complete celebration ───── */
+  .complete{
+    background:var(--surface);border:2px solid var(--line);
+    border-radius:var(--rxl);padding:2.4rem 1.5rem 2rem;text-align:center;
+    box-shadow:0 6px 0 var(--line2);position:relative;overflow:hidden;
+  }
+  .complete-mascot{width:120px;height:120px;margin:0 auto .75rem;animation:bounce 1s ease-in-out infinite}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  .complete .label{font-family:'Fredoka',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--coral-d);margin-bottom:.5rem}
+  .complete .pct{font-family:'Fredoka',sans-serif;font-weight:700;font-size:5rem;line-height:1;letter-spacing:-.02em}
+  .complete .grade{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.2rem;color:var(--ink);margin-top:.4rem}
+  .complete .sub{font-size:.92rem;color:var(--ink2);margin-top:.3rem;font-weight:600}
+
+  .stat-row{display:flex;justify-content:center;gap:.65rem;margin:1.4rem 0 1.5rem;flex-wrap:wrap}
+  .stat-tile{
+    background:var(--surface2);border:2px solid var(--line2);border-radius:18px;
+    padding:.85rem 1.1rem;min-width:96px;
+    box-shadow:0 3px 0 var(--line2);
+  }
+  .stat-tile .v{font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.7rem;color:var(--ink);line-height:1}
+  .stat-tile .l{font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);font-weight:800;margin-top:5px}
+
+  /* Confetti */
+  .confetti{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;overflow:hidden}
+  .confetti span{
+    position:absolute;width:10px;height:14px;top:-20px;border-radius:2px;
+    animation:fall 2.6s cubic-bezier(.4,0,.6,1) forwards;
+  }
+  @keyframes fall{
+    0%{transform:translateY(0) rotate(0);opacity:1}
+    100%{transform:translateY(560px) rotate(720deg);opacity:.2}
+  }
 
   /* Auth */
-  .auth-overlay{position:fixed;inset:0;background:rgba(247,245,240,0.97);display:flex;align-items:center;justify-content:center;z-index:100;padding:1rem}
-  .auth-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:2.25rem 2rem;max-width:380px;width:100%;box-shadow:var(--shadow)}
-  .auth-title{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--text);margin-bottom:.375rem}
-  .auth-sub{font-size:.875rem;color:var(--text2);margin-bottom:1.5rem;line-height:1.55}
-  .auth-input{width:100%;padding:10px 12px;border-radius:var(--r);border:1px solid var(--border2);background:var(--surface);font-size:.9375rem;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;margin-bottom:.75rem;transition:border-color .15s}
-  .auth-input:focus{border-color:var(--accent)}
-  .auth-btn{width:100%;padding:10px;border-radius:var(--r);background:var(--accent);color:#fff;border:none;font-size:.9375rem;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer}
-  .auth-btn:hover{background:#1D4ED8}
-  .auth-btn:disabled{opacity:.6;cursor:default}
-  .auth-note{font-size:.75rem;color:var(--text3);margin-top:.875rem;line-height:1.55}
-  .auth-skip{background:none;border:none;color:var(--text3);font-size:.75rem;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:underline;margin-top:.5rem;display:block;width:100%;text-align:center}
-  .auth-error{font-size:.8125rem;color:var(--red);margin-bottom:.75rem;display:none}
+  .auth-overlay{
+    position:fixed;inset:0;z-index:100;
+    background:linear-gradient(180deg,#FFF8F0 0%, #FFE7D5 100%);
+    display:flex;align-items:center;justify-content:center;padding:1.25rem;
+  }
+  .auth-card{
+    background:#fff;border:2px solid var(--line);border-radius:var(--rxl);
+    padding:1.75rem 1.6rem 1.5rem;max-width:400px;width:100%;
+    box-shadow:0 8px 0 var(--line2), 0 20px 50px rgba(0,0,0,.1);
+    text-align:center;position:relative;
+  }
+  .auth-card .mascot{margin:0 auto .9rem}
+  .auth-title{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.55rem;color:var(--ink);margin-bottom:.35rem;letter-spacing:-.01em}
+  .auth-sub{font-size:.88rem;color:var(--ink2);margin-bottom:1.2rem;font-weight:600;line-height:1.5}
+  .auth-input{
+    width:100%;padding:.85rem 1rem;border-radius:14px;
+    border:2px solid var(--line2);background:var(--surface2);
+    font-family:'Nunito',sans-serif;font-weight:700;font-size:1rem;color:var(--ink);
+    outline:none;margin-bottom:.6rem;transition:border-color .15s, background .15s;
+    text-align:center;
+  }
+  .auth-input:focus{border-color:var(--coral);background:#fff}
+  .auth-err{font-size:.82rem;color:var(--bad-shadow);margin-bottom:.5rem;display:none;font-weight:700}
+  .auth-skip{
+    background:none;border:none;color:var(--ink3);font-size:.78rem;font-weight:700;
+    cursor:pointer;text-decoration:underline;margin-top:.7rem;font-family:'Nunito',sans-serif;
+  }
+  .auth-note{font-size:.72rem;color:var(--ink3);margin-top:.85rem;font-weight:600;line-height:1.5}
 
-  /* Tabs */
-  .tabs{display:flex;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:3px;margin-bottom:1.5rem;width:fit-content}
-  .tab-btn{padding:6px 16px;font-size:.8125rem;font-weight:500;font-family:'DM Sans',sans-serif;color:var(--text2);background:none;border:none;border-radius:calc(var(--r) - 2px);cursor:pointer;display:flex;align-items:center;gap:6px}
-  .tab-btn.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+  /* ───── Progress dashboard ───── */
+  .ptitle{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.3rem;color:var(--ink);margin-bottom:.25rem}
+  .psub{font-size:.85rem;color:var(--ink2);font-weight:600;margin-bottom:1.25rem}
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.7rem;margin-bottom:1.5rem}
+  .mcard{
+    background:#fff;border:2px solid var(--line);border-radius:18px;
+    padding:1rem 1.1rem;box-shadow:0 3px 0 var(--line2);
+  }
+  .mcard .l{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);font-weight:800;margin-bottom:6px}
+  .mcard .v{font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.85rem;line-height:1;color:var(--ink)}
+  .mcard .s{font-size:.74rem;color:var(--ink3);margin-top:5px;font-weight:600}
 
-  /* Controls */
-  .controls-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
-  .pill-btn{padding:5px 12px;font-size:.8rem;font-weight:500;font-family:'DM Sans',sans-serif;border-radius:20px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:5px}
-  .pill-btn:hover{background:var(--surface2)}
-  .pill-btn.active-d1{background:var(--d1-bg);color:var(--d1-text);border-color:var(--d1-border)}
-  .pill-btn.active-d2{background:var(--d2-bg);color:var(--d2-text);border-color:var(--d2-border)}
-  .pill-btn.active-d3{background:var(--d3-bg);color:var(--d3-text);border-color:var(--d3-border)}
-  .pill-btn.active-mode{background:var(--text);color:#fff;border-color:var(--text)}
-  .icon-btn{padding:6px 12px;font-size:.8rem;font-family:'DM Sans',sans-serif;font-weight:500;border-radius:var(--r);border:1px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .15s,transform .15s,box-shadow .15s}
-  .icon-btn:hover{background:var(--surface2);transform:scale(1.02)}
-  .icon-btn:active{transform:scale(0.97)}
-  .icon-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .icon-btn.primary:hover{background:#1D4ED8}
-  .icon-btn:disabled{opacity:.35;cursor:default;transform:none}
-  .divider{width:1px;height:20px;background:var(--border2);flex-shrink:0}
+  .section-h{font-family:'Fredoka',sans-serif;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink3);margin-bottom:.6rem}
+  .spark{display:flex;gap:5px;align-items:flex-end;height:64px;margin-bottom:1.5rem}
+  .spark-c{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0}
+  .spark-bar{width:100%;height:48px;background:var(--surface2);border:1.5px solid var(--line2);border-radius:6px;overflow:hidden;display:flex;align-items:flex-end}
+  .spark-fill{width:100%;border-radius:4px;box-shadow:inset 0 -2px 0 rgba(0,0,0,.15)}
+  .spark-pct{font-size:.65rem;color:var(--ink3);font-weight:700;font-family:'Fredoka',sans-serif}
 
-  .prog-wrap{height:3px;background:var(--border);border-radius:2px;margin-bottom:1.25rem;overflow:hidden}
-  .prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+  .domain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-bottom:1.5rem}
+  .dom-card{
+    background:#fff;border:2px solid var(--line);border-radius:18px;
+    padding:.95rem 1rem;box-shadow:0 3px 0 var(--line2);
+  }
+  .dom-card.d1{background:linear-gradient(180deg,#fff,#F0F8FF)}
+  .dom-card.d2{background:linear-gradient(180deg,#fff,#F0FBF7)}
+  .dom-card.d3{background:linear-gradient(180deg,#fff,#F8F2FF)}
+  .dom-card .v{font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.6rem;line-height:1;margin-top:5px}
+  .dom-card .s{font-size:.7rem;color:var(--ink3);margin-top:5px;font-weight:600}
 
-  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:1.5rem;box-shadow:var(--shadow);margin-bottom:.875rem}
+  .sess-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
+  .sess-row{
+    display:flex;align-items:center;gap:.7rem;padding:.65rem .85rem;
+    background:#fff;border:2px solid var(--line);border-radius:14px;font-size:.85rem;font-weight:600;
+  }
+  .sr-date{color:var(--ink3);min-width:120px;font-size:.78rem}
+  .sr-bar{flex:1;height:8px;background:var(--surface2);border:1px solid var(--line2);border-radius:999px;overflow:hidden;min-width:60px}
+  .sr-bar div{height:100%;border-radius:999px}
+  .sr-pct{font-family:'Fredoka',sans-serif;font-weight:700;min-width:40px;text-align:right}
+  .sr-meta{font-size:.7rem;color:var(--ink3);min-width:90px;text-align:right;font-weight:700}
 
-  /* ── Flashcard — deeply 3D ── */
-  .fc-scene {
-    perspective: 900px;
-    perspective-origin: 50% 40%;
-    cursor: pointer;
-    margin-bottom: 1rem;
-    user-select: none;
+  .empty{
+    text-align:center;padding:3rem 1rem;
+    background:var(--surface);border:2px dashed var(--line2);border-radius:var(--rxl);
+    color:var(--ink3);font-weight:700;
   }
-  /* Card enters from the side on navigation — on fc-tilt, not fc-inner */
-  @keyframes cardEnterRight {
-    from { opacity: 0; transform: rotateY(-14deg) translateX(36px) scale(0.96); }
-    to   { opacity: 1; transform: rotateY(0deg)   translateX(0)    scale(1); }
-  }
-  @keyframes cardEnterLeft {
-    from { opacity: 0; transform: rotateY(14deg)  translateX(-36px) scale(0.96); }
-    to   { opacity: 1; transform: rotateY(0deg)   translateX(0)     scale(1); }
-  }
-  .fc-scene.enter-right .fc-tilt { animation: cardEnterRight .42s cubic-bezier(.22,1,.36,1) both; }
-  .fc-scene.enter-left  .fc-tilt { animation: cardEnterLeft  .42s cubic-bezier(.22,1,.36,1) both; }
+  .empty .em{font-size:3rem;margin-bottom:.6rem}
 
-  /* Tilt wrapper: tiny X/Y parallax only — never 180deg, so back face text stays correct */
-  .fc-tilt {
-    width: 100%;
-    transform-style: preserve-3d;
-    will-change: transform;
-    /* tilt transition is fast/instant via JS */
-  }
-  /* Flip inner: ONLY rotates Y by 0 or 180 — no X rotation ever touches this element */
-  .fc-inner {
-    position: relative;
-    width: 100%;
-    /* Use grid to stack faces so the tallest one sets the height */
-    display: grid;
-    transform-style: preserve-3d;
-    will-change: transform;
-  }
-
-  .fc-face {
-    /* Both faces occupy the same grid cell, stacked */
-    grid-area: 1 / 1;
-    width: 100%;
-    min-height: 200px;
-    backface-visibility: hidden;
-    border-radius: 18px;
-    padding: 2.25rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow:
-      0 2px 4px rgba(0,0,0,0.04),
-      0 8px 24px rgba(0,0,0,0.08),
-      0 24px 48px rgba(0,0,0,0.06),
-      inset 0 1px 0 rgba(255,255,255,0.9);
-    border: 1px solid rgba(0,0,0,0.07);
-    background: #FFFFFF;
-    overflow: hidden;
-  }
-  /* Subtle top sheen */
-  .fc-face::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(160deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 50%);
-    pointer-events: none;
-  }
-  /* Floating dot texture on front */
-  .fc-face::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background-image: radial-gradient(circle, rgba(0,0,0,0.035) 1px, transparent 1px);
-    background-size: 22px 22px;
-    pointer-events: none;
-    opacity: 0.5;
-  }
-  .fc-back {
-    transform: rotateY(180deg);
-    background: linear-gradient(145deg, #F0EDE6 0%, #E8E4DC 100%);
-    box-shadow:
-      0 2px 4px rgba(0,0,0,0.05),
-      0 8px 24px rgba(0,0,0,0.1),
-      0 24px 48px rgba(0,0,0,0.08),
-      inset 0 1px 0 rgba(255,255,255,0.7);
-  }
-  .fc-back::after { display: none; }
-
-  .fc-q {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.15rem;
-    color: var(--text);
-    line-height: 1.45;
-    max-width: 520px;
-    position: relative;
-    z-index: 1;
-  }
-  .fc-a {
-    font-size: .9375rem;
-    color: var(--text);
-    line-height: 1.65;
-    max-width: 520px;
-    position: relative;
-    z-index: 1;
-  }
-  .fc-hint {
-    font-size: .7rem;
-    color: var(--text3);
-    margin-top: 1.1rem;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .fc-hint-icon {
-    display: inline-flex;
-    animation: hintBounce 2s ease-in-out infinite;
-  }
-  @keyframes hintBounce {
-    0%,100% { transform: translateY(0); }
-    50%      { transform: translateY(-3px); }
-  }
-
-  /* ── Nav buttons — expressive ── */
-  @keyframes arrowNudgeLeft  { 0%,100%{transform:translateX(0)} 50%{transform:translateX(-3px)} }
-  @keyframes arrowNudgeRight { 0%,100%{transform:translateX(0)} 50%{transform:translateX(3px)} }
-
-  .nav-btn {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 9px 20px;
-    font-size: .875rem;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    border-radius: 12px;
-    border: 1.5px solid var(--border2);
-    background: var(--surface);
-    color: var(--text2);
-    cursor: pointer;
-    transition:
-      background .15s,
-      border-color .15s,
-      color .15s,
-      transform .15s cubic-bezier(.34,1.56,.64,1),
-      box-shadow .15s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-    position: relative;
-    overflow: hidden;
-  }
-  .nav-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(37,99,235,0.08) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity .2s;
-  }
-  .nav-btn:not(:disabled):hover {
-    background: var(--surface);
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: scale(1.04);
-    box-shadow: 0 4px 16px rgba(37,99,235,0.15), 0 1px 3px rgba(0,0,0,0.06);
-  }
-  .nav-btn:not(:disabled):hover::before { opacity: 1; }
-  .nav-btn:not(:disabled):active {
-    transform: scale(0.97);
-    box-shadow: 0 1px 4px rgba(37,99,235,0.1);
-  }
-  .nav-btn:disabled { opacity: .3; cursor: default; }
-  .nav-btn .arrow { transition: transform .2s cubic-bezier(.34,1.56,.64,1); display: flex; align-items: center; }
-  .nav-btn:not(:disabled):hover .arrow-left  { transform: translateX(-3px); }
-  .nav-btn:not(:disabled):hover .arrow-right { transform: translateX(3px); }
-
-  /* Ripple on click */
-  .nav-btn .ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(37,99,235,0.15);
-    transform: scale(0);
-    animation: ripple .5s ease-out forwards;
-    pointer-events: none;
-  }
-  @keyframes ripple {
-    to { transform: scale(4); opacity: 0; }
-  }
-
-  .q-stem{font-family:'DM Serif Display',serif;font-size:1.0625rem;color:var(--text);line-height:1.45;margin-bottom:1.25rem}
-  .options{display:flex;flex-direction:column;gap:7px}
-  .option{padding:10px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-size:.875rem;font-family:'DM Sans',sans-serif;text-align:left;width:100%}
-  .option:not(:disabled):hover{border-color:var(--border2);background:var(--surface2);color:var(--text)}
-  .option.correct{background:var(--green-bg);color:var(--green);border-color:var(--green-border)}
-  .option.incorrect{background:var(--red-bg);color:var(--red);border-color:var(--red-border)}
-  .option:disabled{cursor:default}
-  .tf-row{display:flex;gap:10px;margin-top:.25rem}
-  .tf-btn{flex:1;padding:11px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-size:.9375rem;font-weight:500;font-family:'DM Sans',sans-serif}
-  .tf-btn:not(:disabled):hover{border-color:var(--border2);background:var(--surface2);color:var(--text)}
-  .tf-btn.correct{background:var(--green-bg);color:var(--green);border-color:var(--green-border)}
-  .tf-btn.incorrect{background:var(--red-bg);color:var(--red);border-color:var(--red-border)}
-  .tf-btn:disabled{cursor:default}
-  .expl{margin-top:1rem;padding:10px 14px;background:var(--accent-bg);border-left:3px solid var(--accent);border-radius:0 var(--r) var(--r) 0;font-size:.8125rem;color:var(--text2);line-height:1.55;display:none}
-
-  .badge{display:inline-block;font-size:.6875rem;font-weight:500;padding:2px 8px;border-radius:20px;margin-bottom:.875rem;letter-spacing:.02em}
-  .bd1{background:var(--d1-bg);color:var(--d1-text);border:1px solid var(--d1-border)}
-  .bd2{background:var(--d2-bg);color:var(--d2-text);border:1px solid var(--d2-border)}
-  .bd3{background:var(--d3-bg);color:var(--d3-text);border:1px solid var(--d3-border)}
-
-  .nav-row{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem}
-  .nav-ctr{font-size:.8125rem;color:var(--text3);text-align:center}
-  .score-pill{display:inline-block;font-size:.75rem;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);margin-top:3px}
-
-  .sess-end{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:2.5rem 2rem;text-align:center;box-shadow:var(--shadow);margin-bottom:.875rem}
-  .big-pct{font-family:'DM Serif Display',serif;font-size:4rem;color:var(--text);line-height:1}
-  .grade-txt{font-size:.9375rem;color:var(--text2);margin-top:.4rem}
-  .sess-actions{display:flex;gap:10px;justify-content:center;margin-top:1.5rem;flex-wrap:wrap}
-
-  /* Progress */
-  .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.25rem}
-  .m-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.875rem 1rem}
-  .m-label{font-size:.7125rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
-  .m-val{font-family:'DM Serif Display',serif;font-size:1.75rem;color:var(--text);line-height:1.1}
-  .m-sub{font-size:.7rem;color:var(--text3);margin-top:3px}
-  .s-label{font-size:.7125rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:.625rem;font-weight:500}
-  .spark-wrap{display:flex;gap:5px;align-items:flex-end;height:52px;margin-bottom:1.5rem}
-  .spark-col{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:0}
-  .spark-bw{width:100%;height:40px;background:var(--surface2);border-radius:4px;display:flex;align-items:flex-end;overflow:hidden}
-  .spark-b{width:100%;border-radius:3px}
-  .spark-pct{font-size:.625rem;color:var(--text3);white-space:nowrap}
-  .d-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
-  .d-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.875rem 1rem}
-  .d-pct{font-family:'DM Serif Display',serif;font-size:1.5rem;margin-top:4px}
-  .d-detail{font-size:.6875rem;color:var(--text3);margin-top:3px}
-  .sess-list{display:flex;flex-direction:column;gap:7px;margin-bottom:1.25rem}
-  .sess-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);font-size:.8125rem}
-  .sr-date{color:var(--text3);min-width:105px;font-size:.75rem}
-  .sr-bw{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden}
-  .sr-b{height:100%;border-radius:3px}
-  .sr-pct{font-weight:500;min-width:36px;text-align:right}
-  .sr-meta{font-size:.7rem;color:var(--text3);min-width:80px;text-align:right}
-
-  /* Sync banner */
-  .sync-banner{display:none;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);font-size:.75rem;color:var(--text3);margin-bottom:1rem}
-  .sync-banner.syncing{border-color:var(--accent-border);background:var(--accent-bg);color:#1D4ED8}
-  .sync-banner.error{border-color:var(--red-border);background:var(--red-bg);color:var(--red)}
-  .sync-banner.ok{border-color:var(--green-border);background:var(--green-bg);color:var(--green)}
-  .s-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+  .sync-banner{display:none;align-items:center;gap:8px;padding:.55rem .85rem;border-radius:12px;border:2px solid var(--line);background:#fff;font-size:.78rem;color:var(--ink2);margin-bottom:1rem;font-weight:700}
+  .sync-banner.syncing{border-color:#ADDDFA;background:#E0F2FF;color:#1683C4}
+  .sync-banner.error{border-color:#F5B5B5;background:var(--bad-bg);color:var(--bad-shadow)}
+  .sync-banner.ok{border-color:#A4E8CD;background:var(--good-bg);color:var(--teal-shadow)}
+  .s-dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex-shrink:0}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
   .s-dot.spin{animation:pulse 1s infinite}
 
-  .empty-state{text-align:center;padding:3rem 1rem;border:1px dashed var(--border2);border-radius:var(--rl);color:var(--text3)}
-  .flex-between{display:flex;align-items:center;justify-content:space-between;margin-bottom:.625rem}
-  .clear-link{font-size:.75rem;color:var(--text3);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:'DM Sans',sans-serif}
+  .clear-link{font-size:.76rem;color:var(--ink3);background:none;border:none;cursor:pointer;text-decoration:underline;font-weight:700;font-family:'Nunito',sans-serif}
 
-  @media(max-width:500px){
-    .wordmark{font-size:1.35rem}
-    .d-grid{gap:7px}
-    .d-card{padding:.625rem .75rem}
-    .d-pct{font-size:1.25rem}
-    .sess-row{flex-wrap:wrap}
-    .sr-date{min-width:unset}
+  @media(max-width:520px){
+    .qcard{padding:1.2rem 1rem 1.3rem}
+    .qstem{font-size:1.05rem}
+    .complete .pct{font-size:3.6rem}
+    .domain-grid{grid-template-columns:1fr}
     .sr-meta{display:none}
-    .fc-q{font-size:1rem}
-    .big-pct{font-size:3rem}
+    .sr-date{min-width:90px}
+    .mascot{width:60px;height:60px}
+    .complete-mascot{width:96px;height:96px}
   }
 </style>
 </head>
-<body>
+<body style="font-family: Nunito">
 
-<!-- ── AUTH OVERLAY ── -->
+<!-- ═══════ MASCOT SVG SYMBOL — original "Axel" character ═══════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="axel" viewBox="0 0 100 100">
+      <!-- shadow -->
+      <ellipse cx="50" cy="92" rx="28" ry="4" fill="rgba(0,0,0,0.12)"/>
+      <!-- body (round teal blob) -->
+      <path d="M50 8 C 22 8, 8 30, 8 52 C 8 76, 26 90, 50 90 C 74 90, 92 76, 92 52 C 92 30, 78 8, 50 8 Z"
+            fill="#34C9A1" stroke="#1FA483" stroke-width="3"/>
+      <!-- belly highlight -->
+      <ellipse cx="50" cy="58" rx="26" ry="22" fill="#7AE3C2" opacity="0.5"/>
+      <!-- two little ear/tuft bumps -->
+      <circle cx="28" cy="18" r="7" fill="#34C9A1" stroke="#1FA483" stroke-width="3"/>
+      <circle cx="72" cy="18" r="7" fill="#34C9A1" stroke="#1FA483" stroke-width="3"/>
+      <!-- eyes (white) -->
+      <ellipse cx="38" cy="44" rx="8" ry="9" fill="#fff"/>
+      <ellipse cx="62" cy="44" rx="8" ry="9" fill="#fff"/>
+      <!-- pupils -->
+      <circle cx="39" cy="46" r="3.5" fill="#1A1A1A"/>
+      <circle cx="63" cy="46" r="3.5" fill="#1A1A1A"/>
+      <!-- pupil shine -->
+      <circle cx="40.5" cy="44.5" r="1.2" fill="#fff"/>
+      <circle cx="64.5" cy="44.5" r="1.2" fill="#fff"/>
+      <!-- cheeks -->
+      <ellipse cx="28" cy="58" rx="5" ry="3" fill="#FF9DAD" opacity="0.7"/>
+      <ellipse cx="72" cy="58" rx="5" ry="3" fill="#FF9DAD" opacity="0.7"/>
+      <!-- smile -->
+      <path d="M 40 62 Q 50 72 60 62" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+      <!-- tooth -->
+      <path d="M 47 66 L 53 66 L 53 70 Q 50 72 47 70 Z" fill="#fff"/>
+    </symbol>
+
+    <symbol id="axel-cheer" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="92" rx="28" ry="4" fill="rgba(0,0,0,0.12)"/>
+      <path d="M50 8 C 22 8, 8 30, 8 52 C 8 76, 26 90, 50 90 C 74 90, 92 76, 92 52 C 92 30, 78 8, 50 8 Z"
+            fill="#34C9A1" stroke="#1FA483" stroke-width="3"/>
+      <ellipse cx="50" cy="58" rx="26" ry="22" fill="#7AE3C2" opacity="0.5"/>
+      <circle cx="28" cy="18" r="7" fill="#34C9A1" stroke="#1FA483" stroke-width="3"/>
+      <circle cx="72" cy="18" r="7" fill="#34C9A1" stroke="#1FA483" stroke-width="3"/>
+      <!-- closed happy eyes -->
+      <path d="M 32 44 Q 38 38 44 44" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 56 44 Q 62 38 68 44" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="28" cy="58" rx="6" ry="3.5" fill="#FF9DAD" opacity="0.85"/>
+      <ellipse cx="72" cy="58" rx="6" ry="3.5" fill="#FF9DAD" opacity="0.85"/>
+      <!-- big open mouth -->
+      <path d="M 38 60 Q 50 78 62 60 Q 50 70 38 60 Z" fill="#1A1A1A"/>
+      <path d="M 42 64 Q 50 73 58 64 Q 50 71 42 64 Z" fill="#FF6B8B"/>
+    </symbol>
+
+    <symbol id="axel-sad" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="92" rx="28" ry="4" fill="rgba(0,0,0,0.12)"/>
+      <path d="M50 8 C 22 8, 8 30, 8 52 C 8 76, 26 90, 50 90 C 74 90, 92 76, 92 52 C 92 30, 78 8, 50 8 Z"
+            fill="#7FCFB8" stroke="#1FA483" stroke-width="3"/>
+      <ellipse cx="50" cy="58" rx="26" ry="22" fill="#9FDDC9" opacity="0.5"/>
+      <circle cx="28" cy="18" r="7" fill="#7FCFB8" stroke="#1FA483" stroke-width="3"/>
+      <circle cx="72" cy="18" r="7" fill="#7FCFB8" stroke="#1FA483" stroke-width="3"/>
+      <ellipse cx="38" cy="44" rx="6" ry="7" fill="#fff"/>
+      <ellipse cx="62" cy="44" rx="6" ry="7" fill="#fff"/>
+      <circle cx="38" cy="47" r="2.5" fill="#1A1A1A"/>
+      <circle cx="62" cy="47" r="2.5" fill="#1A1A1A"/>
+      <ellipse cx="28" cy="58" rx="4" ry="2.5" fill="#FFB0BE" opacity="0.7"/>
+      <ellipse cx="72" cy="58" rx="4" ry="2.5" fill="#FFB0BE" opacity="0.7"/>
+      <!-- frown -->
+      <path d="M 40 70 Q 50 62 60 70" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+      <!-- tear -->
+      <path d="M 36 52 Q 33 58 36 60 Q 39 58 36 52 Z" fill="#3DB8FF"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ═══════ AUTH ═══════ -->
 <div class="auth-overlay" id="auth-overlay">
   <div class="auth-card">
-    <p class="auth-title">Welcome back</p>
-    <p class="auth-sub">Enter a passphrase to sync your progress across all your devices. Use the same passphrase everywhere.</p>
-    <input class="auth-input" type="password" id="pass-input" placeholder="Your passphrase" autocomplete="current-password">
-    <p class="auth-error" id="auth-err"></p>
-    <button class="auth-btn" id="auth-btn" onclick="signIn()">Continue</button>
-    <p class="auth-note">Your passphrase is hashed locally using SHA-256 and never transmitted. Sessions are stored in Supabase under the derived ID.</p>
-    <button class="auth-skip" onclick="skipAuth()">Skip — use offline mode (no sync)</button>
+    <svg class="mascot" viewBox="0 0 100 100" aria-hidden="true"><use href="#axel"/></svg>
+    <p class="display" style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--coral-d);margin-bottom:.4rem">Axel says hi!</p>
+    <p class="auth-title">Ready to learn?</p>
+    <p class="auth-sub">Set a passphrase to save your streak across devices, or skip and play offline.</p>
+    <input class="auth-input" type="password" id="pass-input" placeholder="your secret passphrase" autocomplete="current-password">
+    <p class="auth-err" id="auth-err"></p>
+    <button class="b3d teal" style="width:100%" id="auth-btn" onclick="signIn()">Let's go!</button>
+    <button class="auth-skip" onclick="skipAuth()">Skip — play offline</button>
+    <p class="auth-note">Your passphrase is hashed locally with SHA-256 and never transmitted as plain text.</p>
   </div>
 </div>
 
-<!-- ── APP ── -->
+<!-- ═══════ APP ═══════ -->
 <div class="shell">
-  <header>
-    <div class="header-inner">
-      <div>
-        <div class="wordmark">CPACC<span>.</span>quiz</div>
-        <div class="tagline">IAAP Body of Knowledge · Version 4.0</div>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg width="28" height="28" viewBox="0 0 100 100" aria-hidden="true"><use href="#axel"/></svg>
       </div>
-      <button class="user-chip" id="user-chip" onclick="showAuth()" style="display:none">
-        <div class="u-dot" id="u-dot"></div>
-        <span id="u-label">Offline</span>
+      <div class="brand-text">
+        <div class="name">Axel<span style="color:var(--coral)">.</span>quiz</div>
+        <div class="sub"><span style="color:rgb(138, 129, 123)">CPACC · v4.0</span></div>
+      </div>
+    </div>
+    <div class="hud">
+      <div class="hud-chip streak" title="Streak — correct in a row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#F5A623" stroke="#A87A0E" stroke-width="1.5"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+        <span id="streak-n">0</span>
+      </div>
+      <div class="hud-chip hearts" id="hearts" title="Lives this session">
+        <span id="hearts-vis">♥♥♥</span>
+      </div>
+      <div class="hud-chip xp" title="XP earned this session">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#FF8F60" stroke="var(--coral-d)" stroke-width="1.5"><path d="M12 2l2.5 7H22l-6 4.5 2.5 7L12 16l-6.5 4.5L8 13.5 2 9h7.5z"/></svg>
+        <span id="xp-n">0</span>
+      </div>
+      <button class="hud-chip user" id="user-chip" onclick="showAuth()" style="display:none">
+        <span class="u-dot" id="u-dot"></span><span id="u-label">Offline</span>
       </button>
     </div>
-  </header>
+  </div>
 
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
-    <div class="tabs" style="margin-bottom:0">
-      <button class="tab-btn active" data-tab="quiz" onclick="showTab('quiz',this)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        Quiz
+  <!-- Tabs + end session -->
+  <div class="row-between" style="margin-top:.5rem">
+    <div class="tabs">
+      <button class="tab active" data-tab="quiz" onclick="showTab('quiz',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="5"/></svg>
+        Learn
       </button>
-      <button class="tab-btn" data-tab="progress" onclick="showTab('progress',this)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-4"/></svg>
+      <button class="tab" data-tab="progress" onclick="showTab('progress',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg>
         Progress
       </button>
     </div>
-    <button class="icon-btn primary" id="end-session-btn" onclick="endSession()">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
-      End session
+    <button class="b3d ghost sm" id="end-session-btn" onclick="endSession()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      End
     </button>
   </div>
 
-  <!-- QUIZ -->
+  <!-- ═════════ QUIZ TAB ═════════ -->
   <div id="quiz-tab">
-    <p style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:500;margin-bottom:.5rem">Settings</p>
-    <div class="controls-row">
-      <button class="pill-btn active-mode" id="mb-fc" onclick="setMode('fc',this)">Flashcard</button>
-      <button class="pill-btn" id="mb-mc" onclick="setMode('mc',this)">Multiple choice</button>
-      <button class="pill-btn" id="mb-tf" onclick="setMode('tf',this)">True / false</button>
-      <div class="divider"></div>
-      <button class="pill-btn active-d1" id="df1" onclick="toggleDomain(1)">D1</button>
-      <button class="pill-btn active-d2" id="df2" onclick="toggleDomain(2)">D2</button>
-      <button class="pill-btn active-d3" id="df3" onclick="toggleDomain(3)">D3</button>
-      <div class="divider"></div>
-      <button class="icon-btn" onclick="doShuffle()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
-        Shuffle
-      </button>
-    </div>
-    <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
-    <div id="card-area" style="min-height:220px"></div>
-    <div class="nav-row">
-      <button class="nav-btn" id="prev-btn" onclick="navClick(this,-1)" disabled>
-        <span class="arrow arrow-left">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+
+    <!-- Settings (collapsible) -->
+    <div class="settings" id="settings">
+      <button class="settings-toggle" id="settings-toggle" onclick="toggleSettings()" aria-expanded="false">
+        <span class="st-left">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8L7 17M17 7l2.8-2.8"/></svg>
+          <span>Settings</span>
         </span>
+        <span class="st-summary" id="st-summary">Flashcard · D1 D2 D3</span>
+        <svg class="st-caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="settings-body" id="settings-body">
+        <div class="settings-label">Mode</div>
+        <div class="pill-row" style="margin-bottom:.7rem">
+          <button class="pill" id="mb-mx" onclick="setMode('mx',this)">🎲 Mixed</button>
+          <button class="pill on-mode" id="mb-fc" onclick="setMode('fc',this)">📇 Flashcard</button>
+          <button class="pill" id="mb-mc" onclick="setMode('mc',this)">🔘 Multi</button>
+          <button class="pill" id="mb-tf" onclick="setMode('tf',this)">⚡ True/False</button>
+        </div>
+        <div class="settings-label">Domains</div>
+        <div class="pill-row">
+          <button class="pill on-d1" id="df1" onclick="toggleDomain(1)">D1 · Disabilities</button>
+          <button class="pill on-d2" id="df2" onclick="toggleDomain(2)">D2 · Universal Design</button>
+          <button class="pill on-d3" id="df3" onclick="toggleDomain(3)">D3 · Standards & Law</button>
+          <span class="vsep"></span>
+          <button class="pill" onclick="doShuffle()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align:-1px;margin-right:3px"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+            Shuffle
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- XP progress bar -->
+    <div class="xp-track" aria-label="Progress through this session"><div class="xp-fill" id="prog" style="width:5%"></div></div>
+
+    <!-- Mascot row -->
+    <div class="mascot-row" id="mascot-row">
+      <svg class="mascot" id="mascot-svg" viewBox="0 0 100 100" aria-hidden="true"><use href="#axel"/></svg>
+      <div class="speech" id="speech-bubble">Let's tackle some questions! Tap the card to flip it.</div>
+    </div>
+
+    <!-- Question card -->
+    <div id="card-area" style="min-height:240px"></div>
+
+    <!-- Bottom nav -->
+    <div class="bottom-nav">
+      <button class="b3d ghost sm" id="prev-btn" onclick="navClick(-1)" disabled>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         Prev
       </button>
-      <div class="nav-ctr">
-        <div id="counter">1 / 1</div>
-        <div id="score-display" style="display:none" class="score-pill"></div>
+      <div class="nav-counter">
+        <span id="counter">1 / 1</span>
+        <span class="small" id="fmt-badge"></span>
       </div>
-      <button class="nav-btn" id="next-btn" onclick="navClick(this,1)">
+      <button class="b3d sm" id="next-btn" onclick="navClick(1)">
         Next
-        <span class="arrow arrow-right">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
   </div>
 
-  <!-- PROGRESS -->
+  <!-- ═════════ PROGRESS TAB ═════════ -->
   <div id="progress-tab" style="display:none">
     <div class="sync-banner" id="sync-banner">
       <div class="s-dot" id="s-dot"></div>
@@ -440,188 +684,74 @@
     </div>
     <div id="progress-content"></div>
   </div>
+
 </div>
 
 <script>
 /* ═══════════════════════════════════════════════════════
-   ⚙️  CONFIGURATION
-   ─────────────────────────────────────────────────────
-   Step 1 — Create a free project at supabase.com
-   Step 2 — Run this SQL in Supabase → SQL Editor:
-
-     create table sessions (
-       id uuid primary key default gen_random_uuid(),
-       user_id text not null,
-       created_at timestamptz default now(),
-       date text, time text,
-       score int, total int, pct int,
-       mode text, domains int[],
-       ts bigint
-     );
-     alter table sessions enable row level security;
-     create policy "anon insert" on sessions for insert
-       with check (true);
-     create policy "own rows" on sessions for select
-       using (user_id = current_setting('request.headers',true)::json->>'x-user-id');
-     create policy "own delete" on sessions for delete
-       using (user_id = current_setting('request.headers',true)::json->>'x-user-id');
-
-   Step 3 — Paste your Project URL and anon key below:
-   ═══════════════════════════════════════════════════════ */
-const SB_URL  = 'https://ipwbzboudyntnykpixwx.supabase.co';       // e.g. https://abcxyz.supabase.co
-const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlwd2J6Ym91ZHludG55a3BpeHd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxMTgyODksImV4cCI6MjA5MzY5NDI4OX0.eEbZjQK53M-sggL1LJhIvUsuH-rcktbLj6OpwmbtfgQ';  // starts with eyJ…
-/* ═══════════════════════════════════════════════════════ */
-
+   ⚙️  CONFIGURATION (Supabase optional)
+   Same setup instructions as before — paste your URL/key:
+═══════════════════════════════════════════════════════ */
+const SB_URL  = 'YOUR_SUPABASE_URL';
+const SB_KEY  = 'YOUR_SUPABASE_ANON_KEY';
 const configured = () => SB_URL !== 'YOUR_SUPABASE_URL' && SB_KEY !== 'YOUR_SUPABASE_ANON_KEY';
 
 /* ── Identity ── */
 let userId = null, offlineMode = false;
-
 async function hashPass(p) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(p.trim().toLowerCase()));
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,32);
 }
-
 async function signIn() {
   const pass = document.getElementById('pass-input').value.trim();
-  if (!pass) { showErr('Please enter a passphrase.'); return; }
+  if (!pass) { showErr('Pop in a passphrase first!'); return; }
   const btn = document.getElementById('auth-btn');
-  btn.disabled = true; btn.textContent = 'Signing in…';
+  btn.disabled = true; btn.textContent = 'Loading…';
   try {
     userId = await hashPass(pass);
     const hint = pass.slice(0,2) + '…';
     localStorage.setItem('cpacc_uid', userId);
     localStorage.setItem('cpacc_hint', hint);
     document.getElementById('auth-overlay').style.display = 'none';
-    setChip(true, hint);
-    reset();
-  } catch(e) {
-    showErr('Something went wrong — try again.');
-    btn.disabled = false; btn.textContent = 'Continue';
-  }
+    setChip(true, hint); reset();
+  } catch(e) { showErr('Hmm, try again.'); btn.disabled = false; btn.textContent = "Let's go!"; }
 }
+function skipAuth(){offlineMode=true;document.getElementById('auth-overlay').style.display='none';setChip(false,'Offline');reset()}
+function showErr(msg){const e=document.getElementById('auth-err');e.textContent=msg;e.style.display='block'}
+function showAuth(){document.getElementById('auth-err').style.display='none';document.getElementById('pass-input').value='';document.getElementById('auth-overlay').style.display='flex'}
+function setChip(s,l){const c=document.getElementById('user-chip');c.style.display='inline-flex';document.getElementById('u-dot').className='u-dot'+(s?'':' off');document.getElementById('u-label').textContent=s?'Synced · '+l:l}
 
-function skipAuth() {
-  offlineMode = true;
-  document.getElementById('auth-overlay').style.display = 'none';
-  setChip(false, 'Offline mode');
-  reset();
-}
-
-function showErr(msg) {
-  const el = document.getElementById('auth-err');
-  el.textContent = msg; el.style.display = 'block';
-}
-
-function showAuth() {
-  document.getElementById('auth-err').style.display = 'none';
-  document.getElementById('pass-input').value = '';
-  document.getElementById('auth-overlay').style.display = 'flex';
-}
-
-function setChip(synced, label) {
-  const chip = document.getElementById('user-chip');
-  chip.style.display = 'flex';
-  document.getElementById('u-dot').className = 'u-dot' + (synced ? '' : ' off');
-  document.getElementById('u-label').textContent = synced ? 'Synced · ' + label : label;
-}
-
-window.addEventListener('load', () => {
-  const uid = localStorage.getItem('cpacc_uid');
-  if (uid) {
-    userId = uid;
-    document.getElementById('auth-overlay').style.display = 'none';
-    setChip(true, localStorage.getItem('cpacc_hint') || '••');
-    reset();
-  }
-  document.getElementById('pass-input').addEventListener('keydown', e => { if (e.key === 'Enter') signIn(); });
+window.addEventListener('load',()=>{
+  const uid=localStorage.getItem('cpacc_uid');
+  if(uid){userId=uid;document.getElementById('auth-overlay').style.display='none';setChip(true,localStorage.getItem('cpacc_hint')||'••');reset()}
+  document.getElementById('pass-input').addEventListener('keydown',e=>{if(e.key==='Enter')signIn()});
 });
 
 /* ── Supabase REST ── */
-async function sbFetch(path, opts = {}) {
-  const res = await fetch(SB_URL + '/rest/v1' + path, {
-    ...opts,
-    headers: {
-      'Content-Type': 'application/json',
-      'apikey': SB_KEY,
-      'Authorization': 'Bearer ' + SB_KEY,
-      'x-user-id': userId,
-      ...(opts.headers || {})
-    }
-  });
-  if (!res.ok) throw new Error(await res.text());
-  if (res.status === 204 || res.headers.get('content-length') === '0') return null;
+async function sbFetch(path,opts={}){
+  const res=await fetch(SB_URL+'/rest/v1'+path,{...opts,headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'x-user-id':userId,...(opts.headers||{})}});
+  if(!res.ok)throw new Error(await res.text());
+  if(res.status===204||res.headers.get('content-length')==='0')return null;
   return res.json();
 }
+async function remoteFetch(){return await sbFetch(`/sessions?user_id=eq.${userId}&order=ts.asc&limit=500`,{method:'GET'})||[]}
+async function remoteInsert(s){await sbFetch('/sessions',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({...s,user_id:userId})})}
+async function remoteDelete(){await sbFetch(`/sessions?user_id=eq.${userId}`,{method:'DELETE'})}
 
-async function remoteFetch() {
-  return await sbFetch(`/sessions?user_id=eq.${userId}&order=ts.asc&limit=500`, { method: 'GET' }) || [];
-}
-
-async function remoteInsert(s) {
-  await sbFetch('/sessions', {
-    method: 'POST',
-    headers: { 'Prefer': 'return=minimal' },
-    body: JSON.stringify({ ...s, user_id: userId })
-  });
-}
-
-async function remoteDelete() {
-  await sbFetch(`/sessions?user_id=eq.${userId}`, { method: 'DELETE' });
-}
-
-/* ── Storage (remote + local fallback) ── */
-const LS_KEY = 'cpacc_sessions';
-const lsGet  = () => { try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch(e) { return []; }};
-const lsSave = a  => localStorage.setItem(LS_KEY, JSON.stringify(a));
-const lsPush = s  => { const a = lsGet(); a.push(s); lsSave(a); };
-
-async function getHistory() {
-  if (!offlineMode && userId && configured()) {
-    const remote = await remoteFetch();
-    lsSave(remote);
-    return remote;
-  }
-  return lsGet();
-}
-
-async function saveSession(s) {
-  lsPush(s);
-  if (!offlineMode && userId && configured()) {
-    setBanner('syncing', 'Saving to cloud…');
-    try {
-      await remoteInsert(s);
-      setBanner('ok', 'Saved to cloud');
-      setTimeout(hideBanner, 2500);
-    } catch(e) {
-      setBanner('error', 'Saved locally — could not reach database');
-    }
-  }
-}
-
-async function clearHistory() {
-  lsSave([]);
-  if (!offlineMode && userId && configured()) {
-    try { await remoteDelete(); } catch(e) {}
-  }
-}
-
-/* ── Sync banner ── */
-function setBanner(state, msg) {
-  const b = document.getElementById('sync-banner');
-  const d = document.getElementById('s-dot');
-  b.style.display = 'flex';
-  b.className = 'sync-banner ' + state;
-  d.className = 's-dot' + (state === 'syncing' ? ' spin' : '');
-  document.getElementById('sync-msg').textContent = msg;
-}
-function hideBanner() { document.getElementById('sync-banner').style.display = 'none'; }
+const LS_KEY='cpacc_sessions';
+const lsGet=()=>{try{return JSON.parse(localStorage.getItem(LS_KEY)||'[]')}catch(e){return[]}};
+const lsSave=a=>localStorage.setItem(LS_KEY,JSON.stringify(a));
+const lsPush=s=>{const a=lsGet();a.push(s);lsSave(a)};
+async function getHistory(){if(!offlineMode&&userId&&configured()){const r=await remoteFetch();lsSave(r);return r}return lsGet()}
+async function saveSession(s){lsPush(s);if(!offlineMode&&userId&&configured()){setBanner('syncing','Saving to cloud…');try{await remoteInsert(s);setBanner('ok','Saved!');setTimeout(hideBanner,2200)}catch(e){setBanner('error','Saved locally only')}}}
+async function clearHistory(){lsSave([]);if(!offlineMode&&userId&&configured()){try{await remoteDelete()}catch(e){}}}
+function setBanner(state,msg){const b=document.getElementById('sync-banner');const d=document.getElementById('s-dot');b.style.display='flex';b.className='sync-banner '+state;d.className='s-dot'+(state==='syncing'?' spin':'');document.getElementById('sync-msg').textContent=msg}
+function hideBanner(){document.getElementById('sync-banner').style.display='none'}
 
 /* ═══════════════════════════════════════════════════════
-   QUESTION DATABASE
-════════════════════════════════════════════════════════ */
+   QUESTION DATABASE (unchanged content)
+═══════════════════════════════════════════════════════ */
 const QDB = [
-  /* ── DOMAIN 1: FLASHCARDS ── */
   {d:1,t:'fc',q:'What is the medical model of disability?',a:'Views disability as a problem of the individual caused by disease or health conditions, requiring medical cure or management. Political response focuses on reforming healthcare policy.'},
   {d:1,t:'fc',q:'What is the social model of disability?',a:'Holds that society\'s barriers and inaccessible environments cause disability, not the individual\'s impairment. Equal access is a human rights issue; change must come from society.'},
   {d:1,t:'fc',q:'What is the biopsychosocial model?',a:'Integrates biological, psychological, and social factors. First conceptualized by George Engel in 1977. The WHO\'s ICF (International Classification of Functioning, 2002) is derived from this model.'},
@@ -639,7 +769,6 @@ const QDB = [
   {d:1,t:'fc',q:'According to the WHO, how many people experience significant disability globally?',a:'About 1.3 billion people — representing 16% of the world\'s population, or 1 in 6 people.'},
   {d:1,t:'fc',q:'What ICT barriers do people with visual disabilities commonly face?',a:'Images without text alternatives, text that can\'t be resized, missing heading structure/navigation aids, video without audio description, insufficient color contrast, sites that don\'t work with keyboard-only navigation.'},
   {d:1,t:'fc',q:'What is the difference between adaptive strategies and assistive technologies?',a:'Assistive technologies are products/devices used to perform tasks otherwise impossible. Adaptive strategies are tweaks and adjustments (e.g., settings changes, moving closer to a speaker) to perform daily activities more independently.'},
-  /* ── DOMAIN 1: MC ── */
   {d:1,t:'mc',q:'The charity model is most closely related to which other disability model?',ch:['Social model','Biopsychosocial model','Medical model','Functional solutions model'],c:2,ex:'The charity model is related to the medical model (individual problem) and economic model (financial consequences to the individual).'},
   {d:1,t:'mc',q:'Which ICT assistive technology is specifically designed for Deaf-Blind users?',ch:['Cochlear implant','Screen reader with refreshable braille display','Haptic wearable','CART real-time captioning'],c:1,ex:'A screen reader converting text to braille on a refreshable braille device is the primary ICT tool for Deaf-Blind users.'},
   {d:1,t:'mc',q:'Dyslexia is estimated to affect what percentage of the global population?',ch:['1–2%','5–10%','15–20%','25–30%'],c:1,ex:'5–10% of the population has dyslexia — potentially as high as 17%. Of people with reading difficulties, 70–80% likely have some form of dyslexia.'},
@@ -648,15 +777,14 @@ const QDB = [
   {d:1,t:'mc',q:'Selective mutism affects what percentage of the population?',ch:['0.47–0.76%','2–3%','5–7%','10–12%'],c:0,ex:'Selective mutism is estimated to affect 0.47–0.76% of the population. It is psychogenic — anxiety-based, not caused by brain injury.'},
   {d:1,t:'mc',q:'According to the WHO, approximately how many people globally have epilepsy?',ch:['10 million','25 million','50 million','100 million'],c:2,ex:'According to the WHO, 50 million people have epilepsy globally, making it one of the most common neurological diseases.'},
   {d:1,t:'mc',q:'How many people in the EU use sign language as their first language?',ch:['75,000','250,000','750,000','2.5 million'],c:2,ex:'According to the European Commission Knowledge Centre on Interpretation, 750,000 persons in the EU use sign language as their first language.'},
-  /* ── DOMAIN 1: TF ── */
-  {d:1,t:'tf',q:'The social model of disability holds that disability is caused by a person\'s impairment, not by society.',c:false,ex:'False. The social model says society\'s barriers and inaccessible environments cause disability — not the individual\'s impairment or difference.'},
-  {d:1,t:'tf',q:'Deaf-Blindness always means a person is completely deaf and completely blind.',c:false,ex:'False. Most people who are Deaf-Blind are NOT completely deaf nor completely blind — they retain some hearing and sight capability.'},
-  {d:1,t:'tf',q:'The WHO estimates approximately 430 million people globally have disabling hearing loss.',c:true,ex:'True. The WHO estimates approximately 430 million people have disabling hearing loss.'},
-  {d:1,t:'tf',q:'Selective mutism is a type of neurogenic mutism caused by brain injury.',c:false,ex:'False. Selective mutism is psychogenic (anxiety-based). Neurogenic mutism is caused by brain injury — often a result of aphasia, apraxia, or dysarthria.'},
-  {d:1,t:'tf',q:'About 246 million people (3.5% of the world\'s population) have low vision according to WHO.',c:true,ex:'True. The WHO reports about 246 million people, or 3.5% of the world\'s population, have low vision. About 90% live in low-income settings.'},
-  {d:1,t:'tf',q:'Web pages that flash more than 3 times per second are a concern for people with seizure disorders.',c:true,ex:'True. Accessibility guidelines require pages not contain anything that flashes more than three times per second, or the flash must be below general flash and red flash thresholds.'},
-  {d:1,t:'tf',q:'In the CPACC BoK, AT for cognitive disabilities is organized by diagnosis.',c:false,ex:'False. Adaptive strategies and AT for cognitive disabilities are organized by mental function (attention, memory, perceptual), NOT by specific diagnosis.'},
-  /* ── DOMAIN 2: FLASHCARDS ── */
+  {d:1,t:'tf',q:'The social model of disability holds that disability is caused by a person\'s impairment, not by society.',c:false,ex:'The social model says society\'s barriers and inaccessible environments cause disability — not the individual\'s impairment or difference.'},
+  {d:1,t:'tf',q:'Deaf-Blindness always means a person is completely deaf and completely blind.',c:false,ex:'Most people who are Deaf-Blind are NOT completely deaf nor completely blind — they retain some hearing and sight capability.'},
+  {d:1,t:'tf',q:'The WHO estimates approximately 430 million people globally have disabling hearing loss.',c:true,ex:'The WHO estimates approximately 430 million people have disabling hearing loss.'},
+  {d:1,t:'tf',q:'Selective mutism is a type of neurogenic mutism caused by brain injury.',c:false,ex:'Selective mutism is psychogenic (anxiety-based). Neurogenic mutism is caused by brain injury — often a result of aphasia, apraxia, or dysarthria.'},
+  {d:1,t:'tf',q:'About 246 million people (3.5% of the world\'s population) have low vision according to WHO.',c:true,ex:'The WHO reports about 246 million people, or 3.5% of the world\'s population, have low vision. About 90% live in low-income settings.'},
+  {d:1,t:'tf',q:'Web pages that flash more than 3 times per second are a concern for people with seizure disorders.',c:true,ex:'Accessibility guidelines require pages not contain anything that flashes more than three times per second, or the flash must be below general flash and red flash thresholds.'},
+  {d:1,t:'tf',q:'In the CPACC BoK, AT for cognitive disabilities is organized by diagnosis.',c:false,ex:'Adaptive strategies and AT for cognitive disabilities are organized by mental function (attention, memory, perceptual), NOT by specific diagnosis.'},
+
   {d:2,t:'fc',q:'What is the key distinction between universal design and reasonable accommodation?',a:'Universal design proactively creates products/environments usable by everyone without needing adaptation. Reasonable accommodation is a reactive, case-by-case modification for a specific individual\'s needs.'},
   {d:2,t:'fc',q:'Name the 7 Principles of Universal Design.',a:'1. Equitable Use  2. Flexibility in Use  3. Simple and Intuitive Use  4. Perceptible Information  5. Tolerance for Error  6. Low Physical Effort  7. Size and Space for Approach and Use'},
   {d:2,t:'fc',q:'Who developed the 7 Principles of Universal Design and when?',a:'A working group led by Ronald Mace at North Carolina State University (NCSU) in 1997, including architects, product designers, engineers, and environmental design researchers.'},
@@ -667,20 +795,18 @@ const QDB = [
   {d:2,t:'fc',q:'What is user-centered design?',a:'An approach putting the user at the center of every stage of design and development through user research, iterative design/prototyping, and user testing — including accessibility testing — throughout the process.'},
   {d:2,t:'fc',q:'How does usability differ from user experience (UX)?',a:'Usability is a sub-discipline of UX focused on ease of use and proficiency. UX is broader, encompassing usability, useful content, desirability, accessibility, and credibility — every interaction a person has with a product.'},
   {d:2,t:'fc',q:'What related concepts share the core idea of universal design?',a:'Inclusive design, Design for All, Human-centered design, and Life-span design. European standard EN 17161:2019 formalizes "Design for All" in an accessibility context.'},
-  /* ── DOMAIN 2: MC ── */
   {d:2,t:'mc',q:'The "Flexibility in Use" principle of Universal Design includes which guideline?',ch:['Information in Braille on all signs','Accommodating right- or left-handed access and use','Maximizing compatibility with assistive technology','Providing warnings of hazards and errors'],c:1,ex:'Flexibility in Use includes: provide choice in methods of use, accommodate right- or left-handed access, facilitate accuracy, and adaptability to the user\'s pace.'},
   {d:2,t:'mc',q:'Which UDL guideline addresses "the Why of learning"?',ch:['Representation','Action & Expression','Engagement','Comprehension'],c:2,ex:'Engagement is the "Why" — relating to affect, motivation, recruiting learners\' interest, sustaining effort, and self-regulation.'},
   {d:2,t:'mc',q:'European standard EN 17161:2019 is associated with which concept?',ch:['WCAG 2.1','Design for All','Universal Design for Learning','Section 508'],c:1,ex:'EN 17161:2019 is the "Design for All" standard, supporting organisations to develop accessible products, goods, and services.'},
   {d:2,t:'mc',q:'Which Universal Design principle requires redundant presentation through multiple modes (pictorial, verbal, tactile)?',ch:['Equitable Use','Simple and Intuitive Use','Perceptible Information','Tolerance for Error'],c:2,ex:'Perceptible Information requires using different modes for redundant presentation, adequate contrast, maximized legibility, and compatibility with sensory aid devices.'},
   {d:2,t:'mc',q:'How many main principles and guidelines does WCAG 2.2 contain?',ch:['3 principles, 10 guidelines','4 principles, 13 guidelines','4 principles, 17 guidelines','5 principles, 13 guidelines'],c:1,ex:'WCAG 2.2 is structured into 4 main principles (POUR) and 13 guidelines.'},
   {d:2,t:'mc',q:'In user-centered design, what is the recommended approach to the design process?',ch:['Linear — design then test once','Agile sprints only','Iterative — test throughout the process after each stage','Expert review at final stage'],c:2,ex:'User-centered design takes an iterative approach — testing is conducted after each stage, with accessibility testing included in iterative cycles.'},
-  /* ── DOMAIN 2: TF ── */
-  {d:2,t:'tf',q:'Universal Design principles were originally developed specifically for digital technology.',c:false,ex:'False. The 7 Principles were originally developed for the built environment by architects and designers at NCSU in 1997.'},
-  {d:2,t:'tf',q:'Adopting universal design eliminates the need for adaptive devices or reasonable accommodation.',c:false,ex:'False. Universal design does not prevent the use of adaptive devices or reasonable accommodation where needed — but it may reduce the extent or need for them.'},
-  {d:2,t:'tf',q:'Web accessibility only benefits people with permanent disabilities.',c:false,ex:'False. Web accessibility also benefits older people, people using mobile phones, those with temporary disabilities, and situational limitations like bright sunlight.'},
-  {d:2,t:'tf',q:'"Perceptible Information" in Universal Design requires redundant presentation through multiple modes.',c:true,ex:'True. Perceptible Information uses different modes (pictorial, verbal, tactile) for redundant presentation of essential information.'},
-  {d:2,t:'tf',q:'The cost of integrating Universal Design is typically lower when built in from the start vs. retrofitted.',c:true,ex:'True. The cost of not integrating UD into the initial design and construction stages of a building is often greater than its overall construction cost.'},
-  /* ── DOMAIN 3: FLASHCARDS ── */
+  {d:2,t:'tf',q:'Universal Design principles were originally developed specifically for digital technology.',c:false,ex:'The 7 Principles were originally developed for the built environment by architects and designers at NCSU in 1997.'},
+  {d:2,t:'tf',q:'Adopting universal design eliminates the need for adaptive devices or reasonable accommodation.',c:false,ex:'Universal design does not prevent the use of adaptive devices or reasonable accommodation where needed — but it may reduce the extent or need for them.'},
+  {d:2,t:'tf',q:'Web accessibility only benefits people with permanent disabilities.',c:false,ex:'Web accessibility also benefits older people, people using mobile phones, those with temporary disabilities, and situational limitations like bright sunlight.'},
+  {d:2,t:'tf',q:'"Perceptible Information" in Universal Design requires redundant presentation through multiple modes.',c:true,ex:'Perceptible Information uses different modes (pictorial, verbal, tactile) for redundant presentation of essential information.'},
+  {d:2,t:'tf',q:'The cost of integrating Universal Design is typically lower when built in from the start vs. retrofitted.',c:true,ex:'The cost of not integrating UD into the initial design and construction stages of a building is often greater than its overall construction cost.'},
+
   {d:3,t:'fc',q:'What is the CRPD and when was it adopted?',a:'The Convention on the Rights of Persons with Disabilities — adopted by the UN in 2006. The first binding international human rights instrument specifically addressing disability rights. Over 160 countries signed, more than 180 ratified.'},
   {d:3,t:'fc',q:'What is the purpose of the Marrakesh Treaty?',a:'Ensures people with vision or print disabilities have access to books and printed materials. Adopted in 2013, it creates a copyright exception allowing accessible format copies to be made and distributed without permission.'},
   {d:3,t:'fc',q:'What does the ADA guarantee?',a:'Equal opportunities for people with disabilities in public accommodations, employment, transportation, state/local government services, and telecommunications. Enacted in 1990, modeled on civil rights protections for race, sex, etc.'},
@@ -691,7 +817,6 @@ const QDB = [
   {d:3,t:'fc',q:'What is the role of management champions in accessibility programs?',a:'Champions build vision, sustain commitment, engage teams, build awareness and skills, and support programmatic integration of accessibility — distinguishing it from discrete one-off projects. They lead adoption of maturity models.'},
   {d:3,t:'fc',q:'What is the EU\'s Web Accessibility Directive and who does it apply to?',a:'Directive 2016/2102, applied from September 2019. Requires all EU public sector bodies to ensure their websites and mobile apps are accessible, publish an accessibility statement, and provide a method to report issues. References EN 301 549 standard.'},
   {d:3,t:'fc',q:'What is the Inter-American Convention on the Elimination of All Forms of Discrimination Against Persons with Disabilities?',a:'Adopted in 1999 in Guatemala — the first regional, binding treaty expressly prohibiting disability discrimination. Requires gradual elimination of discrimination and accessible buildings, transportation, and communication.'},
-  /* ── DOMAIN 3: MC ── */
   {d:3,t:'mc',q:'Which law requires US federal government websites to meet WCAG 2.0-based accessibility standards?',ch:['ADA Title III','Marrakesh Treaty','Section 508 of the Rehabilitation Act','CVAA of 2010'],c:2,ex:'Section 508 requires federal, state, and local government websites to meet Section 508 Standards based on WCAG 2.0. The ADA does not include specific web accessibility standards.'},
   {d:3,t:'mc',q:'The EU Web Accessibility Directive applies from which date and to whom?',ch:['2000, all EU businesses','2009, EU public sector only','September 2019, EU public sector bodies','2025, all EU private businesses'],c:2,ex:'The EU Web Accessibility Directive applied from September 2019 to all EU public sector bodies\' websites and mobile apps.'},
   {d:3,t:'mc',q:'Level 3 of the Business Disability Forum Accessibility Maturity Model is:',ch:['Defined','Managed','Repeatable','Optimizing'],c:2,ex:'Level 3 is "Repeatable" — the process is established and actioned consistently. Level 1 = Informal, 2 = Defined, 4 = Managed, 5 = Best practice.'},
@@ -699,214 +824,144 @@ const QDB = [
   {d:3,t:'mc',q:'The CVAA (Twenty-First Century Communications and Video Accessibility Act) was enacted in which year?',ch:['2000','2006','2010','2019'],c:2,ex:'The CVAA was enacted in 2010 to update federal communications law, ensuring 1980s–90s accessibility laws cover digital, broadband, and mobile technologies.'},
   {d:3,t:'mc',q:'Which regional instrument was the first binding treaty to expressly prohibit disability discrimination?',ch:['EU Charter of Fundamental Rights','African Charter on Human and People\'s Rights','Inter-American Convention (Guatemala, 1999)','ASEAN Human Rights Declaration'],c:2,ex:'The Inter-American Convention on the Elimination of All Forms of Discrimination Against Persons with Disabilities (1999, Guatemala) was the first regional binding treaty expressly prohibiting disability discrimination.'},
   {d:3,t:'mc',q:'What does the US Federal Acquisition Regulation implement regarding accessibility?',ch:['ADA Title III website standards','Section 508 ICT accessibility for federal procurement','WCAG 2.2 as a binding standard','The European Accessibility Act in the US'],c:1,ex:'The US Federal Acquisition Regulation implements Section 508 of the Rehabilitation Act, requiring that when federal agencies acquire ICT, it must be accessible to employees and the public with disabilities.'},
-  /* ── DOMAIN 3: TF ── */
-  {d:3,t:'tf',q:'The CRPD is the first binding international human rights instrument specifically addressing disability rights.',c:true,ex:'True. The UN CRPD, adopted in 2006, was the first legally binding international human rights instrument specifically addressing the rights of people with disabilities.'},
-  {d:3,t:'tf',q:'Under the ADA, private business websites are subject to clear, specific legal accessibility standards.',c:false,ex:'False. The ADA has no specific legal standards for private website accessibility. However, businesses can be sued under Title III. E-commerce, organizational websites, and public mobile apps fall under Title III.'},
-  {d:3,t:'tf',q:'The European Accessibility Act requires common rules for private businesses (except microenterprises) from 2025.',c:true,ex:'True. The EAA (adopted 2019) applies common accessibility rules to private businesses from 2025. Microenterprises are exempt.'},
-  {d:3,t:'tf',q:'ICT accessibility should be treated as a discrete project rather than an ongoing organizational program.',c:false,ex:'False. Per the W3C WAI, ICT accessibility must be "a program, not a project" — an integral, ongoing activity grounded in organizational culture, process, and practice.'},
-  {d:3,t:'tf',q:'The 1948 Universal Declaration of Human Rights explicitly listed disability as a protected characteristic.',c:false,ex:'False. The UDHR did not explicitly list disability among protected groups. This gap led to the UN Declaration on the Rights of Disabled Persons (1975) and eventually the CRPD (2006).'},
-  {d:3,t:'tf',q:'The Marrakesh Treaty allows people with print disabilities to import and export accessible format versions of books across borders.',c:true,ex:'True. The Marrakesh Treaty (2013) creates a copyright exception AND allows import and export of accessible format versions between countries.'},
+  {d:3,t:'tf',q:'The CRPD is the first binding international human rights instrument specifically addressing disability rights.',c:true,ex:'The UN CRPD, adopted in 2006, was the first legally binding international human rights instrument specifically addressing the rights of people with disabilities.'},
+  {d:3,t:'tf',q:'Under the ADA, private business websites are subject to clear, specific legal accessibility standards.',c:false,ex:'The ADA has no specific legal standards for private website accessibility. However, businesses can be sued under Title III. E-commerce, organizational websites, and public mobile apps fall under Title III.'},
+  {d:3,t:'tf',q:'The European Accessibility Act requires common rules for private businesses (except microenterprises) from 2025.',c:true,ex:'The EAA (adopted 2019) applies common accessibility rules to private businesses from 2025. Microenterprises are exempt.'},
+  {d:3,t:'tf',q:'ICT accessibility should be treated as a discrete project rather than an ongoing organizational program.',c:false,ex:'Per the W3C WAI, ICT accessibility must be "a program, not a project" — an integral, ongoing activity grounded in organizational culture, process, and practice.'},
+  {d:3,t:'tf',q:'The 1948 Universal Declaration of Human Rights explicitly listed disability as a protected characteristic.',c:false,ex:'The UDHR did not explicitly list disability among protected groups. This gap led to the UN Declaration on the Rights of Disabled Persons (1975) and eventually the CRPD (2006).'},
+  {d:3,t:'tf',q:'The Marrakesh Treaty allows people with print disabilities to import and export accessible format versions of books across borders.',c:true,ex:'The Marrakesh Treaty (2013) creates a copyright exception AND allows import and export of accessible format versions between countries.'},
 ];
 
 /* ═══════════════════════════════════════════════════════
    QUIZ ENGINE
-════════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════ */
 let mode='fc', activeDomains=[1,2,3], filteredQ=[], idx=0, answered=false;
-let sessionScore=0, sessionTotal=0;
+let sessionScore=0, sessionTotal=0, streak=0, hearts=3, xp=0;
 
-const getFiltered = () => QDB.filter(q => activeDomains.includes(q.d) && q.t === (mode === 'fc' ? 'fc' : mode === 'mc' ? 'mc' : 'tf'));
+const FORMATS = ['fc','mc','tf'];
+function getMixed(){
+  const concepts={}; QDB.forEach(q=>{if(!activeDomains.includes(q.d))return;const k=q.q.slice(0,40);if(!concepts[k])concepts[k]=[];concepts[k].push(q)});
+  const deck=[]; Object.values(concepts).forEach(v=>{const fmt=FORMATS[Math.floor(Math.random()*FORMATS.length)];const m=v.find(x=>x.t===fmt)||v[Math.floor(Math.random()*v.length)];deck.push({...m,_fmt:m.t})});
+  return deck.sort(()=>Math.random()-0.5);
+}
+const getFiltered=()=>{
+  if(mode==='mx')return getMixed();
+  return QDB.filter(q=>activeDomains.includes(q.d)&&q.t===(mode==='fc'?'fc':mode==='mc'?'mc':'tf')).map(q=>({...q,_fmt:q.t})).sort(()=>Math.random()-0.5);
+};
 
-function showTab(t, el) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+function showTab(t,el){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('quiz-tab').style.display = t === 'quiz' ? '' : 'none';
-  document.getElementById('progress-tab').style.display = t === 'progress' ? '' : 'none';
-  document.getElementById('end-session-btn').style.display = t === 'quiz' ? '' : 'none';
-  if (t === 'progress') renderProgress();
+  document.getElementById('quiz-tab').style.display=t==='quiz'?'':'none';
+  document.getElementById('progress-tab').style.display=t==='progress'?'':'none';
+  document.getElementById('end-session-btn').style.display=t==='quiz'?'':'none';
+  if(t==='progress')renderProgress();
 }
-
-function setMode(m, el) {
-  mode = m;
-  document.querySelectorAll('[id^="mb-"]').forEach(b => b.classList.remove('active-mode'));
-  el.classList.add('active-mode');
+function setMode(m,el){mode=m;document.querySelectorAll('[id^="mb-"]').forEach(b=>b.classList.remove('on-mode'));el.classList.add('on-mode');updateSettingsSummary();reset()}
+function toggleSettings(){const s=document.getElementById('settings');const open=s.classList.toggle('open');document.getElementById('settings-toggle').setAttribute('aria-expanded',open?'true':'false')}
+function updateSettingsSummary(){const labels={mx:'Mixed',fc:'Flashcard',mc:'Multi',tf:'True/False'};const doms=activeDomains.slice().sort().map(d=>'D'+d).join(' ');document.getElementById('st-summary').textContent=labels[mode]+' · '+doms}
+function toggleDomain(d){
+  const btn=document.getElementById('df'+d);const cls='on-d'+d;
+  if(activeDomains.includes(d)){if(activeDomains.length===1)return;activeDomains=activeDomains.filter(x=>x!==d);btn.classList.remove(cls)}
+  else{activeDomains.push(d);btn.classList.add(cls)}
+  updateSettingsSummary();
   reset();
 }
+function doShuffle(){filteredQ=getFiltered();idx=0;answered=false;sessionScore=0;sessionTotal=0;streak=0;hearts=3;xp=0;updateHUD();render()}
+function reset(){filteredQ=getFiltered();idx=0;answered=false;sessionScore=0;sessionTotal=0;streak=0;hearts=3;xp=0;updateHUD();render()}
 
-function toggleDomain(d) {
-  const btn = document.getElementById('df' + d);
-  const cls = 'active-d' + d;
-  if (activeDomains.includes(d)) {
-    if (activeDomains.length === 1) return;
-    activeDomains = activeDomains.filter(x => x !== d);
-    btn.classList.remove(cls);
-  } else {
-    activeDomains.push(d);
-    btn.classList.add(cls);
+let _navDir=0;
+const bClass=d=>d===1?'bd1':d===2?'bd2':'bd3';
+const dLabel=d=>d===1?'D1 · Disabilities':d===2?'D2 · Universal Design':'D3 · Standards & Law';
+
+function navClick(dir){navigate(dir)}
+function navigate(dir){_navDir=dir;idx=Math.max(0,Math.min(filteredQ.length-1,idx+dir));answered=false;render()}
+
+function updateHUD(){
+  document.getElementById('streak-n').textContent=streak;
+  document.getElementById('xp-n').textContent=xp;
+  const hv=document.getElementById('hearts-vis');
+  hv.textContent='♥'.repeat(hearts)+'♡'.repeat(Math.max(0,3-hearts));
+}
+
+function setMascot(state, msg){
+  const m=document.getElementById('mascot-svg');
+  const useEl=m.querySelector('use');
+  if(state==='cheer'){useEl.setAttribute('href','#axel-cheer');m.classList.remove('sad');m.classList.add('cheer');setTimeout(()=>{m.classList.remove('cheer');useEl.setAttribute('href','#axel')},900)}
+  else if(state==='sad'){useEl.setAttribute('href','#axel-sad');m.classList.remove('cheer');m.classList.add('sad');setTimeout(()=>{m.classList.remove('sad');useEl.setAttribute('href','#axel')},1100)}
+  if(msg)document.getElementById('speech-bubble').textContent=msg;
+}
+
+const CHEERS=['Nailed it! 🎉','Boom — correct!','You\'re on fire 🔥','High five!','Sweet, keep going!','That\'s the one!','Crushing it!','Amazing!'];
+const OOPS=['Not quite — try the next one!','Don\'t worry, you\'ve got this.','Close one! Read the explainer.','Tricky question — keep going!','Almost! Take a breath.','That happens — onward!'];
+
+function render(){
+  if(!filteredQ.length)filteredQ=getFiltered();
+  if(!filteredQ.length){document.getElementById('card-area').innerHTML='<div class="empty"><div class="em">🤷</div>No questions match this selection.<br><span style="font-size:.78rem;font-weight:600;color:var(--ink3)">Try a different mode or domain combo.</span></div>';return}
+  const q=filteredQ[idx];
+  document.getElementById('prog').style.width=Math.max(5,Math.round(((idx+1)/filteredQ.length)*100))+'%';
+  document.getElementById('counter').textContent=(idx+1)+' / '+filteredQ.length;
+  const fmtBadge=document.getElementById('fmt-badge');
+  if(mode==='mx'){const labels={fc:'Flashcard',mc:'Multiple choice',tf:'True / false'};fmtBadge.textContent=labels[q._fmt]||''}
+  else fmtBadge.textContent='';
+  document.getElementById('prev-btn').disabled=idx===0;
+  document.getElementById('next-btn').disabled=idx===filteredQ.length-1;
+  const ca=document.getElementById('card-area');
+  const fmt=q._fmt||mode;
+  ca.innerHTML=fmt==='fc'?renderFC(q,_navDir):fmt==='mc'?renderMC(q):renderTF(q);
+  _navDir=0;
+
+  if(fmt==='fc'){setupFlashcard()}
+}
+
+function setupFlashcard(){
+  const scene=document.getElementById('fc-scene'),tilt=document.getElementById('fc-tilt'),inner=document.getElementById('fc-inner');
+  let flipped=false,animating=false;
+  function doFlip(){
+    if(animating)return;animating=true;
+    tilt.style.transition='transform .2s ease';tilt.style.transform='rotateX(0) rotateY(0)';
+    setTimeout(()=>{
+      flipped=!flipped;
+      inner.style.transition='transform .65s cubic-bezier(.34,1.3,.64,1)';
+      inner.style.transform=`rotateY(${flipped?180:0}deg)`;
+      const front=inner.querySelector('.fc-face:not(.fc-back)'),back=inner.querySelector('.fc-back');
+      if(flipped){front.style.transition='opacity .12s';front.style.opacity='0';setTimeout(()=>{back.style.transition='opacity .15s';back.style.opacity='1'},350);
+        // Mark this flashcard as "viewed" for XP
+        if(!filteredQ[idx]._viewed){filteredQ[idx]._viewed=true;sessionTotal++;sessionScore++;xp+=5;updateHUD();setMascot('cheer','Nice — that\'s the answer!')}
+      }
+      else{back.style.transition='opacity .12s';back.style.opacity='0';setTimeout(()=>{front.style.transition='opacity .15s';front.style.opacity='1'},350)}
+      setTimeout(()=>{animating=false},700);
+    },120);
   }
-  reset();
+  function applyTilt(rx,ry){if(animating)return;tilt.style.transition='none';tilt.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`}
+  function resetTilt(){tilt.style.transition='transform .3s ease';tilt.style.transform='rotateX(0) rotateY(0)'}
+  scene.addEventListener('click',doFlip);
+  scene.addEventListener('mousemove',e=>{const r=scene.getBoundingClientRect();applyTilt(-((e.clientY-r.top)/r.height-.5)*8,((e.clientX-r.left)/r.width-.5)*10)});
+  scene.addEventListener('mouseleave',resetTilt);
+  scene.addEventListener('touchmove',e=>{const t=e.touches[0],r=scene.getBoundingClientRect();applyTilt(-((t.clientY-r.top)/r.height-.5)*6,((t.clientX-r.left)/r.width-.5)*8)},{passive:true});
+  scene.addEventListener('touchend',resetTilt);
+  const f0=inner.querySelector('.fc-face:not(.fc-back)'),b0=inner.querySelector('.fc-back');
+  f0.style.transition='none';f0.style.opacity='1';b0.style.transition='none';b0.style.opacity='0';
+  tilt.style.transition='none';inner.style.transition='none';inner.style.transform='rotateY(0deg)';
+  setTimeout(()=>scene.classList.remove('enter-right','enter-left'),450);
 }
 
-function doShuffle() {
-  filteredQ = getFiltered().sort(() => Math.random() - 0.5);
-  idx = 0; answered = false; sessionScore = 0; sessionTotal = 0;
-  document.getElementById('score-display').style.display = 'none';
-  render();
-}
-
-function reset() {
-  filteredQ = getFiltered().sort(() => Math.random() - 0.5);
-  idx = 0; answered = false; sessionScore = 0; sessionTotal = 0;
-  document.getElementById('score-display').style.display = 'none';
-  render();
-}
-
-let _navDir = 0; // tracks direction for enter animation
-
-const bClass = d => d === 1 ? 'bd1' : d === 2 ? 'bd2' : 'bd3';
-const dLabel = d => 'Domain ' + d;
-
-function navClick(btn, dir) {
-  // Ripple effect
-  const ripple = document.createElement('span');
-  ripple.className = 'ripple';
-  const rect = btn.getBoundingClientRect();
-  const size = Math.max(rect.width, rect.height);
-  ripple.style.cssText = `width:${size}px;height:${size}px;left:${rect.width/2 - size/2}px;top:${rect.height/2 - size/2}px`;
-  btn.appendChild(ripple);
-  setTimeout(() => ripple.remove(), 600);
-  navigate(dir);
-}
-
-function navigate(dir) {
-  _navDir = dir;
-  idx = Math.max(0, Math.min(filteredQ.length - 1, idx + dir));
-  answered = false; render();
-}
-
-function render() {
-  if (!filteredQ.length) filteredQ = getFiltered().sort(() => Math.random() - 0.5);
-  if (!filteredQ.length) {
-    document.getElementById('card-area').innerHTML = '<div style="text-align:center;padding:2rem;color:var(--text3);font-size:.875rem">No questions match this selection.</div>';
-    return;
-  }
-  const q = filteredQ[idx];
-  document.getElementById('prog').style.width = Math.round(((idx + 1) / filteredQ.length) * 100) + '%';
-  document.getElementById('counter').textContent = (idx + 1) + ' / ' + filteredQ.length;
-  const sd = document.getElementById('score-display');
-  if (sessionTotal > 0) { sd.style.display = 'inline-block'; sd.textContent = sessionScore + ' / ' + sessionTotal + ' correct'; }
-  document.getElementById('prev-btn').disabled = idx === 0;
-  document.getElementById('next-btn').disabled = idx === filteredQ.length - 1;
-  const ca = document.getElementById('card-area');
-  ca.innerHTML = mode === 'fc' ? renderFC(q, _navDir) : mode === 'mc' ? renderMC(q) : renderTF(q);
-  _navDir = 0;
-
-  if (mode === 'fc') {
-    const scene = document.getElementById('fc-scene');
-    const tilt  = document.getElementById('fc-tilt');
-    const inner = document.getElementById('fc-inner');
-    let flipped = false;
-    let animating = false;
-
-    // Flip: only rotateY on fc-inner, 0 or 180 — never touches X
-    function doFlip() {
-      if (animating) return;
-      animating = true;
-      tilt.style.transition = 'transform .2s ease';
-      tilt.style.transform  = 'rotateX(0deg) rotateY(0deg)';
-      setTimeout(() => {
-        flipped = !flipped;
-        inner.style.transition = 'transform .65s cubic-bezier(.34,1.3,.64,1)';
-        inner.style.transform  = `rotateY(${flipped ? 180 : 0}deg)`;
-        const front = inner.querySelector('.fc-face:not(.fc-back)');
-        const back  = inner.querySelector('.fc-back');
-        if (flipped) {
-          // Fade front out quickly at the start of the flip
-          front.style.transition = 'opacity .12s ease';
-          front.style.opacity = '0';
-          // Fade back in just after the halfway point
-          setTimeout(() => {
-            back.style.transition = 'opacity .15s ease';
-            back.style.opacity = '1';
-          }, 350);
-        } else {
-          back.style.transition = 'opacity .12s ease';
-          back.style.opacity = '0';
-          setTimeout(() => {
-            front.style.transition = 'opacity .15s ease';
-            front.style.opacity = '1';
-          }, 350);
-        }
-        setTimeout(() => { animating = false; }, 700);
-      }, 120);
-    }
-
-    // Tilt: only on fc-tilt, small X+Y — fc-inner never sees these rotations
-    function applyTilt(rx, ry) {
-      if (animating) return;
-      tilt.style.transition = 'none';
-      tilt.style.transform  = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-    }
-
-    function resetTilt() {
-      tilt.style.transition = 'transform .3s ease';
-      tilt.style.transform  = 'rotateX(0deg) rotateY(0deg)';
-    }
-
-    scene.addEventListener('click', doFlip);
-
-    scene.addEventListener('mousemove', e => {
-      const r = scene.getBoundingClientRect();
-      const rx = -((e.clientY - r.top)  / r.height - 0.5) * 9;
-      const ry =  ((e.clientX - r.left) / r.width  - 0.5) * 12;
-      applyTilt(rx, ry);
-    });
-    scene.addEventListener('mouseleave', resetTilt);
-
-    scene.addEventListener('touchmove', e => {
-      const t = e.touches[0];
-      const r = scene.getBoundingClientRect();
-      const rx = -((t.clientY - r.top)  / r.height - 0.5) * 7;
-      const ry =  ((t.clientX - r.left) / r.width  - 0.5) * 10;
-      applyTilt(rx, ry);
-    }, { passive: true });
-    scene.addEventListener('touchend', resetTilt);
-
-    // Initialise — back face starts invisible, front visible
-    const front0 = inner.querySelector('.fc-face:not(.fc-back)');
-    const back0  = inner.querySelector('.fc-back');
-    front0.style.transition = 'none';
-    front0.style.opacity    = '1';
-    back0.style.transition  = 'none';
-    back0.style.opacity     = '0';
-
-    tilt.style.transition  = 'none';
-    inner.style.transition = 'none';
-    inner.style.transform  = 'rotateY(0deg)';
-    requestAnimationFrame(() => {
-      inner.style.transform = 'rotateY(0deg)';
-    });
-    setTimeout(() => scene.classList.remove('enter-right', 'enter-left'), 450);
-  }
-}
-
-function renderFC(q, dir) {
-  const dirClass = dir === 1 ? 'enter-right' : dir === -1 ? 'enter-left' : '';
+function renderFC(q,dir){
+  const dirClass=dir===1?'enter-right':dir===-1?'enter-left':'';
   return `<div class="fc-scene ${dirClass}" id="fc-scene">
     <div class="fc-tilt" id="fc-tilt">
       <div class="fc-inner" id="fc-inner">
         <div class="fc-face">
-          <span class="badge ${bClass(q.d)}" style="position:relative;z-index:1">${dLabel(q.d)}</span>
+          <span class="badge ${bClass(q.d)}" style="position:relative;z-index:1;margin-bottom:1rem">${dLabel(q.d)}</span>
           <p class="fc-q">${q.q}</p>
-          <p class="fc-hint">
-            <span class="fc-hint-icon">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
-            </span>
+          <span class="fc-hint">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 12a9 9 0 0 1 9-9M3 12l3-3M3 12l3 3"/></svg>
             Tap to flip
-          </p>
+          </span>
         </div>
         <div class="fc-face fc-back">
-          <span class="badge" style="background:rgba(255,255,255,0.6);border:1px solid rgba(0,0,0,0.1);color:var(--text3);margin-bottom:.875rem;position:relative;z-index:1">Answer</span>
-          <p class="fc-q" style="opacity:.65;font-size:.9rem;margin-bottom:.875rem">${q.q}</p>
+          <span class="badge badge-fmt" style="position:relative;z-index:1;margin-bottom:.9rem">✨ Answer</span>
+          <p class="fc-q" style="font-size:.95rem;opacity:.65;margin-bottom:1rem">${q.q}</p>
           <p class="fc-a">${q.a}</p>
         </div>
       </div>
@@ -914,183 +969,189 @@ function renderFC(q, dir) {
   </div>`;
 }
 
-function renderMC(q) {
-  const L = ['A','B','C','D'];
-  const opts = q.ch.map((c,i) => `<button class="option" id="o${i}" onclick="answerMC(${i},${q.c},${q.ch.length})">${L[i]}.&nbsp; ${c}</button>`).join('');
-  return `<div class="card"><span class="badge ${bClass(q.d)}">${dLabel(q.d)}</span><p class="q-stem">${q.q}</p><div class="options">${opts}</div><div id="expl" class="expl"></div></div>`;
+function renderMC(q){
+  const L=['A','B','C','D'];
+  const opts=q.ch.map((c,i)=>`<button class="option" id="o${i}" onclick="answerMC(${i},${q.c},${q.ch.length})"><span class="o-key">${L[i]}</span><span>${c}</span></button>`).join('');
+  return `<div class="qcard"><div class="qhead"><span class="badge ${bClass(q.d)}">${dLabel(q.d)}</span></div><p class="qstem">${q.q}</p><div class="options">${opts}</div><div id="expl" class="expl"></div></div>`;
 }
 
-function answerMC(chosen, correct, n) {
-  if (answered) return;
-  answered = true; sessionTotal++;
-  if (chosen === correct) sessionScore++;
-  for (let i = 0; i < n; i++) {
-    const el = document.getElementById('o' + i); el.disabled = true;
-    if (i === correct) el.classList.add('correct');
-    else if (i === chosen && chosen !== correct) el.classList.add('incorrect');
-  }
-  showExpl((chosen === correct ? '✓ Correct — ' : '✗ Incorrect — ') + filteredQ[idx].ex);
-  updateSD();
-  if (idx < filteredQ.length - 1) setTimeout(() => navigate(1), 2000);
+function answerMC(chosen,correct,n){
+  if(answered)return;answered=true;sessionTotal++;
+  const ok=chosen===correct;
+  if(ok){sessionScore++;streak++;xp+=10;setMascot('cheer',CHEERS[Math.floor(Math.random()*CHEERS.length)])}
+  else{loseHeart();streak=0;setMascot('sad',OOPS[Math.floor(Math.random()*OOPS.length)])}
+  for(let i=0;i<n;i++){const el=document.getElementById('o'+i);el.disabled=true;if(i===correct)el.classList.add('correct');else if(i===chosen&&!ok)el.classList.add('incorrect')}
+  showExpl(filteredQ[idx].ex,ok);updateHUD();
+  if(idx<filteredQ.length-1)setTimeout(()=>navigate(1),2200);
 }
 
-function renderTF(q) {
-  return `<div class="card"><span class="badge ${bClass(q.d)}">${dLabel(q.d)}</span><p class="q-stem">${q.q}</p>
-    <div class="tf-row"><button class="tf-btn" id="tft" onclick="answerTF(true,${q.c})">True</button><button class="tf-btn" id="tff" onclick="answerTF(false,${q.c})">False</button></div>
+function renderTF(q){
+  return `<div class="qcard"><div class="qhead"><span class="badge ${bClass(q.d)}">${dLabel(q.d)}</span></div><p class="qstem">${q.q}</p>
+    <div class="tf-row">
+      <button class="tf-btn true-btn" id="tft" onclick="answerTF(true,${q.c})">✓ True</button>
+      <button class="tf-btn false-btn" id="tff" onclick="answerTF(false,${q.c})">✗ False</button>
+    </div>
     <div id="expl" class="expl"></div></div>`;
 }
 
-function answerTF(chosen, correct) {
-  if (answered) return;
-  answered = true; sessionTotal++;
-  const ok = chosen === correct;
-  if (ok) sessionScore++;
-  document.getElementById('tft').disabled = true; document.getElementById('tff').disabled = true;
-  document.getElementById(chosen ? 'tft' : 'tff').classList.add(ok ? 'correct' : 'incorrect');
-  if (!ok) document.getElementById(correct ? 'tft' : 'tff').classList.add('correct');
-  showExpl((ok ? '✓ Correct — ' : '✗ Incorrect — ') + filteredQ[idx].ex);
-  updateSD();
-  if (idx < filteredQ.length - 1) setTimeout(() => navigate(1), 2000);
+function answerTF(chosen,correct){
+  if(answered)return;answered=true;sessionTotal++;
+  const ok=chosen===correct;
+  if(ok){sessionScore++;streak++;xp+=10;setMascot('cheer',CHEERS[Math.floor(Math.random()*CHEERS.length)])}
+  else{loseHeart();streak=0;setMascot('sad',OOPS[Math.floor(Math.random()*OOPS.length)])}
+  document.getElementById('tft').disabled=true;document.getElementById('tff').disabled=true;
+  document.getElementById(chosen?'tft':'tff').classList.add(ok?'correct':'incorrect');
+  if(!ok)document.getElementById(correct?'tft':'tff').classList.add('correct');
+  showExpl(filteredQ[idx].ex,ok);updateHUD();
+  if(idx<filteredQ.length-1)setTimeout(()=>navigate(1),2200);
 }
 
-function showExpl(txt) { const e = document.getElementById('expl'); e.textContent = txt; e.style.display = 'block'; }
-function updateSD() { const sd = document.getElementById('score-display'); sd.style.display = 'inline-block'; sd.textContent = sessionScore + ' / ' + sessionTotal + ' correct'; }
+function loseHeart(){
+  if(hearts>0)hearts--;
+  const el=document.getElementById('hearts');
+  el.classList.remove('heart-pop');void el.offsetWidth;el.classList.add('heart-pop');
+}
 
-async function endSession() {
-  if (sessionTotal === 0) { alert('Answer at least one question before ending the session.'); return; }
-  const pct = Math.round((sessionScore / sessionTotal) * 100);
-  const now = new Date();
-  const s = {
-    date: now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
-    time: now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}),
-    score: sessionScore, total: sessionTotal, pct, mode,
-    domains: [...activeDomains].sort(), ts: Date.now()
-  };
+function showExpl(txt,ok){
+  const e=document.getElementById('expl');
+  e.className='expl show '+(ok?'right':'wrong');
+  e.innerHTML=`<span class="expl-icon">${ok?'✓':'!'}</span><span><strong>${ok?'Correct!':'Not quite.'}</strong> ${txt}</span>`;
+}
+
+async function endSession(){
+  if(sessionTotal===0){alert('Answer at least one question first!');return}
+  const pct=Math.round((sessionScore/sessionTotal)*100);
+  const now=new Date();
+  const s={date:now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),time:now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}),score:sessionScore,total:sessionTotal,pct,mode,domains:[...activeDomains].sort(),ts:Date.now(),xp,streak};
   await saveSession(s);
-  const grade = pct >= 90 ? 'Excellent' : pct >= 75 ? 'Good work' : pct >= 60 ? 'Keep going' : 'Needs more practice';
-  const col = pct >= 75 ? 'var(--green)' : pct >= 60 ? 'var(--amber)' : 'var(--red)';
-  document.getElementById('card-area').innerHTML = `<div class="sess-end">
-    <p style="font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:.75rem">Session complete</p>
-    <div class="big-pct" style="color:${col}">${pct}%</div>
-    <p class="grade-txt">${sessionScore} of ${sessionTotal} correct &mdash; ${grade}</p>
-    <div class="sess-actions">
-      <button class="icon-btn" onclick="startNew()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg> New session</button>
-      <button class="icon-btn primary" onclick="goProgress()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-4"/></svg> View progress</button>
+  const grade=pct>=90?'Legendary!':pct>=75?'Awesome work!':pct>=60?'Keep going!':'Practice makes perfect';
+  const col=pct>=75?'var(--good)':pct>=60?'var(--gold-shadow)':'var(--bad)';
+  const cheer=pct>=75;
+  const confetti=cheer?renderConfetti():'';
+  document.getElementById('card-area').innerHTML=`<div class="complete">
+    ${confetti}
+    <svg class="complete-mascot" viewBox="0 0 100 100" aria-hidden="true"><use href="#${cheer?'axel-cheer':'axel'}"/></svg>
+    <p class="label">Session complete</p>
+    <div class="pct" style="color:${col}">${pct}%</div>
+    <p class="grade">${grade}</p>
+    <p class="sub">${sessionScore} of ${sessionTotal} correct</p>
+    <div class="stat-row">
+      <div class="stat-tile"><div class="v" style="color:var(--coral-d)">+${xp}</div><div class="l">XP earned</div></div>
+      <div class="stat-tile"><div class="v" style="color:#A87A0E">${streak}</div><div class="l">Best streak</div></div>
+      <div class="stat-tile"><div class="v" style="color:var(--bad-shadow)">${hearts}/3</div><div class="l">Hearts left</div></div>
+    </div>
+    <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
+      <button class="b3d ghost sm" onclick="startNew()">↻ New session</button>
+      <button class="b3d teal sm" onclick="goProgress()">📊 View progress</button>
     </div>
   </div>`;
-  document.getElementById('prog').style.width = '100%';
-  document.getElementById('prev-btn').disabled = true;
-  document.getElementById('next-btn').disabled = true;
-  document.getElementById('end-session-btn').style.display = 'none';
-  document.getElementById('counter').textContent = 'Session saved';
+  document.getElementById('prog').style.width='100%';
+  document.getElementById('prev-btn').disabled=true;
+  document.getElementById('next-btn').disabled=true;
+  document.getElementById('end-session-btn').style.display='none';
+  document.getElementById('counter').textContent='Session saved';
+  document.getElementById('fmt-badge').textContent='';
+  setMascot(cheer?'cheer':'sad',cheer?'You did amazing!':'Nice effort — try another round!');
 }
 
-function startNew() {
-  sessionScore = 0; sessionTotal = 0; answered = false; idx = 0;
-  filteredQ = getFiltered().sort(() => Math.random() - 0.5);
-  document.getElementById('score-display').style.display = 'none';
-  document.getElementById('end-session-btn').style.display = '';
+function renderConfetti(){
+  const colors=['#FF6B4A','#34C9A1','#FFC83D','#9B5DE5','#3DB8FF','#FF4D8B'];
+  let html='<div class="confetti">';
+  for(let i=0;i<30;i++){
+    const c=colors[i%colors.length];const x=Math.random()*100;const d=Math.random()*1.4;const r=(Math.random()*360)|0;
+    html+=`<span style="left:${x}%;background:${c};animation-delay:${d}s;transform:rotate(${r}deg)"></span>`;
+  }
+  return html+'</div>';
+}
+
+function startNew(){
+  sessionScore=0;sessionTotal=0;answered=false;idx=0;streak=0;hearts=3;xp=0;
+  filteredQ=getFiltered();updateHUD();
+  document.getElementById('end-session-btn').style.display='';
+  setMascot('idle','Fresh round! Let\'s do this 💪');
   render();
 }
 
-function goProgress() {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector('.tab-btn[data-tab="progress"]').classList.add('active');
-  document.getElementById('quiz-tab').style.display = 'none';
-  document.getElementById('progress-tab').style.display = '';
-  document.getElementById('end-session-btn').style.display = 'none';
+function goProgress(){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.tab[data-tab="progress"]').classList.add('active');
+  document.getElementById('quiz-tab').style.display='none';
+  document.getElementById('progress-tab').style.display='';
+  document.getElementById('end-session-btn').style.display='none';
   renderProgress();
 }
 
-async function renderProgress() {
-  const pc = document.getElementById('progress-content');
-  pc.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--text3);font-size:.875rem">Loading…</div>';
-  setBanner('syncing', 'Fetching your sessions…');
-  let sessions = [];
-  try {
-    sessions = await getHistory();
-    hideBanner();
-  } catch(e) {
-    setBanner('error', 'Could not reach database — showing local data');
-    sessions = lsGet();
-  }
+async function renderProgress(){
+  const pc=document.getElementById('progress-content');
+  pc.innerHTML='<div style="text-align:center;padding:2rem;color:var(--ink3);font-weight:700">Loading…</div>';
+  setBanner('syncing','Fetching your sessions…');
+  let sessions=[];
+  try{sessions=await getHistory();hideBanner()}catch(e){setBanner('error','Could not reach cloud — showing local data');sessions=lsGet()}
 
-  if (!sessions.length) {
+  if(!sessions.length){
     hideBanner();
-    pc.innerHTML = `<div class="empty-state"><p style="font-size:2rem;margin-bottom:.75rem">📊</p><p>No sessions recorded yet.</p><p style="margin-top:.4rem;font-size:.8rem">Complete a quiz and tap "End session" to start tracking.</p></div>`;
+    pc.innerHTML=`<div class="empty"><svg width="80" height="80" viewBox="0 0 100 100" style="margin-bottom:.5rem"><use href="#axel"/></svg><p style="font-family:Fredoka,sans-serif;font-size:1.05rem;color:var(--ink);margin-bottom:.4rem">No sessions yet!</p><p style="font-size:.85rem;font-weight:600">Complete a quiz and tap "End" to start tracking.</p></div>`;
     return;
   }
 
-  const totalQ = sessions.reduce((a,s) => a + s.total, 0);
-  const totalC = sessions.reduce((a,s) => a + s.score, 0);
-  const avgPct = Math.round(totalC / totalQ * 100);
-  const best = Math.max(...sessions.map(s => s.pct));
-  const trend = sessions.length >= 2 ? sessions[sessions.length-1].pct - sessions[sessions.length-2].pct : null;
-  const trendStr = trend === null ? '—' : trend > 0 ? '+' + trend + '%' : trend < 0 ? trend + '%' : 'No change';
-  const trendCol = trend > 0 ? 'var(--green)' : trend < 0 ? 'var(--red)' : 'var(--text3)';
+  const totalQ=sessions.reduce((a,s)=>a+s.total,0);
+  const totalC=sessions.reduce((a,s)=>a+s.score,0);
+  const avgPct=Math.round(totalC/totalQ*100);
+  const best=Math.max(...sessions.map(s=>s.pct));
+  const totalXp=sessions.reduce((a,s)=>a+(s.xp||0),0);
 
-  const d1s = sessions.filter(s => s.domains && s.domains.includes(1));
-  const d2s = sessions.filter(s => s.domains && s.domains.includes(2));
-  const d3s = sessions.filter(s => s.domains && s.domains.includes(3));
-  const avgFor = arr => arr.length ? Math.round(arr.reduce((a,s) => a + s.pct, 0) / arr.length) : null;
+  const d1s=sessions.filter(s=>s.domains&&s.domains.includes(1));
+  const d2s=sessions.filter(s=>s.domains&&s.domains.includes(2));
+  const d3s=sessions.filter(s=>s.domains&&s.domains.includes(3));
+  const avgFor=arr=>arr.length?Math.round(arr.reduce((a,s)=>a+s.pct,0)/arr.length):null;
 
-  const recent10 = sessions.slice(-10);
-  const sparks = recent10.map(s => {
-    const h = Math.max(4, Math.round((s.pct/100)*40));
-    const col = s.pct >= 75 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626';
-    return `<div class="spark-col"><div class="spark-bw"><div class="spark-b" style="height:${h}px;background:${col}"></div></div><span class="spark-pct">${s.pct}%</span></div>`;
+  const recent10=sessions.slice(-10);
+  const sparks=recent10.map(s=>{
+    const h=Math.max(4,Math.round((s.pct/100)*44));
+    const col=s.pct>=75?'#34C9A1':s.pct>=50?'#FFC83D':'#FF5A5A';
+    return `<div class="spark-c"><div class="spark-bar"><div class="spark-fill" style="height:${h}px;background:${col}"></div></div><span class="spark-pct">${s.pct}%</span></div>`;
   }).join('');
 
-  const dBlock = (label,avg,arr) => {
-    if (avg === null) return `<div class="d-card"><p class="s-label">${label}</p><p class="d-pct" style="color:var(--text3)">—</p><p class="d-detail">No sessions yet</p></div>`;
-    const col = avg >= 75 ? 'var(--green)' : avg >= 50 ? 'var(--amber)' : 'var(--red)';
-    return `<div class="d-card"><p class="s-label">${label}</p><p class="d-pct" style="color:${col}">${avg}%</p><p class="d-detail">avg · ${arr.length} session${arr.length!==1?'s':''}</p></div>`;
+  const dBlock=(label,avg,arr,cls)=>{
+    if(avg===null)return `<div class="dom-card ${cls}"><p class="section-h" style="margin:0">${label}</p><p class="v" style="color:var(--ink3)">—</p><p class="s">No sessions yet</p></div>`;
+    const col=avg>=75?'var(--good)':avg>=50?'var(--gold-shadow)':'var(--bad)';
+    return `<div class="dom-card ${cls}"><p class="section-h" style="margin:0">${label}</p><p class="v" style="color:${col}">${avg}%</p><p class="s">avg · ${arr.length} session${arr.length!==1?'s':''}</p></div>`;
   };
 
-  const rows = sessions.slice().reverse().slice(0, 8).map(s => {
-    const col = s.pct >= 75 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626';
-    const ml = s.mode === 'fc' ? 'Flashcard' : s.mode === 'mc' ? 'Multiple choice' : 'True/False';
-    const doms = Array.isArray(s.domains) ? s.domains : [];
-    return `<div class="sess-row">
-      <span class="sr-date">${s.date} · ${s.time}</span>
-      <div class="sr-bw"><div class="sr-b" style="width:${s.pct}%;background:${col}"></div></div>
-      <span class="sr-pct" style="color:${col}">${s.pct}%</span>
-      <span class="sr-meta">${ml}${doms.length?' · D'+doms.join(','):''}</span>
-    </div>`;
+  const rows=sessions.slice().reverse().slice(0,8).map(s=>{
+    const col=s.pct>=75?'#34C9A1':s.pct>=50?'#FFC83D':'#FF5A5A';
+    const ml=s.mode==='fc'?'Flashcard':s.mode==='mc'?'Multi':s.mode==='mx'?'Mixed':'T/F';
+    const doms=Array.isArray(s.domains)?s.domains:[];
+    return `<div class="sess-row"><span class="sr-date">${s.date} · ${s.time}</span><div class="sr-bar"><div style="width:${s.pct}%;background:${col}"></div></div><span class="sr-pct" style="color:${col}">${s.pct}%</span><span class="sr-meta">${ml}${doms.length?' · D'+doms.join(','):''}</span></div>`;
   }).join('');
 
-  const syncNote = !configured()
-    ? `<p style="font-size:.75rem;color:var(--amber);background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:var(--r);padding:8px 12px;margin-bottom:1rem">⚠ Add your Supabase credentials to the HTML file to enable cross-device sync.</p>`
-    : offlineMode
-    ? `<p style="font-size:.75rem;color:var(--text3);margin-bottom:.75rem">Offline mode — progress is device-local only.</p>`
-    : '';
+  const syncNote=!configured()?`<div style="font-size:.78rem;color:var(--gold-shadow);background:#FFF6E0;border:2px solid #F5DC92;border-radius:12px;padding:.7rem .9rem;margin-bottom:1rem;font-weight:700">⚠ Add Supabase credentials to enable cross-device sync.</div>`:offlineMode?`<p style="font-size:.78rem;color:var(--ink3);margin-bottom:.75rem;font-weight:700">Offline mode — progress is device-local only.</p>`:'';
 
-  pc.innerHTML = `
-    <div class="flex-between"><p style="font-size:1rem;font-weight:500;color:var(--text)">Your progress</p><button class="clear-link" onclick="confirmClear()">Clear history</button></div>
+  pc.innerHTML=`
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.25rem;gap:1rem">
+      <div><p class="ptitle">Your stats</p><p class="psub">${sessions.length} session${sessions.length!==1?'s':''} · ${totalQ} questions answered</p></div>
+      <button class="clear-link" onclick="confirmClear()">Clear history</button>
+    </div>
     ${syncNote}
-    <div class="metrics-grid">
-      <div class="m-card"><p class="m-label">Overall accuracy</p><p class="m-val">${avgPct}%</p><p class="m-sub">${totalC} of ${totalQ} correct</p></div>
-      <div class="m-card"><p class="m-label">Sessions</p><p class="m-val">${sessions.length}</p><p class="m-sub">${totalQ} questions answered</p></div>
-      <div class="m-card"><p class="m-label">Best session</p><p class="m-val">${best}%</p></div>
-      <div class="m-card"><p class="m-label">Trend</p><p class="m-val" style="color:${trendCol}">${trendStr}</p><p class="m-sub">vs previous session</p></div>
+    <div class="metrics">
+      <div class="mcard"><p class="l">Accuracy</p><p class="v" style="color:var(--good)">${avgPct}%</p><p class="s">${totalC} of ${totalQ} correct</p></div>
+      <div class="mcard"><p class="l">Best score</p><p class="v" style="color:var(--coral-d)">${best}%</p><p class="s">in one session</p></div>
+      <div class="mcard"><p class="l">Total XP</p><p class="v" style="color:#A87A0E">${totalXp}</p><p class="s">earned all-time</p></div>
+      <div class="mcard"><p class="l">Sessions</p><p class="v" style="color:var(--plum)">${sessions.length}</p><p class="s">completed</p></div>
     </div>
-    <p class="s-label">Last ${recent10.length} session${recent10.length!==1?'s':''}</p>
-    <div class="spark-wrap" style="margin-bottom:1.5rem">${sparks}</div>
-    <p class="s-label" style="margin-bottom:.625rem">By domain</p>
-    <div class="d-grid" style="margin-bottom:1.5rem">
-      ${dBlock('Domain 1', avgFor(d1s), d1s)}
-      ${dBlock('Domain 2', avgFor(d2s), d2s)}
-      ${dBlock('Domain 3', avgFor(d3s), d3s)}
+    <p class="section-h">Last ${recent10.length} session${recent10.length!==1?'s':''}</p>
+    <div class="spark">${sparks}</div>
+    <p class="section-h">By domain</p>
+    <div class="domain-grid">
+      ${dBlock('D1 · Disabilities',avgFor(d1s),d1s,'d1')}
+      ${dBlock('D2 · Universal Design',avgFor(d2s),d2s,'d2')}
+      ${dBlock('D3 · Standards & Law',avgFor(d3s),d3s,'d3')}
     </div>
-    <p class="s-label">Recent sessions</p>
+    <p class="section-h">Recent sessions</p>
     <div class="sess-list">${rows}</div>`;
 }
 
-async function confirmClear() {
-  if (!confirm('Clear all session history? This cannot be undone.')) return;
-  await clearHistory();
-  renderProgress();
-}
+async function confirmClear(){if(!confirm('Clear all session history? This cannot be undone.'))return;await clearHistory();renderProgress()}
 </script>
 </body>
 </html>
