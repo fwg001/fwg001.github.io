@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPACC Study Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#F7F5F0; --surface:#FFFFFF; --surface2:#F0EDE6;
+    --border:rgba(0,0,0,0.09); --border2:rgba(0,0,0,0.15);
+    --text:#1A1916; --text2:#6B6860; --text3:#6E6B65;
+    --accent:#2563EB; --accent-bg:#EFF4FF; --accent-border:#BFCFFD;
+    --green:#00862D; --green-bg:#F0FDF4; --green-border:#86EFAC;
+    --red:#DA2424;   --red-bg:#FEF2F2;   --red-border:#FECACA;
+    --amber:#BA5800; --amber-bg:#FFFBEB; --amber-border:#FDE68A;
+    --d1-bg:#EFF4FF; --d1-text:#1D4ED8; --d1-border:#BFCFFD;
+    --d2-bg:#F0FDF4; --d2-text:#15803D; --d2-border:#86EFAC;
+    --d3-bg:#FAF5FF; --d3-text:#7C3AED; --d3-border:#DDD6FE;
+    --r:8px; --rl:14px;
+    --shadow:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.05);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+  .shell{max-width:720px;margin:0 auto;padding:0 1rem 4rem}
+  header{padding:2rem 0 1.5rem;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
+  .header-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .wordmark{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--text);letter-spacing:-0.01em}
+  .wordmark span{color:var(--accent)}
+  .tagline{font-size:.75rem;color:var(--text3);font-weight:300;margin-top:2px;letter-spacing:.04em;text-transform:uppercase}
+  .user-chip{display:flex;align-items:center;gap:7px;padding:5px 11px;border-radius:20px;border:1px solid var(--border2);background:var(--surface);font-size:.75rem;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif}
+  .user-chip:hover{background:var(--surface2)}
+  .u-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
+  .u-dot.off{background:var(--text3)}
+
+  /* Auth */
+  .auth-overlay{position:fixed;inset:0;background:rgba(247,245,240,0.97);display:flex;align-items:center;justify-content:center;z-index:100;padding:1rem}
+  .auth-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:2.25rem 2rem;max-width:380px;width:100%;box-shadow:var(--shadow)}
+  .auth-title{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--text);margin-bottom:.375rem}
+  .auth-sub{font-size:.875rem;color:var(--text2);margin-bottom:1.5rem;line-height:1.55}
+  .auth-input{width:100%;padding:10px 12px;border-radius:var(--r);border:1px solid var(--border2);background:var(--surface);font-size:.9375rem;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;margin-bottom:.75rem;transition:border-color .15s}
+  .auth-input:focus{border-color:var(--accent)}
+  .auth-btn{width:100%;padding:10px;border-radius:var(--r);background:var(--accent);color:#fff;border:none;font-size:.9375rem;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer}
+  .auth-btn:hover{background:#1D4ED8}
+  .auth-btn:disabled{opacity:.6;cursor:default}
+  .auth-note{font-size:.75rem;color:var(--text3);margin-top:.875rem;line-height:1.55}
+  .auth-skip{background:none;border:none;color:var(--text3);font-size:.75rem;font-family:'DM Sans',sans-serif;cursor:pointer;text-decoration:underline;margin-top:.5rem;display:block;width:100%;text-align:center}
+  .auth-error{font-size:.8125rem;color:var(--red);margin-bottom:.75rem;display:none}
+
+  /* Tabs */
+  .tabs{display:flex;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:3px;margin-bottom:1.5rem;width:fit-content}
+  .tab-btn{padding:6px 16px;font-size:.8125rem;font-weight:500;font-family:'DM Sans',sans-serif;color:var(--text2);background:none;border:none;border-radius:calc(var(--r) - 2px);cursor:pointer;display:flex;align-items:center;gap:6px}
+  .tab-btn.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+
+  /* Controls */
+  .controls-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
+  .pill-btn{padding:5px 12px;font-size:.8rem;font-weight:500;font-family:'DM Sans',sans-serif;border-radius:20px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:5px}
+  .pill-btn:hover{background:var(--surface2)}
+  .pill-btn.active-d1{background:var(--d1-bg);color:var(--d1-text);border-color:var(--d1-border)}
+  .pill-btn.active-d2{background:var(--d2-bg);color:var(--d2-text);border-color:var(--d2-border)}
+  .pill-btn.active-d3{background:var(--d3-bg);color:var(--d3-text);border-color:var(--d3-border)}
+  .pill-btn.active-mode{background:var(--text);color:#fff;border-color:var(--text)}
+  .icon-btn{padding:6px 12px;font-size:.8rem;font-family:'DM Sans',sans-serif;font-weight:500;border-radius:var(--r);border:1px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .15s,transform .15s,box-shadow .15s}
+  .icon-btn:hover{background:var(--surface2);transform:scale(1.02)}
+  .icon-btn:active{transform:scale(0.97)}
+  .icon-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .icon-btn.primary:hover{background:#1D4ED8}
+  .icon-btn:disabled{opacity:.35;cursor:default;transform:none}
+  .divider{width:1px;height:20px;background:var(--border2);flex-shrink:0}
+
+  .prog-wrap{height:3px;background:var(--border);border-radius:2px;margin-bottom:1.25rem;overflow:hidden}
+  .prog-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s ease}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:1.5rem;box-shadow:var(--shadow);margin-bottom:.875rem}
+
+  /* ── Flashcard — deeply 3D ── */
+  .fc-scene {
+    perspective: 900px;
+    perspective-origin: 50% 40%;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    user-select: none;
+  }
+  /* Card enters from the side on navigation — on fc-tilt, not fc-inner */
+  @keyframes cardEnterRight {
+    from { opacity: 0; transform: rotateY(-14deg) translateX(36px) scale(0.96); }
+    to   { opacity: 1; transform: rotateY(0deg)   translateX(0)    scale(1); }
+  }
+  @keyframes cardEnterLeft {
+    from { opacity: 0; transform: rotateY(14deg)  translateX(-36px) scale(0.96); }
+    to   { opacity: 1; transform: rotateY(0deg)   translateX(0)     scale(1); }
+  }
+  .fc-scene.enter-right .fc-tilt { animation: cardEnterRight .42s cubic-bezier(.22,1,.36,1) both; }
+  .fc-scene.enter-left  .fc-tilt { animation: cardEnterLeft  .42s cubic-bezier(.22,1,.36,1) both; }
+
+  /* Tilt wrapper: tiny X/Y parallax only — never 180deg, so back face text stays correct */
+  .fc-tilt {
+    width: 100%;
+    transform-style: preserve-3d;
+    will-change: transform;
+    /* tilt transition is fast/instant via JS */
+  }
+  /* Flip inner: ONLY rotates Y by 0 or 180 — no X rotation ever touches this element */
+  .fc-inner {
+    position: relative;
+    width: 100%;
+    min-height: 220px;
+    transform-style: preserve-3d;
+    will-change: transform;
+    /* flip transition set by JS */
+  }
+
+  .fc-face {
+    position: absolute;
+    width: 100%;
+    min-height: 220px;
+    backface-visibility: hidden;
+    border-radius: 18px;
+    padding: 2.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* Layered shadow for depth */
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.04),
+      0 8px 24px rgba(0,0,0,0.08),
+      0 24px 48px rgba(0,0,0,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+    border: 1px solid rgba(0,0,0,0.07);
+    background: #FFFFFF;
+    overflow: hidden;
+  }
+  /* Subtle top sheen */
+  .fc-face::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(160deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 50%);
+    pointer-events: none;
+  }
+  /* Floating dot texture on front */
+  .fc-face::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: radial-gradient(circle, rgba(0,0,0,0.035) 1px, transparent 1px);
+    background-size: 22px 22px;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .fc-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(145deg, #F0EDE6 0%, #E8E4DC 100%);
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.05),
+      0 8px 24px rgba(0,0,0,0.1),
+      0 24px 48px rgba(0,0,0,0.08),
+      inset 0 1px 0 rgba(255,255,255,0.7);
+  }
+  .fc-back::after { display: none; }
+
+  .fc-q {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--text);
+    line-height: 1.45;
+    max-width: 520px;
+    position: relative;
+    z-index: 1;
+  }
+  .fc-a {
+    font-size: .9375rem;
+    color: var(--text);
+    line-height: 1.65;
+    max-width: 520px;
+    position: relative;
+    z-index: 1;
+  }
+  .fc-hint {
+    font-size: .7rem;
+    color: var(--text3);
+    margin-top: 1.1rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .fc-hint-icon {
+    display: inline-flex;
+    animation: hintBounce 2s ease-in-out infinite;
+  }
+  @keyframes hintBounce {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-3px); }
+  }
+
+  /* ── Nav buttons — expressive ── */
+  @keyframes arrowNudgeLeft  { 0%,100%{transform:translateX(0)} 50%{transform:translateX(-3px)} }
+  @keyframes arrowNudgeRight { 0%,100%{transform:translateX(0)} 50%{transform:translateX(3px)} }
+
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 20px;
+    font-size: .875rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    border-radius: 12px;
+    border: 1.5px solid var(--border2);
+    background: var(--surface);
+    color: var(--text2);
+    cursor: pointer;
+    transition:
+      background .15s,
+      border-color .15s,
+      color .15s,
+      transform .15s cubic-bezier(.34,1.56,.64,1),
+      box-shadow .15s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(37,99,235,0.08) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .nav-btn:not(:disabled):hover {
+    background: var(--surface);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: scale(1.04);
+    box-shadow: 0 4px 16px rgba(37,99,235,0.15), 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .nav-btn:not(:disabled):hover::before { opacity: 1; }
+  .nav-btn:not(:disabled):active {
+    transform: scale(0.97);
+    box-shadow: 0 1px 4px rgba(37,99,235,0.1);
+  }
+  .nav-btn:disabled { opacity: .3; cursor: default; }
+  .nav-btn .arrow { transition: transform .2s cubic-bezier(.34,1.56,.64,1); display: flex; align-items: center; }
+  .nav-btn:not(:disabled):hover .arrow-left  { transform: translateX(-3px); }
+  .nav-btn:not(:disabled):hover .arrow-right { transform: translateX(3px); }
+
+  /* Ripple on click */
+  .nav-btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(37,99,235,0.15);
+    transform: scale(0);
+    animation: ripple .5s ease-out forwards;
+    pointer-events: none;
+  }
+  @keyframes ripple {
+    to { transform: scale(4); opacity: 0; }
+  }
+
+  .q-stem{font-family:'DM Serif Display',serif;font-size:1.0625rem;color:var(--text);line-height:1.45;margin-bottom:1.25rem}
+  .options{display:flex;flex-direction:column;gap:7px}
+  .option{padding:10px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-size:.875rem;font-family:'DM Sans',sans-serif;text-align:left;width:100%}
+  .option:not(:disabled):hover{border-color:var(--border2);background:var(--surface2);color:var(--text)}
+  .option.correct{background:var(--green-bg);color:var(--green);border-color:var(--green-border)}
+  .option.incorrect{background:var(--red-bg);color:var(--red);border-color:var(--red-border)}
+  .option:disabled{cursor:default}
+  .tf-row{display:flex;gap:10px;margin-top:.25rem}
+  .tf-btn{flex:1;padding:11px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-size:.9375rem;font-weight:500;font-family:'DM Sans',sans-serif}
+  .tf-btn:not(:disabled):hover{border-color:var(--border2);background:var(--surface2);color:var(--text)}
+  .tf-btn.correct{background:var(--green-bg);color:var(--green);border-color:var(--green-border)}
+  .tf-btn.incorrect{background:var(--red-bg);color:var(--red);border-color:var(--red-border)}
+  .tf-btn:disabled{cursor:default}
+  .expl{margin-top:1rem;padding:10px 14px;background:var(--accent-bg);border-left:3px solid var(--accent);border-radius:0 var(--r) var(--r) 0;font-size:.8125rem;color:var(--text2);line-height:1.55;display:none}
+
+  .badge{display:inline-block;font-size:.6875rem;font-weight:500;padding:2px 8px;border-radius:20px;margin-bottom:.875rem;letter-spacing:.02em}
+  .bd1{background:var(--d1-bg);color:var(--d1-text);border:1px solid var(--d1-border)}
+  .bd2{background:var(--d2-bg);color:var(--d2-text);border:1px solid var(--d2-border)}
+  .bd3{background:var(--d3-bg);color:var(--d3-text);border:1px solid var(--d3-border)}
+
+  .nav-row{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem}
+  .nav-ctr{font-size:.8125rem;color:var(--text3);text-align:center}
+  .score-pill{display:inline-block;font-size:.75rem;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);margin-top:3px}
+
+  .sess-end{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:2.5rem 2rem;text-align:center;box-shadow:var(--shadow);margin-bottom:.875rem}
+  .big-pct{font-family:'DM Serif Display',serif;font-size:4rem;color:var(--text);line-height:1}
+  .grade-txt{font-size:.9375rem;color:var(--text2);margin-top:.4rem}
+  .sess-actions{display:flex;gap:10px;justify-content:center;margin-top:1.5rem;flex-wrap:wrap}
+
+  /* Progress */
+  .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.25rem}
+  .m-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.875rem 1rem}
+  .m-label{font-size:.7125rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+  .m-val{font-family:'DM Serif Display',serif;font-size:1.75rem;color:var(--text);line-height:1.1}
+  .m-sub{font-size:.7rem;color:var(--text3);margin-top:3px}
+  .s-label{font-size:.7125rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:.625rem;font-weight:500}
+  .spark-wrap{display:flex;gap:5px;align-items:flex-end;height:52px;margin-bottom:1.5rem}
+  .spark-col{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:0}
+  .spark-bw{width:100%;height:40px;background:var(--surface2);border-radius:4px;display:flex;align-items:flex-end;overflow:hidden}
+  .spark-b{width:100%;border-radius:3px}
+  .spark-pct{font-size:.625rem;color:var(--text3);white-space:nowrap}
+  .d-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
+  .d-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.875rem 1rem}
+  .d-pct{font-family:'DM Serif Display',serif;font-size:1.5rem;margin-top:4px}
+  .d-detail{font-size:.6875rem;color:var(--text3);margin-top:3px}
+  .sess-list{display:flex;flex-direction:column;gap:7px;margin-bottom:1.25rem}
+  .sess-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);font-size:.8125rem}
+  .sr-date{color:var(--text3);min-width:105px;font-size:.75rem}
+  .sr-bw{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden}
+  .sr-b{height:100%;border-radius:3px}
+  .sr-pct{font-weight:500;min-width:36px;text-align:right}
+  .sr-meta{font-size:.7rem;color:var(--text3);min-width:80px;text-align:right}
+
+  /* Sync banner */
+  .sync-banner{display:none;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);font-size:.75rem;color:var(--text3);margin-bottom:1rem}
+  .sync-banner.syncing{border-color:var(--accent-border);background:var(--accent-bg);color:#1D4ED8}
+  .sync-banner.error{border-color:var(--red-border);background:var(--red-bg);color:var(--red)}
+  .sync-banner.ok{border-color:var(--green-border);background:var(--green-bg);color:var(--green)}
+  .s-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .s-dot.spin{animation:pulse 1s infinite}
+
+  .empty-state{text-align:center;padding:3rem 1rem;border:1px dashed var(--border2);border-radius:var(--rl);color:var(--text3)}
+  .flex-between{display:flex;align-items:center;justify-content:space-between;margin-bottom:.625rem}
+  .clear-link{font-size:.75rem;color:var(--text3);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:'DM Sans',sans-serif}
+
+  @media(max-width:500px){
+    .wordmark{font-size:1.35rem}
+    .d-grid{gap:7px}
+    .d-card{padding:.625rem .75rem}
+    .d-pct{font-size:1.25rem}
+    .sess-row{flex-wrap:wrap}
+    .sr-date{min-width:unset}
+    .sr-meta{display:none}
+    .fc-q{font-size:1rem}
+    .big-pct{font-size:3rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── AUTH OVERLAY ── -->
+<div class="auth-overlay" id="auth-overlay">
+  <div class="auth-card">
+    <p class="auth-title">Welcome back</p>
+    <p class="auth-sub">Enter a passphrase to sync your progress across all your devices. Use the same passphrase everywhere.</p>
+    <input class="auth-input" type="password" id="pass-input" placeholder="Your passphrase" autocomplete="current-password">
+    <p class="auth-error" id="auth-err"></p>
+    <button class="auth-btn" id="auth-btn" onclick="signIn()">Continue</button>
+    <p class="auth-note">Your passphrase is hashed locally using SHA-256 and never transmitted. Sessions are stored in Supabase under the derived ID.</p>
+    <button class="auth-skip" onclick="skipAuth()">Skip — use offline mode (no sync)</button>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div class="shell">
+  <header>
+    <div class="header-inner">
+      <div>
+        <div class="wordmark">CPACC<span>.</span>quiz</div>
+        <div class="tagline">IAAP Body of Knowledge · Version 4.0</div>
+      </div>
+      <button class="user-chip" id="user-chip" onclick="showAuth()" style="display:none">
+        <div class="u-dot" id="u-dot"></div>
+        <span id="u-label">Offline</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('quiz',this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      Quiz
+    </button>
+    <button class="tab-btn" onclick="showTab('progress',this)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-4"/></svg>
+      Progress
+    </button>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-tab">
+    <div class="controls-row">
+      <button class="pill-btn active-mode" id="mb-fc" onclick="setMode('fc',this)">Flashcard</button>
+      <button class="pill-btn" id="mb-mc" onclick="setMode('mc',this)">Multiple choice</button>
+      <button class="pill-btn" id="mb-tf" onclick="setMode('tf',this)">True / false</button>
+      <div class="divider"></div>
+      <button class="pill-btn active-d1" id="df1" onclick="toggleDomain(1)">D1</button>
+      <button class="pill-btn active-d2" id="df2" onclick="toggleDomain(2)">D2</button>
+      <button class="pill-btn active-d3" id="df3" onclick="toggleDomain(3)">D3</button>
+      <div class="divider"></div>
+      <button class="icon-btn" onclick="doShuffle()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+        Shuffle
+      </button>
+      <button class="icon-btn primary" onclick="endSession()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
+        End session
+      </button>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+    <div id="card-area" style="min-height:220px"></div>
+    <div class="nav-row">
+      <button class="nav-btn" id="prev-btn" onclick="navClick(this,-1)" disabled>
+        <span class="arrow arrow-left">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </span>
+        Prev
+      </button>
+      <div class="nav-ctr">
+        <div id="counter">1 / 1</div>
+        <div id="score-display" style="display:none" class="score-pill"></div>
+      </div>
+      <button class="nav-btn" id="next-btn" onclick="navClick(this,1)">
+        Next
+        <span class="arrow arrow-right">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div id="progress-tab" style="display:none">
+    <div class="sync-banner" id="sync-banner">
+      <div class="s-dot" id="s-dot"></div>
+      <span id="sync-msg"></span>
+    </div>
+    <div id="progress-content"></div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   ⚙️  CONFIGURATION
+   ─────────────────────────────────────────────────────
+   Step 1 — Create a free project at supabase.com
+   Step 2 — Run this SQL in Supabase → SQL Editor:
+
+     create table sessions (
+       id uuid primary key default gen_random_uuid(),
+       user_id text not null,
+       created_at timestamptz default now(),
+       date text, time text,
+       score int, total int, pct int,
+       mode text, domains int[],
+       ts bigint
+     );
+     alter table sessions enable row level security;
+     create policy "anon insert" on sessions for insert
+       with check (true);
+     create policy "own rows" on sessions for select
+       using (user_id = current_setting('request.headers',true)::json->>'x-user-id');
+     create policy "own delete" on sessions for delete
+       using (user_id = current_setting('request.headers',true)::json->>'x-user-id');
+
+   Step 3 — Paste your Project URL and anon key below:
+   ═══════════════════════════════════════════════════════ */
+const SB_URL  = 'YOUR_SUPABASE_URL';       // e.g. https://abcxyz.supabase.co
+const SB_KEY  = 'YOUR_SUPABASE_ANON_KEY';  // starts with eyJ…
+/* ═══════════════════════════════════════════════════════ */
+
+const configured = () => SB_URL !== 'YOUR_SUPABASE_URL' && SB_KEY !== 'YOUR_SUPABASE_ANON_KEY';
+
+/* ── Identity ── */
+let userId = null, offlineMode = false;
+
+async function hashPass(p) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(p.trim().toLowerCase()));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,32);
+}
+
+async function signIn() {
+  const pass = document.getElementById('pass-input').value.trim();
+  if (!pass) { showErr('Please enter a passphrase.'); return; }
+  const btn = document.getElementById('auth-btn');
+  btn.disabled = true; btn.textContent = 'Signing in…';
+  try {
+    userId = await hashPass(pass);
+    const hint = pass.slice(0,2) + '…';
+    localStorage.setItem('cpacc_uid', userId);
+    localStorage.setItem('cpacc_hint', hint);
+    document.getElementById('auth-overlay').style.display = 'none';
+    setChip(true, hint);
+    reset();
+  } catch(e) {
+    showErr('Something went wrong — try again.');
+    btn.disabled = false; btn.textContent = 'Continue';
+  }
+}
+
+function skipAuth() {
+  offlineMode = true;
+  document.getElementById('auth-overlay').style.display = 'none';
+  setChip(false, 'Offline mode');
+  reset();
+}
+
+function showErr(msg) {
+  const el = document.getElementById('auth-err');
+  el.textContent = msg; el.style.display = 'block';
+}
+
+function showAuth() {
+  document.getElementById('auth-err').style.display = 'none';
+  document.getElementById('pass-input').value = '';
+  document.getElementById('auth-overlay').style.display = 'flex';
+}
+
+function setChip(synced, label) {
+  const chip = document.getElementById('user-chip');
+  chip.style.display = 'flex';
+  document.getElementById('u-dot').className = 'u-dot' + (synced ? '' : ' off');
+  document.getElementById('u-label').textContent = synced ? 'Synced · ' + label : label;
+}
+
+window.addEventListener('load', () => {
+  const uid = localStorage.getItem('cpacc_uid');
+  if (uid) {
+    userId = uid;
+    document.getElementById('auth-overlay').style.display = 'none';
+    setChip(true, localStorage.getItem('cpacc_hint') || '••');
+    reset();
+  }
+  document.getElementById('pass-input').addEventListener('keydown', e => { if (e.key === 'Enter') signIn(); });
+});
+
+/* ── Supabase REST ── */
+async function sbFetch(path, opts = {}) {
+  const res = await fetch(SB_URL + '/rest/v1' + path, {
+    ...opts,
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SB_KEY,
+      'Authorization': 'Bearer ' + SB_KEY,
+      'x-user-id': userId,
+      ...(opts.headers || {})
+    }
+  });
+  if (!res.ok) throw new Error(await res.text());
+  if (res.status === 204 || res.headers.get('content-length') === '0') return null;
+  return res.json();
+}
+
+async function remoteFetch() {
+  return await sbFetch(`/sessions?user_id=eq.${userId}&order=ts.asc&limit=500`, { method: 'GET' }) || [];
+}
+
+async function remoteInsert(s) {
+  await sbFetch('/sessions', {
+    method: 'POST',
+    headers: { 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ ...s, user_id: userId })
+  });
+}
+
+async function remoteDelete() {
+  await sbFetch(`/sessions?user_id=eq.${userId}`, { method: 'DELETE' });
+}
+
+/* ── Storage (remote + local fallback) ── */
+const LS_KEY = 'cpacc_sessions';
+const lsGet  = () => { try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch(e) { return []; }};
+const lsSave = a  => localStorage.setItem(LS_KEY, JSON.stringify(a));
+const lsPush = s  => { const a = lsGet(); a.push(s); lsSave(a); };
+
+async function getHistory() {
+  if (!offlineMode && userId && configured()) {
+    const remote = await remoteFetch();
+    lsSave(remote);
+    return remote;
+  }
+  return lsGet();
+}
+
+async function saveSession(s) {
+  lsPush(s);
+  if (!offlineMode && userId && configured()) {
+    setBanner('syncing', 'Saving to cloud…');
+    try {
+      await remoteInsert(s);
+      setBanner('ok', 'Saved to cloud');
+      setTimeout(hideBanner, 2500);
+    } catch(e) {
+      setBanner('error', 'Saved locally — could not reach database');
+    }
+  }
+}
+
+async function clearHistory() {
+  lsSave([]);
+  if (!offlineMode && userId && configured()) {
+    try { await remoteDelete(); } catch(e) {}
+  }
+}
+
+/* ── Sync banner ── */
+function setBanner(state, msg) {
+  const b = document.getElementById('sync-banner');
+  const d = document.getElementById('s-dot');
+  b.style.display = 'flex';
+  b.className = 'sync-banner ' + state;
+  d.className = 's-dot' + (state === 'syncing' ? ' spin' : '');
+  document.getElementById('sync-msg').textContent = msg;
+}
+function hideBanner() { document.getElementById('sync-banner').style.display = 'none'; }
+
+/* ═══════════════════════════════════════════════════════
+   QUESTION DATABASE
+════════════════════════════════════════════════════════ */
+const QDB = [
+  /* ── DOMAIN 1: FLASHCARDS ── */
+  {d:1,t:'fc',q:'What is the medical model of disability?',a:'Views disability as a problem of the individual caused by disease or health conditions, requiring medical cure or management. Political response focuses on reforming healthcare policy.'},
+  {d:1,t:'fc',q:'What is the social model of disability?',a:'Holds that society\'s barriers and inaccessible environments cause disability, not the individual\'s impairment. Equal access is a human rights issue; change must come from society.'},
+  {d:1,t:'fc',q:'What is the biopsychosocial model?',a:'Integrates biological, psychological, and social factors. First conceptualized by George Engel in 1977. The WHO\'s ICF (International Classification of Functioning, 2002) is derived from this model.'},
+  {d:1,t:'fc',q:'What is the functional solutions model?',a:'A practical perspective identifying functional limitations and promoting technological or methodological solutions. The work of accessibility professionals can be viewed through this lens.'},
+  {d:1,t:'fc',q:'What is the charity model of disability?',a:'Regards people with disabilities as unfortunate and in need of outside help. Related to the medical model (individual problem) and economic model (financial consequences). Can be condescending and focuses on short-term needs.'},
+  {d:1,t:'fc',q:'What is the social identity or cultural affiliation model?',a:'Derives personal identity from membership in a group of like-minded individuals. Most evident in Deaf culture. Accepts disability as a point of pride; weakness is potential exclusion for those who don\'t fit group expectations.'},
+  {d:1,t:'fc',q:'Name 4 assistive technologies for people with visual disabilities.',a:'Screen readers (convert text/structure to speech), refreshable braille displays, screen magnification software, audio description tracks, GPS navigation with audio, canes, service animals.'},
+  {d:1,t:'fc',q:'What is Central Auditory Processing Disorder (APD)?',a:'An inability to interpret, organize, or analyze what is heard — not a hearing loss. The hearing pathway works but the brain doesn\'t process it correctly. Affects approximately 5% of the global population.'},
+  {d:1,t:'fc',q:'What is Deaf-Blindness and its primary communication mode?',a:'A sensory disability combining deafness and blindness. Most Deaf-Blind people retain some hearing/sight. Touch is the primary means of complex communication — tactile sign language, refreshable braille. Affects 0.2–2% of the world\'s population.'},
+  {d:1,t:'fc',q:'What is aphasia?',a:'A language disorder from neurological damage (most commonly stroke). Affects speech production/comprehension, reading, and writing. At least 2 million people in the US have aphasia.'},
+  {d:1,t:'fc',q:'What are the 3 types of psychogenic mutism?',a:'1. Elective mutism — chooses not to speak. 2. Selective mutism — wants to speak but cannot in certain situations due to anxiety. 3. Total mutism — does not speak at all.'},
+  {d:1,t:'fc',q:'What is the DSM-V IQ threshold for intellectual disability?',a:'Typically below 70–75, combined with impairments in adaptive behavior (conceptual, social, and practical skills) manifesting during the developmental period (childhood).'},
+  {d:1,t:'fc',q:'What is photosensitive epilepsy?',a:'Seizures triggered by flashing or flickering lights or patterns. Lights flashing 16–25 times per second are most likely to trigger a seizure. Affects approximately 3% of people with epilepsy.'},
+  {d:1,t:'fc',q:'What are people-first and identity-first language? Which does the UNCRPD use?',a:'People-first: "a person with a disability" — emphasizes the person. Identity-first: "disabled person" — treats disability as a key part of identity. The UNCRPD uses people-first language. Always ask the individual their preference.'},
+  {d:1,t:'fc',q:'According to the WHO, how many people experience significant disability globally?',a:'About 1.3 billion people — representing 16% of the world\'s population, or 1 in 6 people.'},
+  {d:1,t:'fc',q:'What ICT barriers do people with visual disabilities commonly face?',a:'Images without text alternatives, text that can\'t be resized, missing heading structure/navigation aids, video without audio description, insufficient color contrast, sites that don\'t work with keyboard-only navigation.'},
+  {d:1,t:'fc',q:'What is the difference between adaptive strategies and assistive technologies?',a:'Assistive technologies are products/devices used to perform tasks otherwise impossible. Adaptive strategies are tweaks and adjustments (e.g., settings changes, moving closer to a speaker) to perform daily activities more independently.'},
+  /* ── DOMAIN 1: MC ── */
+  {d:1,t:'mc',q:'The charity model is most closely related to which other disability model?',ch:['Social model','Biopsychosocial model','Medical model','Functional solutions model'],c:2,ex:'The charity model is related to the medical model (individual problem) and economic model (financial consequences to the individual).'},
+  {d:1,t:'mc',q:'Which ICT assistive technology is specifically designed for Deaf-Blind users?',ch:['Cochlear implant','Screen reader with refreshable braille display','Haptic wearable','CART real-time captioning'],c:1,ex:'A screen reader converting text to braille on a refreshable braille device is the primary ICT tool for Deaf-Blind users.'},
+  {d:1,t:'mc',q:'Dyslexia is estimated to affect what percentage of the global population?',ch:['1–2%','5–10%','15–20%','25–30%'],c:1,ex:'5–10% of the population has dyslexia — potentially as high as 17%. Of people with reading difficulties, 70–80% likely have some form of dyslexia.'},
+  {d:1,t:'mc',q:'Red-green color vision deficiency affects what proportion of males?',ch:['1 in 50 (2%)','1 in 12 (8.3%)','1 in 200 (0.5%)','1 in 10,000'],c:1,ex:'Red-green defects affect 1 in 12 males (8.3%) and 1 in 200 females (0.5%). Blue-yellow defects affect males and females equally.'},
+  {d:1,t:'mc',q:'Which disability model most directly aligns with accessibility professionals\' daily work?',ch:['Charity model','Economic model','Functional solutions model','Social identity model'],c:2,ex:'The functional solutions model identifies limitations and promotes technological/methodological solutions — directly what accessibility professionals do.'},
+  {d:1,t:'mc',q:'Selective mutism affects what percentage of the population?',ch:['0.47–0.76%','2–3%','5–7%','10–12%'],c:0,ex:'Selective mutism is estimated to affect 0.47–0.76% of the population. It is psychogenic — anxiety-based, not caused by brain injury.'},
+  {d:1,t:'mc',q:'According to the WHO, approximately how many people globally have epilepsy?',ch:['10 million','25 million','50 million','100 million'],c:2,ex:'According to the WHO, 50 million people have epilepsy globally, making it one of the most common neurological diseases.'},
+  {d:1,t:'mc',q:'How many people in the EU use sign language as their first language?',ch:['75,000','250,000','750,000','2.5 million'],c:2,ex:'According to the European Commission Knowledge Centre on Interpretation, 750,000 persons in the EU use sign language as their first language.'},
+  /* ── DOMAIN 1: TF ── */
+  {d:1,t:'tf',q:'The social model of disability holds that disability is caused by a person\'s impairment, not by society.',c:false,ex:'False. The social model says society\'s barriers and inaccessible environments cause disability — not the individual\'s impairment or difference.'},
+  {d:1,t:'tf',q:'Deaf-Blindness always means a person is completely deaf and completely blind.',c:false,ex:'False. Most people who are Deaf-Blind are NOT completely deaf nor completely blind — they retain some hearing and sight capability.'},
+  {d:1,t:'tf',q:'The WHO estimates approximately 430 million people globally have disabling hearing loss.',c:true,ex:'True. The WHO estimates approximately 430 million people have disabling hearing loss.'},
+  {d:1,t:'tf',q:'Selective mutism is a type of neurogenic mutism caused by brain injury.',c:false,ex:'False. Selective mutism is psychogenic (anxiety-based). Neurogenic mutism is caused by brain injury — often a result of aphasia, apraxia, or dysarthria.'},
+  {d:1,t:'tf',q:'About 246 million people (3.5% of the world\'s population) have low vision according to WHO.',c:true,ex:'True. The WHO reports about 246 million people, or 3.5% of the world\'s population, have low vision. About 90% live in low-income settings.'},
+  {d:1,t:'tf',q:'Web pages that flash more than 3 times per second are a concern for people with seizure disorders.',c:true,ex:'True. Accessibility guidelines require pages not contain anything that flashes more than three times per second, or the flash must be below general flash and red flash thresholds.'},
+  {d:1,t:'tf',q:'In the CPACC BoK, AT for cognitive disabilities is organized by diagnosis.',c:false,ex:'False. Adaptive strategies and AT for cognitive disabilities are organized by mental function (attention, memory, perceptual), NOT by specific diagnosis.'},
+  /* ── DOMAIN 2: FLASHCARDS ── */
+  {d:2,t:'fc',q:'What is the key distinction between universal design and reasonable accommodation?',a:'Universal design proactively creates products/environments usable by everyone without needing adaptation. Reasonable accommodation is a reactive, case-by-case modification for a specific individual\'s needs.'},
+  {d:2,t:'fc',q:'Name the 7 Principles of Universal Design.',a:'1. Equitable Use  2. Flexibility in Use  3. Simple and Intuitive Use  4. Perceptible Information  5. Tolerance for Error  6. Low Physical Effort  7. Size and Space for Approach and Use'},
+  {d:2,t:'fc',q:'Who developed the 7 Principles of Universal Design and when?',a:'A working group led by Ronald Mace at North Carolina State University (NCSU) in 1997, including architects, product designers, engineers, and environmental design researchers.'},
+  {d:2,t:'fc',q:'What are the three UDL guidelines and their nicknames?',a:'1. Multiple Means of Engagement — "the Why of learning"  2. Multiple Means of Representation — "the What of learning"  3. Multiple Means of Action & Expression — "the How of learning"'},
+  {d:2,t:'fc',q:'What does WCAG\'s "Perceivable" principle require?',a:'Provide text alternatives for non-text content; captions and alternatives for multimedia; content presentable in different ways without losing meaning; make it easier for users to see and hear content.'},
+  {d:2,t:'fc',q:'What does WCAG\'s "Operable" principle require?',a:'Make all functionality available from a keyboard; give users enough time; avoid seizure-inducing content; help users navigate and find content; make it easier to use inputs other than a keyboard.'},
+  {d:2,t:'fc',q:'What does WCAG\'s "Robust" principle require?',a:'Maximize compatibility with current and future user tools. Content must be interpretable by a wide variety of user agents, including assistive technologies.'},
+  {d:2,t:'fc',q:'What is user-centered design?',a:'An approach putting the user at the center of every stage of design and development through user research, iterative design/prototyping, and user testing — including accessibility testing — throughout the process.'},
+  {d:2,t:'fc',q:'How does usability differ from user experience (UX)?',a:'Usability is a sub-discipline of UX focused on ease of use and proficiency. UX is broader, encompassing usability, useful content, desirability, accessibility, and credibility — every interaction a person has with a product.'},
+  {d:2,t:'fc',q:'What related concepts share the core idea of universal design?',a:'Inclusive design, Design for All, Human-centered design, and Life-span design. European standard EN 17161:2019 formalizes "Design for All" in an accessibility context.'},
+  /* ── DOMAIN 2: MC ── */
+  {d:2,t:'mc',q:'The "Flexibility in Use" principle of Universal Design includes which guideline?',ch:['Information in Braille on all signs','Accommodating right- or left-handed access and use','Maximizing compatibility with assistive technology','Providing warnings of hazards and errors'],c:1,ex:'Flexibility in Use includes: provide choice in methods of use, accommodate right- or left-handed access, facilitate accuracy, and adaptability to the user\'s pace.'},
+  {d:2,t:'mc',q:'Which UDL guideline addresses "the Why of learning"?',ch:['Representation','Action & Expression','Engagement','Comprehension'],c:2,ex:'Engagement is the "Why" — relating to affect, motivation, recruiting learners\' interest, sustaining effort, and self-regulation.'},
+  {d:2,t:'mc',q:'European standard EN 17161:2019 is associated with which concept?',ch:['WCAG 2.1','Design for All','Universal Design for Learning','Section 508'],c:1,ex:'EN 17161:2019 is the "Design for All" standard, supporting organisations to develop accessible products, goods, and services.'},
+  {d:2,t:'mc',q:'Which Universal Design principle requires redundant presentation through multiple modes (pictorial, verbal, tactile)?',ch:['Equitable Use','Simple and Intuitive Use','Perceptible Information','Tolerance for Error'],c:2,ex:'Perceptible Information requires using different modes for redundant presentation, adequate contrast, maximized legibility, and compatibility with sensory aid devices.'},
+  {d:2,t:'mc',q:'How many main principles and guidelines does WCAG 2.2 contain?',ch:['3 principles, 10 guidelines','4 principles, 13 guidelines','4 principles, 17 guidelines','5 principles, 13 guidelines'],c:1,ex:'WCAG 2.2 is structured into 4 main principles (POUR) and 13 guidelines.'},
+  {d:2,t:'mc',q:'In user-centered design, what is the recommended approach to the design process?',ch:['Linear — design then test once','Agile sprints only','Iterative — test throughout the process after each stage','Expert review at final stage'],c:2,ex:'User-centered design takes an iterative approach — testing is conducted after each stage, with accessibility testing included in iterative cycles.'},
+  /* ── DOMAIN 2: TF ── */
+  {d:2,t:'tf',q:'Universal Design principles were originally developed specifically for digital technology.',c:false,ex:'False. The 7 Principles were originally developed for the built environment by architects and designers at NCSU in 1997.'},
+  {d:2,t:'tf',q:'Adopting universal design eliminates the need for adaptive devices or reasonable accommodation.',c:false,ex:'False. Universal design does not prevent the use of adaptive devices or reasonable accommodation where needed — but it may reduce the extent or need for them.'},
+  {d:2,t:'tf',q:'Web accessibility only benefits people with permanent disabilities.',c:false,ex:'False. Web accessibility also benefits older people, people using mobile phones, those with temporary disabilities, and situational limitations like bright sunlight.'},
+  {d:2,t:'tf',q:'"Perceptible Information" in Universal Design requires redundant presentation through multiple modes.',c:true,ex:'True. Perceptible Information uses different modes (pictorial, verbal, tactile) for redundant presentation of essential information.'},
+  {d:2,t:'tf',q:'The cost of integrating Universal Design is typically lower when built in from the start vs. retrofitted.',c:true,ex:'True. The cost of not integrating UD into the initial design and construction stages of a building is often greater than its overall construction cost.'},
+  /* ── DOMAIN 3: FLASHCARDS ── */
+  {d:3,t:'fc',q:'What is the CRPD and when was it adopted?',a:'The Convention on the Rights of Persons with Disabilities — adopted by the UN in 2006. The first binding international human rights instrument specifically addressing disability rights. Over 160 countries signed, more than 180 ratified.'},
+  {d:3,t:'fc',q:'What is the purpose of the Marrakesh Treaty?',a:'Ensures people with vision or print disabilities have access to books and printed materials. Adopted in 2013, it creates a copyright exception allowing accessible format copies to be made and distributed without permission.'},
+  {d:3,t:'fc',q:'What does the ADA guarantee?',a:'Equal opportunities for people with disabilities in public accommodations, employment, transportation, state/local government services, and telecommunications. Enacted in 1990, modeled on civil rights protections for race, sex, etc.'},
+  {d:3,t:'fc',q:'What is Section 508 of the Rehabilitation Act?',a:'Requires US federal agencies to ensure electronic and information technology is accessible to people with disabilities — both federal employees and members of the public seeking agency information or services.'},
+  {d:3,t:'fc',q:'What are the four phases of the W3C WAI accessibility planning cycle?',a:'Initiate (build organizational support) → Plan (create policy, assign roles, set budget) → Implement (build skills, integrate goals) → Sustain (monitor, engage stakeholders, track standards). ICT accessibility must be a program, not a project.'},
+  {d:3,t:'fc',q:'What is an accessibility maturity model?',a:'A tool for organizations to measure and benchmark progress in integrating accessibility. The Business Disability Forum model uses 5 levels: 1. Informal, 2. Defined, 3. Repeatable, 4. Managed, 5. Best practice.'},
+  {d:3,t:'fc',q:'What is the European Accessibility Act?',a:'A 2019 EU directive requiring private businesses to make key products/services accessible (computers, ATMs, smartphones, e-commerce, banking, transport services). Common rules apply from 2025; microenterprises are exempt.'},
+  {d:3,t:'fc',q:'What is the role of management champions in accessibility programs?',a:'Champions build vision, sustain commitment, engage teams, build awareness and skills, and support programmatic integration of accessibility — distinguishing it from discrete one-off projects. They lead adoption of maturity models.'},
+  {d:3,t:'fc',q:'What is the EU\'s Web Accessibility Directive and who does it apply to?',a:'Directive 2016/2102, applied from September 2019. Requires all EU public sector bodies to ensure their websites and mobile apps are accessible, publish an accessibility statement, and provide a method to report issues. References EN 301 549 standard.'},
+  {d:3,t:'fc',q:'What is the Inter-American Convention on the Elimination of All Forms of Discrimination Against Persons with Disabilities?',a:'Adopted in 1999 in Guatemala — the first regional, binding treaty expressly prohibiting disability discrimination. Requires gradual elimination of discrimination and accessible buildings, transportation, and communication.'},
+  /* ── DOMAIN 3: MC ── */
+  {d:3,t:'mc',q:'Which law requires US federal government websites to meet WCAG 2.0-based accessibility standards?',ch:['ADA Title III','Marrakesh Treaty','Section 508 of the Rehabilitation Act','CVAA of 2010'],c:2,ex:'Section 508 requires federal, state, and local government websites to meet Section 508 Standards based on WCAG 2.0. The ADA does not include specific web accessibility standards.'},
+  {d:3,t:'mc',q:'The EU Web Accessibility Directive applies from which date and to whom?',ch:['2000, all EU businesses','2009, EU public sector only','September 2019, EU public sector bodies','2025, all EU private businesses'],c:2,ex:'The EU Web Accessibility Directive applied from September 2019 to all EU public sector bodies\' websites and mobile apps.'},
+  {d:3,t:'mc',q:'Level 3 of the Business Disability Forum Accessibility Maturity Model is:',ch:['Defined','Managed','Repeatable','Optimizing'],c:2,ex:'Level 3 is "Repeatable" — the process is established and actioned consistently. Level 1 = Informal, 2 = Defined, 4 = Managed, 5 = Best practice.'},
+  {d:3,t:'mc',q:'The Ontarians with Disabilities Act was enacted in which year?',ch:['1990','1998','2001','2010'],c:2,ex:'The Ontarians with Disabilities Act was enacted in 2001, ensuring the rights of people with disabilities to equal opportunities and freedom from discrimination in Ontario.'},
+  {d:3,t:'mc',q:'The CVAA (Twenty-First Century Communications and Video Accessibility Act) was enacted in which year?',ch:['2000','2006','2010','2019'],c:2,ex:'The CVAA was enacted in 2010 to update federal communications law, ensuring 1980s–90s accessibility laws cover digital, broadband, and mobile technologies.'},
+  {d:3,t:'mc',q:'Which regional instrument was the first binding treaty to expressly prohibit disability discrimination?',ch:['EU Charter of Fundamental Rights','African Charter on Human and People\'s Rights','Inter-American Convention (Guatemala, 1999)','ASEAN Human Rights Declaration'],c:2,ex:'The Inter-American Convention on the Elimination of All Forms of Discrimination Against Persons with Disabilities (1999, Guatemala) was the first regional binding treaty expressly prohibiting disability discrimination.'},
+  {d:3,t:'mc',q:'What does the US Federal Acquisition Regulation implement regarding accessibility?',ch:['ADA Title III website standards','Section 508 ICT accessibility for federal procurement','WCAG 2.2 as a binding standard','The European Accessibility Act in the US'],c:1,ex:'The US Federal Acquisition Regulation implements Section 508 of the Rehabilitation Act, requiring that when federal agencies acquire ICT, it must be accessible to employees and the public with disabilities.'},
+  /* ── DOMAIN 3: TF ── */
+  {d:3,t:'tf',q:'The CRPD is the first binding international human rights instrument specifically addressing disability rights.',c:true,ex:'True. The UN CRPD, adopted in 2006, was the first legally binding international human rights instrument specifically addressing the rights of people with disabilities.'},
+  {d:3,t:'tf',q:'Under the ADA, private business websites are subject to clear, specific legal accessibility standards.',c:false,ex:'False. The ADA has no specific legal standards for private website accessibility. However, businesses can be sued under Title III. E-commerce, organizational websites, and public mobile apps fall under Title III.'},
+  {d:3,t:'tf',q:'The European Accessibility Act requires common rules for private businesses (except microenterprises) from 2025.',c:true,ex:'True. The EAA (adopted 2019) applies common accessibility rules to private businesses from 2025. Microenterprises are exempt.'},
+  {d:3,t:'tf',q:'ICT accessibility should be treated as a discrete project rather than an ongoing organizational program.',c:false,ex:'False. Per the W3C WAI, ICT accessibility must be "a program, not a project" — an integral, ongoing activity grounded in organizational culture, process, and practice.'},
+  {d:3,t:'tf',q:'The 1948 Universal Declaration of Human Rights explicitly listed disability as a protected characteristic.',c:false,ex:'False. The UDHR did not explicitly list disability among protected groups. This gap led to the UN Declaration on the Rights of Disabled Persons (1975) and eventually the CRPD (2006).'},
+  {d:3,t:'tf',q:'The Marrakesh Treaty allows people with print disabilities to import and export accessible format versions of books across borders.',c:true,ex:'True. The Marrakesh Treaty (2013) creates a copyright exception AND allows import and export of accessible format versions between countries.'},
+];
+
+/* ═══════════════════════════════════════════════════════
+   QUIZ ENGINE
+════════════════════════════════════════════════════════ */
+let mode='fc', activeDomains=[1,2,3], filteredQ=[], idx=0, answered=false;
+let sessionScore=0, sessionTotal=0;
+
+const getFiltered = () => QDB.filter(q => activeDomains.includes(q.d) && q.t === (mode === 'fc' ? 'fc' : mode === 'mc' ? 'mc' : 'tf'));
+
+function showTab(t, el) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('quiz-tab').style.display = t === 'quiz' ? '' : 'none';
+  document.getElementById('progress-tab').style.display = t === 'progress' ? '' : 'none';
+  if (t === 'progress') renderProgress();
+}
+
+function setMode(m, el) {
+  mode = m;
+  document.querySelectorAll('[id^="mb-"]').forEach(b => b.classList.remove('active-mode'));
+  el.classList.add('active-mode');
+  reset();
+}
+
+function toggleDomain(d) {
+  const btn = document.getElementById('df' + d);
+  const cls = 'active-d' + d;
+  if (activeDomains.includes(d)) {
+    if (activeDomains.length === 1) return;
+    activeDomains = activeDomains.filter(x => x !== d);
+    btn.classList.remove(cls);
+  } else {
+    activeDomains.push(d);
+    btn.classList.add(cls);
+  }
+  reset();
+}
+
+function doShuffle() {
+  filteredQ = getFiltered().sort(() => Math.random() - 0.5);
+  idx = 0; answered = false; sessionScore = 0; sessionTotal = 0;
+  document.getElementById('score-display').style.display = 'none';
+  render();
+}
+
+function reset() {
+  filteredQ = getFiltered().sort(() => Math.random() - 0.5);
+  idx = 0; answered = false; sessionScore = 0; sessionTotal = 0;
+  document.getElementById('score-display').style.display = 'none';
+  render();
+}
+
+let _navDir = 0; // tracks direction for enter animation
+
+const bClass = d => d === 1 ? 'bd1' : d === 2 ? 'bd2' : 'bd3';
+const dLabel = d => 'Domain ' + d;
+
+function navClick(btn, dir) {
+  // Ripple effect
+  const ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  const rect = btn.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  ripple.style.cssText = `width:${size}px;height:${size}px;left:${rect.width/2 - size/2}px;top:${rect.height/2 - size/2}px`;
+  btn.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 600);
+  navigate(dir);
+}
+
+function navigate(dir) {
+  _navDir = dir;
+  idx = Math.max(0, Math.min(filteredQ.length - 1, idx + dir));
+  answered = false; render();
+}
+
+function render() {
+  if (!filteredQ.length) filteredQ = getFiltered().sort(() => Math.random() - 0.5);
+  if (!filteredQ.length) {
+    document.getElementById('card-area').innerHTML = '<div style="text-align:center;padding:2rem;color:var(--text3);font-size:.875rem">No questions match this selection.</div>';
+    return;
+  }
+  const q = filteredQ[idx];
+  document.getElementById('prog').style.width = Math.round(((idx + 1) / filteredQ.length) * 100) + '%';
+  document.getElementById('counter').textContent = (idx + 1) + ' / ' + filteredQ.length;
+  const sd = document.getElementById('score-display');
+  if (sessionTotal > 0) { sd.style.display = 'inline-block'; sd.textContent = sessionScore + ' / ' + sessionTotal + ' correct'; }
+  document.getElementById('prev-btn').disabled = idx === 0;
+  document.getElementById('next-btn').disabled = idx === filteredQ.length - 1;
+  const ca = document.getElementById('card-area');
+  ca.innerHTML = mode === 'fc' ? renderFC(q, _navDir) : mode === 'mc' ? renderMC(q) : renderTF(q);
+  _navDir = 0;
+
+  if (mode === 'fc') {
+    const scene = document.getElementById('fc-scene');
+    const tilt  = document.getElementById('fc-tilt');
+    const inner = document.getElementById('fc-inner');
+    let flipped = false;
+    let animating = false;
+
+    // Flip: only rotateY on fc-inner, 0 or 180 — never touches X
+    function doFlip() {
+      if (animating) return;
+      animating = true;
+      tilt.style.transition = 'transform .2s ease';
+      tilt.style.transform  = 'rotateX(0deg) rotateY(0deg)';
+      setTimeout(() => {
+        flipped = !flipped;
+        inner.style.transition = 'transform .65s cubic-bezier(.34,1.3,.64,1)';
+        inner.style.transform  = `rotateY(${flipped ? 180 : 0}deg)`;
+        const front = inner.querySelector('.fc-face:not(.fc-back)');
+        const back  = inner.querySelector('.fc-back');
+        if (flipped) {
+          // Fade front out quickly at the start of the flip
+          front.style.transition = 'opacity .12s ease';
+          front.style.opacity = '0';
+          // Fade back in just after the halfway point
+          setTimeout(() => {
+            back.style.transition = 'opacity .15s ease';
+            back.style.opacity = '1';
+          }, 350);
+        } else {
+          back.style.transition = 'opacity .12s ease';
+          back.style.opacity = '0';
+          setTimeout(() => {
+            front.style.transition = 'opacity .15s ease';
+            front.style.opacity = '1';
+          }, 350);
+        }
+        setTimeout(() => { animating = false; }, 700);
+      }, 120);
+    }
+
+    // Tilt: only on fc-tilt, small X+Y — fc-inner never sees these rotations
+    function applyTilt(rx, ry) {
+      if (animating) return;
+      tilt.style.transition = 'none';
+      tilt.style.transform  = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+    }
+
+    function resetTilt() {
+      tilt.style.transition = 'transform .3s ease';
+      tilt.style.transform  = 'rotateX(0deg) rotateY(0deg)';
+    }
+
+    scene.addEventListener('click', doFlip);
+
+    scene.addEventListener('mousemove', e => {
+      const r = scene.getBoundingClientRect();
+      const rx = -((e.clientY - r.top)  / r.height - 0.5) * 9;
+      const ry =  ((e.clientX - r.left) / r.width  - 0.5) * 12;
+      applyTilt(rx, ry);
+    });
+    scene.addEventListener('mouseleave', resetTilt);
+
+    scene.addEventListener('touchmove', e => {
+      const t = e.touches[0];
+      const r = scene.getBoundingClientRect();
+      const rx = -((t.clientY - r.top)  / r.height - 0.5) * 7;
+      const ry =  ((t.clientX - r.left) / r.width  - 0.5) * 10;
+      applyTilt(rx, ry);
+    }, { passive: true });
+    scene.addEventListener('touchend', resetTilt);
+
+    // Initialise — back face starts invisible, front visible
+    const front0 = inner.querySelector('.fc-face:not(.fc-back)');
+    const back0  = inner.querySelector('.fc-back');
+    front0.style.transition = 'none';
+    front0.style.opacity    = '1';
+    back0.style.transition  = 'none';
+    back0.style.opacity     = '0';
+
+    tilt.style.transition  = 'none';
+    inner.style.transition = 'none';
+    inner.style.transform  = 'rotateY(0deg)';
+    requestAnimationFrame(() => {
+      inner.style.transform = 'rotateY(0deg)';
+    });
+    setTimeout(() => scene.classList.remove('enter-right', 'enter-left'), 450);
+  }
+}
+
+function renderFC(q, dir) {
+  const dirClass = dir === 1 ? 'enter-right' : dir === -1 ? 'enter-left' : '';
+  return `<div class="fc-scene ${dirClass}" id="fc-scene">
+    <div class="fc-tilt" id="fc-tilt">
+      <div class="fc-inner" id="fc-inner">
+        <div class="fc-face">
+          <span class="badge ${bClass(q.d)}" style="position:relative;z-index:1">${dLabel(q.d)}</span>
+          <p class="fc-q">${q.q}</p>
+          <p class="fc-hint">
+            <span class="fc-hint-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+            </span>
+            Tap to flip
+          </p>
+        </div>
+        <div class="fc-face fc-back">
+          <span class="badge" style="background:rgba(255,255,255,0.6);border:1px solid rgba(0,0,0,0.1);color:var(--text3);margin-bottom:.875rem;position:relative;z-index:1">Answer</span>
+          <p class="fc-q" style="opacity:.65;font-size:.9rem;margin-bottom:.875rem">${q.q}</p>
+          <p class="fc-a">${q.a}</p>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderMC(q) {
+  const L = ['A','B','C','D'];
+  const opts = q.ch.map((c,i) => `<button class="option" id="o${i}" onclick="answerMC(${i},${q.c},${q.ch.length})">${L[i]}.&nbsp; ${c}</button>`).join('');
+  return `<div class="card"><span class="badge ${bClass(q.d)}">${dLabel(q.d)}</span><p class="q-stem">${q.q}</p><div class="options">${opts}</div><div id="expl" class="expl"></div></div>`;
+}
+
+function answerMC(chosen, correct, n) {
+  if (answered) return;
+  answered = true; sessionTotal++;
+  if (chosen === correct) sessionScore++;
+  for (let i = 0; i < n; i++) {
+    const el = document.getElementById('o' + i); el.disabled = true;
+    if (i === correct) el.classList.add('correct');
+    else if (i === chosen && chosen !== correct) el.classList.add('incorrect');
+  }
+  showExpl((chosen === correct ? '✓ Correct — ' : '✗ Incorrect — ') + filteredQ[idx].ex);
+  updateSD();
+  if (idx < filteredQ.length - 1) setTimeout(() => navigate(1), 2000);
+}
+
+function renderTF(q) {
+  return `<div class="card"><span class="badge ${bClass(q.d)}">${dLabel(q.d)}</span><p class="q-stem">${q.q}</p>
+    <div class="tf-row"><button class="tf-btn" id="tft" onclick="answerTF(true,${q.c})">True</button><button class="tf-btn" id="tff" onclick="answerTF(false,${q.c})">False</button></div>
+    <div id="expl" class="expl"></div></div>`;
+}
+
+function answerTF(chosen, correct) {
+  if (answered) return;
+  answered = true; sessionTotal++;
+  const ok = chosen === correct;
+  if (ok) sessionScore++;
+  document.getElementById('tft').disabled = true; document.getElementById('tff').disabled = true;
+  document.getElementById(chosen ? 'tft' : 'tff').classList.add(ok ? 'correct' : 'incorrect');
+  if (!ok) document.getElementById(correct ? 'tft' : 'tff').classList.add('correct');
+  showExpl((ok ? '✓ Correct — ' : '✗ Incorrect — ') + filteredQ[idx].ex);
+  updateSD();
+  if (idx < filteredQ.length - 1) setTimeout(() => navigate(1), 2000);
+}
+
+function showExpl(txt) { const e = document.getElementById('expl'); e.textContent = txt; e.style.display = 'block'; }
+function updateSD() { const sd = document.getElementById('score-display'); sd.style.display = 'inline-block'; sd.textContent = sessionScore + ' / ' + sessionTotal + ' correct'; }
+
+async function endSession() {
+  if (sessionTotal === 0) { alert('Answer at least one question before ending the session.'); return; }
+  const pct = Math.round((sessionScore / sessionTotal) * 100);
+  const now = new Date();
+  const s = {
+    date: now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+    time: now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}),
+    score: sessionScore, total: sessionTotal, pct, mode,
+    domains: [...activeDomains].sort(), ts: Date.now()
+  };
+  await saveSession(s);
+  const grade = pct >= 90 ? 'Excellent' : pct >= 75 ? 'Good work' : pct >= 60 ? 'Keep going' : 'Needs more practice';
+  const col = pct >= 75 ? 'var(--green)' : pct >= 60 ? 'var(--amber)' : 'var(--red)';
+  document.getElementById('card-area').innerHTML = `<div class="sess-end">
+    <p style="font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:.75rem">Session complete</p>
+    <div class="big-pct" style="color:${col}">${pct}%</div>
+    <p class="grade-txt">${sessionScore} of ${sessionTotal} correct &mdash; ${grade}</p>
+    <div class="sess-actions">
+      <button class="icon-btn" onclick="startNew()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg> New session</button>
+      <button class="icon-btn primary" onclick="goProgress()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-4"/></svg> View progress</button>
+    </div>
+  </div>`;
+  document.getElementById('prog').style.width = '100%';
+  document.getElementById('prev-btn').disabled = true; document.getElementById('next-btn').disabled = true;
+  document.getElementById('counter').textContent = 'Session saved';
+}
+
+function startNew() {
+  sessionScore = 0; sessionTotal = 0; answered = false; idx = 0;
+  filteredQ = getFiltered().sort(() => Math.random() - 0.5);
+  document.getElementById('score-display').style.display = 'none';
+  render();
+}
+
+function goProgress() {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i === 1));
+  document.getElementById('quiz-tab').style.display = 'none';
+  document.getElementById('progress-tab').style.display = '';
+  renderProgress();
+}
+
+async function renderProgress() {
+  const pc = document.getElementById('progress-content');
+  pc.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--text3);font-size:.875rem">Loading…</div>';
+  setBanner('syncing', 'Fetching your sessions…');
+  let sessions = [];
+  try {
+    sessions = await getHistory();
+    hideBanner();
+  } catch(e) {
+    setBanner('error', 'Could not reach database — showing local data');
+    sessions = lsGet();
+  }
+
+  if (!sessions.length) {
+    hideBanner();
+    pc.innerHTML = `<div class="empty-state"><p style="font-size:2rem;margin-bottom:.75rem">📊</p><p>No sessions recorded yet.</p><p style="margin-top:.4rem;font-size:.8rem">Complete a quiz and tap "End session" to start tracking.</p></div>`;
+    return;
+  }
+
+  const totalQ = sessions.reduce((a,s) => a + s.total, 0);
+  const totalC = sessions.reduce((a,s) => a + s.score, 0);
+  const avgPct = Math.round(totalC / totalQ * 100);
+  const best = Math.max(...sessions.map(s => s.pct));
+  const trend = sessions.length >= 2 ? sessions[sessions.length-1].pct - sessions[sessions.length-2].pct : null;
+  const trendStr = trend === null ? '—' : trend > 0 ? '+' + trend + '%' : trend < 0 ? trend + '%' : 'No change';
+  const trendCol = trend > 0 ? 'var(--green)' : trend < 0 ? 'var(--red)' : 'var(--text3)';
+
+  const d1s = sessions.filter(s => s.domains && s.domains.includes(1));
+  const d2s = sessions.filter(s => s.domains && s.domains.includes(2));
+  const d3s = sessions.filter(s => s.domains && s.domains.includes(3));
+  const avgFor = arr => arr.length ? Math.round(arr.reduce((a,s) => a + s.pct, 0) / arr.length) : null;
+
+  const recent10 = sessions.slice(-10);
+  const sparks = recent10.map(s => {
+    const h = Math.max(4, Math.round((s.pct/100)*40));
+    const col = s.pct >= 75 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626';
+    return `<div class="spark-col"><div class="spark-bw"><div class="spark-b" style="height:${h}px;background:${col}"></div></div><span class="spark-pct">${s.pct}%</span></div>`;
+  }).join('');
+
+  const dBlock = (label,avg,arr) => {
+    if (avg === null) return `<div class="d-card"><p class="s-label">${label}</p><p class="d-pct" style="color:var(--text3)">—</p><p class="d-detail">No sessions yet</p></div>`;
+    const col = avg >= 75 ? 'var(--green)' : avg >= 50 ? 'var(--amber)' : 'var(--red)';
+    return `<div class="d-card"><p class="s-label">${label}</p><p class="d-pct" style="color:${col}">${avg}%</p><p class="d-detail">avg · ${arr.length} session${arr.length!==1?'s':''}</p></div>`;
+  };
+
+  const rows = sessions.slice().reverse().slice(0, 8).map(s => {
+    const col = s.pct >= 75 ? '#16A34A' : s.pct >= 50 ? '#D97706' : '#DC2626';
+    const ml = s.mode === 'fc' ? 'Flashcard' : s.mode === 'mc' ? 'Multiple choice' : 'True/False';
+    const doms = Array.isArray(s.domains) ? s.domains : [];
+    return `<div class="sess-row">
+      <span class="sr-date">${s.date} · ${s.time}</span>
+      <div class="sr-bw"><div class="sr-b" style="width:${s.pct}%;background:${col}"></div></div>
+      <span class="sr-pct" style="color:${col}">${s.pct}%</span>
+      <span class="sr-meta">${ml}${doms.length?' · D'+doms.join(','):''}</span>
+    </div>`;
+  }).join('');
+
+  const syncNote = !configured()
+    ? `<p style="font-size:.75rem;color:var(--amber);background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:var(--r);padding:8px 12px;margin-bottom:1rem">⚠ Add your Supabase credentials to the HTML file to enable cross-device sync.</p>`
+    : offlineMode
+    ? `<p style="font-size:.75rem;color:var(--text3);margin-bottom:.75rem">Offline mode — progress is device-local only.</p>`
+    : '';
+
+  pc.innerHTML = `
+    <div class="flex-between"><p style="font-size:1rem;font-weight:500;color:var(--text)">Your progress</p><button class="clear-link" onclick="confirmClear()">Clear history</button></div>
+    ${syncNote}
+    <div class="metrics-grid">
+      <div class="m-card"><p class="m-label">Overall accuracy</p><p class="m-val">${avgPct}%</p><p class="m-sub">${totalC} of ${totalQ} correct</p></div>
+      <div class="m-card"><p class="m-label">Sessions</p><p class="m-val">${sessions.length}</p><p class="m-sub">${totalQ} questions answered</p></div>
+      <div class="m-card"><p class="m-label">Best session</p><p class="m-val">${best}%</p></div>
+      <div class="m-card"><p class="m-label">Trend</p><p class="m-val" style="color:${trendCol}">${trendStr}</p><p class="m-sub">vs previous session</p></div>
+    </div>
+    <p class="s-label">Last ${recent10.length} session${recent10.length!==1?'s':''}</p>
+    <div class="spark-wrap" style="margin-bottom:1.5rem">${sparks}</div>
+    <p class="s-label" style="margin-bottom:.625rem">By domain</p>
+    <div class="d-grid" style="margin-bottom:1.5rem">
+      ${dBlock('Domain 1', avgFor(d1s), d1s)}
+      ${dBlock('Domain 2', avgFor(d2s), d2s)}
+      ${dBlock('Domain 3', avgFor(d3s), d3s)}
+    </div>
+    <p class="s-label">Recent sessions</p>
+    <div class="sess-list">${rows}</div>`;
+}
+
+async function confirmClear() {
+  if (!confirm('Clear all session history? This cannot be undone.')) return;
+  await clearHistory();
+  renderProgress();
+}
+</script>
+</body>
+</html>
