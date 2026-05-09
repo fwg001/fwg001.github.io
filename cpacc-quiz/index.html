@@ -105,16 +105,17 @@
   .fc-inner {
     position: relative;
     width: 100%;
-    min-height: 220px;
+    /* Use grid to stack faces so the tallest one sets the height */
+    display: grid;
     transform-style: preserve-3d;
     will-change: transform;
-    /* flip transition set by JS */
   }
 
   .fc-face {
-    position: absolute;
+    /* Both faces occupy the same grid cell, stacked */
+    grid-area: 1 / 1;
     width: 100%;
-    min-height: 220px;
+    min-height: 200px;
     backface-visibility: hidden;
     border-radius: 18px;
     padding: 2.25rem 2rem;
@@ -123,7 +124,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* Layered shadow for depth */
     box-shadow:
       0 2px 4px rgba(0,0,0,0.04),
       0 8px 24px rgba(0,0,0,0.08),
@@ -376,19 +376,26 @@
     </div>
   </header>
 
-  <div class="tabs">
-    <button class="tab-btn active" onclick="showTab('quiz',this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-      Quiz
-    </button>
-    <button class="tab-btn" onclick="showTab('progress',this)">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-4"/></svg>
-      Progress
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
+    <div class="tabs" style="margin-bottom:0">
+      <button class="tab-btn active" data-tab="quiz" onclick="showTab('quiz',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        Quiz
+      </button>
+      <button class="tab-btn" data-tab="progress" onclick="showTab('progress',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-4"/></svg>
+        Progress
+      </button>
+    </div>
+    <button class="icon-btn primary" id="end-session-btn" onclick="endSession()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
+      End session
     </button>
   </div>
 
   <!-- QUIZ -->
   <div id="quiz-tab">
+    <p style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);font-weight:500;margin-bottom:.5rem">Settings</p>
     <div class="controls-row">
       <button class="pill-btn active-mode" id="mb-fc" onclick="setMode('fc',this)">Flashcard</button>
       <button class="pill-btn" id="mb-mc" onclick="setMode('mc',this)">Multiple choice</button>
@@ -401,10 +408,6 @@
       <button class="icon-btn" onclick="doShuffle()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
         Shuffle
-      </button>
-      <button class="icon-btn primary" onclick="endSession()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
-        End session
       </button>
     </div>
     <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
@@ -465,8 +468,8 @@
 
    Step 3 — Paste your Project URL and anon key below:
    ═══════════════════════════════════════════════════════ */
-const SB_URL  = 'YOUR_SUPABASE_URL';       // e.g. https://abcxyz.supabase.co
-const SB_KEY  = 'YOUR_SUPABASE_ANON_KEY';  // starts with eyJ…
+const SB_URL  = 'https://ipwbzboudyntnykpixwx.supabase.co';       // e.g. https://abcxyz.supabase.co
+const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlwd2J6Ym91ZHludG55a3BpeHd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxMTgyODksImV4cCI6MjA5MzY5NDI4OX0.eEbZjQK53M-sggL1LJhIvUsuH-rcktbLj6OpwmbtfgQ';  // starts with eyJ…
 /* ═══════════════════════════════════════════════════════ */
 
 const configured = () => SB_URL !== 'YOUR_SUPABASE_URL' && SB_KEY !== 'YOUR_SUPABASE_ANON_KEY';
@@ -718,6 +721,7 @@ function showTab(t, el) {
   el.classList.add('active');
   document.getElementById('quiz-tab').style.display = t === 'quiz' ? '' : 'none';
   document.getElementById('progress-tab').style.display = t === 'progress' ? '' : 'none';
+  document.getElementById('end-session-btn').style.display = t === 'quiz' ? '' : 'none';
   if (t === 'progress') renderProgress();
 }
 
@@ -975,7 +979,9 @@ async function endSession() {
     </div>
   </div>`;
   document.getElementById('prog').style.width = '100%';
-  document.getElementById('prev-btn').disabled = true; document.getElementById('next-btn').disabled = true;
+  document.getElementById('prev-btn').disabled = true;
+  document.getElementById('next-btn').disabled = true;
+  document.getElementById('end-session-btn').style.display = 'none';
   document.getElementById('counter').textContent = 'Session saved';
 }
 
@@ -983,13 +989,16 @@ function startNew() {
   sessionScore = 0; sessionTotal = 0; answered = false; idx = 0;
   filteredQ = getFiltered().sort(() => Math.random() - 0.5);
   document.getElementById('score-display').style.display = 'none';
+  document.getElementById('end-session-btn').style.display = '';
   render();
 }
 
 function goProgress() {
-  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i === 1));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.tab-btn[data-tab="progress"]').classList.add('active');
   document.getElementById('quiz-tab').style.display = 'none';
   document.getElementById('progress-tab').style.display = '';
+  document.getElementById('end-session-btn').style.display = 'none';
   renderProgress();
 }
 
