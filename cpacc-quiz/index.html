@@ -10,22 +10,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Brand */
-    --coral:#FF6B4A; --coral-d:#E5532F; --coral-shadow:#C13D1F;
-    --teal:#34C9A1;  --teal-d:#1FA483;  --teal-shadow:#147A60;
+    /* Brand — darkened to pass WCAG AA (4.5:1) with white text */
+    --coral:#D64221; --coral-d:#D5431F; --coral-shadow:#9B2E10;
+    --teal:#00875F;  --teal-d:#007F5E;  --teal-shadow:#005C42;
     --gold:#FFC83D;  --gold-shadow:#D49B0A;
-    --plum:#9B5DE5;  --plum-shadow:#6E36B5;
-    --sky:#3DB8FF;   --sky-shadow:#1683C4;
-    --rose:#FF4D8B;  --rose-shadow:#C82362;
+    --plum:#9456DE;  --plum-shadow:#6E36B5;
+    --sky:#007BC2;   --sky-shadow:#005B96;
+    --rose:#C82362;  --rose-shadow:#8C1040;
 
     /* Surfaces */
     --bg:#FFF8F0; --surface:#FFFFFF; --surface2:#FFF1DD;
-    --ink:#2A2424; --ink2:#6B5F58; --ink3:#A89C95;
+    --ink:#2A2424; --ink2:#6B5F58; --ink3:#796D66;
     --line:#EFE2D2; --line2:#E2D2BC;
 
-    /* States */
-    --good:#34C9A1; --good-bg:#E0FAF1; --good-shadow:#147A60;
-    --bad:#FF5A5A;  --bad-bg:#FFE6E6;  --bad-shadow:#C13030;
+    /* States — darkened to pass 4.5:1 with white */
+    --good:#00875F; --good-bg:#E0FAF1; --good-shadow:#005C42;
+    --bad:#DC3737;  --bad-bg:#FFE6E6;  --bad-shadow:#B02020;
 
     --r:14px; --rl:22px; --rxl:28px;
   }
@@ -69,9 +69,9 @@
     font-family:'Fredoka',sans-serif;font-weight:600;font-size:.9rem;color:var(--ink);
   }
   .hud-chip svg{flex-shrink:0}
-  .hud-chip.streak{background:#FFF6E0;border-color:#F5DC92;color:#A87A0E}
+  .hud-chip.streak{background:#FFF6E0;border-color:#F5DC92;color:#966800}
   .hud-chip.hearts{background:#FFEAEC;border-color:#FFB8C0;color:#C82746}
-  .hud-chip.xp{background:#FFE9DD;border-color:#FFB89A;color:var(--coral-d)}
+  .hud-chip.xp{background:#FFE9DD;border-color:#FFB89A;color:#C73511}
   .hud-chip.user{cursor:pointer;font-size:.78rem}
   .hud-chip.user:hover{background:var(--surface2)}
   .u-dot{width:8px;height:8px;border-radius:50%;background:var(--good)}
@@ -120,25 +120,20 @@
   .b3d.sm{padding:.55rem .95rem;font-size:.82rem;border-radius:12px;box-shadow:0 4px 0 var(--shadow-c)}
   .b3d.sm:not(:disabled):active{transform:translateY(3px);box-shadow:0 1px 0 var(--shadow-c)}
 
-  /* Settings pills */
+  /* Settings pill panel */
   .settings{
-    background:var(--surface);border:2px solid var(--line);
+    background:var(--surface);
     border-radius:var(--rl);
-    box-shadow:0 4px 0 var(--line2);
     margin-bottom:1.25rem;
     overflow:hidden;
+    border:2px solid transparent;
+    box-shadow:none;
+    transition:border-color .25s ease, box-shadow .25s ease;
   }
-  .settings-toggle{
-    width:100%;display:flex;align-items:center;gap:.6rem;
-    padding:.7rem 1rem;background:none;border:none;cursor:pointer;
-    text-align:left;border-radius:var(--rl);
+  .settings.open{
+    border-color:var(--line);
+    box-shadow:0 4px 0 var(--line2);
   }
-  .settings-toggle:hover{background:var(--surface2)}
-  .st-left{display:flex;align-items:center;gap:.5rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:.95rem;color:var(--ink)}
-  .st-left svg{color:var(--coral-d)}
-  .st-summary{flex:1;font-size:.78rem;color:var(--ink2);font-weight:700;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
-  .st-caret{color:var(--ink3);transition:transform .25s ease;flex-shrink:0}
-  .settings.open .st-caret{transform:rotate(180deg)}
   .settings-body{
     max-height:0;overflow:hidden;
     transition:max-height .3s ease, padding .25s ease;
@@ -146,7 +141,7 @@
   }
   .settings.open .settings-body{
     max-height:340px;
-    padding:.4rem 1.1rem 1rem;
+    padding:.75rem 1.1rem 1rem;
   }
   .settings-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);font-weight:800;margin-bottom:.5rem}
   .pill-row{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
@@ -198,9 +193,9 @@
     padding:.25rem .65rem;border-radius:999px;letter-spacing:.04em;
     text-transform:uppercase;
   }
-  .bd1{background:#E0F2FF;color:#1683C4;border:1.5px solid #ADDDFA}
-  .bd2{background:#E0FAF1;color:var(--teal-d);border:1.5px solid #97E8CD}
-  .bd3{background:#F1E5FF;color:#7E45C5;border:1.5px solid #D4B7F5}
+  .bd1{background:#E0F2FF;color:#0572B3;border:1.5px solid #ADDDFA}
+  .bd2{background:#E0FAF1;color:#007F5E;border:1.5px solid #97E8CD}
+  .bd3{background:#F1E5FF;color:#7040C8;border:1.5px solid #D4B7F5}
   .badge-fmt{background:var(--surface2);color:var(--ink2);border:1.5px solid var(--line2)}
 
   .qstem{
@@ -318,9 +313,15 @@
   }
   .nav-counter .small{display:block;font-size:.7rem;color:var(--ink3);margin-top:2px;letter-spacing:.04em}
 
-  /* ───── Mascot (Axel) — original blob character ───── */
+  /* ───── Mascot row ───── */
   .mascot-row{
-    display:flex;align-items:flex-end;gap:.9rem;margin-bottom:1rem;
+    display:flex;align-items:flex-start;gap:.9rem;margin-bottom:1rem;
+  }
+  .mascot-right{
+    display:flex;flex-direction:column;gap:.5rem;flex:1;min-width:0;
+  }
+  .mascot-hud{
+    display:flex;flex-direction:row;gap:.4rem;flex-wrap:wrap;align-items:center;
   }
   .mascot{
     width:78px;height:78px;flex-shrink:0;position:relative;
@@ -335,7 +336,7 @@
   .speech{
     background:#fff;border:2px solid var(--line);border-radius:18px;
     padding:.65rem .9rem;font-family:'Fredoka',sans-serif;font-weight:600;font-size:.92rem;
-    color:var(--ink);box-shadow:0 3px 0 var(--line2);position:relative;flex:1;min-width:0;
+    color:var(--ink);box-shadow:0 3px 0 var(--line2);position:relative;
   }
   .speech::before{
     content:'';position:absolute;left:-9px;bottom:14px;
@@ -455,7 +456,7 @@
   .empty .em{font-size:3rem;margin-bottom:.6rem}
 
   .sync-banner{display:none;align-items:center;gap:8px;padding:.55rem .85rem;border-radius:12px;border:2px solid var(--line);background:#fff;font-size:.78rem;color:var(--ink2);margin-bottom:1rem;font-weight:700}
-  .sync-banner.syncing{border-color:#ADDDFA;background:#E0F2FF;color:#1683C4}
+  .sync-banner.syncing{border-color:#ADDDFA;background:#E0F2FF;color:#0572B3}
   .sync-banner.error{border-color:#F5B5B5;background:var(--bad-bg);color:var(--bad-shadow)}
   .sync-banner.ok{border-color:#A4E8CD;background:var(--good-bg);color:var(--teal-shadow)}
   .s-dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex-shrink:0}
@@ -473,6 +474,218 @@
     .sr-date{min-width:90px}
     .mascot{width:60px;height:60px}
     .complete-mascot{width:96px;height:96px}
+  }
+
+  /* ── Dark mode — synthwave ── */
+  [data-theme="dark"] {
+    --coral:#FF5E8A; --coral-d:#FF2E6C; --coral-shadow:#7A1638;
+    --teal:#22E0C2;  --teal-d:#0FBFA3;  --teal-shadow:#0A5C50;
+    --gold:#FFD93D;  --gold-shadow:#8A6400;
+    --plum:#B47CFF;  --plum-shadow:#4E2191;
+    --sky:#3DD9FF;   --sky-shadow:#0A6E8A;
+    --rose:#FF4DCC;  --rose-shadow:#8A1F6A;
+
+    --bg:#0A0E27; --surface:#161B3D; --surface2:#1F2552;
+    --ink:#EDEFFF; --ink2:#B8BFEA; --ink3:#8B92C8;
+    --line:#2A3163; --line2:#3A4286;
+
+    --good:#22E0C2; --good-bg:#0E3A33; --good-shadow:#0A5C50;
+    --bad:#FF5E8A;  --bad-bg:#3A1228;  --bad-shadow:#7A1638;
+
+    --bg-glow-1:rgba(255,77,204,0.18);
+    --bg-glow-2:rgba(61,217,255,0.16);
+    --grid-line:rgba(180,124,255,0.08);
+    --neon-glow:0 0 16px rgba(255,77,204,0.35);
+    --pill-bg:#161B3D;
+    color-scheme:dark;
+  }
+
+  /* Synthwave grid overlay */
+  [data-theme="dark"] body{
+    background-image:
+      radial-gradient(circle at 12% 8%, var(--bg-glow-1) 0%, transparent 35%),
+      radial-gradient(circle at 88% 92%, var(--bg-glow-2) 0%, transparent 35%);
+  }
+  [data-theme="dark"] body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size:48px 48px;
+    mask-image:linear-gradient(180deg,transparent 0%,#000 30%,#000 70%,transparent 100%);
+    -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 30%,#000 70%,transparent 100%);
+  }
+  [data-theme="dark"] .shell{position:relative;z-index:1}
+
+  /* Theme toggle button */
+  .theme-toggle{
+    width:38px;height:38px;border-radius:12px;
+    background:var(--surface);border:2px solid var(--line);
+    display:inline-flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--ink2);
+    box-shadow:0 3px 0 var(--line2);
+    transition:transform .12s,box-shadow .12s,background .2s,border-color .2s,color .2s;
+    flex-shrink:0;
+  }
+  .theme-toggle:hover{background:var(--surface2);color:var(--ink)}
+  .theme-toggle:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line2)}
+  .theme-toggle .icon-sun{display:block}
+  .theme-toggle .icon-moon{display:none}
+  [data-theme="dark"] .theme-toggle{
+    background:linear-gradient(135deg,#1F2552,#2A1F4D);
+    border-color:var(--plum);color:var(--plum);
+    box-shadow:0 3px 0 var(--plum-shadow),var(--neon-glow);
+  }
+  [data-theme="dark"] .theme-toggle:hover{color:#fff;border-color:var(--rose)}
+  [data-theme="dark"] .theme-toggle .icon-sun{display:none}
+  [data-theme="dark"] .theme-toggle .icon-moon{display:block}
+
+  /* Neon brand accents */
+  [data-theme="dark"] .brand-text .name{
+    text-shadow:0 0 18px rgba(255,94,138,0.45),0 0 2px rgba(255,255,255,0.3);
+  }
+  [data-theme="dark"] .brand-mark{
+    background:linear-gradient(160deg,#22E0C2,#0FBFA3);
+    box-shadow:0 4px 0 var(--teal-shadow),0 0 22px rgba(34,224,194,0.45);
+  }
+
+  /* Cards & surfaces */
+  [data-theme="dark"] .qcard{
+    background:linear-gradient(180deg,#1A2049 0%,#161B3D 100%);
+    border:1px solid var(--plum);
+    box-shadow:0 0 0 1px rgba(255,77,204,0.15),0 0 24px rgba(180,124,255,0.25),inset 0 1px 0 rgba(180,124,255,0.2);
+  }
+  [data-theme="dark"] .qstem{color:var(--ink)}
+  [data-theme="dark"] .settings.open{
+    background:linear-gradient(180deg,#1A2049 0%,#161B3D 100%);
+    border-color:var(--sky);
+    box-shadow:0 0 0 1px rgba(61,217,255,0.18),0 0 22px rgba(61,217,255,0.20);
+  }
+  [data-theme="dark"] .fc-face{
+    background:linear-gradient(180deg,#1A2049 0%,#161B3D 100%);
+    border:1px solid var(--rose);
+    box-shadow:0 0 0 1px rgba(255,77,204,0.20),0 0 28px rgba(255,77,204,0.30);
+  }
+  [data-theme="dark"] .fc-face::after{
+    background-image:radial-gradient(circle,rgba(180,124,255,.08) 1px,transparent 1px);
+  }
+  [data-theme="dark"] .complete,
+  [data-theme="dark"] .auth-card{
+    background:linear-gradient(180deg,#1A2049 0%,#0F1430 100%);
+    border:1px solid var(--rose);
+    box-shadow:0 0 0 1px rgba(255,77,204,0.18),0 0 32px rgba(255,77,204,0.30);
+  }
+  [data-theme="dark"] .speech{
+    background:linear-gradient(180deg,#1A2049 0%,#161B3D 100%);
+    border:1px solid var(--teal);color:var(--ink);
+    box-shadow:0 0 18px rgba(34,224,194,0.30);
+  }
+  [data-theme="dark"] .speech::before{
+    background:#1A2049;border-left-color:var(--teal);border-bottom-color:var(--teal);
+  }
+
+  /* Buttons & interactives */
+  [data-theme="dark"] .option,
+  [data-theme="dark"] .tf-btn{
+    background:var(--pill-bg);color:var(--ink);border:1px solid var(--line2);
+    box-shadow:0 0 0 1px rgba(180,124,255,0.10),inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  [data-theme="dark"] .option:not(:disabled):hover,
+  [data-theme="dark"] .tf-btn:not(:disabled):hover{
+    background:var(--surface2);border-color:var(--plum);
+    box-shadow:0 0 0 1px var(--plum),0 0 16px rgba(180,124,255,0.35);
+  }
+  [data-theme="dark"] .o-key{
+    background:rgba(10,14,39,0.8);border:1px solid var(--plum);color:var(--plum);
+  }
+  [data-theme="dark"] .pill{
+    background:var(--pill-bg);border:1px solid var(--line2);color:var(--ink2);
+    box-shadow:0 0 0 1px rgba(180,124,255,0.08);
+  }
+  [data-theme="dark"] .b3d{box-shadow:0 4px 0 var(--shadow-c),var(--neon-glow);--text-c:#0A0E27}
+  [data-theme="dark"] .b3d.teal{box-shadow:0 0 0 1px var(--shadow-c),0 4px 0 var(--shadow-c),0 0 20px rgba(34,224,194,0.45);--text-c:#0A0E27}
+  [data-theme="dark"] .b3d.gold{box-shadow:0 0 0 1px var(--shadow-c),0 4px 0 var(--shadow-c),0 0 20px rgba(255,217,61,0.45);--text-c:#0A0E27}
+  [data-theme="dark"] .b3d.ghost{--bg-c:var(--surface);--text-c:var(--ink2);border:1px solid var(--line2);box-shadow:0 0 0 1px rgba(180,124,255,0.20),0 4px 0 var(--line2)}
+
+  /* Tabs */
+  [data-theme="dark"] .tabs{
+    background:rgba(22,27,61,0.6);border:1px solid var(--plum);
+    box-shadow:0 0 14px rgba(180,124,255,0.25);
+  }
+  [data-theme="dark"] .tab.active{
+    background:linear-gradient(135deg,var(--rose),var(--coral));
+    box-shadow:0 0 14px rgba(255,77,204,0.55);color:#0A0E27;
+  }
+
+  /* HUD chips */
+  [data-theme="dark"] .hud-chip{border-width:1px;box-shadow:0 0 12px rgba(255,77,204,0.15)}
+  [data-theme="dark"] .hud-chip.streak{background:#3A2D08;border-color:#8A6400;color:#FFD93D;box-shadow:0 0 14px rgba(255,217,61,0.35)}
+  [data-theme="dark"] .hud-chip.hearts{background:#3A1228;border-color:#7A1638;color:#FF8AB0;box-shadow:0 0 14px rgba(255,94,138,0.40)}
+  [data-theme="dark"] .hud-chip.xp{background:#3A1F12;border-color:#7A2F1A;color:#FF8E6E;box-shadow:0 0 14px rgba(255,142,110,0.35)}
+
+  /* Badges */
+  [data-theme="dark"] .bd1{background:#0E2A3A;color:#3DD9FF;border-color:#1683C4}
+  [data-theme="dark"] .bd2{background:#0E3A33;color:#22E0C2;border-color:#0FBFA3}
+  [data-theme="dark"] .bd3{background:#2A1A4D;color:#B47CFF;border-color:#7A45C5}
+  [data-theme="dark"] .badge-fmt{background:var(--surface2);color:var(--ink2);border-color:var(--line2)}
+  [data-theme="dark"] .badge{box-shadow:0 0 8px currentColor}
+
+  /* XP bar */
+  [data-theme="dark"] .xp-track{
+    background:rgba(10,14,39,0.8);border:1px solid var(--plum);
+    box-shadow:inset 0 1px 4px rgba(0,0,0,.5),0 0 12px rgba(180,124,255,0.30);
+  }
+  [data-theme="dark"] .xp-fill{
+    background:linear-gradient(90deg,var(--rose),var(--coral),var(--gold));
+    box-shadow:0 0 12px rgba(255,77,204,0.6);
+  }
+  [data-theme="dark"] .vsep{background:var(--plum)}
+
+  /* Explanation banners */
+  [data-theme="dark"] .expl.right{background:#0E3A33;border-color:#22E0C2;color:#7DF5D9}
+  [data-theme="dark"] .expl.wrong{background:#3A1228;border-color:#FF5E8A;color:#FFB3CC}
+  [data-theme="dark"] .expl.right .expl-icon{background:#22E0C2;color:#062018}
+  [data-theme="dark"] .expl.wrong .expl-icon{background:#FF5E8A;color:#3A0E1E}
+
+  /* Auth overlay */
+  [data-theme="dark"] .auth-overlay{
+    background:linear-gradient(180deg,#0A0E27 0%,#161B3D 100%);
+  }
+  [data-theme="dark"] .auth-input{background:var(--surface2);border-color:var(--line2);color:var(--ink)}
+  [data-theme="dark"] .auth-input:focus{border-color:var(--rose);background:var(--surface)}
+
+  /* Misc */
+  [data-theme="dark"] .sync-banner.syncing{background:#0E2A3A;border-color:#3DD9FF;color:#3DD9FF}
+  [data-theme="dark"] .mcard{background:var(--surface)}
+  [data-theme="dark"] .dom-card{background:var(--surface)}
+  [data-theme="dark"] .sess-row{background:var(--surface)}
+  [data-theme="dark"] .empty{background:var(--surface)}
+  [data-theme="dark"] .fc-back{background:linear-gradient(165deg,#1F2552 0%,#2A1A4D 100%);box-shadow:0 6px 0 var(--line2)}
+  :focus-visible{
+    outline:3px solid var(--coral);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+  .b3d:focus-visible,.pill:focus-visible,.tab:focus-visible{
+    outline:3px solid var(--coral);
+    outline-offset:3px;
+  }
+  .auth-input:focus-visible{
+    outline:3px solid var(--coral);
+    outline-offset:0;
+  }
+  /* Suppress default outline only where we've supplied focus-visible */
+  button:focus:not(:focus-visible),
+  input:focus:not(:focus-visible){ outline:none; }
+
+  /* ── Reduced motion (WCAG 2.3.3 / 2.5.7) ── */
+  @media (prefers-reduced-motion: reduce) {
+    *,*::before,*::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .xp-fill{transition:none}
   }
 </style>
 </head>
@@ -508,6 +721,14 @@
       <path d="M 40 62 Q 50 72 60 62" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
       <!-- tooth -->
       <path d="M 47 66 L 53 66 L 53 70 Q 50 72 47 70 Z" fill="#fff"/>
+      <!-- shades (dark mode only) -->
+      <g style="opacity:var(--shades-on,0)">
+        <rect x="27" y="38" width="22" height="13" rx="5" fill="#0A0E1F" stroke="#FF4DCC" stroke-width="1"/>
+        <rect x="51" y="38" width="22" height="13" rx="5" fill="#0A0E1F" stroke="#FF4DCC" stroke-width="1"/>
+        <path d="M 49 42 L 51 42" stroke="#FF4DCC" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="29" y="40" width="6" height="2" rx="1" fill="#FF4DCC" opacity="0.85"/>
+        <rect x="53" y="40" width="6" height="2" rx="1" fill="#3DD9FF" opacity="0.85"/>
+      </g>
     </symbol>
 
     <symbol id="axel-cheer" viewBox="0 0 100 100">
@@ -525,6 +746,14 @@
       <!-- big open mouth -->
       <path d="M 38 60 Q 50 78 62 60 Q 50 70 38 60 Z" fill="#1A1A1A"/>
       <path d="M 42 64 Q 50 73 58 64 Q 50 71 42 64 Z" fill="#FF6B8B"/>
+      <!-- shades (dark mode only) -->
+      <g style="opacity:var(--shades-on,0)">
+        <rect x="27" y="38" width="22" height="13" rx="5" fill="#0A0E1F" stroke="#FF4DCC" stroke-width="1"/>
+        <rect x="51" y="38" width="22" height="13" rx="5" fill="#0A0E1F" stroke="#FF4DCC" stroke-width="1"/>
+        <path d="M 49 42 L 51 42" stroke="#FF4DCC" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="29" y="40" width="6" height="2" rx="1" fill="#FF4DCC" opacity="0.85"/>
+        <rect x="53" y="40" width="6" height="2" rx="1" fill="#3DD9FF" opacity="0.85"/>
+      </g>
     </symbol>
 
     <symbol id="axel-sad" viewBox="0 0 100 100">
@@ -544,6 +773,14 @@
       <path d="M 40 70 Q 50 62 60 70" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
       <!-- tear -->
       <path d="M 36 52 Q 33 58 36 60 Q 39 58 36 52 Z" fill="#3DB8FF"/>
+      <!-- shades (dark mode only) -->
+      <g style="opacity:var(--shades-on,0)">
+        <rect x="27" y="38" width="22" height="13" rx="5" fill="#0A0E1F" stroke="#FF4DCC" stroke-width="1"/>
+        <rect x="51" y="38" width="22" height="13" rx="5" fill="#0A0E1F" stroke="#FF4DCC" stroke-width="1"/>
+        <path d="M 49 42 L 51 42" stroke="#FF4DCC" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="29" y="40" width="6" height="2" rx="1" fill="#FF4DCC" opacity="0.85"/>
+        <rect x="53" y="40" width="6" height="2" rx="1" fill="#3DD9FF" opacity="0.85"/>
+      </g>
     </symbol>
   </defs>
 </svg>
@@ -554,8 +791,8 @@
     <svg class="mascot" viewBox="0 0 100 100" aria-hidden="true"><use href="#axel"/></svg>
     <p class="display" style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--coral-d);margin-bottom:.4rem">Axel says hi!</p>
     <p class="auth-title">Ready to learn?</p>
-    <p class="auth-sub">Set a passphrase to save your streak across devices, or skip and play offline.</p>
-    <input class="auth-input" type="password" id="pass-input" placeholder="your secret passphrase" autocomplete="current-password">
+    <label for="pass-input" class="auth-sub" style="display:block;text-align:center">Set a passphrase to save your streak across devices, or skip and play offline.</label>
+    <input class="auth-input" type="password" id="pass-input" placeholder="your secret passphrase" autocomplete="current-password" aria-label="Passphrase">
     <p class="auth-err" id="auth-err"></p>
     <button class="b3d teal" style="width:100%" id="auth-btn" onclick="signIn()">Let's go!</button>
     <button class="auth-skip" onclick="skipAuth()">Skip — play offline</button>
@@ -564,7 +801,7 @@
 </div>
 
 <!-- ═══════ APP ═══════ -->
-<div class="shell">
+<div class="shell" role="main">
 
   <!-- Top bar -->
   <div class="topbar">
@@ -574,23 +811,16 @@
       </div>
       <div class="brand-text">
         <div class="name">Axel Quiz</div>
-        <div class="sub"><span style="color:rgb(138, 129, 123)">CPACC · v4.0</span></div>
+        <div class="sub"><span style="color:var(--ink3)">CPACC · v4.0</span></div>
       </div>
     </div>
     <div class="hud">
-      <div class="hud-chip streak" title="Streak — correct in a row">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#F5A623" stroke="#A87A0E" stroke-width="1.5"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
-        <span id="streak-n">0</span>
-      </div>
-      <div class="hud-chip hearts" id="hearts" title="Lives this session">
-        <span id="hearts-vis">♥♥♥</span>
-      </div>
-      <div class="hud-chip xp" title="XP earned this session">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#FF8F60" stroke="var(--coral-d)" stroke-width="1.5"><path d="M12 2l2.5 7H22l-6 4.5 2.5 7L12 16l-6.5 4.5L8 13.5 2 9h7.5z"/></svg>
-        <span id="xp-n">0</span>
-      </div>
       <button class="hud-chip user" id="user-chip" onclick="showAuth()" style="display:none">
         <span class="u-dot" id="u-dot"></span><span id="u-label">Offline</span>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
     </div>
   </div>
@@ -606,6 +836,10 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg>
         Progress
       </button>
+      <button class="tab" id="settings-tab-btn" onclick="toggleSettings()" aria-expanded="false">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8L7 17M17 7l2.8-2.8"/></svg>
+        Settings
+      </button>
     </div>
     <button class="b3d ghost sm" id="end-session-btn" onclick="endSession()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
@@ -616,16 +850,8 @@
   <!-- ═════════ QUIZ TAB ═════════ -->
   <div id="quiz-tab">
 
-    <!-- Settings (collapsible) -->
+    <!-- Settings (collapsible panel — toggle now in tab row) -->
     <div class="settings" id="settings">
-      <button class="settings-toggle" id="settings-toggle" onclick="toggleSettings()" aria-expanded="false">
-        <span class="st-left">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.8 2.8M17 17l2.8 2.8M1 12h4M19 12h4M4.2 19.8L7 17M17 7l2.8-2.8"/></svg>
-          <span>Settings</span>
-        </span>
-        <span class="st-summary" id="st-summary">Flashcard · D1 D2 D3</span>
-        <svg class="st-caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
       <div class="settings-body" id="settings-body">
         <div class="settings-label">Mode</div>
         <div class="pill-row" style="margin-bottom:.7rem">
@@ -649,12 +875,27 @@
     </div>
 
     <!-- XP progress bar -->
-    <div class="xp-track" aria-label="Progress through this session"><div class="xp-fill" id="prog" style="width:5%"></div></div>
+    <div class="xp-track" role="progressbar" aria-label="Progress through this session" aria-valuemin="0" aria-valuemax="100" aria-valuenow="5"><div class="xp-fill" id="prog" style="width:5%"></div></div>
 
     <!-- Mascot row -->
     <div class="mascot-row" id="mascot-row">
       <svg class="mascot" id="mascot-svg" viewBox="0 0 100 100" aria-hidden="true"><use href="#axel"/></svg>
-      <div class="speech" id="speech-bubble">Let's tackle some questions! Tap the card to flip it.</div>
+      <div class="mascot-right">
+        <div class="speech" id="speech-bubble">Let's tackle some questions! Tap the card to flip it.</div>
+        <div class="mascot-hud">
+          <div class="hud-chip streak" aria-label="Streak — correct answers in a row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#F5A623" stroke="#966800" stroke-width="1.5" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+            <span id="streak-n">0</span>
+          </div>
+          <div class="hud-chip hearts" id="hearts" aria-label="Lives remaining this session" aria-live="polite">
+            <span id="hearts-vis">♥♥♥</span>
+          </div>
+          <div class="hud-chip xp" aria-label="XP earned this session">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#FF8F60" stroke="#C73511" stroke-width="1.5" aria-hidden="true"><path d="M12 2l2.5 7H22l-6 4.5 2.5 7L12 16l-6.5 4.5L8 13.5 2 9h7.5z"/></svg>
+            <span id="xp-n">0</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Question card -->
@@ -880,10 +1121,22 @@ function showTab(t,el){
   document.getElementById('quiz-tab').style.display=t==='quiz'?'':'none';
   document.getElementById('progress-tab').style.display=t==='progress'?'':'none';
   document.getElementById('end-session-btn').style.display=t==='quiz'?'':'none';
+  // Close settings panel when leaving quiz tab
+  if(t!=='quiz'){
+    document.getElementById('settings').classList.remove('open');
+    document.getElementById('settings-tab-btn').classList.remove('active');
+    document.getElementById('settings-tab-btn').setAttribute('aria-expanded','false');
+  }
   if(t==='progress')renderProgress();
 }
 function setMode(m,el){mode=m;document.querySelectorAll('[id^="mb-"]').forEach(b=>b.classList.remove('on-mode'));el.classList.add('on-mode');updateSettingsSummary();reset()}
-function toggleSettings(){const s=document.getElementById('settings');const open=s.classList.toggle('open');document.getElementById('settings-toggle').setAttribute('aria-expanded',open?'true':'false')}
+function toggleSettings(){
+  const s=document.getElementById('settings');
+  const open=s.classList.toggle('open');
+  const btn=document.getElementById('settings-tab-btn');
+  btn.setAttribute('aria-expanded',open?'true':'false');
+  btn.classList.toggle('active',open);
+}
 function updateSettingsSummary(){const labels={mx:'Mixed',fc:'Flashcard',mc:'Multi',tf:'True/False'};const doms=activeDomains.slice().sort().map(d=>'D'+d).join(' ');document.getElementById('st-summary').textContent=labels[mode]+' · '+doms}
 function toggleDomain(d){
   const btn=document.getElementById('df'+d);const cls='on-d'+d;
@@ -924,7 +1177,9 @@ function render(){
   if(!filteredQ.length)filteredQ=getFiltered();
   if(!filteredQ.length){document.getElementById('card-area').innerHTML='<div class="empty"><div class="em">🤷</div>No questions match this selection.<br><span style="font-size:.78rem;font-weight:600;color:var(--ink3)">Try a different mode or domain combo.</span></div>';return}
   const q=filteredQ[idx];
-  document.getElementById('prog').style.width=Math.max(5,Math.round(((idx+1)/filteredQ.length)*100))+'%';
+  const pct=Math.max(5,Math.round(((idx+1)/filteredQ.length)*100));
+  document.getElementById('prog').style.width=pct+'%';
+  document.getElementById('prog').parentElement.setAttribute('aria-valuenow',pct);
   document.getElementById('counter').textContent=(idx+1)+' / '+filteredQ.length;
   const fmtBadge=document.getElementById('fmt-badge');
   if(mode==='mx'){const labels={fc:'Flashcard',mc:'Multiple choice',tf:'True / false'};fmtBadge.textContent=labels[q._fmt]||''}
@@ -1007,7 +1262,7 @@ function answerMC(chosen,correct,n){
   else{loseHeart();streak=0;setMascot('sad',OOPS[Math.floor(Math.random()*OOPS.length)])}
   for(let i=0;i<n;i++){const el=document.getElementById('o'+i);el.disabled=true;if(i===correct)el.classList.add('correct');else if(i===chosen&&!ok)el.classList.add('incorrect')}
   showExpl(filteredQ[idx].ex,ok);updateHUD();
-  if(idx<filteredQ.length-1)setTimeout(()=>navigate(1),2200);
+  if(idx<filteredQ.length-1)document.getElementById('next-btn').disabled=false;
 }
 
 function renderTF(q){
@@ -1028,7 +1283,7 @@ function answerTF(chosen,correct){
   document.getElementById(chosen?'tft':'tff').classList.add(ok?'correct':'incorrect');
   if(!ok)document.getElementById(correct?'tft':'tff').classList.add('correct');
   showExpl(filteredQ[idx].ex,ok);updateHUD();
-  if(idx<filteredQ.length-1)setTimeout(()=>navigate(1),2200);
+  if(idx<filteredQ.length-1)document.getElementById('next-btn').disabled=false;
 }
 
 function loseHeart(){
@@ -1040,7 +1295,8 @@ function loseHeart(){
 function showExpl(txt,ok){
   const e=document.getElementById('expl');
   e.className='expl show '+(ok?'right':'wrong');
-  e.innerHTML=`<span class="expl-icon">${ok?'✓':'!'}</span><span><strong>${ok?'Correct!':'Not quite.'}</strong> ${txt}</span>`;
+  const hasNext=idx<filteredQ.length-1;
+  e.innerHTML=`<span class="expl-icon">${ok?'✓':'!'}</span><span><strong>${ok?'Correct!':'Not quite.'}</strong> ${txt}${hasNext?'<span style="display:block;margin-top:.4rem;font-size:.78rem;opacity:.7">Tap Next when ready →</span>':''}</span>`;
 }
 
 async function endSession(){
@@ -1062,7 +1318,7 @@ async function endSession(){
     <p class="sub">${sessionScore} of ${sessionTotal} correct</p>
     <div class="stat-row">
       <div class="stat-tile"><div class="v" style="color:var(--coral-d)">+${xp}</div><div class="l">XP earned</div></div>
-      <div class="stat-tile"><div class="v" style="color:#A87A0E">${streak}</div><div class="l">Best streak</div></div>
+      <div class="stat-tile"><div class="v" style="color:#966800">${streak}</div><div class="l">Best streak</div></div>
       <div class="stat-tile"><div class="v" style="color:var(--bad-shadow)">${hearts}/3</div><div class="l">Hearts left</div></div>
     </div>
     <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
@@ -1133,18 +1389,18 @@ async function renderProgress(){
   const recent10=sessions.slice(-10);
   const sparks=recent10.map(s=>{
     const h=Math.max(4,Math.round((s.pct/100)*44));
-    const col=s.pct>=75?'#34C9A1':s.pct>=50?'#FFC83D':'#FF5A5A';
+    const col=s.pct>=75?'#005C42':s.pct>=50?'#966800':'#B02020';
     return `<div class="spark-c"><div class="spark-bar"><div class="spark-fill" style="height:${h}px;background:${col}"></div></div><span class="spark-pct">${s.pct}%</span></div>`;
   }).join('');
 
   const dBlock=(label,avg,arr,cls)=>{
     if(avg===null)return `<div class="dom-card ${cls}"><p class="section-h" style="margin:0">${label}</p><p class="v" style="color:var(--ink3)">—</p><p class="s">No sessions yet</p></div>`;
-    const col=avg>=75?'var(--good)':avg>=50?'var(--gold-shadow)':'var(--bad)';
+    const col=avg>=75?'var(--good-shadow)':avg>=50?'var(--gold-shadow)':'var(--bad-shadow)';
     return `<div class="dom-card ${cls}"><p class="section-h" style="margin:0">${label}</p><p class="v" style="color:${col}">${avg}%</p><p class="s">avg · ${arr.length} session${arr.length!==1?'s':''}</p></div>`;
   };
 
   const rows=sessions.slice().reverse().slice(0,8).map(s=>{
-    const col=s.pct>=75?'#34C9A1':s.pct>=50?'#FFC83D':'#FF5A5A';
+    const col=s.pct>=75?'#005C42':s.pct>=50?'#966800':'#B02020';
     const ml=s.mode==='fc'?'Flashcard':s.mode==='mc'?'Multi':s.mode==='mx'?'Mixed':'T/F';
     const doms=Array.isArray(s.domains)?s.domains:[];
     return `<div class="sess-row"><span class="sr-date">${s.date} · ${s.time}</span><div class="sr-bar"><div style="width:${s.pct}%;background:${col}"></div></div><span class="sr-pct" style="color:${col}">${s.pct}%</span><span class="sr-meta">${ml}${doms.length?' · D'+doms.join(','):''}</span></div>`;
@@ -1161,7 +1417,7 @@ async function renderProgress(){
     <div class="metrics">
       <div class="mcard"><p class="l">Accuracy</p><p class="v" style="color:var(--good)">${avgPct}%</p><p class="s">${totalC} of ${totalQ} correct</p></div>
       <div class="mcard"><p class="l">Best score</p><p class="v" style="color:var(--coral-d)">${best}%</p><p class="s">in one session</p></div>
-      <div class="mcard"><p class="l">Total XP</p><p class="v" style="color:#A87A0E">${totalXp}</p><p class="s">earned all-time</p></div>
+      <div class="mcard"><p class="l">Total XP</p><p class="v" style="color:#966800">${totalXp}</p><p class="s">earned all-time</p></div>
       <div class="mcard"><p class="l">Sessions</p><p class="v" style="color:var(--plum)">${sessions.length}</p><p class="s">completed</p></div>
     </div>
     <p class="section-h">Last ${recent10.length} session${recent10.length!==1?'s':''}</p>
@@ -1177,6 +1433,23 @@ async function renderProgress(){
 }
 
 async function confirmClear(){if(!confirm('Clear all session history? This cannot be undone.'))return;await clearHistory();renderProgress()}
+
+/* ── Theme toggle ── */
+function applyTheme(t){
+  if(t==='dark')document.documentElement.setAttribute('data-theme','dark');
+  else document.documentElement.removeAttribute('data-theme');
+}
+function toggleTheme(){
+  const cur=document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light';
+  const next=cur==='dark'?'light':'dark';
+  applyTheme(next);
+  try{localStorage.setItem('cpacc_theme',next)}catch(e){}
+}
+(function initTheme(){
+  let t='light';
+  try{t=localStorage.getItem('cpacc_theme')||'light'}catch(e){}
+  applyTheme(t);
+})();
 </script>
 </body>
 </html>
