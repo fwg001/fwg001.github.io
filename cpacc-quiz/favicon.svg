@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- body -->
+  <ellipse cx="50" cy="56" rx="44" ry="42" fill="#3CC8A0"/>
+  <!-- ear bumps -->
+  <circle cx="18" cy="22" r="12" fill="#3CC8A0"/>
+  <circle cx="82" cy="22" r="12" fill="#3CC8A0"/>
+  <!-- face shading -->
+  <ellipse cx="50" cy="72" rx="34" ry="22" fill="#2EB48C" opacity="0.45"/>
+  <!-- eye whites -->
+  <ellipse cx="34" cy="50" rx="11" ry="12" fill="#fff"/>
+  <ellipse cx="66" cy="50" rx="11" ry="12" fill="#fff"/>
+  <!-- pupils -->
+  <circle cx="36" cy="52" r="6" fill="#1A2E28"/>
+  <circle cx="68" cy="52" r="6" fill="#1A2E28"/>
+  <!-- catchlights -->
+  <circle cx="38.5" cy="49" r="2.2" fill="#fff"/>
+  <circle cx="70.5" cy="49" r="2.2" fill="#fff"/>
+  <!-- blush -->
+  <ellipse cx="20" cy="65" rx="7" ry="4" fill="#F9A8A0" opacity="0.65"/>
+  <ellipse cx="80" cy="65" rx="7" ry="4" fill="#F9A8A0" opacity="0.65"/>
+  <!-- smile -->
+  <path d="M 38 72 Q 50 86 62 72" fill="none" stroke="#1A2E28" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- tooth -->
+  <rect x="46" y="72" width="8" height="8" rx="2" fill="#fff"/>
+</svg>
