@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Axel · CPACC Quiz</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -690,7 +691,31 @@
 <script>
 /* ═══════════════════════════════════════════════════════
    ⚙️  CONFIGURATION (Supabase optional)
-   Same setup instructions as before — paste your URL/key:
+   ─────────────────────────────────────────────────────
+   Run this SQL in Supabase → SQL Editor:
+
+     create table if not exists sessions (
+       id uuid primary key default gen_random_uuid(),
+       user_id text not null,
+       created_at timestamptz default now(),
+       date text, time text,
+       score int, total int, pct int,
+       mode text, domains int[], ts bigint, xp int
+     );
+     alter table sessions enable row level security;
+
+     -- Drop old policies if re-running
+     drop policy if exists "anon insert" on sessions;
+     drop policy if exists "own rows" on sessions;
+     drop policy if exists "anon select" on sessions;
+     drop policy if exists "anon delete" on sessions;
+     drop policy if exists "own delete" on sessions;
+
+     create policy "anon insert" on sessions for insert with check (true);
+     create policy "anon select" on sessions for select using (true);
+     create policy "anon delete" on sessions for delete using (true);
+
+   Then paste your Project URL and anon key below:
 ═══════════════════════════════════════════════════════ */
 const SB_URL  = 'YOUR_SUPABASE_URL';
 const SB_KEY  = 'YOUR_SUPABASE_ANON_KEY';
