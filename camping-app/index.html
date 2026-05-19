@@ -1,1 +1,1222 @@
-Hello world
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Sunset Beach Camp 2026</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: #faf7f2; }
+    #root { height: 100%; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+// ─── DATA ────────────────────────────────────────────────────────────────────
+
+const CAMP_INFO = {
+  name: "Sunset Beach State Park",
+  address: "201 Sunset Beach Rd, Watsonville, CA 95076",
+  phone: "(831) 763-7063",
+  travelTime: "1 hour from South Bay — add traffic time",
+  checkIn: "2pm",
+  checkOut: "12pm",
+  dogs: "Yes — except on the beach",
+  maxPerSite: 8,
+  maxVehicles: "2 per site (trailers count, 20ft max)",
+  sites: [
+    { family: "Russo", sites: "51, 61" },
+    { family: "Chow", sites: "58, 59" },
+    { family: "Carleton", sites: "57, 60" },
+    { family: "Young Adults", sites: "Emma's 2 sites" },
+  ],
+  features: ["Awesome beach!", "Fire pits", "Restrooms on site", "Whale watching in season"],
+  notes: [
+    "Choose EASY meals with simple cooking and few ingredients",
+    "No refrigerators — just coolers (subject to ice melting)",
+    "If you aren't a cook, team up with someone else",
+    "Everyone leads one meal and supports another",
+  ],
+};
+
+const ROSTER = [
+  { name: "James Carleton", phone: "4088381923", type: "adult", adults: 3, kids: 1, status: "confirmed", admin: true },
+  { name: "Ivan Russo", phone: "4084216032", type: "adult", adults: 3, kids: 0, status: "confirmed", admin: false },
+  { name: "Alex Chow", phone: "4088345841", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false },
+  { name: "Philip Nemec", phone: "4088298165", type: "adult", adults: 1, kids: 1, status: "confirmed", admin: false },
+  { name: "Cole Holmgren", phone: "6513738872", type: "adult", adults: 1, kids: 4, status: "confirmed", admin: false },
+  { name: "Andrew Lowd", phone: "4084994152", type: "adult", adults: 1, kids: 2, status: "confirmed", admin: false },
+  { name: "Steven Feldmeyer", phone: "4084831670", type: "adult", adults: 1, kids: 2, status: "confirmed", admin: false },
+  { name: "Aaron Teixeira", phone: "4086741790", type: "adult", adults: 3, kids: 0, status: "confirmed", admin: false },
+  { name: "Scott Jennings", phone: "5712719224", type: "adult", adults: 1, kids: 2, status: "confirmed", admin: false },
+  { name: "Dave Carlsen", phone: "4086219257", type: "adult", adults: 3, kids: 2, status: "confirmed", admin: false },
+  { name: "Eric Ritchey", phone: "4083403564", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false },
+  { name: "Peter Cook", phone: "5104272615", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false },
+  { name: "Ben Quimby", phone: "9102739103", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
+  { name: "Joe Bass", phone: "8054231417", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
+  { name: "Gria PA", phone: "4088900824", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
+  { name: "Russ Drews", phone: "4084774235", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
+];
+
+const MEALS = [
+  { id: "fri-dinner", label: "Friday Dinner", icon: "🌙", day: "Fri", defaultChef: "James Carleton", defaultHelper: "Emma", menu: "TBD" },
+  { id: "fri-dessert", label: "Friday Dessert", icon: "🍰", day: "Fri", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "sat-breakfast", label: "Saturday Breakfast", icon: "🌅", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "sat-lunch", label: "Saturday Lunch", icon: "☀️", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "sat-dinner", label: "Saturday Dinner", icon: "🌆", day: "Sat", defaultChef: "Aaron Teixeira", defaultHelper: null, menu: "Kahlua pork, sliders" },
+  { id: "sat-dessert", label: "Saturday Dessert", icon: "🍦", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "sun-breakfast", label: "Sunday Breakfast", icon: "🌄", day: "Sun", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "sides-snacks", label: "Sides & Snacks", icon: "🥗", day: "Any", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "drinks", label: "Drinks", icon: "🥤", day: "Any", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "coffee", label: "Coffee", icon: "☕", day: "Any", defaultChef: null, defaultHelper: null, menu: "" },
+];
+
+const GROUP_GEAR = [
+  { id: "coolers", item: "Coolers", defaultClaimers: [] },
+  { id: "campstove", item: "Camp Stove & Fuel", defaultClaimers: ["Ivan Russo", "Aaron Teixeira"] },
+  { id: "lanterns", item: "Lanterns (2)", defaultClaimers: ["James Carleton", "Ivan Russo", "Andrew Lowd"] },
+  { id: "tables", item: "Tables for eating/cooking (2)", defaultClaimers: ["James Carleton", "Ivan Russo", "Alex Chow"] },
+  { id: "firewood", item: "Firewood", defaultClaimers: ["Ivan Russo"] },
+  { id: "canopy", item: "Canopy", defaultClaimers: ["James Carleton", "Philip Nemec"] },
+  { id: "cooktools", item: "Cooking tools, pots/pans", defaultClaimers: ["James Carleton", "Ivan Russo", "Alex Chow"] },
+  { id: "dishes", item: "Dish soap/scrubber/washbins", defaultClaimers: ["James Carleton", "Alex Chow"] },
+  { id: "trash", item: "Trash bags", defaultClaimers: ["James Carleton"] },
+  { id: "napkins", item: "Napkins/paper towels", defaultClaimers: ["James Carleton", "Alex Chow"] },
+  { id: "citronella", item: "Citronella candle", defaultClaimers: ["James Carleton"] },
+  { id: "beachtoys", item: "Beach toys", defaultClaimers: [] },
+];
+
+const PERSONAL_GEAR = [
+  "Water", "Tent", "Air mattress / cot", "Sleeping bag", "Blanket / Pillow",
+  "Toiletries", "Clothes (layers — warm days, cool nights)", "Swimsuits! 🩱",
+  "Towels", "Bug spray", "Plates", "Silverware", "Camp chairs",
+  "Games / Dice", "Flashlights", "Hiking stuff — camelback, first aid",
+  "Surf boards, boogie boards, SUPs", "Cooler for food & drinks",
+  "Food for meals you signed up for",
+];
+
+// ─── SUPABASE ────────────────────────────────────────────────────────────────
+const SUPABASE_URL = "https://ipobjafwifquhagvalaf.supabase.co";
+const SUPABASE_KEY = "sb_publishable_TahjTRUV4DSvdwwcbe6G6g_drXqlRF-";
+
+async function sbFetch(path, options = {}) {
+  const res = await fetch(SUPABASE_URL + "/rest/v1/" + path, {
+    ...options,
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Content-Type": "application/json",
+      "Prefer": options.prefer || "return=representation",
+      ...(options.headers || {}),
+    },
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error("Supabase error: " + err);
+  }
+  const text = await res.text();
+  return text ? JSON.parse(text) : [];
+}
+
+// Build in-memory appState shape from Supabase rows
+function buildAppState(mealRows, claimRows) {
+  // Meals: start from defaults, overlay DB rows
+  const meals = Object.fromEntries(MEALS.map(m => [
+    m.id,
+    {
+      chef: m.defaultChef ? { name: m.defaultChef, phone: "seed" } : null,
+      helper: m.defaultHelper ? { name: m.defaultHelper, phone: "seed" } : null,
+      menu: m.menu,
+    }
+  ]));
+  mealRows.forEach(row => {
+    meals[row.meal_id] = {
+      chef: row.chef_name ? { name: row.chef_name, phone: row.chef_phone } : null,
+      helper: row.helper_name ? { name: row.helper_name, phone: row.helper_phone } : null,
+      menu: row.menu || "",
+    };
+  });
+
+  // Claims: group by gear_id
+  const claims = {};
+  claimRows.forEach(row => {
+    if (!claims[row.gear_id]) claims[row.gear_id] = [];
+    claims[row.gear_id].push({ name: row.user_name, phone: row.user_phone });
+  });
+
+  return { meals, claims };
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function formatPhone(raw) {
+  const d = raw.replace(/\D/g, "");
+  if (d.length <= 3) return d;
+  if (d.length <= 6) return `(${d.slice(0,3)}) ${d.slice(3)}`;
+  return `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6,10)}`;
+}
+
+function exportCSV(mealState, claimState, gearList) {
+  const rows = [];
+  rows.push(["=== ROSTER ==="]);
+  rows.push(["Name", "Phone", "Status", "Adults/Teens", "Kids"]);
+  ROSTER.forEach(r => rows.push([r.name, r.phone, r.status, r.adults, r.kids]));
+  rows.push([]);
+  rows.push(["=== MEALS ==="]);
+  rows.push(["Meal", "Chef", "Helper", "Menu"]);
+  MEALS.forEach(m => {
+    const s = mealState[m.id];
+    rows.push([m.label, s?.chef?.name || "", s?.helper?.name || "", s?.menu || ""]);
+  });
+  rows.push([]);
+  rows.push(["=== GROUP GEAR CLAIMS ==="]);
+  rows.push(["Item", "Claimed By"]);
+  gearList.forEach(g => rows.push([g.item, (claimState[g.id]||[]).map(c=>c.name).join(", ") || "Unclaimed"]));
+
+  const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "sunset-beach-camp.csv"; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ─── MAIN APP ────────────────────────────────────────────────────────────────
+function App() {
+  const [screen, setScreen] = useState("login");
+  const [page, setPage] = useState(0);
+  const [phoneInput, setPhoneInput] = useState("");
+  const [rawPhone, setRawPhone] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loginError, setLoginError] = useState("");
+  const [toast, setToast] = useState(null);
+  const [appState, setAppState] = useState(null);
+  const [menuEdit, setMenuEdit] = useState({});
+  const [personalChecks, setPersonalChecks] = useState({});
+  const [gearList, setGearList] = useState(GROUP_GEAR);
+  const [gearListPersonal, setGearListPersonal] = useState(PERSONAL_GEAR);
+  const [editingGear, setEditingGear] = useState(null); // { type: 'group'|'personal', id, value }
+  const [newGearInput, setNewGearInput] = useState({ group: "", personal: "" });
+
+  useEffect(() => {
+    async function loadFromSupabase() {
+      try {
+        const [mealRows, claimRows, configRows] = await Promise.all([
+          sbFetch("meal_signups?select=*"),
+          sbFetch("gear_claims?select=*"),
+          sbFetch("app_config?key=eq.gear_list&select=value").catch(() => []),
+        ]);
+        setAppState(buildAppState(mealRows, claimRows));
+        if (configRows.length > 0) {
+          const saved = JSON.parse(configRows[0].value);
+          if (saved.group) setGearList(saved.group);
+          if (saved.personal) setGearListPersonal(saved.personal);
+        }
+      } catch (e) {
+        console.error("Load failed, using defaults", e);
+        setAppState(buildAppState([], []));
+      }
+    }
+    loadFromSupabase();
+  }, []);
+
+  // saveState just updates local React state — DB writes happen inline per action
+  function saveState(newState) {
+    setAppState(newState);
+  }
+
+  const showToast = (msg, type = "success") => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 2800);
+  };
+
+  const handlePhoneInput = (e) => {
+    const raw = e.target.value.replace(/\D/g,"").slice(0,10);
+    setRawPhone(raw);
+    setPhoneInput(formatPhone(raw));
+  };
+
+  const handleLogin = async () => {
+    const found = ROSTER.find(p => p.phone === rawPhone);
+    if (found) {
+      setCurrentUser(found);
+      setScreen("app");
+      setPage(0);
+      setLoginError("");
+      // Load this user's personal checklist from Supabase
+      try {
+        const rows = await sbFetch(`personal_checks?user_phone=eq.${found.phone}&select=item,checked`);
+        const checks = {};
+        rows.forEach(r => { if (r.checked) checks[r.item] = true; });
+        setPersonalChecks(checks);
+      } catch { setPersonalChecks({}); }
+    } else {
+      setLoginError("Phone number not on the roster. Contact James.");
+    }
+  };
+
+  const handleMealSignup = async (mealId, role) => {
+    if (!appState) return;
+    const slot = appState.meals[mealId];
+    const isChef = slot.chef?.phone === currentUser.phone;
+    const isHelper = slot.helper?.phone === currentUser.phone;
+
+    let newSlot = { ...slot };
+
+    if (role === "chef") {
+      if (isChef) {
+        newSlot.chef = null;
+        showToast("Removed as chef", "info");
+      } else if (slot.chef && slot.chef.phone !== currentUser.phone) {
+        showToast("Chef spot is taken!", "error"); return;
+      } else {
+        newSlot.chef = { name: currentUser.name, phone: currentUser.phone };
+        if (isHelper) newSlot.helper = null;
+        showToast(`You're the chef for ${MEALS.find(m=>m.id===mealId).label}! 🍳`);
+      }
+    } else {
+      if (isHelper) {
+        newSlot.helper = null;
+        showToast("Removed as helper", "info");
+      } else if (slot.helper && slot.helper.phone !== currentUser.phone) {
+        showToast("Helper spot is taken!", "error"); return;
+      } else {
+        newSlot.helper = { name: currentUser.name, phone: currentUser.phone };
+        if (isChef) newSlot.chef = null;
+        showToast(`You're the helper for ${MEALS.find(m=>m.id===mealId).label}! 👨‍🍳`);
+      }
+    }
+
+    // Optimistic UI update
+    saveState({ ...appState, meals: { ...appState.meals, [mealId]: newSlot } });
+
+    // Persist to Supabase
+    try {
+      await sbFetch("meal_signups", {
+        method: "POST",
+        prefer: "resolution=merge-duplicates,return=representation",
+        headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
+        body: JSON.stringify({
+          meal_id: mealId,
+          chef_name: newSlot.chef?.name || null,
+          chef_phone: newSlot.chef?.phone || null,
+          helper_name: newSlot.helper?.name || null,
+          helper_phone: newSlot.helper?.phone || null,
+          menu: newSlot.menu || null,
+          updated_at: new Date().toISOString(),
+        }),
+      });
+    } catch (e) {
+      console.error("Meal save failed", e);
+      showToast("Save failed — check connection", "error");
+    }
+  };
+
+  const handleClaim = async (gearId) => {
+    if (!appState) return;
+    const existing = appState.claims[gearId] || [];
+    const isMine = existing.some(c => c.phone === currentUser.phone);
+
+    if (isMine) {
+      const updated = existing.filter(c => c.phone !== currentUser.phone);
+      saveState({ ...appState, claims: { ...appState.claims, [gearId]: updated } });
+      showToast("Removed your claim", "info");
+      try {
+        await sbFetch(
+          `gear_claims?gear_id=eq.${gearId}&user_phone=eq.${currentUser.phone}`,
+          { method: "DELETE", prefer: "" }
+        );
+      } catch (e) { console.error("Claim delete failed", e); }
+    } else {
+      const updated = [...existing, { name: currentUser.name, phone: currentUser.phone }];
+      saveState({ ...appState, claims: { ...appState.claims, [gearId]: updated } });
+      showToast(`You've got ${gearList.find(g=>g.id===gearId)?.item || gearId}!`);
+      try {
+        await sbFetch("gear_claims", {
+          method: "POST",
+          body: JSON.stringify({ gear_id: gearId, user_name: currentUser.name, user_phone: currentUser.phone }),
+        });
+      } catch (e) { console.error("Claim insert failed", e); }
+    }
+  };
+
+  const toggleCheck = async (item) => {
+    const nowChecked = !personalChecks[item];
+    setPersonalChecks(prev => ({ ...prev, [item]: nowChecked }));
+    try {
+      if (nowChecked) {
+        await sbFetch("personal_checks", {
+          method: "POST",
+          headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
+          body: JSON.stringify({ user_phone: currentUser.phone, item, checked: true }),
+        });
+      } else {
+        await sbFetch(
+          `personal_checks?user_phone=eq.${currentUser.phone}&item=eq.${encodeURIComponent(item)}`,
+          { method: "DELETE", prefer: "" }
+        );
+      }
+    } catch (e) { console.error("Check save failed", e); }
+  };
+
+  const handleMenuSave = async (mealId) => {
+    if (!appState) return;
+    const slot = appState.meals[mealId];
+    const newMenu = menuEdit[mealId];
+    const ns = { ...appState, meals: { ...appState.meals, [mealId]: { ...slot, menu: newMenu } } };
+    saveState(ns);
+    setMenuEdit(prev => { const n = {...prev}; delete n[mealId]; return n; });
+    showToast("Menu updated!");
+    try {
+      await sbFetch("meal_signups", {
+        method: "POST",
+        headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
+        body: JSON.stringify({
+          meal_id: mealId,
+          chef_name: slot.chef?.name || null,
+          chef_phone: slot.chef?.phone || null,
+          helper_name: slot.helper?.name || null,
+          helper_phone: slot.helper?.phone || null,
+          menu: newMenu,
+          updated_at: new Date().toISOString(),
+        }),
+      });
+    } catch (e) { console.error("Menu save failed", e); }
+  };
+
+  const saveGearList = async (newGroup, newPersonal) => {
+    setGearList(newGroup);
+    setGearListPersonal(newPersonal);
+    try {
+      await sbFetch("app_config", {
+        method: "POST",
+        headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
+        body: JSON.stringify({ key: "gear_list", value: JSON.stringify({ group: newGroup, personal: newPersonal }) }),
+      });
+    } catch (e) { console.error("Gear list save failed", e); }
+  };
+
+  const totalAdults = ROSTER.filter(r=>r.status==="confirmed").reduce((a,r)=>a+r.adults,0);
+  const totalKids = ROSTER.filter(r=>r.status==="confirmed").reduce((a,r)=>a+r.kids,0);
+
+  const tabs = currentUser?.admin
+    ? ["🏠 Home", "📍 Location", "👥 Roster", "🍳 Meals", "🎒 Gear", "⚙️ Admin"]
+    : ["🏠 Home", "📍 Location", "👥 Roster", "🍳 Meals", "🎒 Gear"];
+
+  const CSS = `
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Sans+3:wght@300;400;600&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sand: #f2e8d5;
+      --sand-dark: #d4c4a0;
+      --ocean: #1a4a5e;
+      --ocean-light: #2a6a82;
+      --wave: #4a9aba;
+      --sunset: #e07040;
+      --sunset-light: #f09060;
+      --pine: #2d5a3d;
+      --pine-light: #4a8a5a;
+      --bg: #faf7f2;
+      --text: #1a2a1a;
+      --muted: #7a8a7a;
+      --card: #ffffff;
+      --border: rgba(0,0,0,0.08);
+    }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text); }
+    .display { font-family: 'Playfair Display', serif; }
+    .btn {
+      border: none; border-radius: 8px; cursor: pointer;
+      font-family: 'Source Sans 3', sans-serif; font-size: 13px; font-weight: 600;
+      letter-spacing: 0.04em; transition: all 0.15s; padding: 8px 16px;
+    }
+    .btn-primary { background: var(--ocean); color: white; }
+    .btn-primary:hover { background: var(--ocean-light); }
+    .btn-sunset { background: var(--sunset); color: white; }
+    .btn-sunset:hover { background: var(--sunset-light); }
+    .btn-ghost { background: transparent; border: 1.5px solid var(--border); color: var(--muted); }
+    .btn-ghost:hover { border-color: var(--ocean); color: var(--ocean); }
+    .btn-pine { background: var(--pine); color: white; }
+    .btn-pine:hover { background: var(--pine-light); }
+    .btn-ocean { background: var(--ocean); color: white; }
+    .btn-ocean:hover { background: var(--ocean-light); }
+    .card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
+    .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .tag-ocean { background: #e0f0f8; color: var(--ocean); }
+    .tag-pine { background: #e0f0e6; color: var(--pine); }
+    .tag-sunset { background: #fce8de; color: var(--sunset); }
+    .tag-sand { background: #f5eedc; color: #8a6a30; }
+    input:focus { outline: none; }
+    textarea:focus { outline: none; }
+  `;
+
+  if (!appState) return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh", fontFamily: "Georgia, serif", color: "#666" }}>
+      Loading camp data…
+    </div>
+  );
+
+  // ── LOGIN ──
+  if (screen === "login") return (
+    <>
+      <style>{CSS}</style>
+      <div style={{
+        minHeight: "100vh",
+        background: "linear-gradient(170deg, #0d2a3a 0%, #1a4a5e 40%, #2d5a3d 100%)",
+        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+        padding: 24, position: "relative", overflow: "hidden",
+      }}>
+        {/* Wave shapes */}
+        <svg style={{ position: "absolute", bottom: 0, left: 0, right: 0, opacity: 0.15 }} viewBox="0 0 800 120" preserveAspectRatio="none">
+          <path d="M0,60 C200,120 600,0 800,60 L800,120 L0,120 Z" fill="#f2e8d5"/>
+        </svg>
+        <svg style={{ position: "absolute", bottom: 0, left: 0, right: 0, opacity: 0.08 }} viewBox="0 0 800 100" preserveAspectRatio="none">
+          <path d="M0,40 C300,100 500,10 800,50 L800,100 L0,100 Z" fill="#4a9aba"/>
+        </svg>
+
+        <div style={{ position: "relative", zIndex: 1, width: "100%", maxWidth: 360, textAlign: "center" }}>
+          <div style={{ fontSize: 56, marginBottom: 12 }}>🏖️</div>
+          <h1 className="display" style={{ color: "#f2e8d5", fontSize: 30, fontWeight: 600, marginBottom: 4 }}>
+            Sunset Beach
+          </h1>
+          <p style={{ color: "#8abccc", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 36 }}>
+            Family Camp · 2026
+          </p>
+
+          <div style={{ background: "rgba(255,255,255,0.07)", backdropFilter: "blur(12px)", borderRadius: 16, border: "1px solid rgba(255,255,255,0.12)", padding: "28px 24px" }}>
+            <p style={{ color: "#c0d8e0", fontSize: 14, marginBottom: 20, lineHeight: 1.7 }}>
+              Enter your phone number to access the trip details.
+            </p>
+            <input
+              type="tel"
+              placeholder="(408) 555-0000"
+              value={phoneInput}
+              onChange={handlePhoneInput}
+              onKeyDown={e => e.key === "Enter" && handleLogin()}
+              style={{
+                width: "100%", background: "rgba(255,255,255,0.1)", border: "1.5px solid rgba(255,255,255,0.2)",
+                borderRadius: 10, padding: "13px 16px", color: "#f2e8d5",
+                fontSize: 20, letterSpacing: "0.06em", textAlign: "center",
+                fontFamily: "'Playfair Display', serif",
+              }}
+            />
+            {loginError && <p style={{ color: "#f09060", fontSize: 12, marginTop: 10, lineHeight: 1.5 }}>{loginError}</p>}
+            <button className="btn btn-sunset" onClick={handleLogin} style={{ width: "100%", marginTop: 16, padding: "13px", fontSize: 14 }}>
+              Enter Camp →
+            </button>
+          </div>
+          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: 11, marginTop: 16 }}>
+            Not on the list? Contact James Carleton
+          </p>
+        </div>
+      </div>
+    </>
+  );
+
+  // ── APP SHELL ──
+  return (
+    <>
+      <style>{CSS}</style>
+      <div style={{ minHeight: "100vh", background: "var(--bg)", display: "flex", flexDirection: "column", maxWidth: 520, margin: "0 auto" }}>
+
+        {/* Toast */}
+        {toast && (
+          <div style={{
+            position: "fixed", top: 16, left: "50%", transform: "translateX(-50%)",
+            background: toast.type === "error" ? "#5a1a1a" : toast.type === "info" ? "#1a3a4a" : "#1a3a2a",
+            border: `1px solid ${toast.type === "error" ? "#c05050" : toast.type === "info" ? "#4a8aaa" : "#4a8a5a"}`,
+            borderRadius: 10, padding: "10px 20px", color: "#f2e8d5",
+            fontSize: 13, zIndex: 999, boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
+            whiteSpace: "nowrap", fontFamily: "'Source Sans 3', sans-serif",
+          }}>{toast.msg}</div>
+        )}
+
+        {/* Header */}
+        <div style={{
+          background: "linear-gradient(135deg, var(--ocean) 0%, var(--ocean-light) 100%)",
+          padding: "14px 20px 10px",
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+        }}>
+          <div>
+            <div className="display" style={{ color: "#f2e8d5", fontSize: 16, fontWeight: 600 }}>🏖️ Sunset Beach</div>
+            <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 11, marginTop: 1 }}>
+              {currentUser?.name}{currentUser?.admin ? " · Admin" : ""}
+            </div>
+          </div>
+          <button className="btn" onClick={() => { setScreen("login"); setCurrentUser(null); setPhoneInput(""); setRawPhone(""); }}
+            style={{ background: "rgba(255,255,255,0.12)", color: "#f2e8d5", fontSize: 11, padding: "6px 12px" }}>
+            Sign out
+          </button>
+        </div>
+
+        {/* Tab Bar */}
+        <div style={{ display: "flex", background: "white", borderBottom: "1px solid var(--border)", overflowX: "auto" }}>
+          {tabs.map((t, i) => (
+            <button key={t} onClick={() => setPage(i)} style={{
+              flex: 1, minWidth: 60, padding: "10px 4px", background: "none", border: "none",
+              borderBottom: page === i ? "2.5px solid var(--ocean)" : "2.5px solid transparent",
+              color: page === i ? "var(--ocean)" : "var(--muted)",
+              fontSize: 11, fontWeight: 600, letterSpacing: "0.04em", cursor: "pointer",
+              fontFamily: "'Source Sans 3', sans-serif", whiteSpace: "nowrap",
+            }}>{t}</button>
+          ))}
+        </div>
+
+        {/* Pages */}
+        <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px 40px" }}>
+
+          {/* ── PAGE 0: HOME ── */}
+          {page === 0 && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+
+              {/* Welcome banner */}
+              <div className="card" style={{ background: "linear-gradient(135deg, var(--ocean) 0%, #1a6a8a 100%)", padding: "20px 24px" }}>
+                <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 }}>Welcome back</div>
+                <div className="display" style={{ color: "#f2e8d5", fontSize: 22, fontWeight: 600 }}>{currentUser?.name} 👋</div>
+                <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 13, marginTop: 6 }}>
+                  Sunset Beach State Park · July 2026
+                </div>
+              </div>
+
+              {/* Meal status card */}
+              {(() => {
+                const myChefMeals = MEALS.filter(m => appState.meals[m.id]?.chef?.phone === currentUser.phone);
+                const myHelperMeals = MEALS.filter(m => appState.meals[m.id]?.helper?.phone === currentUser.phone);
+                const totalMySigned = myChefMeals.length + myHelperMeals.length;
+                const needsMore = totalMySigned < 2;
+
+                return (
+                  <div className="card" style={{ overflow: "visible" }}>
+                    <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>🍳 Your Meal Sign-ups</div>
+                      {needsMore
+                        ? <span className="tag tag-sunset">Action needed</span>
+                        : <span className="tag tag-pine">All set ✓</span>}
+                    </div>
+                    <div style={{ padding: "12px 16px" }}>
+                      {needsMore && (
+                        <div style={{ background: "#fff8f0", border: "1px solid #f0d0a0", borderRadius: 8, padding: "10px 12px", marginBottom: 12, fontSize: 13, color: "#8a4a10", lineHeight: 1.6 }}>
+                          Everyone should <strong>lead one meal</strong> and <strong>help with another</strong>. You've signed up for {totalMySigned} so far — head to Meals to finish!
+                        </div>
+                      )}
+
+                      {myChefMeals.length === 0 && myHelperMeals.length === 0 ? (
+                        <div style={{ textAlign: "center", padding: "12px 0" }}>
+                          <div style={{ fontSize: 32, marginBottom: 8 }}>🍽️</div>
+                          <div style={{ fontSize: 14, color: "var(--muted)" }}>You haven't signed up for any meals yet.</div>
+                        </div>
+                      ) : (
+                        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                          {myChefMeals.map(m => (
+                            <div key={m.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", background: "#edf6ee", borderRadius: 8 }}>
+                              <span style={{ fontSize: 18 }}>{m.icon}</span>
+                              <div style={{ flex: 1 }}>
+                                <div style={{ fontSize: 13, fontWeight: 600, color: "var(--pine)" }}>{m.label}</div>
+                                <div style={{ fontSize: 11, color: "var(--muted)" }}>{appState.meals[m.id]?.menu || "Menu TBD"}</div>
+                              </div>
+                              <span className="tag tag-pine">Chef 👨‍🍳</span>
+                            </div>
+                          ))}
+                          {myHelperMeals.map(m => (
+                            <div key={m.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", background: "#f0f6f0", borderRadius: 8 }}>
+                              <span style={{ fontSize: 18 }}>{m.icon}</span>
+                              <div style={{ flex: 1 }}>
+                                <div style={{ fontSize: 13, fontWeight: 600, color: "var(--pine)" }}>{m.label}</div>
+                                <div style={{ fontSize: 11, color: "var(--muted)" }}>{appState.meals[m.id]?.menu || "Menu TBD"}</div>
+                              </div>
+                              <span className="tag tag-ocean">Helper 🤝</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      <button className="btn btn-ocean" onClick={() => setPage(3)} style={{ width: "100%", marginTop: 12, padding: "10px", fontSize: 13 }}>
+                        {needsMore ? "Sign up for meals →" : "View all meals →"}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Gear claim status */}
+              {(() => {
+                const myClaims = GROUP_GEAR.filter(g => (appState.claims[g.id]||[]).some(c => c.phone === currentUser.phone));
+                const unclaimed = GROUP_GEAR.filter(g => (appState.claims[g.id]||[]).length === 0);
+                return (
+                  <div className="card">
+                    <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>🎒 Your Gear Claims</div>
+                      {unclaimed.length > 0
+                        ? <span className="tag tag-sunset">{unclaimed.length} unclaimed</span>
+                        : <span className="tag tag-pine">All covered ✓</span>}
+                    </div>
+                    <div style={{ padding: "12px 16px" }}>
+                      {myClaims.length === 0 ? (
+                        <div style={{ fontSize: 13, color: "var(--muted)", fontStyle: "italic", marginBottom: 10 }}>
+                          You haven't claimed any group gear yet.
+                        </div>
+                      ) : (
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 10 }}>
+                          {myClaims.map(g => (
+                            <span key={g.id} style={{ background: "#edf6ee", color: "var(--pine)", borderRadius: 20, padding: "4px 10px", fontSize: 12, fontWeight: 600 }}>
+                              ✓ {g.item}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      {unclaimed.length > 0 && (
+                        <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 10 }}>
+                          Still needed: {unclaimed.map(g => g.item).join(", ")}
+                        </div>
+                      )}
+                      <button className="btn btn-ghost" onClick={() => setPage(4)} style={{ width: "100%", padding: "9px", fontSize: 13 }}>
+                        View gear list →
+                      </button>
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Quick links */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                <button className="btn" onClick={() => setPage(1)} style={{ padding: "14px 10px", background: "white", border: "1px solid var(--border)", borderRadius: 12, cursor: "pointer", textAlign: "center" }}>
+                  <div style={{ fontSize: 22, marginBottom: 4 }}>📍</div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: "var(--ocean)" }}>Location</div>
+                  <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 2 }}>Directions & site info</div>
+                </button>
+                <button className="btn" onClick={() => setPage(2)} style={{ padding: "14px 10px", background: "white", border: "1px solid var(--border)", borderRadius: 12, cursor: "pointer", textAlign: "center" }}>
+                  <div style={{ fontSize: 22, marginBottom: 4 }}>👥</div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: "var(--ocean)" }}>Roster</div>
+                  <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 2 }}>{(() => { const c = ROSTER.filter(r=>r.status==="confirmed"); const a = c.reduce((s,r)=>s+r.adults,0); const k = c.reduce((s,r)=>s+r.kids,0); return `${a+k} people coming`; })()}</div>
+                </button>
+              </div>
+
+            </div>
+          )}
+
+          {/* ── PAGE 1: LOCATION ── */}
+          {page === 1 && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              {/* Hero card */}
+              <div className="card" style={{ background: "linear-gradient(135deg, var(--ocean) 0%, #1a6a8a 100%)", padding: 24 }}>
+                <div className="display" style={{ color: "#f2e8d5", fontSize: 24, fontWeight: 600, marginBottom: 4 }}>
+                  {CAMP_INFO.name}
+                </div>
+                <div style={{ color: "rgba(242,232,213,0.8)", fontSize: 13, marginBottom: 16 }}>{CAMP_INFO.address}</div>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  <a href={`https://maps.google.com/dir/?api=1&destination=${encodeURIComponent(CAMP_INFO.address)}`}
+                    target="_blank" rel="noreferrer"
+                    style={{ background: "var(--sunset)", color: "white", borderRadius: 8, padding: "9px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>
+                    📍 Get Directions
+                  </a>
+                  <a href={`tel:${CAMP_INFO.phone}`}
+                    style={{ background: "rgba(255,255,255,0.15)", color: "#f2e8d5", borderRadius: 8, padding: "9px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>
+                    📞 Call Park
+                  </a>
+                </div>
+              </div>
+
+              {/* Travel time */}
+              <div className="card" style={{ padding: 16 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 12 }}>Trip Details</div>
+                {[
+                  ["🚗", "Travel time", CAMP_INFO.travelTime],
+                  ["✅", "Check-in", CAMP_INFO.checkIn],
+                  ["🏃", "Check-out", CAMP_INFO.checkOut],
+                  ["🐶", "Dogs allowed", CAMP_INFO.dogs],
+                  ["👥", "Max per site", CAMP_INFO.maxPerSite + " people"],
+                  ["🚙", "Vehicles", CAMP_INFO.maxVehicles],
+                ].map(([icon, label, val]) => (
+                  <div key={label} style={{ display: "flex", gap: 12, padding: "8px 0", borderBottom: "1px solid var(--border)", alignItems: "flex-start" }}>
+                    <span style={{ fontSize: 16, width: 22, flexShrink: 0 }}>{icon}</span>
+                    <div>
+                      <div style={{ fontSize: 11, color: "var(--muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em" }}>{label}</div>
+                      <div style={{ fontSize: 14, color: "var(--text)", marginTop: 1 }}>{val}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Sites */}
+              <div className="card" style={{ padding: 16 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 12 }}>Campsites</div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                  {CAMP_INFO.sites.map(s => (
+                    <div key={s.family} style={{ background: "#f5f0e8", borderRadius: 8, padding: "10px 12px" }}>
+                      <div style={{ fontSize: 12, color: "var(--muted)", fontWeight: 600 }}>{s.family}</div>
+                      <div style={{ fontSize: 15, fontWeight: 600, color: "var(--ocean)", marginTop: 2 }}>Sites {s.sites}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Features */}
+              <div className="card" style={{ padding: 16 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 10 }}>Features</div>
+                {CAMP_INFO.features.map(f => (
+                  <div key={f} style={{ display: "flex", gap: 10, padding: "6px 0", fontSize: 14, color: "var(--text)" }}>
+                    <span style={{ color: "var(--pine)" }}>✦</span> {f}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ── PAGE 2: ROSTER ── */}
+          {page === 2 && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              {/* Stats */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+                {[
+                  ["Total", totalAdults + totalKids, "🏕️"],
+                  ["Adults", totalAdults, "🧑"],
+                  ["Kids", totalKids, "👦"],
+                ].map(([label, val, icon]) => (
+                  <div key={label} className="card" style={{ padding: 16, textAlign: "center" }}>
+                    <div style={{ fontSize: 22 }}>{icon}</div>
+                    <div className="display" style={{ fontSize: 26, fontWeight: 600, color: "var(--ocean)", margin: "4px 0 2px" }}>{val}</div>
+                    <div style={{ fontSize: 11, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>{label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Confirmed */}
+              <div className="card">
+                <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>Confirmed</div>
+                  <span className="tag tag-pine">{ROSTER.filter(r=>r.status==="confirmed").length} families</span>
+                </div>
+                {ROSTER.filter(r=>r.status==="confirmed").map((r, i) => (
+                  <div key={r.phone} style={{ padding: "12px 16px", borderBottom: i < ROSTER.filter(x=>x.status==="confirmed").length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text)" }}>{r.name} {r.admin ? "⭐" : ""}</div>
+                      <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>
+                        {r.adults > 0 ? `${r.adults} adult${r.adults>1?"s":""}` : ""}
+                        {r.adults > 0 && r.kids > 0 ? " · " : ""}
+                        {r.kids > 0 ? `${r.kids} kid${r.kids>1?"s":""}` : ""}
+                      </div>
+                    </div>
+                    <span className="tag tag-ocean">{r.adults + r.kids} ppl</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Invited */}
+              <div className="card">
+                <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)" }}>
+                  <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>Invited / Potentials</div>
+                </div>
+                {ROSTER.filter(r=>r.status==="invited").map((r, i, arr) => (
+                  <div key={r.phone} style={{ padding: "12px 16px", borderBottom: i < arr.length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <div style={{ fontSize: 14, color: "var(--muted)" }}>{r.name}</div>
+                    <span className="tag tag-sand">Invited</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ── PAGE 3: MEALS ── */}
+          {page === 3 && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <div style={{ background: "#fff8f0", border: "1px solid #f0d8c0", borderRadius: 10, padding: "12px 14px" }}>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--sunset)", marginBottom: 6 }}>📋 How it works</div>
+                {CAMP_INFO.notes.map(n => (
+                  <div key={n} style={{ fontSize: 12, color: "#6a4a30", lineHeight: 1.6 }}>• {n}</div>
+                ))}
+              </div>
+
+              {["Fri","Sat","Sun","Any"].map(day => {
+                const dayMeals = MEALS.filter(m => m.day === day);
+                if (!dayMeals.length) return null;
+                const dayLabels = { Fri: "Friday", Sat: "Saturday", Sun: "Sunday", Any: "Anytime" };
+                return (
+                  <div key={day}>
+                    <div className="display" style={{ fontSize: 13, fontWeight: 600, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, marginLeft: 2 }}>
+                      {dayLabels[day]}
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                      {dayMeals.map(meal => {
+                        const slot = appState.meals[meal.id];
+                        const iAmChef = slot?.chef?.phone === currentUser.phone;
+                        const iAmHelper = slot?.helper?.phone === currentUser.phone;
+                        const isEditingMenu = menuEdit[meal.id] !== undefined;
+
+                        return (
+                          <div key={meal.id} className="card" style={{ padding: 14 }}>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+                              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                                <span style={{ fontSize: 20 }}>{meal.icon}</span>
+                                <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>{meal.label}</div>
+                              </div>
+                              {(iAmChef || iAmHelper) && <span className="tag tag-pine">You're in!</span>}
+                            </div>
+
+                            {/* Menu */}
+                            {isEditingMenu ? (
+                              <div style={{ marginBottom: 10, display: "flex", gap: 6 }}>
+                                <input
+                                  value={menuEdit[meal.id]}
+                                  onChange={e => setMenuEdit(prev => ({...prev, [meal.id]: e.target.value}))}
+                                  placeholder="What's on the menu?"
+                                  style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "7px 10px", fontSize: 13 }}
+                                />
+                                <button className="btn btn-pine" onClick={() => handleMenuSave(meal.id)} style={{ padding: "7px 12px" }}>Save</button>
+                                <button className="btn btn-ghost" onClick={() => setMenuEdit(prev => { const n={...prev}; delete n[meal.id]; return n; })} style={{ padding: "7px 10px" }}>✕</button>
+                              </div>
+                            ) : (
+                              <div style={{ marginBottom: 10, display: "flex", gap: 6, alignItems: "center" }}>
+                                <div style={{ flex: 1, fontSize: 13, color: slot?.menu ? "var(--text)" : "var(--muted)", fontStyle: slot?.menu ? "normal" : "italic" }}>
+                                  {slot?.menu || "Menu TBD"}
+                                </div>
+                                {(iAmChef || currentUser?.admin) && (
+                                  <button className="btn btn-ghost" style={{ padding: "4px 10px", fontSize: 11 }}
+                                    onClick={() => setMenuEdit(prev => ({...prev, [meal.id]: slot?.menu || ""}))}>
+                                    Edit
+                                  </button>
+                                )}
+                              </div>
+                            )}
+
+                            {/* Slots */}
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                              {[["chef","👨‍🍳 Chef"], ["helper","🤝 Helper"]].map(([role, label]) => {
+                                const person = slot?.[role];
+                                const isMine = person?.phone === currentUser.phone;
+                                const isSeed = person?.phone === "seed";
+                                const taken = person && !isMine && !isSeed;
+
+                                return (
+                                  <button key={role} className="btn" onClick={() => !isSeed && handleMealSignup(meal.id, role)} style={{
+                                    padding: "10px 8px", borderRadius: 8, textAlign: "left",
+                                    background: isMine ? "var(--pine)" : taken || isSeed ? "#f0f4f0" : "#f8f6f2",
+                                    border: isMine ? "2px solid var(--pine)" : taken || isSeed ? "1.5px solid #c0d8c0" : "1.5px solid var(--border)",
+                                    color: isMine ? "white" : taken || isSeed ? "var(--pine)" : "var(--muted)",
+                                    cursor: isSeed ? "default" : "pointer",
+                                  }}>
+                                    <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.05em", marginBottom: 3 }}>{label}</div>
+                                    <div style={{ fontSize: 12, fontWeight: isMine ? 600 : 400 }}>
+                                      {person ? person.name : "Open — tap to sign up"}
+                                    </div>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* ── PAGE 4: GEAR ── */}
+          {page === 4 && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              {/* Group gear */}
+              <div className="card">
+                <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div>
+                    <div className="display" style={{ fontSize: 16, fontWeight: 600 }}>🏕️ Shared Equipment</div>
+                    <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>Tap to claim you're bringing it</div>
+                  </div>
+                  <span className="tag tag-ocean">
+                    {gearList.filter(g => (appState.claims[g.id]||[]).length > 0).length}/{gearList.length} covered
+                  </span>
+                </div>
+                {gearList.map((g, i) => {
+                  const claimers = appState.claims[g.id] || [];
+                  const isMine = claimers.some(c => c.phone === currentUser.phone);
+                  return (
+                    <div key={g.id} style={{ padding: "11px 16px", borderBottom: i < gearList.length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text)" }}>{g.item}</div>
+                        {claimers.length > 0 && (
+                          <div style={{ marginTop: 4, display: "flex", flexWrap: "wrap", gap: 4 }}>
+                            {claimers.map(c => (
+                              <span key={c.phone} style={{
+                                display: "inline-block", fontSize: 11, fontWeight: 600,
+                                background: c.phone === currentUser.phone ? "var(--pine)" : "#e8f4ea",
+                                color: c.phone === currentUser.phone ? "white" : "var(--pine)",
+                                borderRadius: 20, padding: "2px 8px",
+                              }}>✓ {c.name}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <button className="btn" onClick={() => handleClaim(g.id)} style={{
+                        padding: "6px 12px", fontSize: 11, flexShrink: 0, marginTop: 2,
+                        background: isMine ? "var(--pine)" : "transparent",
+                        border: isMine ? "none" : "1.5px solid var(--border)",
+                        color: isMine ? "white" : "var(--ocean)",
+                      }}>
+                        {isMine ? "Claimed ✓" : "+ Claim"}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Personal gear */}
+              <div className="card">
+                <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div>
+                    <div className="display" style={{ fontSize: 16, fontWeight: 600 }}>🎒 Bring Your Own</div>
+                    <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>Tap items to check them off</div>
+                  </div>
+                  <span className="tag tag-pine">
+                    {gearListPersonal.filter(item => personalChecks[item]).length}/{gearListPersonal.length}
+                  </span>
+                </div>
+                {gearListPersonal.map((item, i) => {
+                  const checked = !!personalChecks[item];
+                  return (
+                    <div key={item} onClick={() => toggleCheck(item)} style={{
+                      padding: "11px 16px",
+                      borderBottom: i < PERSONAL_GEAR.length-1 ? "1px solid var(--border)" : "none",
+                      display: "flex", gap: 12, alignItems: "center",
+                      cursor: "pointer",
+                      background: checked ? "#f4faf4" : "white",
+                      transition: "background 0.15s",
+                    }}>
+                      <div style={{
+                        width: 20, height: 20, borderRadius: 5, flexShrink: 0,
+                        border: checked ? "none" : "2px solid #c0d0c0",
+                        background: checked ? "var(--pine)" : "transparent",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        transition: "all 0.15s",
+                      }}>
+                        {checked && <span style={{ color: "white", fontSize: 12, lineHeight: 1 }}>✓</span>}
+                      </div>
+                      <span style={{
+                        fontSize: 14,
+                        color: checked ? "var(--muted)" : "var(--text)",
+                        textDecoration: checked ? "line-through" : "none",
+                        transition: "all 0.15s",
+                      }}>{item}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* ── PAGE 5: ADMIN ── */}
+          {page === 5 && currentUser?.admin && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div className="display" style={{ fontSize: 18, fontWeight: 600 }}>Admin Dashboard</div>
+                <button className="btn btn-pine" onClick={() => exportCSV(appState.meals, appState.claims, gearList)} style={{ fontSize: 12 }}>
+                  ⬇ Export CSV
+                </button>
+              </div>
+
+              {/* Full roster with phones */}
+              <div className="card">
+                <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)" }}>
+                  <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>Full Roster</div>
+                </div>
+                {ROSTER.filter(r=>r.status==="confirmed").map((r, i, arr) => (
+                  <div key={r.phone} style={{ padding: "10px 16px", borderBottom: i < arr.length-1 ? "1px solid var(--border)" : "none" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <div style={{ fontSize: 14, fontWeight: 600 }}>{r.name} {r.admin ? "⭐" : ""}</div>
+                      <span className="tag tag-ocean">{r.adults + r.kids} ppl</span>
+                    </div>
+                    <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>
+                      📱 {formatPhone(r.phone)} · {r.adults} adult{r.adults!==1?"s":""}, {r.kids} kid{r.kids!==1?"s":""}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* All meal signups */}
+              <div className="card">
+                <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)" }}>
+                  <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>Meal Sign-ups</div>
+                </div>
+                {MEALS.map((m, i) => {
+                  const slot = appState.meals[m.id];
+                  return (
+                    <div key={m.id} style={{ padding: "10px 16px", borderBottom: i < MEALS.length-1 ? "1px solid var(--border)" : "none" }}>
+                      <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4 }}>{m.icon} {m.label}</div>
+                      <div style={{ display: "flex", gap: 16 }}>
+                        <div style={{ fontSize: 12 }}>
+                          <span style={{ color: "var(--muted)" }}>Chef: </span>
+                          <span style={{ color: slot?.chef ? "var(--pine)" : "var(--muted)", fontStyle: slot?.chef ? "normal" : "italic" }}>
+                            {slot?.chef?.name || "—"}
+                          </span>
+                        </div>
+                        <div style={{ fontSize: 12 }}>
+                          <span style={{ color: "var(--muted)" }}>Helper: </span>
+                          <span style={{ color: slot?.helper ? "var(--pine)" : "var(--muted)", fontStyle: slot?.helper ? "normal" : "italic" }}>
+                            {slot?.helper?.name || "—"}
+                          </span>
+                        </div>
+                      </div>
+                      {slot?.menu && <div style={{ fontSize: 11, color: "var(--sunset)", marginTop: 3 }}>🍽 {slot.menu}</div>}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Shared Gear — editable */}
+              <div className="card">
+                <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>🏕️ Shared Gear List</div>
+                  <span className="tag tag-pine">{gearList.filter(g=>(appState.claims[g.id]||[]).length>0).length}/{gearList.length} claimed</span>
+                </div>
+                {gearList.map((g, i) => {
+                  const claimers = appState.claims[g.id] || [];
+                  const isEditing = editingGear?.type === "group" && editingGear?.id === g.id;
+                  return (
+                    <div key={g.id} style={{ padding: "9px 16px", borderBottom: i < gearList.length-1 ? "1px solid var(--border)" : "none" }}>
+                      {isEditing ? (
+                        <div style={{ display: "flex", gap: 6 }}>
+                          <input
+                            value={editingGear.value}
+                            onChange={e => setEditingGear(prev => ({ ...prev, value: e.target.value }))}
+                            style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "6px 10px", fontSize: 13 }}
+                            autoFocus
+                          />
+                          <button className="btn btn-pine" style={{ padding: "6px 10px", fontSize: 11 }} onClick={() => {
+                            const updated = gearList.map(x => x.id === g.id ? { ...x, item: editingGear.value } : x);
+                            saveGearList(updated, gearListPersonal);
+                            setEditingGear(null);
+                          }}>Save</button>
+                          <button className="btn btn-ghost" style={{ padding: "6px 10px", fontSize: 11 }} onClick={() => setEditingGear(null)}>✕</button>
+                        </div>
+                      ) : (
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
+                          <div>
+                            <div style={{ fontSize: 13, fontWeight: 600 }}>{g.item}</div>
+                            {claimers.length > 0 && (
+                              <div style={{ fontSize: 11, color: "var(--pine)", marginTop: 2 }}>
+                                {claimers.map(c => c.name).join(", ")}
+                              </div>
+                            )}
+                            {claimers.length === 0 && <div style={{ fontSize: 11, color: "var(--muted)", fontStyle: "italic" }}>Unclaimed</div>}
+                          </div>
+                          <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+                            <button className="btn btn-ghost" style={{ padding: "4px 10px", fontSize: 11 }}
+                              onClick={() => setEditingGear({ type: "group", id: g.id, value: g.item })}>Edit</button>
+                            <button className="btn" style={{ padding: "4px 10px", fontSize: 11, background: "#fde8e8", border: "1px solid #f0b0b0", color: "#c04040" }}
+                              onClick={() => {
+                                if (!window.confirm(`Remove "${g.item}" from the gear list?`)) return;
+                                const updated = gearList.filter(x => x.id !== g.id);
+                                saveGearList(updated, gearListPersonal);
+                              }}>✕</button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+                {/* Add new group item */}
+                <div style={{ padding: "10px 16px", borderTop: "1px solid var(--border)", display: "flex", gap: 6 }}>
+                  <input
+                    value={newGearInput.group}
+                    onChange={e => setNewGearInput(prev => ({ ...prev, group: e.target.value }))}
+                    placeholder="Add group item…"
+                    style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "7px 10px", fontSize: 13 }}
+                    onKeyDown={e => {
+                      if (e.key === "Enter" && newGearInput.group.trim()) {
+                        const id = "custom-" + Date.now();
+                        saveGearList([...gearList, { id, item: newGearInput.group.trim(), defaultClaimers: [] }], gearListPersonal);
+                        setNewGearInput(prev => ({ ...prev, group: "" }));
+                      }
+                    }}
+                  />
+                  <button className="btn btn-pine" style={{ padding: "7px 12px", fontSize: 12 }} onClick={() => {
+                    if (!newGearInput.group.trim()) return;
+                    const id = "custom-" + Date.now();
+                    saveGearList([...gearList, { id, item: newGearInput.group.trim(), defaultClaimers: [] }], gearListPersonal);
+                    setNewGearInput(prev => ({ ...prev, group: "" }));
+                  }}>+ Add</button>
+                </div>
+              </div>
+
+              {/* Personal Gear — editable */}
+              <div className="card">
+                <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)" }}>
+                  <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>🎒 Personal Gear List</div>
+                </div>
+                {gearListPersonal.map((item, i) => {
+                  const isEditing = editingGear?.type === "personal" && editingGear?.id === i;
+                  return (
+                    <div key={i} style={{ padding: "9px 16px", borderBottom: i < gearListPersonal.length-1 ? "1px solid var(--border)" : "none" }}>
+                      {isEditing ? (
+                        <div style={{ display: "flex", gap: 6 }}>
+                          <input
+                            value={editingGear.value}
+                            onChange={e => setEditingGear(prev => ({ ...prev, value: e.target.value }))}
+                            style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "6px 10px", fontSize: 13 }}
+                            autoFocus
+                          />
+                          <button className="btn btn-pine" style={{ padding: "6px 10px", fontSize: 11 }} onClick={() => {
+                            const updated = gearListPersonal.map((x, idx) => idx === i ? editingGear.value : x);
+                            saveGearList(gearList, updated);
+                            setEditingGear(null);
+                          }}>Save</button>
+                          <button className="btn btn-ghost" style={{ padding: "6px 10px", fontSize: 11 }} onClick={() => setEditingGear(null)}>✕</button>
+                        </div>
+                      ) : (
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
+                          <div style={{ fontSize: 13 }}>{item}</div>
+                          <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+                            <button className="btn btn-ghost" style={{ padding: "4px 10px", fontSize: 11 }}
+                              onClick={() => setEditingGear({ type: "personal", id: i, value: item })}>Edit</button>
+                            <button className="btn" style={{ padding: "4px 10px", fontSize: 11, background: "#fde8e8", border: "1px solid #f0b0b0", color: "#c04040" }}
+                              onClick={() => {
+                                if (!window.confirm(`Remove "${item}" from the personal list?`)) return;
+                                saveGearList(gearList, gearListPersonal.filter((_, idx) => idx !== i));
+                              }}>✕</button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+                {/* Add new personal item */}
+                <div style={{ padding: "10px 16px", borderTop: "1px solid var(--border)", display: "flex", gap: 6 }}>
+                  <input
+                    value={newGearInput.personal}
+                    onChange={e => setNewGearInput(prev => ({ ...prev, personal: e.target.value }))}
+                    placeholder="Add personal item…"
+                    style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "7px 10px", fontSize: 13 }}
+                    onKeyDown={e => {
+                      if (e.key === "Enter" && newGearInput.personal.trim()) {
+                        saveGearList(gearList, [...gearListPersonal, newGearInput.personal.trim()]);
+                        setNewGearInput(prev => ({ ...prev, personal: "" }));
+                      }
+                    }}
+                  />
+                  <button className="btn btn-pine" style={{ padding: "7px 12px", fontSize: 12 }} onClick={() => {
+                    if (!newGearInput.personal.trim()) return;
+                    saveGearList(gearList, [...gearListPersonal, newGearInput.personal.trim()]);
+                    setNewGearInput(prev => ({ ...prev, personal: "" }));
+                  }}>+ Add</button>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+      </div>
+    </>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+
+  </script>
+</body>
+</html>
