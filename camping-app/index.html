@@ -419,13 +419,13 @@ function App() {
       --ocean: #1a4a5e;
       --ocean-light: #2a6a82;
       --wave: #4a9aba;
-      --sunset: #e07040;
-      --sunset-light: #f09060;
+      --sunset: #7a3010;
+      --sunset-light: #5a2008;
       --pine: #2d5a3d;
       --pine-light: #4a8a5a;
       --bg: #faf7f2;
       --text: #1a2a1a;
-      --muted: #7a8a7a;
+      --muted: #5a6a5a;
       --card: #ffffff;
       --border: rgba(0,0,0,0.08);
     }
@@ -433,7 +433,7 @@ function App() {
     .display { font-family: 'Playfair Display', serif; }
     .btn {
       border: none; border-radius: 8px; cursor: pointer;
-      font-family: 'Source Sans 3', sans-serif; font-size: 13px; font-weight: 600;
+      font-family: 'Source Sans 3', sans-serif; font-size: 14px; font-weight: 600;
       letter-spacing: 0.04em; transition: all 0.15s; padding: 8px 16px;
     }
     .btn-primary { background: var(--ocean); color: white; }
@@ -447,11 +447,11 @@ function App() {
     .btn-ocean { background: var(--ocean); color: white; }
     .btn-ocean:hover { background: var(--ocean-light); }
     .card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
-    .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
     .tag-ocean { background: #e0f0f8; color: var(--ocean); }
     .tag-pine { background: #e0f0e6; color: var(--pine); }
     .tag-sunset { background: #fce8de; color: var(--sunset); }
-    .tag-sand { background: #f5eedc; color: #8a6a30; }
+    .tag-sand { background: #f5eedc; color: #6b5020; }
     input:focus { outline: none; }
     textarea:focus { outline: none; }
   `;
@@ -485,8 +485,8 @@ function App() {
           <h1 className="display" style={{ color: "#f2e8d5", fontSize: 30, fontWeight: 600, marginBottom: 4 }}>
             Sunset Beach
           </h1>
-          <p style={{ color: "#8abccc", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 36 }}>
-            Family Camp · 2026
+          <p style={{ color: "#8abccc", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 36 }}>
+            Dads & Kids Camping 2026
           </p>
 
           <div style={{ background: "rgba(255,255,255,0.07)", backdropFilter: "blur(12px)", borderRadius: 16, border: "1px solid rgba(255,255,255,0.12)", padding: "28px 24px" }}>
@@ -506,12 +506,12 @@ function App() {
                 fontFamily: "'Playfair Display', serif",
               }}
             />
-            {loginError && <p style={{ color: "#f09060", fontSize: 12, marginTop: 10, lineHeight: 1.5 }}>{loginError}</p>}
+            {loginError && <p style={{ color: "#f09060", fontSize: 14, marginTop: 10, lineHeight: 1.5 }}>{loginError}</p>}
             <button className="btn btn-sunset" onClick={handleLogin} style={{ width: "100%", marginTop: 16, padding: "13px", fontSize: 14 }}>
               Enter Camp →
             </button>
           </div>
-          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: 11, marginTop: 16 }}>
+          <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, marginTop: 16 }}>
             Not on the list? Contact James Carleton
           </p>
         </div>
@@ -532,7 +532,7 @@ function App() {
             background: toast.type === "error" ? "#5a1a1a" : toast.type === "info" ? "#1a3a4a" : "#1a3a2a",
             border: `1px solid ${toast.type === "error" ? "#c05050" : toast.type === "info" ? "#4a8aaa" : "#4a8a5a"}`,
             borderRadius: 10, padding: "10px 20px", color: "#f2e8d5",
-            fontSize: 13, zIndex: 999, boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
+            fontSize: 14, zIndex: 999, boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
             whiteSpace: "nowrap", fontFamily: "'Source Sans 3', sans-serif",
           }}>{toast.msg}</div>
         )}
@@ -545,12 +545,12 @@ function App() {
         }}>
           <div>
             <div className="display" style={{ color: "#f2e8d5", fontSize: 16, fontWeight: 600 }}>🏖️ Sunset Beach</div>
-            <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 11, marginTop: 1 }}>
+            <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 14, marginTop: 1 }}>
               {currentUser?.name}{currentUser?.admin ? " · Admin" : ""}
             </div>
           </div>
           <button className="btn" onClick={() => { setScreen("login"); setCurrentUser(null); setPhoneInput(""); setRawPhone(""); }}
-            style={{ background: "rgba(255,255,255,0.12)", color: "#f2e8d5", fontSize: 11, padding: "6px 12px" }}>
+            style={{ background: "rgba(255,255,255,0.12)", color: "#f2e8d5", fontSize: 14, padding: "6px 12px" }}>
             Sign out
           </button>
         </div>
@@ -562,7 +562,7 @@ function App() {
               flex: 1, minWidth: 60, padding: "10px 4px", background: "none", border: "none",
               borderBottom: page === i ? "2.5px solid var(--ocean)" : "2.5px solid transparent",
               color: page === i ? "var(--ocean)" : "var(--muted)",
-              fontSize: 11, fontWeight: 600, letterSpacing: "0.04em", cursor: "pointer",
+              fontSize: 14, fontWeight: 600, letterSpacing: "0.04em", cursor: "pointer",
               fontFamily: "'Source Sans 3', sans-serif", whiteSpace: "nowrap",
             }}>{t}</button>
           ))}
@@ -577,9 +577,9 @@ function App() {
 
               {/* Welcome banner */}
               <div className="card" style={{ background: "linear-gradient(135deg, var(--ocean) 0%, #1a6a8a 100%)", padding: "20px 24px" }}>
-                <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 }}>Welcome back</div>
+                <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 14, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 }}>Welcome back</div>
                 <div className="display" style={{ color: "#f2e8d5", fontSize: 22, fontWeight: 600 }}>{currentUser?.name} 👋</div>
-                <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 13, marginTop: 6 }}>
+                <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 14, marginTop: 6 }}>
                   Sunset Beach State Park · July 2026
                 </div>
               </div>
@@ -601,7 +601,7 @@ function App() {
                     </div>
                     <div style={{ padding: "12px 16px" }}>
                       {needsMore && (
-                        <div style={{ background: "#fff8f0", border: "1px solid #f0d0a0", borderRadius: 8, padding: "10px 12px", marginBottom: 12, fontSize: 13, color: "#8a4a10", lineHeight: 1.6 }}>
+                        <div style={{ background: "#fff8f0", border: "1px solid #f0d0a0", borderRadius: 8, padding: "10px 12px", marginBottom: 12, fontSize: 14, color: "#8a4a10", lineHeight: 1.6 }}>
                           Everyone should <strong>lead one meal</strong> and <strong>help with another</strong>. You've signed up for {totalMySigned} so far — head to Meals to finish!
                         </div>
                       )}
@@ -617,8 +617,8 @@ function App() {
                             <div key={m.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", background: "#edf6ee", borderRadius: 8 }}>
                               <span style={{ fontSize: 18 }}>{m.icon}</span>
                               <div style={{ flex: 1 }}>
-                                <div style={{ fontSize: 13, fontWeight: 600, color: "var(--pine)" }}>{m.label}</div>
-                                <div style={{ fontSize: 11, color: "var(--muted)" }}>{appState.meals[m.id]?.menu || "Menu TBD"}</div>
+                                <div style={{ fontSize: 14, fontWeight: 600, color: "var(--pine)" }}>{m.label}</div>
+                                <div style={{ fontSize: 14, color: "var(--muted)" }}>{appState.meals[m.id]?.menu || "Menu TBD"}</div>
                               </div>
                               <span className="tag tag-pine">Chef 👨‍🍳</span>
                             </div>
@@ -627,8 +627,8 @@ function App() {
                             <div key={m.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", background: "#f0f6f0", borderRadius: 8 }}>
                               <span style={{ fontSize: 18 }}>{m.icon}</span>
                               <div style={{ flex: 1 }}>
-                                <div style={{ fontSize: 13, fontWeight: 600, color: "var(--pine)" }}>{m.label}</div>
-                                <div style={{ fontSize: 11, color: "var(--muted)" }}>{appState.meals[m.id]?.menu || "Menu TBD"}</div>
+                                <div style={{ fontSize: 14, fontWeight: 600, color: "var(--pine)" }}>{m.label}</div>
+                                <div style={{ fontSize: 14, color: "var(--muted)" }}>{appState.meals[m.id]?.menu || "Menu TBD"}</div>
                               </div>
                               <span className="tag tag-ocean">Helper 🤝</span>
                             </div>
@@ -636,7 +636,7 @@ function App() {
                         </div>
                       )}
 
-                      <button className="btn btn-ocean" onClick={() => setPage(3)} style={{ width: "100%", marginTop: 12, padding: "10px", fontSize: 13 }}>
+                      <button className="btn btn-ocean" onClick={() => setPage(3)} style={{ width: "100%", marginTop: 12, padding: "10px", fontSize: 14 }}>
                         {needsMore ? "Sign up for meals →" : "View all meals →"}
                       </button>
                     </div>
@@ -658,24 +658,24 @@ function App() {
                     </div>
                     <div style={{ padding: "12px 16px" }}>
                       {myClaims.length === 0 ? (
-                        <div style={{ fontSize: 13, color: "var(--muted)", fontStyle: "italic", marginBottom: 10 }}>
+                        <div style={{ fontSize: 14, color: "var(--muted)", fontStyle: "italic", marginBottom: 10 }}>
                           You haven't claimed any group gear yet.
                         </div>
                       ) : (
                         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 10 }}>
                           {myClaims.map(g => (
-                            <span key={g.id} style={{ background: "#edf6ee", color: "var(--pine)", borderRadius: 20, padding: "4px 10px", fontSize: 12, fontWeight: 600 }}>
+                            <span key={g.id} style={{ background: "#edf6ee", color: "var(--pine)", borderRadius: 20, padding: "4px 10px", fontSize: 14, fontWeight: 600 }}>
                               ✓ {g.item}
                             </span>
                           ))}
                         </div>
                       )}
                       {unclaimed.length > 0 && (
-                        <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 10 }}>
+                        <div style={{ fontSize: 14, color: "var(--muted)", marginBottom: 10 }}>
                           Still needed: {unclaimed.map(g => g.item).join(", ")}
                         </div>
                       )}
-                      <button className="btn btn-ghost" onClick={() => setPage(4)} style={{ width: "100%", padding: "9px", fontSize: 13 }}>
+                      <button className="btn btn-ghost" onClick={() => setPage(4)} style={{ width: "100%", padding: "9px", fontSize: 14 }}>
                         View gear list →
                       </button>
                     </div>
@@ -687,13 +687,13 @@ function App() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                 <button className="btn" onClick={() => setPage(1)} style={{ padding: "14px 10px", background: "white", border: "1px solid var(--border)", borderRadius: 12, cursor: "pointer", textAlign: "center" }}>
                   <div style={{ fontSize: 22, marginBottom: 4 }}>📍</div>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: "var(--ocean)" }}>Location</div>
-                  <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 2 }}>Directions & site info</div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: "var(--ocean)" }}>Location</div>
+                  <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>Directions & site info</div>
                 </button>
                 <button className="btn" onClick={() => setPage(2)} style={{ padding: "14px 10px", background: "white", border: "1px solid var(--border)", borderRadius: 12, cursor: "pointer", textAlign: "center" }}>
                   <div style={{ fontSize: 22, marginBottom: 4 }}>👥</div>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: "var(--ocean)" }}>Roster</div>
-                  <div style={{ fontSize: 11, color: "var(--muted)", marginTop: 2 }}>{(() => { const c = ROSTER.filter(r=>r.status==="confirmed"); const a = c.reduce((s,r)=>s+r.adults,0); const k = c.reduce((s,r)=>s+r.kids,0); return `${a+k} people coming`; })()}</div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: "var(--ocean)" }}>Roster</div>
+                  <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>{(() => { const c = ROSTER.filter(r=>r.status==="confirmed"); const a = c.reduce((s,r)=>s+r.adults,0); const k = c.reduce((s,r)=>s+r.kids,0); return `${a+k} people coming`; })()}</div>
                 </button>
               </div>
 
@@ -708,15 +708,15 @@ function App() {
                 <div className="display" style={{ color: "#f2e8d5", fontSize: 24, fontWeight: 600, marginBottom: 4 }}>
                   {CAMP_INFO.name}
                 </div>
-                <div style={{ color: "rgba(242,232,213,0.8)", fontSize: 13, marginBottom: 16 }}>{CAMP_INFO.address}</div>
+                <div style={{ color: "#f2e8d5", fontSize: 14, marginBottom: 16 }}>{CAMP_INFO.address}</div>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   <a href={`https://maps.google.com/dir/?api=1&destination=${encodeURIComponent(CAMP_INFO.address)}`}
                     target="_blank" rel="noreferrer"
-                    style={{ background: "var(--sunset)", color: "white", borderRadius: 8, padding: "9px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>
+                    style={{ background: "var(--sunset)", color: "white", borderRadius: 8, padding: "9px 16px", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
                     📍 Get Directions
                   </a>
                   <a href={`tel:${CAMP_INFO.phone}`}
-                    style={{ background: "rgba(255,255,255,0.15)", color: "#f2e8d5", borderRadius: 8, padding: "9px 16px", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>
+                    style={{ background: "rgba(255,255,255,0.15)", color: "#f2e8d5", borderRadius: 8, padding: "9px 16px", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
                     📞 Call Park
                   </a>
                 </div>
@@ -724,7 +724,7 @@ function App() {
 
               {/* Travel time */}
               <div className="card" style={{ padding: 16 }}>
-                <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 12 }}>Trip Details</div>
+                <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 12 }}>Trip Details</div>
                 {[
                   ["🚗", "Travel time", CAMP_INFO.travelTime],
                   ["✅", "Check-in", CAMP_INFO.checkIn],
@@ -736,7 +736,7 @@ function App() {
                   <div key={label} style={{ display: "flex", gap: 12, padding: "8px 0", borderBottom: "1px solid var(--border)", alignItems: "flex-start" }}>
                     <span style={{ fontSize: 16, width: 22, flexShrink: 0 }}>{icon}</span>
                     <div>
-                      <div style={{ fontSize: 11, color: "var(--muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em" }}>{label}</div>
+                      <div style={{ fontSize: 14, color: "var(--muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em" }}>{label}</div>
                       <div style={{ fontSize: 14, color: "var(--text)", marginTop: 1 }}>{val}</div>
                     </div>
                   </div>
@@ -745,11 +745,11 @@ function App() {
 
               {/* Sites */}
               <div className="card" style={{ padding: 16 }}>
-                <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 12 }}>Campsites</div>
+                <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 12 }}>Campsites</div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                   {CAMP_INFO.sites.map(s => (
                     <div key={s.family} style={{ background: "#f5f0e8", borderRadius: 8, padding: "10px 12px" }}>
-                      <div style={{ fontSize: 12, color: "var(--muted)", fontWeight: 600 }}>{s.family}</div>
+                      <div style={{ fontSize: 14, color: "var(--muted)", fontWeight: 600 }}>{s.family}</div>
                       <div style={{ fontSize: 15, fontWeight: 600, color: "var(--ocean)", marginTop: 2 }}>Sites {s.sites}</div>
                     </div>
                   ))}
@@ -758,7 +758,7 @@ function App() {
 
               {/* Features */}
               <div className="card" style={{ padding: 16 }}>
-                <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 10 }}>Features</div>
+                <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 10 }}>Features</div>
                 {CAMP_INFO.features.map(f => (
                   <div key={f} style={{ display: "flex", gap: 10, padding: "6px 0", fontSize: 14, color: "var(--text)" }}>
                     <span style={{ color: "var(--pine)" }}>✦</span> {f}
@@ -781,7 +781,7 @@ function App() {
                   <div key={label} className="card" style={{ padding: 16, textAlign: "center" }}>
                     <div style={{ fontSize: 22 }}>{icon}</div>
                     <div className="display" style={{ fontSize: 26, fontWeight: 600, color: "var(--ocean)", margin: "4px 0 2px" }}>{val}</div>
-                    <div style={{ fontSize: 11, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>{label}</div>
+                    <div style={{ fontSize: 14, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>{label}</div>
                   </div>
                 ))}
               </div>
@@ -796,7 +796,7 @@ function App() {
                   <div key={r.phone} style={{ padding: "12px 16px", borderBottom: i < ROSTER.filter(x=>x.status==="confirmed").length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <div>
                       <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text)" }}>{r.name} {r.admin ? "⭐" : ""}</div>
-                      <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>
+                      <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>
                         {r.adults > 0 ? `${r.adults} adult${r.adults>1?"s":""}` : ""}
                         {r.adults > 0 && r.kids > 0 ? " · " : ""}
                         {r.kids > 0 ? `${r.kids} kid${r.kids>1?"s":""}` : ""}
@@ -826,9 +826,9 @@ function App() {
           {page === 3 && (
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <div style={{ background: "#fff8f0", border: "1px solid #f0d8c0", borderRadius: 10, padding: "12px 14px" }}>
-                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--sunset)", marginBottom: 6 }}>📋 How it works</div>
+                <div style={{ fontSize: 14, fontWeight: 600, color: "var(--sunset)", marginBottom: 6 }}>📋 How it works</div>
                 {CAMP_INFO.notes.map(n => (
-                  <div key={n} style={{ fontSize: 12, color: "#6a4a30", lineHeight: 1.6 }}>• {n}</div>
+                  <div key={n} style={{ fontSize: 14, color: "#6a4a30", lineHeight: 1.6 }}>• {n}</div>
                 ))}
               </div>
 
@@ -838,7 +838,7 @@ function App() {
                 const dayLabels = { Fri: "Friday", Sat: "Saturday", Sun: "Sunday", Any: "Anytime" };
                 return (
                   <div key={day}>
-                    <div className="display" style={{ fontSize: 13, fontWeight: 600, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, marginLeft: 2 }}>
+                    <div className="display" style={{ fontSize: 14, fontWeight: 600, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, marginLeft: 2 }}>
                       {dayLabels[day]}
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -865,18 +865,18 @@ function App() {
                                   value={menuEdit[meal.id]}
                                   onChange={e => setMenuEdit(prev => ({...prev, [meal.id]: e.target.value}))}
                                   placeholder="What's on the menu?"
-                                  style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "7px 10px", fontSize: 13 }}
+                                  style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "7px 10px", fontSize: 14 }}
                                 />
                                 <button className="btn btn-pine" onClick={() => handleMenuSave(meal.id)} style={{ padding: "7px 12px" }}>Save</button>
                                 <button className="btn btn-ghost" onClick={() => setMenuEdit(prev => { const n={...prev}; delete n[meal.id]; return n; })} style={{ padding: "7px 10px" }}>✕</button>
                               </div>
                             ) : (
                               <div style={{ marginBottom: 10, display: "flex", gap: 6, alignItems: "center" }}>
-                                <div style={{ flex: 1, fontSize: 13, color: slot?.menu ? "var(--text)" : "var(--muted)", fontStyle: slot?.menu ? "normal" : "italic" }}>
+                                <div style={{ flex: 1, fontSize: 14, color: slot?.menu ? "var(--text)" : "var(--muted)", fontStyle: slot?.menu ? "normal" : "italic" }}>
                                   {slot?.menu || "Menu TBD"}
                                 </div>
                                 {(iAmChef || currentUser?.admin) && (
-                                  <button className="btn btn-ghost" style={{ padding: "4px 10px", fontSize: 11 }}
+                                  <button className="btn btn-ghost" style={{ padding: "4px 10px", fontSize: 14 }}
                                     onClick={() => setMenuEdit(prev => ({...prev, [meal.id]: slot?.menu || ""}))}>
                                     Edit
                                   </button>
@@ -900,8 +900,8 @@ function App() {
                                     color: isMine ? "white" : taken || isSeed ? "var(--pine)" : "var(--muted)",
                                     cursor: isSeed ? "default" : "pointer",
                                   }}>
-                                    <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.05em", marginBottom: 3 }}>{label}</div>
-                                    <div style={{ fontSize: 12, fontWeight: isMine ? 600 : 400 }}>
+                                    <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: "0.05em", marginBottom: 3 }}>{label}</div>
+                                    <div style={{ fontSize: 14, fontWeight: isMine ? 600 : 400 }}>
                                       {person ? person.name : "Open — tap to sign up"}
                                     </div>
                                   </button>
@@ -926,7 +926,7 @@ function App() {
                 <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div>
                     <div className="display" style={{ fontSize: 16, fontWeight: 600 }}>🏕️ Shared Equipment</div>
-                    <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>Tap to claim you're bringing it</div>
+                    <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>Tap to claim you're bringing it</div>
                   </div>
                   <span className="tag tag-ocean">
                     {gearList.filter(g => (appState.claims[g.id]||[]).length > 0).length}/{gearList.length} covered
@@ -943,7 +943,7 @@ function App() {
                           <div style={{ marginTop: 4, display: "flex", flexWrap: "wrap", gap: 4 }}>
                             {claimers.map(c => (
                               <span key={c.phone} style={{
-                                display: "inline-block", fontSize: 11, fontWeight: 600,
+                                display: "inline-block", fontSize: 14, fontWeight: 600,
                                 background: c.phone === currentUser.phone ? "var(--pine)" : "#e8f4ea",
                                 color: c.phone === currentUser.phone ? "white" : "var(--pine)",
                                 borderRadius: 20, padding: "2px 8px",
@@ -953,7 +953,7 @@ function App() {
                         )}
                       </div>
                       <button className="btn" onClick={() => handleClaim(g.id)} style={{
-                        padding: "6px 12px", fontSize: 11, flexShrink: 0, marginTop: 2,
+                        padding: "6px 12px", fontSize: 14, flexShrink: 0, marginTop: 2,
                         background: isMine ? "var(--pine)" : "transparent",
                         border: isMine ? "none" : "1.5px solid var(--border)",
                         color: isMine ? "white" : "var(--ocean)",
@@ -970,7 +970,7 @@ function App() {
                 <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div>
                     <div className="display" style={{ fontSize: 16, fontWeight: 600 }}>🎒 Bring Your Own</div>
-                    <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>Tap items to check them off</div>
+                    <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>Tap items to check them off</div>
                   </div>
                   <span className="tag tag-pine">
                     {gearListPersonal.filter(item => personalChecks[item]).length}/{gearListPersonal.length}
@@ -994,7 +994,7 @@ function App() {
                         display: "flex", alignItems: "center", justifyContent: "center",
                         transition: "all 0.15s",
                       }}>
-                        {checked && <span style={{ color: "white", fontSize: 12, lineHeight: 1 }}>✓</span>}
+                        {checked && <span style={{ color: "white", fontSize: 14, lineHeight: 1 }}>✓</span>}
                       </div>
                       <span style={{
                         fontSize: 14,
@@ -1014,7 +1014,7 @@ function App() {
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div className="display" style={{ fontSize: 18, fontWeight: 600 }}>Admin Dashboard</div>
-                <button className="btn btn-pine" onClick={() => exportCSV(appState.meals, appState.claims, gearList)} style={{ fontSize: 12 }}>
+                <button className="btn btn-pine" onClick={() => exportCSV(appState.meals, appState.claims, gearList)} style={{ fontSize: 14 }}>
                   ⬇ Export CSV
                 </button>
               </div>
@@ -1030,7 +1030,7 @@ function App() {
                       <div style={{ fontSize: 14, fontWeight: 600 }}>{r.name} {r.admin ? "⭐" : ""}</div>
                       <span className="tag tag-ocean">{r.adults + r.kids} ppl</span>
                     </div>
-                    <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 2 }}>
+                    <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>
                       📱 {formatPhone(r.phone)} · {r.adults} adult{r.adults!==1?"s":""}, {r.kids} kid{r.kids!==1?"s":""}
                     </div>
                   </div>
@@ -1046,22 +1046,22 @@ function App() {
                   const slot = appState.meals[m.id];
                   return (
                     <div key={m.id} style={{ padding: "10px 16px", borderBottom: i < MEALS.length-1 ? "1px solid var(--border)" : "none" }}>
-                      <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4 }}>{m.icon} {m.label}</div>
+                      <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{m.icon} {m.label}</div>
                       <div style={{ display: "flex", gap: 16 }}>
-                        <div style={{ fontSize: 12 }}>
+                        <div style={{ fontSize: 14 }}>
                           <span style={{ color: "var(--muted)" }}>Chef: </span>
                           <span style={{ color: slot?.chef ? "var(--pine)" : "var(--muted)", fontStyle: slot?.chef ? "normal" : "italic" }}>
                             {slot?.chef?.name || "—"}
                           </span>
                         </div>
-                        <div style={{ fontSize: 12 }}>
+                        <div style={{ fontSize: 14 }}>
                           <span style={{ color: "var(--muted)" }}>Helper: </span>
                           <span style={{ color: slot?.helper ? "var(--pine)" : "var(--muted)", fontStyle: slot?.helper ? "normal" : "italic" }}>
                             {slot?.helper?.name || "—"}
                           </span>
                         </div>
                       </div>
-                      {slot?.menu && <div style={{ fontSize: 11, color: "var(--sunset)", marginTop: 3 }}>🍽 {slot.menu}</div>}
+                      {slot?.menu && <div style={{ fontSize: 14, color: "var(--sunset)", marginTop: 3 }}>🍽 {slot.menu}</div>}
                     </div>
                   );
                 })}
@@ -1083,31 +1083,31 @@ function App() {
                           <input
                             value={editingGear.value}
                             onChange={e => setEditingGear(prev => ({ ...prev, value: e.target.value }))}
-                            style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "6px 10px", fontSize: 13 }}
+                            style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "6px 10px", fontSize: 14 }}
                             autoFocus
                           />
-                          <button className="btn btn-pine" style={{ padding: "6px 10px", fontSize: 11 }} onClick={() => {
+                          <button className="btn btn-pine" style={{ padding: "6px 10px", fontSize: 14 }} onClick={() => {
                             const updated = gearList.map(x => x.id === g.id ? { ...x, item: editingGear.value } : x);
                             saveGearList(updated, gearListPersonal);
                             setEditingGear(null);
                           }}>Save</button>
-                          <button className="btn btn-ghost" style={{ padding: "6px 10px", fontSize: 11 }} onClick={() => setEditingGear(null)}>✕</button>
+                          <button className="btn btn-ghost" style={{ padding: "6px 10px", fontSize: 14 }} onClick={() => setEditingGear(null)}>✕</button>
                         </div>
                       ) : (
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
                           <div>
-                            <div style={{ fontSize: 13, fontWeight: 600 }}>{g.item}</div>
+                            <div style={{ fontSize: 14, fontWeight: 600 }}>{g.item}</div>
                             {claimers.length > 0 && (
-                              <div style={{ fontSize: 11, color: "var(--pine)", marginTop: 2 }}>
+                              <div style={{ fontSize: 14, color: "var(--pine)", marginTop: 2 }}>
                                 {claimers.map(c => c.name).join(", ")}
                               </div>
                             )}
-                            {claimers.length === 0 && <div style={{ fontSize: 11, color: "var(--muted)", fontStyle: "italic" }}>Unclaimed</div>}
+                            {claimers.length === 0 && <div style={{ fontSize: 14, color: "var(--muted)", fontStyle: "italic" }}>Unclaimed</div>}
                           </div>
                           <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
-                            <button className="btn btn-ghost" style={{ padding: "4px 10px", fontSize: 11 }}
+                            <button className="btn btn-ghost" style={{ padding: "4px 10px", fontSize: 14 }}
                               onClick={() => setEditingGear({ type: "group", id: g.id, value: g.item })}>Edit</button>
-                            <button className="btn" style={{ padding: "4px 10px", fontSize: 11, background: "#fde8e8", border: "1px solid #f0b0b0", color: "#c04040" }}
+                            <button className="btn" style={{ padding: "4px 10px", fontSize: 14, background: "#fde8e8", border: "1px solid #f0b0b0", color: "#9a2020" }}
                               onClick={() => {
                                 if (!window.confirm(`Remove "${g.item}" from the gear list?`)) return;
                                 const updated = gearList.filter(x => x.id !== g.id);
@@ -1125,7 +1125,7 @@ function App() {
                     value={newGearInput.group}
                     onChange={e => setNewGearInput(prev => ({ ...prev, group: e.target.value }))}
                     placeholder="Add group item…"
-                    style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "7px 10px", fontSize: 13 }}
+                    style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "7px 10px", fontSize: 14 }}
                     onKeyDown={e => {
                       if (e.key === "Enter" && newGearInput.group.trim()) {
                         const id = "custom-" + Date.now();
@@ -1134,7 +1134,7 @@ function App() {
                       }
                     }}
                   />
-                  <button className="btn btn-pine" style={{ padding: "7px 12px", fontSize: 12 }} onClick={() => {
+                  <button className="btn btn-pine" style={{ padding: "7px 12px", fontSize: 14 }} onClick={() => {
                     if (!newGearInput.group.trim()) return;
                     const id = "custom-" + Date.now();
                     saveGearList([...gearList, { id, item: newGearInput.group.trim(), defaultClaimers: [] }], gearListPersonal);
@@ -1157,23 +1157,23 @@ function App() {
                           <input
                             value={editingGear.value}
                             onChange={e => setEditingGear(prev => ({ ...prev, value: e.target.value }))}
-                            style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "6px 10px", fontSize: 13 }}
+                            style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "6px 10px", fontSize: 14 }}
                             autoFocus
                           />
-                          <button className="btn btn-pine" style={{ padding: "6px 10px", fontSize: 11 }} onClick={() => {
+                          <button className="btn btn-pine" style={{ padding: "6px 10px", fontSize: 14 }} onClick={() => {
                             const updated = gearListPersonal.map((x, idx) => idx === i ? editingGear.value : x);
                             saveGearList(gearList, updated);
                             setEditingGear(null);
                           }}>Save</button>
-                          <button className="btn btn-ghost" style={{ padding: "6px 10px", fontSize: 11 }} onClick={() => setEditingGear(null)}>✕</button>
+                          <button className="btn btn-ghost" style={{ padding: "6px 10px", fontSize: 14 }} onClick={() => setEditingGear(null)}>✕</button>
                         </div>
                       ) : (
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
-                          <div style={{ fontSize: 13 }}>{item}</div>
+                          <div style={{ fontSize: 14 }}>{item}</div>
                           <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
-                            <button className="btn btn-ghost" style={{ padding: "4px 10px", fontSize: 11 }}
+                            <button className="btn btn-ghost" style={{ padding: "4px 10px", fontSize: 14 }}
                               onClick={() => setEditingGear({ type: "personal", id: i, value: item })}>Edit</button>
-                            <button className="btn" style={{ padding: "4px 10px", fontSize: 11, background: "#fde8e8", border: "1px solid #f0b0b0", color: "#c04040" }}
+                            <button className="btn" style={{ padding: "4px 10px", fontSize: 14, background: "#fde8e8", border: "1px solid #f0b0b0", color: "#9a2020" }}
                               onClick={() => {
                                 if (!window.confirm(`Remove "${item}" from the personal list?`)) return;
                                 saveGearList(gearList, gearListPersonal.filter((_, idx) => idx !== i));
@@ -1190,7 +1190,7 @@ function App() {
                     value={newGearInput.personal}
                     onChange={e => setNewGearInput(prev => ({ ...prev, personal: e.target.value }))}
                     placeholder="Add personal item…"
-                    style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "7px 10px", fontSize: 13 }}
+                    style={{ flex: 1, background: "#f5f0e8", border: "1px solid var(--border)", borderRadius: 6, padding: "7px 10px", fontSize: 14 }}
                     onKeyDown={e => {
                       if (e.key === "Enter" && newGearInput.personal.trim()) {
                         saveGearList(gearList, [...gearListPersonal, newGearInput.personal.trim()]);
@@ -1198,7 +1198,7 @@ function App() {
                       }
                     }}
                   />
-                  <button className="btn btn-pine" style={{ padding: "7px 12px", fontSize: 12 }} onClick={() => {
+                  <button className="btn btn-pine" style={{ padding: "7px 12px", fontSize: 14 }} onClick={() => {
                     if (!newGearInput.personal.trim()) return;
                     saveGearList(gearList, [...gearListPersonal, newGearInput.personal.trim()]);
                     setNewGearInput(prev => ({ ...prev, personal: "" }));
