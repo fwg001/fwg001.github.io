@@ -36,7 +36,7 @@ const CAMP_INFO = {
     { family: "Russo", sites: "51, 61" },
     { family: "Chow", sites: "58, 59" },
     { family: "Carleton", sites: "57, 60" },
-    { family: "Young Adults", sites: "Emma's 2 sites" },
+    { family: "YA (Emma)", sites: "54, 55" },
   ],
   features: ["Awesome beach!", "Fire pits", "Restrooms on site", "Whale watching in season"],
   notes: [
@@ -64,6 +64,7 @@ const ROSTER = [
   { name: "Joe Bass", phone: "8054231417", type: "adult", adults: 2, kids: 0, status: "confirmed", admin: false },
   { name: "Gria PA", phone: "4088900824", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
   { name: "Russ Drews", phone: "4084774235", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
+  { name: "Guest", phone: "4086470528", type: "guest", adults: 0, kids: 0, status: "guest", admin: false },
 ];
 
 const MEALS = [
@@ -472,8 +473,11 @@ function App() {
   const totalAdults = ROSTER.filter(r=>r.status==="confirmed").reduce((a,r)=>a+r.adults,0);
   const totalKids = ROSTER.filter(r=>r.status==="confirmed").reduce((a,r)=>a+r.kids,0);
 
+  const isGuest = currentUser?.type === "guest";
   const tabs = currentUser?.admin
     ? ["🏠 Home", "📍 Location", "👥 Roster", "🍳 Meals", "🎒 Gear", "⚙️ Admin"]
+    : isGuest
+    ? ["🏠 Home", "📍 Location", "👥 Roster"]
     : ["🏠 Home", "📍 Location", "👥 Roster", "🍳 Meals", "🎒 Gear"];
 
   const CSS = `
@@ -709,9 +713,9 @@ function App() {
                         </div>
                       )}
 
-                      <button className="btn btn-ocean" onClick={() => setPage(3)} style={{ width: "100%", marginTop: 12, padding: "10px", fontSize: 14 }}>
+                      {!isGuest && <button className="btn btn-ocean" onClick={() => setPage(3)} style={{ width: "100%", marginTop: 12, padding: "10px", fontSize: 14 }}>
                         {needsMore ? "Sign up for meals →" : "View all meals →"}
-                      </button>
+                      </button>}
                     </div>
                   </div>
                 );
@@ -748,9 +752,9 @@ function App() {
                           Still needed: {unclaimed.map(g => g.item).join(", ")}
                         </div>
                       )}
-                      <button className="btn btn-ghost" onClick={() => setPage(4)} style={{ width: "100%", padding: "9px", fontSize: 14 }}>
+                      {!isGuest && <button className="btn btn-ghost" onClick={() => setPage(4)} style={{ width: "100%", padding: "9px", fontSize: 14 }}>
                         View gear list →
-                      </button>
+                      </button>}
                     </div>
                   </div>
                 );
@@ -848,7 +852,7 @@ function App() {
               <div className="card" style={{ padding: "16px 20px" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 0 }}>
                   {[
-                    ["Adults", totalAdults, "🧑", false],
+                    ["Adults & Teens", totalAdults, "🧑", false],
                     ["Kids", totalKids, "👦", false],
                     ["Total", totalAdults + totalKids, "🏕️", true],
                   ].map(([label, val, icon, highlight], i) => (
@@ -874,14 +878,14 @@ function App() {
               <div className="card">
                 <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>Confirmed</div>
-                  <span className="tag tag-pine">{ROSTER.filter(r=>r.status==="confirmed").length} families</span>
+                  <span className="tag tag-pine">{ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest").length} families</span>
                 </div>
-                {ROSTER.filter(r=>r.status==="confirmed").map((r, i) => (
+                {ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest").map((r, i) => (
                   <div key={r.phone} style={{ padding: "12px 16px", borderBottom: i < ROSTER.filter(x=>x.status==="confirmed").length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <div>
                       <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text)" }}>{r.name} {r.admin ? "⭐" : ""}</div>
                       <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>
-                        {r.adults > 0 ? `${r.adults} adult${r.adults>1?"s":""}` : ""}
+                        {r.adults > 0 ? `${r.adults} adult${r.adults>1?"s/teens":"\u002fteen"}` : ""}
                         {r.adults > 0 && r.kids > 0 ? " · " : ""}
                         {r.kids > 0 ? `${r.kids} kid${r.kids>1?"s":""}` : ""}
                       </div>
@@ -1109,7 +1113,7 @@ function App() {
                       <span className="tag tag-ocean">{r.adults + r.kids} ppl</span>
                     </div>
                     <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>
-                      📱 {formatPhone(r.phone)} · {r.adults} adult{r.adults!==1?"s":""}, {r.kids} kid{r.kids!==1?"s":""}
+                      📱 {formatPhone(r.phone)} · {r.adults} adult{r.adults!==1?"s/teens":"/teen"}, {r.kids} kid{r.kids!==1?"s":""}
                     </div>
                   </div>
                 ))}
