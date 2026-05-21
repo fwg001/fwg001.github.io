@@ -48,7 +48,7 @@ const CAMP_INFO = {
 };
 
 const ROSTER = [
-  { name: "James Carleton", phone: "4088381923", type: "adult", adults: 3, kids: 1, status: "confirmed", admin: true },
+  { name: "James Carleton", phone: "408838192367", type: "adult", adults: 3, kids: 1, status: "confirmed", admin: true },
   { name: "Ivan Russo", phone: "4084216032", type: "adult", adults: 3, kids: 0, status: "confirmed", admin: false },
   { name: "Alex Chow", phone: "4088345841", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false },
   { name: "Philip Nemec", phone: "4088298165", type: "adult", adults: 1, kids: 1, status: "confirmed", admin: false },
@@ -61,7 +61,7 @@ const ROSTER = [
   { name: "Eric Ritchey", phone: "4083403564", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false },
   { name: "Peter Cook", phone: "5104272615", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false },
   { name: "Ben Quimby", phone: "9102739103", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
-  { name: "Joe Bass", phone: "8054231417", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
+  { name: "Joe Bass", phone: "8054231417", type: "adult", adults: 2, kids: 0, status: "confirmed", admin: false },
   { name: "Gria PA", phone: "4088900824", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
   { name: "Russ Drews", phone: "4084774235", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
 ];
@@ -108,19 +108,20 @@ const SUPABASE_URL = "https://ipobjafwifquhagvalaf.supabase.co";
 const SUPABASE_KEY = "sb_publishable_TahjTRUV4DSvdwwcbe6G6g_drXqlRF-";
 
 async function sbFetch(path, options = {}) {
+  const { prefer, headers: extraHeaders, ...fetchOptions } = options;
   const res = await fetch(SUPABASE_URL + "/rest/v1/" + path, {
-    ...options,
+    ...fetchOptions,
     headers: {
       "apikey": SUPABASE_KEY,
       "Authorization": "Bearer " + SUPABASE_KEY,
       "Content-Type": "application/json",
-      "Prefer": options.prefer || "return=representation",
-      ...(options.headers || {}),
+      "Prefer": prefer !== undefined ? prefer : "return=representation",
+      ...extraHeaders,
     },
   });
   if (!res.ok) {
     const err = await res.text();
-    throw new Error("Supabase error: " + err);
+    throw new Error("Supabase " + res.status + ": " + err);
   }
   const text = await res.text();
   return text ? JSON.parse(text) : [];
@@ -160,7 +161,8 @@ function formatPhone(raw) {
   const d = raw.replace(/\D/g, "");
   if (d.length <= 3) return d;
   if (d.length <= 6) return `(${d.slice(0,3)}) ${d.slice(3)}`;
-  return `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6,10)}`;
+  const base = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6,10)}`;
+  return d.length > 10 ? base + d.slice(10) : base;
 }
 
 function exportCSV(mealState, claimState, gearList) {
@@ -189,6 +191,50 @@ function exportCSV(mealState, claimState, gearList) {
 }
 
 // ─── MAIN APP ────────────────────────────────────────────────────────────────
+// ─── COUNTDOWN ───────────────────────────────────────────────────────────────
+function Countdown() {
+  const target = new Date("2026-06-11T15:00:00");
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft());
+
+  function getTimeLeft() {
+    const diff = target - new Date();
+    if (diff <= 0) return null;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+    return { days, hours, mins, secs };
+  }
+
+  useEffect(() => {
+    const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  if (!timeLeft) return (
+    <div style={{ marginTop: 12, color: "#f2e8d5", fontSize: 16, fontWeight: 600 }}>🏕️ We're camping!</div>
+  );
+
+  const { days, hours, mins, secs } = timeLeft;
+  return (
+    <div style={{ marginTop: 16, display: "flex", gap: 10 }}>
+      {[["days", days], ["hrs", hours], ["min", mins], ["sec", secs]].map(([label, val]) => (
+        <div key={label} style={{
+          background: "rgba(255,255,255,0.15)", borderRadius: 10,
+          padding: "10px 14px", textAlign: "center", flex: 1,
+        }}>
+          <div style={{ color: "#f2e8d5", fontSize: 36, fontWeight: 700, lineHeight: 1, fontFamily: "'Playfair Display', serif" }}>
+            {String(val).padStart(2, "0")}
+          </div>
+          <div style={{ color: "rgba(242,232,213,0.75)", fontSize: 14, marginTop: 4, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 600 }}>
+            {label}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function App() {
   const [screen, setScreen] = useState("login");
   const [page, setPage] = useState(0);
@@ -205,6 +251,22 @@ function App() {
   const [editingGear, setEditingGear] = useState(null); // { type: 'group'|'personal', id, value }
   const [newGearInput, setNewGearInput] = useState({ group: "", personal: "" });
 
+  // Auto-login from localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("camp-phone");
+      if (saved) {
+        const found = ROSTER.find(p => p.phone === saved);
+        if (found) {
+          setCurrentUser(found);
+          setRawPhone(saved);
+          setPhoneInput(formatPhone(saved));
+          setScreen("app");
+        }
+      }
+    } catch(e) {}
+  }, []);
+
   useEffect(() => {
     async function loadFromSupabase() {
       try {
@@ -220,8 +282,11 @@ function App() {
           if (saved.personal) setGearListPersonal(saved.personal);
         }
       } catch (e) {
-        console.error("Load failed, using defaults", e);
+        const msg = e.message || String(e);
+        console.error("Load failed:", msg);
         setAppState(buildAppState([], []));
+        setToast({ msg: "Could not load data: " + msg.slice(0, 70), type: "error" });
+        setTimeout(() => setToast(null), 10000);
       }
     }
     loadFromSupabase();
@@ -238,7 +303,7 @@ function App() {
   };
 
   const handlePhoneInput = (e) => {
-    const raw = e.target.value.replace(/\D/g,"").slice(0,10);
+    const raw = e.target.value.replace(/\D/g,"").slice(0,12);
     setRawPhone(raw);
     setPhoneInput(formatPhone(raw));
   };
@@ -250,6 +315,8 @@ function App() {
       setScreen("app");
       setPage(0);
       setLoginError("");
+      // Remember phone in localStorage for auto-login
+      try { localStorage.setItem("camp-phone", rawPhone); } catch(e) {}
       // Load this user's personal checklist from Supabase
       try {
         const rows = await sbFetch(`personal_checks?user_phone=eq.${found.phone}&select=item,checked`);
@@ -265,8 +332,8 @@ function App() {
   const handleMealSignup = async (mealId, role) => {
     if (!appState) return;
     const slot = appState.meals[mealId];
-    const isChef = slot.chef?.phone === currentUser.phone;
-    const isHelper = slot.helper?.phone === currentUser.phone;
+    const isChef = slot.chef && (slot.chef.phone === currentUser.phone || slot.chef.name === currentUser.name);
+    const isHelper = slot.helper && (slot.helper.phone === currentUser.phone || slot.helper.name === currentUser.name);
 
     let newSlot = { ...slot };
 
@@ -274,7 +341,7 @@ function App() {
       if (isChef) {
         newSlot.chef = null;
         showToast("Removed as chef", "info");
-      } else if (slot.chef && slot.chef.phone !== currentUser.phone) {
+      } else if (slot.chef && slot.chef.phone !== currentUser.phone && slot.chef.name !== currentUser.name) {
         showToast("Chef spot is taken!", "error"); return;
       } else {
         newSlot.chef = { name: currentUser.name, phone: currentUser.phone };
@@ -285,7 +352,7 @@ function App() {
       if (isHelper) {
         newSlot.helper = null;
         showToast("Removed as helper", "info");
-      } else if (slot.helper && slot.helper.phone !== currentUser.phone) {
+      } else if (slot.helper && slot.helper.phone !== currentUser.phone && slot.helper.name !== currentUser.name) {
         showToast("Helper spot is taken!", "error"); return;
       } else {
         newSlot.helper = { name: currentUser.name, phone: currentUser.phone };
@@ -302,7 +369,6 @@ function App() {
       await sbFetch("meal_signups", {
         method: "POST",
         prefer: "resolution=merge-duplicates,return=representation",
-        headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
         body: JSON.stringify({
           meal_id: mealId,
           chef_name: newSlot.chef?.name || null,
@@ -315,7 +381,7 @@ function App() {
       });
     } catch (e) {
       console.error("Meal save failed", e);
-      showToast("Save failed — check connection", "error");
+      showToast("Save failed: " + e.message.slice(0, 60), "error");
     }
   };
 
@@ -331,7 +397,7 @@ function App() {
       try {
         await sbFetch(
           `gear_claims?gear_id=eq.${gearId}&user_phone=eq.${currentUser.phone}`,
-          { method: "DELETE", prefer: "" }
+          { method: "DELETE", prefer: "return=minimal" }
         );
       } catch (e) { console.error("Claim delete failed", e); }
     } else {
@@ -354,13 +420,13 @@ function App() {
       if (nowChecked) {
         await sbFetch("personal_checks", {
           method: "POST",
-          headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
+          prefer: "resolution=merge-duplicates,return=representation",
           body: JSON.stringify({ user_phone: currentUser.phone, item, checked: true }),
         });
       } else {
         await sbFetch(
           `personal_checks?user_phone=eq.${currentUser.phone}&item=eq.${encodeURIComponent(item)}`,
-          { method: "DELETE", prefer: "" }
+          { method: "DELETE", prefer: "return=minimal" }
         );
       }
     } catch (e) { console.error("Check save failed", e); }
@@ -377,7 +443,7 @@ function App() {
     try {
       await sbFetch("meal_signups", {
         method: "POST",
-        headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
+        prefer: "resolution=merge-duplicates,return=representation",
         body: JSON.stringify({
           meal_id: mealId,
           chef_name: slot.chef?.name || null,
@@ -397,7 +463,7 @@ function App() {
     try {
       await sbFetch("app_config", {
         method: "POST",
-        headers: { "Prefer": "resolution=merge-duplicates,return=representation" },
+        prefer: "resolution=merge-duplicates,return=representation",
         body: JSON.stringify({ key: "gear_list", value: JSON.stringify({ group: newGroup, personal: newPersonal }) }),
       });
     } catch (e) { console.error("Gear list save failed", e); }
@@ -549,7 +615,7 @@ function App() {
               {currentUser?.name}{currentUser?.admin ? " · Admin" : ""}
             </div>
           </div>
-          <button className="btn" onClick={() => { setScreen("login"); setCurrentUser(null); setPhoneInput(""); setRawPhone(""); }}
+          <button className="btn" onClick={() => { try { localStorage.removeItem("camp-phone"); } catch(e) {} setScreen("login"); setCurrentUser(null); setPhoneInput(""); setRawPhone(""); setPersonalChecks({}); }}
             style={{ background: "rgba(255,255,255,0.12)", color: "#f2e8d5", fontSize: 14, padding: "6px 12px" }}>
             Sign out
           </button>
@@ -580,14 +646,21 @@ function App() {
                 <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 14, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 4 }}>Welcome back</div>
                 <div className="display" style={{ color: "#f2e8d5", fontSize: 22, fontWeight: 600 }}>{currentUser?.name} 👋</div>
                 <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 14, marginTop: 6 }}>
-                  Sunset Beach State Park · July 2026
+                  Sunset Beach State Park · June 11–14, 2026
                 </div>
+                <Countdown />
               </div>
 
               {/* Meal status card */}
               {(() => {
-                const myChefMeals = MEALS.filter(m => appState.meals[m.id]?.chef?.phone === currentUser.phone);
-                const myHelperMeals = MEALS.filter(m => appState.meals[m.id]?.helper?.phone === currentUser.phone);
+                const myChefMeals = MEALS.filter(m => {
+                  const c = appState.meals[m.id]?.chef;
+                  return c && (c.phone === currentUser.phone || c.name === currentUser.name);
+                });
+                const myHelperMeals = MEALS.filter(m => {
+                  const h = appState.meals[m.id]?.helper;
+                  return h && (h.phone === currentUser.phone || h.name === currentUser.name);
+                });
                 const totalMySigned = myChefMeals.length + myHelperMeals.length;
                 const needsMore = totalMySigned < 2;
 
@@ -772,18 +845,29 @@ function App() {
           {page === 2 && (
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {/* Stats */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
-                {[
-                  ["Total", totalAdults + totalKids, "🏕️"],
-                  ["Adults", totalAdults, "🧑"],
-                  ["Kids", totalKids, "👦"],
-                ].map(([label, val, icon]) => (
-                  <div key={label} className="card" style={{ padding: 16, textAlign: "center" }}>
-                    <div style={{ fontSize: 22 }}>{icon}</div>
-                    <div className="display" style={{ fontSize: 26, fontWeight: 600, color: "var(--ocean)", margin: "4px 0 2px" }}>{val}</div>
-                    <div style={{ fontSize: 14, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>{label}</div>
-                  </div>
-                ))}
+              <div className="card" style={{ padding: "16px 20px" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 0 }}>
+                  {[
+                    ["Adults", totalAdults, "🧑", false],
+                    ["Kids", totalKids, "👦", false],
+                    ["Total", totalAdults + totalKids, "🏕️", true],
+                  ].map(([label, val, icon, highlight], i) => (
+                    <div key={label} style={{
+                      textAlign: "center", padding: "8px 0",
+                      borderLeft: i > 0 ? "1px solid var(--border)" : "none",
+                    }}>
+                      <div style={{ fontSize: 14 }}>{icon}</div>
+                      <div className="display" style={{
+                        fontSize: highlight ? 32 : 28,
+                        fontWeight: 600,
+                        color: highlight ? "var(--ocean)" : "var(--text)",
+                        margin: "2px 0 2px",
+                        lineHeight: 1,
+                      }}>{val}</div>
+                      <div style={{ fontSize: 14, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 600 }}>{label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Confirmed */}
@@ -807,18 +891,7 @@ function App() {
                 ))}
               </div>
 
-              {/* Invited */}
-              <div className="card">
-                <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)" }}>
-                  <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>Invited / Potentials</div>
-                </div>
-                {ROSTER.filter(r=>r.status==="invited").map((r, i, arr) => (
-                  <div key={r.phone} style={{ padding: "12px 16px", borderBottom: i < arr.length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <div style={{ fontSize: 14, color: "var(--muted)" }}>{r.name}</div>
-                    <span className="tag tag-sand">Invited</span>
-                  </div>
-                ))}
-              </div>
+
             </div>
           )}
 
@@ -826,8 +899,13 @@ function App() {
           {page === 3 && (
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <div style={{ background: "#fff8f0", border: "1px solid #f0d8c0", borderRadius: 10, padding: "12px 14px" }}>
-                <div style={{ fontSize: 14, fontWeight: 600, color: "var(--sunset)", marginBottom: 6 }}>📋 How it works</div>
-                {CAMP_INFO.notes.map(n => (
+                <div style={{ fontSize: 14, fontWeight: 600, color: "var(--sunset)", marginBottom: 8 }}>📋 How it works</div>
+                {[
+                  "Everyone should choose at least 2 meals to help with. Lead one, support one.",
+                  "Don't make it too complicated, choose simple cooking processes and few ingredients.",
+                  "We will share stoves and cooking tools.",
+                  "If you need help, team up with someone to share the work.",
+                ].map(n => (
                   <div key={n} style={{ fontSize: 14, color: "#6a4a30", lineHeight: 1.6 }}>• {n}</div>
                 ))}
               </div>
@@ -844,8 +922,8 @@ function App() {
                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                       {dayMeals.map(meal => {
                         const slot = appState.meals[meal.id];
-                        const iAmChef = slot?.chef?.phone === currentUser.phone;
-                        const iAmHelper = slot?.helper?.phone === currentUser.phone;
+                        const iAmChef = slot?.chef && (slot.chef.phone === currentUser.phone || slot.chef.name === currentUser.name);
+                        const iAmHelper = slot?.helper && (slot.helper.phone === currentUser.phone || slot.helper.name === currentUser.name);
                         const isEditingMenu = menuEdit[meal.id] !== undefined;
 
                         return (
