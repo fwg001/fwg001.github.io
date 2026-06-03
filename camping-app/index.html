@@ -68,25 +68,24 @@ const ROSTER = [
 ];
 
 const MEALS = [
-  { id: "fri-dinner", label: "Friday Dinner", icon: "🌙", day: "Fri", defaultChef: "James Carleton", defaultHelper: "Emma", menu: "TBD" },
+  { id: "fri-dinner", hasHelper2: true, label: "Friday Dinner", icon: "🌙", day: "Fri", defaultChef: "James Carleton", defaultHelper: "Emma", menu: "TBD" },
   { id: "fri-dessert", label: "Friday Dessert", icon: "🍰", day: "Fri", defaultChef: null, defaultHelper: null, menu: "" },
-  { id: "sat-breakfast", label: "Saturday Breakfast", icon: "🌅", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
-  { id: "sat-lunch", label: "Saturday Lunch", icon: "☀️", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
-  { id: "sat-dinner", label: "Saturday Dinner", icon: "🌆", day: "Sat", defaultChef: "Aaron Teixeira", defaultHelper: null, menu: "Kahlua pork, sliders" },
+  { id: "sat-breakfast", hasHelper2: true, label: "Saturday Breakfast", icon: "🌅", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "sat-lunch", hasHelper2: true, label: "Saturday Lunch", icon: "☀️", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "sat-dinner", hasHelper2: true, label: "Saturday Dinner", icon: "🌆", day: "Sat", defaultChef: "Aaron Teixeira", defaultHelper: null, menu: "Kahlua pork, sliders" },
   { id: "sat-dessert", label: "Saturday Dessert", icon: "🍦", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
-  { id: "sun-breakfast", label: "Sunday Breakfast", icon: "🌄", day: "Sun", defaultChef: null, defaultHelper: null, menu: "" },
-  { id: "sides-snacks", label: "Sides & Snacks", icon: "🥗", day: "Any", defaultChef: null, defaultHelper: null, menu: "" },
-  { id: "drinks", label: "Drinks", icon: "🥤", day: "Any", defaultChef: null, defaultHelper: null, menu: "" },
-  { id: "coffee", label: "Coffee", icon: "☕", day: "Any", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "sun-breakfast", hasHelper2: true, label: "Sunday Breakfast", icon: "🌄", day: "Sun", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "sides-snacks", noChef: true, hasHelper2: true, label: "Snacks", icon: "🥗", day: "Any", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "drinks", noChef: true, hasHelper2: true, label: "Drinks", icon: "🥤", day: "Any", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "coffee", noChef: true, hasHelper2: true, label: "Coffee", icon: "☕", day: "Any", defaultChef: null, defaultHelper: null, menu: "" },
 ];
 
 const GROUP_GEAR = [
-  { id: "coolers", item: "Coolers", defaultClaimers: [] },
   { id: "campstove", item: "Camp Stove & Fuel", defaultClaimers: ["Ivan Russo", "Aaron Teixeira"] },
   { id: "lanterns", item: "Lanterns (2)", defaultClaimers: ["James Carleton", "Ivan Russo", "Andrew Lowd"] },
   { id: "tables", item: "Tables for eating/cooking (2)", defaultClaimers: ["James Carleton", "Ivan Russo", "Alex Chow"] },
-  { id: "firewood", item: "Firewood", defaultClaimers: ["Ivan Russo"] },
-  { id: "canopy", item: "Canopy", defaultClaimers: ["James Carleton", "Philip Nemec"] },
+  { id: "firewood", item: "Firewood (2)", defaultClaimers: ["Ivan Russo"] },
+  { id: "canopy", item: "Canopy (4)", defaultClaimers: ["James Carleton", "Philip Nemec"] },
   { id: "cooktools", item: "Cooking tools, pots/pans", defaultClaimers: ["James Carleton", "Ivan Russo", "Alex Chow"] },
   { id: "dishes", item: "Dish soap/scrubber/washbins", defaultClaimers: ["James Carleton", "Alex Chow"] },
   { id: "trash", item: "Trash bags", defaultClaimers: ["James Carleton"] },
@@ -136,6 +135,7 @@ function buildAppState(mealRows, claimRows) {
     {
       chef: m.defaultChef ? { name: m.defaultChef, phone: "seed" } : null,
       helper: m.defaultHelper ? { name: m.defaultHelper, phone: "seed" } : null,
+      helper2: null,
       menu: m.menu,
     }
   ]));
@@ -143,6 +143,7 @@ function buildAppState(mealRows, claimRows) {
     meals[row.meal_id] = {
       chef: row.chef_name ? { name: row.chef_name, phone: row.chef_phone } : null,
       helper: row.helper_name ? { name: row.helper_name, phone: row.helper_phone } : null,
+      helper2: row.helper2_name ? { name: row.helper2_name, phone: row.helper2_phone } : null,
       menu: row.menu || "",
     };
   });
@@ -173,7 +174,7 @@ function exportCSV(mealState, claimState, gearList) {
   ROSTER.forEach(r => rows.push([r.name, r.phone, r.status, r.adults, r.kids]));
   rows.push([]);
   rows.push(["=== MEALS ==="]);
-  rows.push(["Meal", "Chef", "Helper", "Menu"]);
+  rows.push(["Meal", "Chef", "Helper 1", "Menu"]);
   MEALS.forEach(m => {
     const s = mealState[m.id];
     rows.push([m.label, s?.chef?.name || "", s?.helper?.name || "", s?.menu || ""]);
@@ -251,6 +252,9 @@ function App() {
   const [gearListPersonal, setGearListPersonal] = useState(PERSONAL_GEAR);
   const [editingGear, setEditingGear] = useState(null); // { type: 'group'|'personal', id, value }
   const [newGearInput, setNewGearInput] = useState({ group: "", personal: "" });
+  const [payments, setPayments] = useState({});
+  const [arrivalDay, setArrivalDay] = useState(null); // current user's arrival day
+  const [allArrivals, setAllArrivals] = useState({});
 
   // Auto-login from localStorage
   useEffect(() => {
@@ -271,10 +275,12 @@ function App() {
   useEffect(() => {
     async function loadFromSupabase() {
       try {
-        const [mealRows, claimRows, configRows] = await Promise.all([
+        const [mealRows, claimRows, configRows, paymentRows, arrivalRows] = await Promise.all([
           sbFetch("meal_signups?select=*"),
           sbFetch("gear_claims?select=*"),
           sbFetch("app_config?key=eq.gear_list&select=value").catch(() => []),
+          sbFetch("payments?select=*").catch(() => []),
+          sbFetch("arrival_day?select=*").catch(() => []),
         ]);
         setAppState(buildAppState(mealRows, claimRows));
         if (configRows.length > 0) {
@@ -282,6 +288,12 @@ function App() {
           if (saved.group) setGearList(saved.group);
           if (saved.personal) setGearListPersonal(saved.personal);
         }
+        const payMap = {};
+        paymentRows.forEach(r => { payMap[r.phone] = r.paid; });
+        setPayments(payMap);
+        const arrMap = {};
+        arrivalRows.forEach(r => { arrMap[r.phone] = r.day; });
+        setAllArrivals(arrMap);
       } catch (e) {
         const msg = e.message || String(e);
         console.error("Load failed:", msg);
@@ -318,12 +330,16 @@ function App() {
       setLoginError("");
       // Remember phone in localStorage for auto-login
       try { localStorage.setItem("camp-phone", rawPhone); } catch(e) {}
-      // Load this user's personal checklist from Supabase
+      // Load this user's personal checklist and arrival day from Supabase
       try {
-        const rows = await sbFetch(`personal_checks?user_phone=eq.${found.phone}&select=item,checked`);
+        const [checkRows, arrRows] = await Promise.all([
+          sbFetch(`personal_checks?user_phone=eq.${found.phone}&select=item,checked`),
+          sbFetch(`arrival_day?phone=eq.${found.phone}&select=day`).catch(() => []),
+        ]);
         const checks = {};
-        rows.forEach(r => { if (r.checked) checks[r.item] = true; });
+        checkRows.forEach(r => { if (r.checked) checks[r.item] = true; });
         setPersonalChecks(checks);
+        setArrivalDay(arrRows.length > 0 ? arrRows[0].day : null);
       } catch { setPersonalChecks({}); }
     } else {
       setLoginError("Phone number not on the roster. Contact James.");
@@ -335,37 +351,42 @@ function App() {
     const slot = appState.meals[mealId];
     const isChef = slot.chef && (slot.chef.phone === currentUser.phone || slot.chef.name === currentUser.name);
     const isHelper = slot.helper && (slot.helper.phone === currentUser.phone || slot.helper.name === currentUser.name);
+    const isHelper2 = slot.helper2 && (slot.helper2.phone === currentUser.phone || slot.helper2.name === currentUser.name);
+    const iAmAnything = isChef || isHelper || isHelper2;
 
     let newSlot = { ...slot };
 
     if (role === "chef") {
-      if (isChef) {
-        newSlot.chef = null;
-        showToast("Removed as chef", "info");
-      } else if (slot.chef && slot.chef.phone !== currentUser.phone && slot.chef.name !== currentUser.name) {
-        showToast("Chef spot is taken!", "error"); return;
-      } else {
+      if (isChef) { newSlot.chef = null; showToast("Removed as chef", "info"); }
+      else if (slot.chef && !isChef) { showToast("Chef spot is taken!", "error"); return; }
+      else {
         newSlot.chef = { name: currentUser.name, phone: currentUser.phone };
         if (isHelper) newSlot.helper = null;
+        if (isHelper2) newSlot.helper2 = null;
         showToast(`You're the chef for ${MEALS.find(m=>m.id===mealId).label}! 🍳`);
       }
-    } else {
-      if (isHelper) {
-        newSlot.helper = null;
-        showToast("Removed as helper", "info");
-      } else if (slot.helper && slot.helper.phone !== currentUser.phone && slot.helper.name !== currentUser.name) {
-        showToast("Helper spot is taken!", "error"); return;
-      } else {
+    } else if (role === "helper") {
+      if (isHelper) { newSlot.helper = null; showToast("Removed as helper", "info"); }
+      else if (slot.helper && !isHelper) { showToast("Helper spot is taken!", "error"); return; }
+      else {
         newSlot.helper = { name: currentUser.name, phone: currentUser.phone };
         if (isChef) newSlot.chef = null;
+        if (isHelper2) newSlot.helper2 = null;
         showToast(`You're the helper for ${MEALS.find(m=>m.id===mealId).label}! 👨‍🍳`);
+      }
+    } else if (role === "helper2") {
+      if (isHelper2) { newSlot.helper2 = null; showToast("Removed as helper 2", "info"); }
+      else if (slot.helper2 && !isHelper2) { showToast("Helper 2 spot is taken!", "error"); return; }
+      else {
+        newSlot.helper2 = { name: currentUser.name, phone: currentUser.phone };
+        if (isChef) newSlot.chef = null;
+        if (isHelper) newSlot.helper = null;
+        showToast(`You're helper 2 for ${MEALS.find(m=>m.id===mealId).label}!`);
       }
     }
 
-    // Optimistic UI update
     saveState({ ...appState, meals: { ...appState.meals, [mealId]: newSlot } });
 
-    // Persist to Supabase
     try {
       await sbFetch("meal_signups", {
         method: "POST",
@@ -376,6 +397,8 @@ function App() {
           chef_phone: newSlot.chef?.phone || null,
           helper_name: newSlot.helper?.name || null,
           helper_phone: newSlot.helper?.phone || null,
+          helper2_name: newSlot.helper2?.name || null,
+          helper2_phone: newSlot.helper2?.phone || null,
           menu: newSlot.menu || null,
           updated_at: new Date().toISOString(),
         }),
@@ -389,7 +412,7 @@ function App() {
   const handleClaim = async (gearId) => {
     if (!appState) return;
     const existing = appState.claims[gearId] || [];
-    const isMine = existing.some(c => c.phone === currentUser.phone);
+    const isMine = existing.some(c => c.phone === currentUser.phone || c.name === currentUser.name);
 
     if (isMine) {
       const updated = existing.filter(c => c.phone !== currentUser.phone);
@@ -451,11 +474,40 @@ function App() {
           chef_phone: slot.chef?.phone || null,
           helper_name: slot.helper?.name || null,
           helper_phone: slot.helper?.phone || null,
+          helper2_name: slot.helper2?.name || null,
+          helper2_phone: slot.helper2?.phone || null,
           menu: newMenu,
           updated_at: new Date().toISOString(),
         }),
       });
     } catch (e) { console.error("Menu save failed", e); }
+  };
+
+  const handleArrivalDay = async (day) => {
+    const newDay = arrivalDay === day ? null : day;
+    setArrivalDay(newDay);
+    try {
+      if (newDay) {
+        await sbFetch("arrival_day", {
+          method: "POST",
+          prefer: "resolution=merge-duplicates,return=representation",
+          body: JSON.stringify({ phone: currentUser.phone, day: newDay }),
+        });
+      } else {
+        await sbFetch(`arrival_day?phone=eq.${currentUser.phone}`, { method: "DELETE", prefer: "return=minimal" });
+      }
+    } catch (e) { console.error("Arrival save failed", e); }
+  };
+
+  const togglePayment = async (phone, paid) => {
+    setPayments(prev => ({ ...prev, [phone]: paid }));
+    try {
+      await sbFetch("payments", {
+        method: "POST",
+        prefer: "resolution=merge-duplicates,return=representation",
+        body: JSON.stringify({ phone, paid, paid_at: paid ? new Date().toISOString() : null }),
+      });
+    } catch (e) { console.error("Payment save failed", e); showToast("Save failed", "error"); }
   };
 
   const saveGearList = async (newGroup, newPersonal) => {
@@ -666,7 +718,7 @@ function App() {
                   return h && (h.phone === currentUser.phone || h.name === currentUser.name);
                 });
                 const totalMySigned = myChefMeals.length + myHelperMeals.length;
-                const needsMore = totalMySigned < 2;
+                const needsMore = totalMySigned < 1;
 
                 return (
                   <div className="card" style={{ overflow: "visible" }}>
@@ -677,11 +729,9 @@ function App() {
                         : <span className="tag tag-pine">All set ✓</span>}
                     </div>
                     <div style={{ padding: "12px 16px" }}>
-                      {needsMore && (
-                        <div style={{ background: "#fff8f0", border: "1px solid #f0d0a0", borderRadius: 8, padding: "10px 12px", marginBottom: 12, fontSize: 14, color: "#8a4a10", lineHeight: 1.6 }}>
-                          Everyone should <strong>lead one meal</strong> and <strong>help with another</strong>. You've signed up for {totalMySigned} so far — head to Meals to finish!
-                        </div>
-                      )}
+                      <div style={{ background: needsMore ? "#fff8f0" : "#edf6ee", border: `1px solid ${needsMore ? "#f0d0a0" : "#b0d8b8"}`, borderRadius: 8, padding: "10px 12px", marginBottom: 12, fontSize: 14, color: needsMore ? "#8a4a10" : "var(--pine)", lineHeight: 1.6 }}>
+                        {needsMore ? "One meal signup required. You haven't signed up yet — head to Meals to pick one!" : "One meal signup required. You're signed up ✓"}
+                      </div>
 
                       {myChefMeals.length === 0 && myHelperMeals.length === 0 ? (
                         <div style={{ textAlign: "center", padding: "12px 0" }}>
@@ -707,7 +757,7 @@ function App() {
                                 <div style={{ fontSize: 14, fontWeight: 600, color: "var(--pine)" }}>{m.label}</div>
                                 <div style={{ fontSize: 14, color: "var(--muted)" }}>{appState.meals[m.id]?.menu || "Menu TBD"}</div>
                               </div>
-                              <span className="tag tag-ocean">Helper 🤝</span>
+                              <span className="tag tag-ocean">Helper 1 🤝</span>
                             </div>
                           ))}
                         </div>
@@ -723,7 +773,7 @@ function App() {
 
               {/* Gear claim status */}
               {(() => {
-                const myClaims = GROUP_GEAR.filter(g => (appState.claims[g.id]||[]).some(c => c.phone === currentUser.phone));
+                const myClaims = GROUP_GEAR.filter(g => (appState.claims[g.id]||[]).some(c => c.phone === currentUser.phone || c.name === currentUser.name));
                 const unclaimed = GROUP_GEAR.filter(g => (appState.claims[g.id]||[]).length === 0);
                 return (
                   <div className="card">
@@ -759,6 +809,59 @@ function App() {
                   </div>
                 );
               })()}
+
+              {/* Campsite Fees */}
+              {!isGuest && (() => {
+                const fee = (currentUser.adults + currentUser.kids) * 15;
+                const paid = payments[currentUser.phone];
+                return (
+                  <div className="card">
+                    <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>💰 Campsite Fee</div>
+                      {paid
+                        ? <span className="tag tag-pine">Paid ✓</span>
+                        : <span className="tag tag-sunset">Unpaid</span>}
+                    </div>
+                    <div style={{ padding: "12px 16px" }}>
+                      <div style={{ fontSize: 14, color: "var(--muted)", marginBottom: 6 }}>
+                        {currentUser.adults + currentUser.kids} people × $15/person
+                      </div>
+                      <div className="display" style={{ fontSize: 26, fontWeight: 600, color: paid ? "var(--pine)" : "var(--ocean)" }}>
+                        ${fee}
+                      </div>
+                      {!paid && (
+                        <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 6 }}>
+                          Venmo/Apple cash to James
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Arrival Day */}
+              {!isGuest && (
+                <div className="card">
+                  <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)" }}>
+                    <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>📅 When are you arriving?</div>
+                    <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>Tap to select your arrival day</div>
+                  </div>
+                  <div style={{ padding: "12px 16px", display: "flex", gap: 10 }}>
+                    {[["thursday", "Thursday June 11", "🌙"], ["friday", "Friday June 12", "☀️"]].map(([day, label, icon]) => (
+                      <button key={day} className="btn" onClick={() => handleArrivalDay(day)} style={{
+                        flex: 1, padding: "12px 8px", borderRadius: 10, textAlign: "center",
+                        background: arrivalDay === day ? "var(--ocean)" : "#f8f6f2",
+                        border: arrivalDay === day ? "2px solid var(--ocean)" : "1.5px solid var(--border)",
+                        color: arrivalDay === day ? "white" : "var(--muted)",
+                        cursor: "pointer",
+                      }}>
+                        <div style={{ fontSize: 20, marginBottom: 4 }}>{icon}</div>
+                        <div style={{ fontSize: 14, fontWeight: 600 }}>{label}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Quick links */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
@@ -905,12 +1008,12 @@ function App() {
               <div style={{ background: "#fff8f0", border: "1px solid #f0d8c0", borderRadius: 10, padding: "12px 14px" }}>
                 <div style={{ fontSize: 14, fontWeight: 600, color: "var(--sunset)", marginBottom: 8 }}>📋 How it works</div>
                 {[
-                  "Everyone should choose at least 2 meals to help with. Lead one, support one.",
+                  "Every dad should choose one meal to help with. You can be the Chef or a Helper.",
+                  "The Chef and Helpers will plan that meal's menu, share the grocery costs, and split the cooking tasks.",
                   "Don't make it too complicated, choose simple cooking processes and few ingredients.",
-                  "We will share stoves and cooking tools.",
-                  "If you need help, team up with someone to share the work.",
+                  "We will share stoves and cooking tools so only bring special tools if needed.",
                 ].map(n => (
-                  <div key={n} style={{ fontSize: 14, color: "#6a4a30", lineHeight: 1.6 }}>• {n}</div>
+                  <div key={n} style={{ fontSize: 14, color: "#6a4a30", lineHeight: 1.6, marginBottom: 4 }}>• {n}</div>
                 ))}
               </div>
 
@@ -928,6 +1031,7 @@ function App() {
                         const slot = appState.meals[meal.id];
                         const iAmChef = slot?.chef && (slot.chef.phone === currentUser.phone || slot.chef.name === currentUser.name);
                         const iAmHelper = slot?.helper && (slot.helper.phone === currentUser.phone || slot.helper.name === currentUser.name);
+                        const iAmHelper2 = slot?.helper2 && (slot.helper2.phone === currentUser.phone || slot.helper2.name === currentUser.name);
                         const isEditingMenu = menuEdit[meal.id] !== undefined;
 
                         return (
@@ -937,7 +1041,7 @@ function App() {
                                 <span style={{ fontSize: 20 }}>{meal.icon}</span>
                                 <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>{meal.label}</div>
                               </div>
-                              {(iAmChef || iAmHelper) && <span className="tag tag-pine">You're in!</span>}
+                              {(iAmChef || iAmHelper || iAmHelper2) && <span className="tag tag-pine">You're in!</span>}
                             </div>
 
                             {/* Menu */}
@@ -967,29 +1071,37 @@ function App() {
                             )}
 
                             {/* Slots */}
-                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-                              {[["chef","👨‍🍳 Chef"], ["helper","🤝 Helper"]].map(([role, label]) => {
-                                const person = slot?.[role];
-                                const isMine = person?.phone === currentUser.phone;
-                                const isSeed = person?.phone === "seed";
-                                const taken = person && !isMine && !isSeed;
-
-                                return (
-                                  <button key={role} className="btn" onClick={() => !isSeed && handleMealSignup(meal.id, role)} style={{
-                                    padding: "10px 8px", borderRadius: 8, textAlign: "left",
-                                    background: isMine ? "var(--pine)" : taken || isSeed ? "#f0f4f0" : "#f8f6f2",
-                                    border: isMine ? "2px solid var(--pine)" : taken || isSeed ? "1.5px solid #c0d8c0" : "1.5px solid var(--border)",
-                                    color: isMine ? "white" : taken || isSeed ? "var(--pine)" : "var(--muted)",
-                                    cursor: isSeed ? "default" : "pointer",
-                                  }}>
-                                    <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: "0.05em", marginBottom: 3 }}>{label}</div>
-                                    <div style={{ fontSize: 14, fontWeight: isMine ? 600 : 400 }}>
-                                      {person ? person.name : "Open — tap to sign up"}
-                                    </div>
-                                  </button>
-                                );
-                              })}
-                            </div>
+                            {(() => {
+                              const roleSet = meal.noChef
+                                ? [["helper","🤝 Helper 1"], ["helper2","🤝 Helper 2"]]
+                                : meal.hasHelper2
+                                ? [["chef","👨‍🍳 Chef"], ["helper","🤝 Helper 1"], ["helper2","🤝 Helper 2"]]
+                                : [["chef","👨‍🍳 Chef"], ["helper","🤝 Helper 1"]];
+                              return (
+                                <div style={{ display: "grid", gridTemplateColumns: roleSet.length === 3 ? "1fr 1fr 1fr" : "1fr 1fr", gap: 8 }}>
+                                  {roleSet.map(([role, label]) => {
+                                    const person = slot?.[role];
+                                    const isMine = person && (person.phone === currentUser.phone || person.name === currentUser.name);
+                                    const isSeed = person?.phone === "seed";
+                                    const taken = person && !isMine && !isSeed;
+                                    return (
+                                      <button key={role} className="btn" onClick={() => !isSeed && handleMealSignup(meal.id, role)} style={{
+                                        padding: "10px 8px", borderRadius: 8, textAlign: "left",
+                                        background: isMine ? "var(--pine)" : taken || isSeed ? "#f0f4f0" : "#f8f6f2",
+                                        border: isMine ? "2px solid var(--pine)" : taken || isSeed ? "1.5px solid #c0d8c0" : "1.5px solid var(--border)",
+                                        color: isMine ? "white" : taken || isSeed ? "var(--pine)" : "var(--muted)",
+                                        cursor: isSeed ? "default" : "pointer",
+                                      }}>
+                                        <div style={{ fontSize: 14, fontWeight: 700, letterSpacing: "0.05em", marginBottom: 3 }}>{label}</div>
+                                        <div style={{ fontSize: 14, fontWeight: isMine ? 600 : 400 }}>
+                                          {person ? person.name : "Open — tap"}
+                                        </div>
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              );
+                            })()}
                           </div>
                         );
                       })}
@@ -1016,7 +1128,7 @@ function App() {
                 </div>
                 {gearList.map((g, i) => {
                   const claimers = appState.claims[g.id] || [];
-                  const isMine = claimers.some(c => c.phone === currentUser.phone);
+                  const isMine = claimers.some(c => c.phone === currentUser.phone || c.name === currentUser.name);
                   return (
                     <div key={g.id} style={{ padding: "11px 16px", borderBottom: i < gearList.length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
                       <div style={{ flex: 1 }}>
@@ -1026,8 +1138,8 @@ function App() {
                             {claimers.map(c => (
                               <span key={c.phone} style={{
                                 display: "inline-block", fontSize: 14, fontWeight: 600,
-                                background: c.phone === currentUser.phone ? "var(--pine)" : "#e8f4ea",
-                                color: c.phone === currentUser.phone ? "white" : "var(--pine)",
+                                background: (c.phone === currentUser.phone || c.name === currentUser.name) ? "var(--pine)" : "#e8f4ea",
+                                color: (c.phone === currentUser.phone || c.name === currentUser.name) ? "white" : "var(--pine)",
                                 borderRadius: 20, padding: "2px 8px",
                               }}>✓ {c.name}</span>
                             ))}
@@ -1101,12 +1213,79 @@ function App() {
                 </button>
               </div>
 
+              {/* Payments */}
+              <div className="card">
+                <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>💰 Campsite Fees</div>
+                  <span className="tag tag-pine">
+                    ${ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest").reduce((s,r)=>s+(r.adults+r.kids)*15,0)} total
+                  </span>
+                </div>
+                {ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest").map((r, i, arr) => {
+                  const fee = (r.adults + r.kids) * 15;
+                  const paid = payments[r.phone];
+                  return (
+                    <div key={r.phone} style={{ padding: "10px 16px", borderBottom: i < arr.length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <div>
+                        <div style={{ fontSize: 14, fontWeight: 600 }}>{r.name}</div>
+                        <div style={{ fontSize: 14, color: "var(--muted)" }}>{r.adults+r.kids} people · ${fee}</div>
+                      </div>
+                      <button className="btn" onClick={() => togglePayment(r.phone, !paid)} style={{
+                        padding: "6px 14px", fontSize: 14,
+                        background: paid ? "var(--pine)" : "#f8f6f2",
+                        border: paid ? "none" : "1.5px solid var(--border)",
+                        color: paid ? "white" : "var(--muted)",
+                        borderRadius: 8,
+                      }}>
+                        {paid ? "Paid ✓" : "Mark paid"}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Arrival Day */}
+              <div className="card">
+                <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)" }}>
+                  <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>📅 Arrival Day</div>
+                </div>
+                {[["thursday", "Thursday June 11 🌙"], ["friday", "Friday June 12 ☀️"]].map(([day, label]) => {
+                  const arrivers = ROSTER.filter(r => r.status === "confirmed" && r.type !== "guest" && allArrivals[r.phone] === day);
+                  const noResponse = ROSTER.filter(r => r.status === "confirmed" && r.type !== "guest" && !allArrivals[r.phone]);
+                  return (
+                    <div key={day} style={{ padding: "10px 16px", borderBottom: day === "thursday" ? "1px solid var(--border)" : "none" }}>
+                      <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 6 }}>{label} <span style={{ color: "var(--muted)", fontWeight: 400 }}>({arrivers.length})</span></div>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                        {arrivers.length > 0 ? arrivers.map(r => (
+                          <span key={r.phone} style={{ background: "#e0f0f8", color: "var(--ocean)", borderRadius: 20, padding: "3px 10px", fontSize: 14, fontWeight: 600 }}>{r.name}</span>
+                        )) : (
+                          <span style={{ fontSize: 14, color: "var(--muted)", fontStyle: "italic" }}>No one yet</span>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+                {(() => {
+                  const noResponse = ROSTER.filter(r => r.status === "confirmed" && r.type !== "guest" && !allArrivals[r.phone]);
+                  return noResponse.length > 0 ? (
+                    <div style={{ padding: "10px 16px", borderTop: "1px solid var(--border)" }}>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--muted)", marginBottom: 6 }}>No response yet ({noResponse.length})</div>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                        {noResponse.map(r => (
+                          <span key={r.phone} style={{ background: "#f5f0e8", color: "var(--muted)", borderRadius: 20, padding: "3px 10px", fontSize: 14 }}>{r.name}</span>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null;
+                })()}
+              </div>
+
               {/* Full roster with phones */}
               <div className="card">
                 <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)" }}>
                   <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>Full Roster</div>
                 </div>
-                {ROSTER.filter(r=>r.status==="confirmed").map((r, i, arr) => (
+                {ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest").map((r, i, arr) => (
                   <div key={r.phone} style={{ padding: "10px 16px", borderBottom: i < arr.length-1 ? "1px solid var(--border)" : "none" }}>
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                       <div style={{ fontSize: 14, fontWeight: 600 }}>{r.name} {r.admin ? "⭐" : ""}</div>
@@ -1129,19 +1308,21 @@ function App() {
                   return (
                     <div key={m.id} style={{ padding: "10px 16px", borderBottom: i < MEALS.length-1 ? "1px solid var(--border)" : "none" }}>
                       <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{m.icon} {m.label}</div>
-                      <div style={{ display: "flex", gap: 16 }}>
-                        <div style={{ fontSize: 14 }}>
+                      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+                        {!m.noChef && <div style={{ fontSize: 14 }}>
                           <span style={{ color: "var(--muted)" }}>Chef: </span>
-                          <span style={{ color: slot?.chef ? "var(--pine)" : "var(--muted)", fontStyle: slot?.chef ? "normal" : "italic" }}>
-                            {slot?.chef?.name || "—"}
-                          </span>
-                        </div>
+                          <span style={{ color: slot?.chef ? "var(--pine)" : "var(--muted)", fontStyle: slot?.chef ? "normal" : "italic" }}>{slot?.chef?.name || "—"}</span>
+                        </div>}
                         <div style={{ fontSize: 14 }}>
-                          <span style={{ color: "var(--muted)" }}>Helper: </span>
-                          <span style={{ color: slot?.helper ? "var(--pine)" : "var(--muted)", fontStyle: slot?.helper ? "normal" : "italic" }}>
-                            {slot?.helper?.name || "—"}
-                          </span>
+                          <span style={{ color: "var(--muted)" }}>Helper 1: </span>
+                          <span style={{ color: slot?.helper ? "var(--pine)" : "var(--muted)", fontStyle: slot?.helper ? "normal" : "italic" }}>{slot?.helper?.name || "—"}</span>
                         </div>
+                        {(m.hasHelper2 || m.noChef) && (
+                          <div style={{ fontSize: 14 }}>
+                            <span style={{ color: "var(--muted)" }}>Helper 2: </span>
+                            <span style={{ color: slot?.helper2 ? "var(--pine)" : "var(--muted)", fontStyle: slot?.helper2 ? "normal" : "italic" }}>{slot?.helper2?.name || "—"}</span>
+                          </div>
+                        )}
                       </div>
                       {slot?.menu && <div style={{ fontSize: 14, color: "var(--sunset)", marginTop: 3 }}>🍽 {slot.menu}</div>}
                     </div>
