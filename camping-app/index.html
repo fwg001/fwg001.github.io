@@ -48,7 +48,7 @@ const CAMP_INFO = {
 };
 
 const ROSTER = [
-  { name: "James Carleton", phone: "408838192367", type: "adult", adults: 3, kids: 1, status: "confirmed", admin: true },
+  { name: "James Carleton", phone: "408838192367", type: "adult", adults: 4, kids: 0, status: "confirmed", admin: true, parentPhone: null },
   { name: "Ivan Russo", phone: "4084216032", type: "adult", adults: 3, kids: 0, status: "confirmed", admin: false },
   { name: "Alex Chow", phone: "4088345841", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false },
   { name: "Philip Nemec", phone: "4088298165", type: "adult", adults: 1, kids: 1, status: "confirmed", admin: false },
@@ -64,7 +64,7 @@ const ROSTER = [
   { name: "Joe Bass", phone: "8054231417", type: "adult", adults: 2, kids: 0, status: "confirmed", admin: false },
   { name: "Gria PA", phone: "4088900824", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
   { name: "Russ Drews", phone: "4084774235", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
-  { name: "Guest", phone: "4086470528", type: "guest", adults: 0, kids: 0, status: "guest", admin: false },
+  { name: "Emma Carleton", phone: "4086470528", type: "subuser", adults: 0, kids: 0, status: "confirmed", admin: false, parentPhone: "408838192367" },
 ];
 
 const MEALS = [
@@ -522,10 +522,11 @@ function App() {
     } catch (e) { console.error("Gear list save failed", e); }
   };
 
-  const totalAdults = ROSTER.filter(r=>r.status==="confirmed").reduce((a,r)=>a+r.adults,0);
-  const totalKids = ROSTER.filter(r=>r.status==="confirmed").reduce((a,r)=>a+r.kids,0);
+  const totalAdults = ROSTER.filter(r=>r.status==="confirmed" && r.type!=="subuser").reduce((a,r)=>a+r.adults,0);
+  const totalKids = ROSTER.filter(r=>r.status==="confirmed" && r.type!=="subuser").reduce((a,r)=>a+r.kids,0);
 
   const isGuest = currentUser?.type === "guest";
+  const isSubuser = currentUser?.type === "subuser";
   const tabs = currentUser?.admin
     ? ["🏠 Home", "📍 Location", "👥 Roster", "🍳 Meals", "🎒 Gear", "⚙️ Admin"]
     : isGuest
@@ -634,7 +635,7 @@ function App() {
             </button>
           </div>
           <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, marginTop: 16 }}>
-            Not on the list? Contact James Carleton
+            Not on the list? Contact James
           </p>
         </div>
       </div>
@@ -812,8 +813,11 @@ function App() {
 
               {/* Campsite Fees */}
               {!isGuest && (() => {
-                const fee = (currentUser.adults + currentUser.kids) * 15;
-                const paid = payments[currentUser.phone];
+                const feeUser = currentUser.parentPhone
+                  ? ROSTER.find(r => r.phone === currentUser.parentPhone) || currentUser
+                  : currentUser;
+                const fee = (feeUser.adults + feeUser.kids) * 15;
+                const paid = payments[feeUser.phone];
                 return (
                   <div className="card">
                     <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -824,7 +828,7 @@ function App() {
                     </div>
                     <div style={{ padding: "12px 16px" }}>
                       <div style={{ fontSize: 14, color: "var(--muted)", marginBottom: 6 }}>
-                        {currentUser.adults + currentUser.kids} people × $15/person
+                        {feeUser.adults + feeUser.kids} people × $15/person
                       </div>
                       <div className="display" style={{ fontSize: 26, fontWeight: 600, color: paid ? "var(--pine)" : "var(--ocean)" }}>
                         ${fee}
@@ -987,21 +991,33 @@ function App() {
               <div className="card">
                 <div style={{ padding: "14px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>Confirmed</div>
-                  <span className="tag tag-pine">{ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest").length} families</span>
+                  <span className="tag tag-pine">{ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest" && r.type!=="subuser").length} families</span>
                 </div>
-                {ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest").map((r, i) => (
-                  <div key={r.phone} style={{ padding: "12px 16px", borderBottom: i < ROSTER.filter(x=>x.status==="confirmed").length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <div>
-                      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text)" }}>{r.name} {r.admin ? "⭐" : ""}</div>
-                      <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>
-                        {r.adults > 0 ? `${r.adults} adult${r.adults>1?"s/teens":"\u002fteen"}` : ""}
-                        {r.adults > 0 && r.kids > 0 ? " · " : ""}
-                        {r.kids > 0 ? `${r.kids} kid${r.kids>1?"s":""}` : ""}
+                {ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest" && r.type!=="subuser").map((r, i, arr) => {
+                  const subusers = ROSTER.filter(s => s.parentPhone === r.phone);
+                  return (
+                    <div key={r.phone} style={{ padding: "12px 16px", borderBottom: i < arr.length-1 ? "1px solid var(--border)" : "none" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <div>
+                          <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text)" }}>{r.name} {r.admin ? "⭐" : ""}</div>
+                          <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>
+                            {r.adults > 0 ? `${r.adults} adult${r.adults>1?"s/teens":"/teen"}` : ""}
+                            {r.adults > 0 && r.kids > 0 ? " · " : ""}
+                            {r.kids > 0 ? `${r.kids} kid${r.kids>1?"s":""}` : ""}
+                          </div>
+                          {subusers.length > 0 && (
+                            <div style={{ marginTop: 4, display: "flex", gap: 4, flexWrap: "wrap" }}>
+                              {subusers.map(s => (
+                                <span key={s.phone} style={{ fontSize: 14, color: "var(--ocean)", background: "#e8f4f8", borderRadius: 20, padding: "2px 8px" }}>{s.name}</span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        <span className="tag tag-ocean">{r.adults + r.kids} ppl</span>
                       </div>
                     </div>
-                    <span className="tag tag-ocean">{r.adults + r.kids} ppl</span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
 
@@ -1227,12 +1243,12 @@ function App() {
                     {(() => {
                       const confirmed = ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest");
                       const total = confirmed.reduce((s,r)=>s+(r.adults+r.kids)*15,0);
-                      const paidTotal = confirmed.filter(r=>payments[r.phone]).reduce((s,r)=>s+(r.adults+r.kids)*15,0);
+                      const paidTotal = confirmed.filter(r=>r.type!=="subuser" && payments[r.phone]).reduce((s,r)=>s+(r.adults+r.kids)*15,0);
                       return `$${paidTotal} paid / $${total} total`;
                     })()}
                   </span>
                 </div>
-                {ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest").map((r, i, arr) => {
+                {ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest" && r.type!=="subuser").map((r, i, arr) => {
                   const fee = (r.adults + r.kids) * 15;
                   const paid = payments[r.phone];
                   return (
@@ -1260,7 +1276,7 @@ function App() {
                 <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)" }}>
                   <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>📅 Arrival Day</div>
                 </div>
-                {ROSTER.filter(r => r.status === "confirmed" && r.type !== "guest").map((r, i, arr) => {
+                {ROSTER.filter(r => r.status === "confirmed" && r.type !== "guest" && r.type !== "subuser").map((r, i, arr) => {
                   const current = allArrivals[r.phone] || null;
                   return (
                     <div key={r.phone} style={{ padding: "10px 16px", borderBottom: i < arr.length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
@@ -1302,17 +1318,25 @@ function App() {
                 <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)" }}>
                   <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>Full Roster</div>
                 </div>
-                {ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest").map((r, i, arr) => (
-                  <div key={r.phone} style={{ padding: "10px 16px", borderBottom: i < arr.length-1 ? "1px solid var(--border)" : "none" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <div style={{ fontSize: 14, fontWeight: 600 }}>{r.name} {r.admin ? "⭐" : ""}</div>
-                      <span className="tag tag-ocean">{r.adults + r.kids} ppl</span>
+                {ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest" && r.type!=="subuser").map((r, i, arr) => {
+                  const subs = ROSTER.filter(s => s.parentPhone === r.phone);
+                  return (
+                    <div key={r.phone} style={{ padding: "10px 16px", borderBottom: i < arr.length-1 ? "1px solid var(--border)" : "none" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <div style={{ fontSize: 14, fontWeight: 600 }}>{r.name} {r.admin ? "⭐" : ""}</div>
+                        <span className="tag tag-ocean">{r.adults + r.kids} ppl</span>
+                      </div>
+                      <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>
+                        📱 {formatPhone(r.phone)} · {r.adults} adult{r.adults!==1?"s/teens":"/teen"}, {r.kids} kid{r.kids!==1?"s":""}
+                      </div>
+                      {subs.map(s => (
+                        <div key={s.phone} style={{ fontSize: 14, color: "var(--ocean)", marginTop: 4 }}>
+                          ↳ {s.name} · 📱 {formatPhone(s.phone)}
+                        </div>
+                      ))}
                     </div>
-                    <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>
-                      📱 {formatPhone(r.phone)} · {r.adults} adult{r.adults!==1?"s/teens":"/teen"}, {r.kids} kid{r.kids!==1?"s":""}
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* All meal signups */}
