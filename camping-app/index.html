@@ -831,7 +831,10 @@ function App() {
                       </div>
                       {!paid && (
                         <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 6 }}>
-                          Venmo/Apple cash to James
+                          <a href="https://venmo.com/u/fwg001" target="_blank" rel="noreferrer" style={{ color: "var(--ocean)", fontWeight: 600 }}>Venmo</a>
+                          {" or "}
+                          <a href="tel:14088381923" style={{ color: "var(--ocean)", fontWeight: 600 }}>Apple Cash</a>
+                          {" to James"}
                         </div>
                       )}
                     </div>
@@ -925,7 +928,10 @@ function App() {
 
               {/* Sites */}
               <div className="card" style={{ padding: 16 }}>
-                <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 12 }}>Campsites</div>
+                <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 4 }}>Sites Reserved</div>
+                <div style={{ fontSize: 14, color: "var(--muted)", marginBottom: 12, lineHeight: 1.5 }}>
+                  Each family can choose a spot on any of these sites.
+                </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                   {CAMP_INFO.sites.map(s => (
                     <div key={s.family} style={{ background: "#f5f0e8", borderRadius: 8, padding: "10px 12px" }}>
@@ -1305,26 +1311,65 @@ function App() {
                 </div>
                 {MEALS.map((m, i) => {
                   const slot = appState.meals[m.id];
+                  const rosterNames = ["—", ...ROSTER.filter(r => r.status === "confirmed" && r.type !== "guest").map(r => r.name)];
+                  const roles = m.noChef
+                    ? [["helper","Helper 1"], ["helper2","Helper 2"]]
+                    : m.hasHelper2
+                    ? [["chef","Chef"], ["helper","Helper 1"], ["helper2","Helper 2"]]
+                    : [["chef","Chef"], ["helper","Helper 1"]];
+
                   return (
-                    <div key={m.id} style={{ padding: "10px 16px", borderBottom: i < MEALS.length-1 ? "1px solid var(--border)" : "none" }}>
-                      <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{m.icon} {m.label}</div>
-                      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-                        {!m.noChef && <div style={{ fontSize: 14 }}>
-                          <span style={{ color: "var(--muted)" }}>Chef: </span>
-                          <span style={{ color: slot?.chef ? "var(--pine)" : "var(--muted)", fontStyle: slot?.chef ? "normal" : "italic" }}>{slot?.chef?.name || "—"}</span>
-                        </div>}
-                        <div style={{ fontSize: 14 }}>
-                          <span style={{ color: "var(--muted)" }}>Helper 1: </span>
-                          <span style={{ color: slot?.helper ? "var(--pine)" : "var(--muted)", fontStyle: slot?.helper ? "normal" : "italic" }}>{slot?.helper?.name || "—"}</span>
-                        </div>
-                        {(m.hasHelper2 || m.noChef) && (
-                          <div style={{ fontSize: 14 }}>
-                            <span style={{ color: "var(--muted)" }}>Helper 2: </span>
-                            <span style={{ color: slot?.helper2 ? "var(--pine)" : "var(--muted)", fontStyle: slot?.helper2 ? "normal" : "italic" }}>{slot?.helper2?.name || "—"}</span>
-                          </div>
-                        )}
+                    <div key={m.id} style={{ padding: "12px 16px", borderBottom: i < MEALS.length-1 ? "1px solid var(--border)" : "none" }}>
+                      <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8 }}>{m.icon} {m.label}</div>
+                      <div style={{ display: "grid", gridTemplateColumns: roles.length === 3 ? "1fr 1fr 1fr" : "1fr 1fr", gap: 8 }}>
+                        {roles.map(([role, label]) => {
+                          const person = slot?.[role];
+                          return (
+                            <div key={role}>
+                              <div style={{ fontSize: 14, color: "var(--muted)", fontWeight: 600, marginBottom: 4 }}>{label}</div>
+                              <select
+                                value={person?.name || "—"}
+                                onChange={async e => {
+                                  const name = e.target.value;
+                                  const found = ROSTER.find(r => r.name === name);
+                                  const newPerson = name === "—" ? null : { name, phone: found?.phone || "" };
+                                  const newSlot = { ...slot, [role]: newPerson };
+                                  saveState({ ...appState, meals: { ...appState.meals, [m.id]: newSlot } });
+                                  try {
+                                    await sbFetch("meal_signups", {
+                                      method: "POST",
+                                      prefer: "resolution=merge-duplicates,return=representation",
+                                      body: JSON.stringify({
+                                        meal_id: m.id,
+                                        chef_name: newSlot.chef?.name || null,
+                                        chef_phone: newSlot.chef?.phone || null,
+                                        helper_name: newSlot.helper?.name || null,
+                                        helper_phone: newSlot.helper?.phone || null,
+                                        helper2_name: newSlot.helper2?.name || null,
+                                        helper2_phone: newSlot.helper2?.phone || null,
+                                        menu: newSlot.menu || null,
+                                        updated_at: new Date().toISOString(),
+                                      }),
+                                    });
+                                    showToast(`${label} updated!`);
+                                  } catch(e) { showToast("Save failed", "error"); }
+                                }}
+                                style={{
+                                  width: "100%", background: person ? "#edf6ee" : "#f8f6f2",
+                                  border: `1.5px solid ${person ? "#b0d8b8" : "var(--border)"}`,
+                                  borderRadius: 8, padding: "7px 10px", fontSize: 14,
+                                  color: person ? "var(--pine)" : "var(--muted)",
+                                  fontWeight: person ? 600 : 400,
+                                  fontFamily: "'Source Sans 3', sans-serif",
+                                }}
+                              >
+                                {rosterNames.map(n => <option key={n} value={n}>{n}</option>)}
+                              </select>
+                            </div>
+                          );
+                        })}
                       </div>
-                      {slot?.menu && <div style={{ fontSize: 14, color: "var(--sunset)", marginTop: 3 }}>🍽 {slot.menu}</div>}
+                      {slot?.menu && <div style={{ fontSize: 14, color: "var(--sunset)", marginTop: 6 }}>🍽 {slot.menu}</div>}
                     </div>
                   );
                 })}
