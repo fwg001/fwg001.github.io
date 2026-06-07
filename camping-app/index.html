@@ -1224,7 +1224,12 @@ function App() {
                 <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>💰 Campsite Fees</div>
                   <span className="tag tag-pine">
-                    ${ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest").reduce((s,r)=>s+(r.adults+r.kids)*15,0)} total
+                    {(() => {
+                      const confirmed = ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest");
+                      const total = confirmed.reduce((s,r)=>s+(r.adults+r.kids)*15,0);
+                      const paidTotal = confirmed.filter(r=>payments[r.phone]).reduce((s,r)=>s+(r.adults+r.kids)*15,0);
+                      return `$${paidTotal} paid / $${total} total`;
+                    })()}
                   </span>
                 </div>
                 {ROSTER.filter(r=>r.status==="confirmed" && r.type!=="guest").map((r, i, arr) => {
@@ -1255,35 +1260,41 @@ function App() {
                 <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)" }}>
                   <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>📅 Arrival Day</div>
                 </div>
-                {[["thursday", "Thursday June 11 🌙"], ["friday", "Friday June 12 ☀️"]].map(([day, label]) => {
-                  const arrivers = ROSTER.filter(r => r.status === "confirmed" && r.type !== "guest" && allArrivals[r.phone] === day);
-                  const noResponse = ROSTER.filter(r => r.status === "confirmed" && r.type !== "guest" && !allArrivals[r.phone]);
+                {ROSTER.filter(r => r.status === "confirmed" && r.type !== "guest").map((r, i, arr) => {
+                  const current = allArrivals[r.phone] || null;
                   return (
-                    <div key={day} style={{ padding: "10px 16px", borderBottom: day === "thursday" ? "1px solid var(--border)" : "none" }}>
-                      <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 6 }}>{label} <span style={{ color: "var(--muted)", fontWeight: 400 }}>({arrivers.length})</span></div>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                        {arrivers.length > 0 ? arrivers.map(r => (
-                          <span key={r.phone} style={{ background: "#e0f0f8", color: "var(--ocean)", borderRadius: 20, padding: "3px 10px", fontSize: 14, fontWeight: 600 }}>{r.name}</span>
-                        )) : (
-                          <span style={{ fontSize: 14, color: "var(--muted)", fontStyle: "italic" }}>No one yet</span>
-                        )}
+                    <div key={r.phone} style={{ padding: "10px 16px", borderBottom: i < arr.length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
+                      <div style={{ fontSize: 14, fontWeight: 600 }}>{r.name}</div>
+                      <div style={{ display: "flex", gap: 6 }}>
+                        {[["thursday", "Thu 11"], ["friday", "Fri 12"]].map(([day, label]) => (
+                          <button key={day} className="btn" onClick={async () => {
+                            const newDay = current === day ? null : day;
+                            const updated = { ...allArrivals, [r.phone]: newDay };
+                            if (!newDay) delete updated[r.phone];
+                            setAllArrivals(updated);
+                            try {
+                              if (newDay) {
+                                await sbFetch("arrival_day", {
+                                  method: "POST",
+                                  prefer: "resolution=merge-duplicates,return=representation",
+                                  body: JSON.stringify({ phone: r.phone, day: newDay }),
+                                });
+                              } else {
+                                await sbFetch(`arrival_day?phone=eq.${r.phone}`, { method: "DELETE", prefer: "return=minimal" });
+                              }
+                            } catch(e) { showToast("Save failed", "error"); }
+                          }} style={{
+                            padding: "5px 12px", fontSize: 14, borderRadius: 8,
+                            background: current === day ? "var(--ocean)" : "#f8f6f2",
+                            border: current === day ? "none" : "1.5px solid var(--border)",
+                            color: current === day ? "white" : "var(--muted)",
+                          }}>{label}</button>
+                        ))}
+                        {!current && <span style={{ fontSize: 14, color: "var(--muted)", fontStyle: "italic", alignSelf: "center" }}>—</span>}
                       </div>
                     </div>
                   );
                 })}
-                {(() => {
-                  const noResponse = ROSTER.filter(r => r.status === "confirmed" && r.type !== "guest" && !allArrivals[r.phone]);
-                  return noResponse.length > 0 ? (
-                    <div style={{ padding: "10px 16px", borderTop: "1px solid var(--border)" }}>
-                      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--muted)", marginBottom: 6 }}>No response yet ({noResponse.length})</div>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                        {noResponse.map(r => (
-                          <span key={r.phone} style={{ background: "#f5f0e8", color: "var(--muted)", borderRadius: 20, padding: "3px 10px", fontSize: 14 }}>{r.name}</span>
-                        ))}
-                      </div>
-                    </div>
-                  ) : null;
-                })()}
               </div>
 
               {/* Full roster with phones */}
