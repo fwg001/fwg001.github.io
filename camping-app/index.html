@@ -69,8 +69,8 @@ const ROSTER = [
 
 const MEALS = [
   { id: "thu-dinner", hasHelper2: true, label: "Thursday Dinner", icon: "🌙", day: "Thu", defaultChef: null, defaultHelper: null, menu: "" },
-  { id: "fri-breakfast", label: "Friday Breakfast", icon: "🌅", day: "Fri", infoOnly: true },
-  { id: "fri-lunch", label: "Friday Lunch", icon: "☀️", day: "Fri", infoOnly: true },
+  { id: "fri-breakfast", label: "Friday Breakfast", icon: "🌅", day: "Fri", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "fri-lunch", label: "Friday Lunch", icon: "☀️", day: "Fri", infoOnly: true, infoNote: "Planning to drive out for pizza — or bring your own meal." },
   { id: "fri-dinner", hasHelper2: true, label: "Friday Dinner", icon: "🌙", day: "Fri", defaultChef: "James Carleton", defaultChefPhone: "408838192367", defaultHelper: "Emma Carleton", defaultHelperPhone: "4086470528", menu: "TBD" },
   { id: "fri-dessert", label: "Friday Dessert", icon: "🍰", day: "Fri", defaultChef: null, defaultHelper: null, menu: "" },
   { id: "sat-breakfast", hasHelper2: true, label: "Saturday Breakfast", icon: "🌅", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
@@ -1062,7 +1062,9 @@ function App() {
                               <span style={{ fontSize: 20 }}>{meal.icon}</span>
                               <div>
                                 <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>{meal.label}</div>
-                                <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2, fontStyle: "italic" }}>No group meal — provide your own.</div>
+                                <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2, fontStyle: "italic" }}>
+                                  {meal.infoNote || "No group meal — provide your own."}
+                                </div>
                               </div>
                             </div>
                           );
