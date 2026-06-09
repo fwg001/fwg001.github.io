@@ -68,7 +68,10 @@ const ROSTER = [
 ];
 
 const MEALS = [
-  { id: "fri-dinner", hasHelper2: true, label: "Friday Dinner", icon: "🌙", day: "Fri", defaultChef: "James Carleton", defaultHelper: "Emma", menu: "TBD" },
+  { id: "thu-dinner", hasHelper2: true, label: "Thursday Dinner", icon: "🌙", day: "Thu", defaultChef: null, defaultHelper: null, menu: "" },
+  { id: "fri-breakfast", label: "Friday Breakfast", icon: "🌅", day: "Fri", infoOnly: true },
+  { id: "fri-lunch", label: "Friday Lunch", icon: "☀️", day: "Fri", infoOnly: true },
+  { id: "fri-dinner", hasHelper2: true, label: "Friday Dinner", icon: "🌙", day: "Fri", defaultChef: "James Carleton", defaultChefPhone: "408838192367", defaultHelper: "Emma Carleton", defaultHelperPhone: "4086470528", menu: "TBD" },
   { id: "fri-dessert", label: "Friday Dessert", icon: "🍰", day: "Fri", defaultChef: null, defaultHelper: null, menu: "" },
   { id: "sat-breakfast", hasHelper2: true, label: "Saturday Breakfast", icon: "🌅", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
   { id: "sat-lunch", hasHelper2: true, label: "Saturday Lunch", icon: "☀️", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
@@ -130,11 +133,11 @@ async function sbFetch(path, options = {}) {
 // Build in-memory appState shape from Supabase rows
 function buildAppState(mealRows, claimRows) {
   // Meals: start from defaults, overlay DB rows
-  const meals = Object.fromEntries(MEALS.map(m => [
+  const meals = Object.fromEntries(MEALS.filter(m => !m.infoOnly).map(m => [
     m.id,
     {
-      chef: m.defaultChef ? { name: m.defaultChef, phone: "seed" } : null,
-      helper: m.defaultHelper ? { name: m.defaultHelper, phone: "seed" } : null,
+      chef: m.defaultChef ? { name: m.defaultChef, phone: m.defaultChefPhone || "seed" } : null,
+      helper: m.defaultHelper ? { name: m.defaultHelper, phone: m.defaultHelperPhone || "seed" } : null,
       helper2: null,
       menu: m.menu,
     }
@@ -349,9 +352,9 @@ function App() {
   const handleMealSignup = async (mealId, role) => {
     if (!appState) return;
     const slot = appState.meals[mealId];
-    const isChef = slot.chef && (slot.chef.phone === currentUser.phone || slot.chef.name === currentUser.name);
-    const isHelper = slot.helper && (slot.helper.phone === currentUser.phone || slot.helper.name === currentUser.name);
-    const isHelper2 = slot.helper2 && (slot.helper2.phone === currentUser.phone || slot.helper2.name === currentUser.name);
+    const isChef = slot.chef && slot.chef.phone === currentUser.phone;
+    const isHelper = slot.helper && slot.helper.phone === currentUser.phone;
+    const isHelper2 = slot.helper2 && slot.helper2.phone === currentUser.phone;
     const iAmAnything = isChef || isHelper || isHelper2;
 
     let newSlot = { ...slot };
@@ -412,7 +415,7 @@ function App() {
   const handleClaim = async (gearId) => {
     if (!appState) return;
     const existing = appState.claims[gearId] || [];
-    const isMine = existing.some(c => c.phone === currentUser.phone || c.name === currentUser.name);
+    const isMine = existing.some(c => c.phone === currentUser.phone);
 
     if (isMine) {
       const updated = existing.filter(c => c.phone !== currentUser.phone);
@@ -710,14 +713,11 @@ function App() {
 
               {/* Meal status card */}
               {(() => {
-                const myChefMeals = MEALS.filter(m => {
-                  const c = appState.meals[m.id]?.chef;
-                  return c && (c.phone === currentUser.phone || c.name === currentUser.name);
-                });
-                const myHelperMeals = MEALS.filter(m => {
-                  const h = appState.meals[m.id]?.helper;
-                  return h && (h.phone === currentUser.phone || h.name === currentUser.name);
-                });
+                const myChefMeals = MEALS.filter(m => !m.infoOnly).filter(m => appState.meals[m.id]?.chef?.phone === currentUser.phone);
+                const myHelperMeals = MEALS.filter(m => !m.infoOnly).filter(m =>
+                  appState.meals[m.id]?.helper?.phone === currentUser.phone ||
+                  appState.meals[m.id]?.helper2?.phone === currentUser.phone
+                );
                 const totalMySigned = myChefMeals.length + myHelperMeals.length;
                 const needsMore = totalMySigned < 1;
 
@@ -774,7 +774,7 @@ function App() {
 
               {/* Gear claim status */}
               {(() => {
-                const myClaims = GROUP_GEAR.filter(g => (appState.claims[g.id]||[]).some(c => c.phone === currentUser.phone || c.name === currentUser.name));
+                const myClaims = GROUP_GEAR.filter(g => (appState.claims[g.id]||[]).some(c => c.phone === currentUser.phone));
                 const unclaimed = GROUP_GEAR.filter(g => (appState.claims[g.id]||[]).length === 0);
                 return (
                   <div className="card">
@@ -934,7 +934,7 @@ function App() {
               <div className="card" style={{ padding: 16 }}>
                 <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.1em", color: "var(--muted)", textTransform: "uppercase", marginBottom: 4 }}>Sites Reserved</div>
                 <div style={{ fontSize: 14, color: "var(--muted)", marginBottom: 12, lineHeight: 1.5 }}>
-                  Each family can choose a spot on any of these sites.
+                  Use these names at the camp gate to check-in. Your tent spot will vary based on spaces left at that point.
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                   {CAMP_INFO.sites.map(s => (
@@ -1039,10 +1039,10 @@ function App() {
                 ))}
               </div>
 
-              {["Fri","Sat","Sun","Any"].map(day => {
+              {["Thu","Fri","Sat","Sun","Any"].map(day => {
                 const dayMeals = MEALS.filter(m => m.day === day);
                 if (!dayMeals.length) return null;
-                const dayLabels = { Fri: "Friday", Sat: "Saturday", Sun: "Sunday", Any: "Anytime" };
+                const dayLabels = { Thu: "Thursday", Fri: "Friday", Sat: "Saturday", Sun: "Sunday", Any: "Anytime" };
                 return (
                   <div key={day}>
                     <div className="display" style={{ fontSize: 14, fontWeight: 600, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8, marginLeft: 2 }}>
@@ -1051,10 +1051,22 @@ function App() {
                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                       {dayMeals.map(meal => {
                         const slot = appState.meals[meal.id];
-                        const iAmChef = slot?.chef && (slot.chef.phone === currentUser.phone || slot.chef.name === currentUser.name);
-                        const iAmHelper = slot?.helper && (slot.helper.phone === currentUser.phone || slot.helper.name === currentUser.name);
-                        const iAmHelper2 = slot?.helper2 && (slot.helper2.phone === currentUser.phone || slot.helper2.name === currentUser.name);
+                        const iAmChef = slot?.chef && slot.chef.phone === currentUser.phone;
+                        const iAmHelper = slot?.helper && slot.helper.phone === currentUser.phone;
+                        const iAmHelper2 = slot?.helper2 && slot.helper2.phone === currentUser.phone;
                         const isEditingMenu = menuEdit[meal.id] !== undefined;
+
+                        if (meal.infoOnly) {
+                          return (
+                            <div key={meal.id} className="card" style={{ padding: 14, display: "flex", alignItems: "center", gap: 10, background: "#f8f6f2" }}>
+                              <span style={{ fontSize: 20 }}>{meal.icon}</span>
+                              <div>
+                                <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>{meal.label}</div>
+                                <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2, fontStyle: "italic" }}>No group meal — provide your own.</div>
+                              </div>
+                            </div>
+                          );
+                        }
 
                         return (
                           <div key={meal.id} className="card" style={{ padding: 14 }}>
@@ -1103,7 +1115,7 @@ function App() {
                                 <div style={{ display: "grid", gridTemplateColumns: roleSet.length === 3 ? "1fr 1fr 1fr" : "1fr 1fr", gap: 8 }}>
                                   {roleSet.map(([role, label]) => {
                                     const person = slot?.[role];
-                                    const isMine = person && (person.phone === currentUser.phone || person.name === currentUser.name);
+                                    const isMine = person && person.phone === currentUser.phone;
                                     const isSeed = person?.phone === "seed";
                                     const taken = person && !isMine && !isSeed;
                                     return (
@@ -1150,7 +1162,7 @@ function App() {
                 </div>
                 {gearList.map((g, i) => {
                   const claimers = appState.claims[g.id] || [];
-                  const isMine = claimers.some(c => c.phone === currentUser.phone || c.name === currentUser.name);
+                  const isMine = claimers.some(c => c.phone === currentUser.phone);
                   return (
                     <div key={g.id} style={{ padding: "11px 16px", borderBottom: i < gearList.length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
                       <div style={{ flex: 1 }}>
@@ -1160,8 +1172,8 @@ function App() {
                             {claimers.map(c => (
                               <span key={c.phone} style={{
                                 display: "inline-block", fontSize: 14, fontWeight: 600,
-                                background: (c.phone === currentUser.phone || c.name === currentUser.name) ? "var(--pine)" : "#e8f4ea",
-                                color: (c.phone === currentUser.phone || c.name === currentUser.name) ? "white" : "var(--pine)",
+                                background: c.phone === currentUser.phone ? "var(--pine)" : "#e8f4ea",
+                                color: c.phone === currentUser.phone ? "white" : "var(--pine)",
                                 borderRadius: 20, padding: "2px 8px",
                               }}>✓ {c.name}</span>
                             ))}
@@ -1344,7 +1356,7 @@ function App() {
                 <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)" }}>
                   <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>Meal Sign-ups</div>
                 </div>
-                {MEALS.map((m, i) => {
+                {MEALS.filter(m => !m.infoOnly).map((m, i) => {
                   const slot = appState.meals[m.id];
                   const rosterNames = ["—", ...ROSTER.filter(r => r.status === "confirmed" && r.type !== "guest").map(r => r.name)];
                   const roles = m.noChef
