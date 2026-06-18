@@ -48,30 +48,30 @@ const CAMP_INFO = {
 };
 
 const ROSTER = [
-  { name: "James Carleton", phone: "408838192367", type: "adult", adults: 4, kids: 0, status: "confirmed", admin: true, parentPhone: null },
-  { name: "Ivan Russo", phone: "4084216032", type: "adult", adults: 3, kids: 0, status: "confirmed", admin: false },
-  { name: "Alex Chow", phone: "4088345841", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false },
-  { name: "Philip Nemec", phone: "4088298165", type: "adult", adults: 1, kids: 1, status: "confirmed", admin: false },
-  { name: "Cole Holmgren", phone: "6513738872", type: "adult", adults: 1, kids: 4, status: "confirmed", admin: false },
-  { name: "Andrew Lowd", phone: "4084994152", type: "adult", adults: 1, kids: 2, status: "confirmed", admin: false },
-  { name: "Steven Feldmeyer", phone: "4084831670", type: "adult", adults: 1, kids: 2, status: "confirmed", admin: false },
-  { name: "Aaron Teixeira", phone: "4086741790", type: "adult", adults: 3, kids: 0, status: "confirmed", admin: false },
-  { name: "Scott Jennings", phone: "5712719224", type: "adult", adults: 1, kids: 2, status: "confirmed", admin: false },
-  { name: "Dave Carlsen", phone: "4086219257", type: "adult", adults: 3, kids: 2, status: "confirmed", admin: false },
-  { name: "Eric Ritchey", phone: "4083403564", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false },
-  { name: "Peter Cook", phone: "5104272615", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false },
-  { name: "Ben Quimby", phone: "9102739103", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
-  { name: "Joe Bass", phone: "8054231417", type: "adult", adults: 2, kids: 0, status: "confirmed", admin: false },
-  { name: "Gria PA", phone: "4088900824", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
-  { name: "Russ Drews", phone: "4084774235", type: "adult", adults: 0, kids: 0, status: "invited", admin: false },
-  { name: "Emma Carleton", phone: "4086470528", type: "subuser", adults: 0, kids: 0, status: "confirmed", admin: false, parentPhone: "408838192367" },
+  { name: "James Carleton", phone: "5cd3222fcc8bd4eedff967f5b0d135357db8c0b0918ccdb9c06550afacc32639", dbPhone: "408838192367", type: "adult", adults: 4, kids: 0, status: "confirmed", admin: true, parentPhone: null },
+  { name: "Ivan Russo", phone: "af726d265656a8231f2677f6cb90b536232782ed120ceccd066bd2b26c4add6a", dbPhone: "4084216032", type: "adult", adults: 3, kids: 0, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Alex Chow", phone: "aa503dcf7a47b0e5a46379fd1672b3df7adc6e4b772c734b12d0812d63112f2c", dbPhone: "4088345841", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Philip Nemec", phone: "21286c763b2d07df3ebc93568619f29d406829a92ceb862f97f1f94d7930b0e8", dbPhone: "4088298165", type: "adult", adults: 1, kids: 1, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Cole Holmgren", phone: "b8e8f2ad216f1179fa4bffce54fa6bcabfd0d6e56b207615811a6b66e9eb936c", dbPhone: "6513738872", type: "adult", adults: 1, kids: 4, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Andrew Lowd", phone: "654c9836d9175e401d26279a831242b62cc9a65f60907a9da36426d2b03e5e90", dbPhone: "4084994152", type: "adult", adults: 1, kids: 2, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Steven Feldmeyer", phone: "6c03267bd4ff862d16eaad07f7b0f71fe54ab6d17be6960ff542fe89ba8ff8aa", dbPhone: "4084831670", type: "adult", adults: 1, kids: 2, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Aaron Teixeira", phone: "82d86c9f45610c85c28e55d075db0d64cc41a6dabf275a0c130788e3a8d3fbb0", dbPhone: "4086741790", type: "adult", adults: 3, kids: 0, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Scott Jennings", phone: "7cf61854977f61746334d09048d32ca37de25438d40ade35af8b68a1cfa9670e", dbPhone: "5712719224", type: "adult", adults: 1, kids: 2, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Dave Carlsen", phone: "57cd89565193987ca3e06c9f6b8f96bf3ba2c927fe21fd9e2388cad97c6326be", dbPhone: "4086219257", type: "adult", adults: 3, kids: 2, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Eric Ritchey", phone: "fcddad750170f321f4700d9c8ed62c3b01e28afdba2c358fee42bf86ad4550d2", dbPhone: "4083403564", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Peter Cook", phone: "2dcc9942b792a28aaa38a780b1ddc1eab49d14e692574ef70fc117bf025281c2", dbPhone: "5104272615", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Ben Quimby", phone: "409a8039a8ab06adf54d6ad9c43a4a5be20a8a75c25d3fddacff7ca15e122da6", dbPhone: "9102739103", type: "adult", adults: 0, kids: 0, status: "invited", admin: false, parentPhone: null },
+  { name: "Joe Bass", phone: "3d36f6726ef1ec26bf1055be301e564b1da131c7f21fe78cf5a9e1084a1ec820", dbPhone: "8054231417", type: "adult", adults: 2, kids: 0, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Gria PA", phone: "76d5dcc9999105d8275caace187f92f7a9f1ed8ec9e45aeb7f66a8d3f5bea1c6", dbPhone: "4088900824", type: "adult", adults: 0, kids: 0, status: "invited", admin: false, parentPhone: null },
+  { name: "Russ Drews", phone: "f30b7a7e7c4e5e9157346679c4fc7999b1751682934ee32989583381c3b3774a", dbPhone: "4084774235", type: "adult", adults: 0, kids: 0, status: "invited", admin: false, parentPhone: null },
+  { name: "Emma Carleton", phone: "cbcaf9b04e2149a7d3d1202f64c10e92649f1a1ba2410a0950a27c1f91adb313", dbPhone: "4086470528", type: "subuser", adults: 0, kids: 0, status: "confirmed", admin: false, parentPhone: "5cd3222fcc8bd4eedff967f5b0d135357db8c0b0918ccdb9c06550afacc32639" },
 ];
 
 const MEALS = [
   { id: "thu-dinner", hasHelper2: true, label: "Thursday Dinner", icon: "🌙", day: "Thu", defaultChef: null, defaultHelper: null, menu: "" },
   { id: "fri-breakfast", label: "Friday Breakfast", icon: "🌅", day: "Fri", defaultChef: null, defaultHelper: null, menu: "" },
   { id: "fri-lunch", label: "Friday Lunch", icon: "☀️", day: "Fri", infoOnly: true, infoNote: "Planning to drive out for pizza — or bring your own meal." },
-  { id: "fri-dinner", hasHelper2: true, label: "Friday Dinner", icon: "🌙", day: "Fri", defaultChef: "James Carleton", defaultChefPhone: "408838192367", defaultHelper: "Emma Carleton", defaultHelperPhone: "4086470528", menu: "TBD" },
+  { id: "fri-dinner", hasHelper2: true, label: "Friday Dinner", icon: "🌙", day: "Fri", defaultChef: "James Carleton", defaultHelper: "Emma Carleton", menu: "TBD" },
   { id: "fri-dessert", label: "Friday Dessert", icon: "🍰", day: "Fri", defaultChef: null, defaultHelper: null, menu: "" },
   { id: "sat-breakfast", hasHelper2: true, label: "Saturday Breakfast", icon: "🌅", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
   { id: "sat-lunch", hasHelper2: true, label: "Saturday Lunch", icon: "☀️", day: "Sat", defaultChef: null, defaultHelper: null, menu: "" },
@@ -136,8 +136,8 @@ function buildAppState(mealRows, claimRows) {
   const meals = Object.fromEntries(MEALS.filter(m => !m.infoOnly).map(m => [
     m.id,
     {
-      chef: m.defaultChef ? { name: m.defaultChef, phone: m.defaultChefPhone || "seed" } : null,
-      helper: m.defaultHelper ? { name: m.defaultHelper, phone: m.defaultHelperPhone || "seed" } : null,
+      chef: m.defaultChef ? { name: m.defaultChef, phone: ROSTER.find(r=>r.name===m.defaultChef)?.dbPhone || "seed" } : null,
+      helper: m.defaultHelper ? { name: m.defaultHelper, phone: ROSTER.find(r=>r.name===m.defaultHelper)?.dbPhone || "seed" } : null,
       helper2: null,
       menu: m.menu,
     }
@@ -267,8 +267,6 @@ function App() {
         const found = ROSTER.find(p => p.phone === saved);
         if (found) {
           setCurrentUser(found);
-          setRawPhone(saved);
-          setPhoneInput(formatPhone(saved));
           setScreen("app");
         }
       }
@@ -292,10 +290,10 @@ function App() {
           if (saved.personal) setGearListPersonal(saved.personal);
         }
         const payMap = {};
-        paymentRows.forEach(r => { payMap[r.phone] = r.paid; });
+        paymentRows.forEach(r => { const rUser = ROSTER.find(u => u.dbPhone === r.phone); if(rUser) payMap[rUser.phone] = r.paid; });
         setPayments(payMap);
         const arrMap = {};
-        arrivalRows.forEach(r => { arrMap[r.phone] = r.day; });
+        arrivalRows.forEach(r => { const rUser = ROSTER.find(u => u.dbPhone === r.phone); if(rUser) arrMap[rUser.phone] = r.day; });
         setAllArrivals(arrMap);
       } catch (e) {
         const msg = e.message || String(e);
@@ -325,19 +323,25 @@ function App() {
   };
 
   const handleLogin = async () => {
-    const found = ROSTER.find(p => p.phone === rawPhone);
+    // Hash the typed phone before comparing to stored hashes
+    const encoder = new TextEncoder();
+    const data = encoder.encode(rawPhone);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashedInput = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+    const found = ROSTER.find(p => p.phone === hashedInput);
     if (found) {
       setCurrentUser(found);
       setScreen("app");
       setPage(0);
       setLoginError("");
       // Remember phone in localStorage for auto-login
-      try { localStorage.setItem("camp-phone", rawPhone); } catch(e) {}
+      try { localStorage.setItem("camp-phone", hashedInput); } catch(e) {}
       // Load this user's personal checklist and arrival day from Supabase
       try {
         const [checkRows, arrRows] = await Promise.all([
-          sbFetch(`personal_checks?user_phone=eq.${found.phone}&select=item,checked`),
-          sbFetch(`arrival_day?phone=eq.${found.phone}&select=day`).catch(() => []),
+          sbFetch(`personal_checks?user_phone=eq.${found.dbPhone}&select=item,checked`),
+          sbFetch(`arrival_day?phone=eq.${found.dbPhone}&select=day`).catch(() => []),
         ]);
         const checks = {};
         checkRows.forEach(r => { if (r.checked) checks[r.item] = true; });
@@ -352,9 +356,9 @@ function App() {
   const handleMealSignup = async (mealId, role) => {
     if (!appState) return;
     const slot = appState.meals[mealId];
-    const isChef = slot.chef && slot.chef.phone === currentUser.phone;
-    const isHelper = slot.helper && slot.helper.phone === currentUser.phone;
-    const isHelper2 = slot.helper2 && slot.helper2.phone === currentUser.phone;
+    const isChef = slot.chef && slot.chef.phone === currentUser.dbPhone;
+    const isHelper = slot.helper && slot.helper.phone === currentUser.dbPhone;
+    const isHelper2 = slot.helper2 && slot.helper2.phone === currentUser.dbPhone;
     const iAmAnything = isChef || isHelper || isHelper2;
 
     let newSlot = { ...slot };
@@ -363,7 +367,7 @@ function App() {
       if (isChef) { newSlot.chef = null; showToast("Removed as chef", "info"); }
       else if (slot.chef && !isChef) { showToast("Chef spot is taken!", "error"); return; }
       else {
-        newSlot.chef = { name: currentUser.name, phone: currentUser.phone };
+        newSlot.chef = { name: currentUser.name, phone: currentUser.dbPhone };
         if (isHelper) newSlot.helper = null;
         if (isHelper2) newSlot.helper2 = null;
         showToast(`You're the chef for ${MEALS.find(m=>m.id===mealId).label}! 🍳`);
@@ -372,7 +376,7 @@ function App() {
       if (isHelper) { newSlot.helper = null; showToast("Removed as helper", "info"); }
       else if (slot.helper && !isHelper) { showToast("Helper spot is taken!", "error"); return; }
       else {
-        newSlot.helper = { name: currentUser.name, phone: currentUser.phone };
+        newSlot.helper = { name: currentUser.name, phone: currentUser.dbPhone };
         if (isChef) newSlot.chef = null;
         if (isHelper2) newSlot.helper2 = null;
         showToast(`You're the helper for ${MEALS.find(m=>m.id===mealId).label}! 👨‍🍳`);
@@ -381,7 +385,7 @@ function App() {
       if (isHelper2) { newSlot.helper2 = null; showToast("Removed as helper 2", "info"); }
       else if (slot.helper2 && !isHelper2) { showToast("Helper 2 spot is taken!", "error"); return; }
       else {
-        newSlot.helper2 = { name: currentUser.name, phone: currentUser.phone };
+        newSlot.helper2 = { name: currentUser.name, phone: currentUser.dbPhone };
         if (isChef) newSlot.chef = null;
         if (isHelper) newSlot.helper = null;
         showToast(`You're helper 2 for ${MEALS.find(m=>m.id===mealId).label}!`);
@@ -415,7 +419,7 @@ function App() {
   const handleClaim = async (gearId) => {
     if (!appState) return;
     const existing = appState.claims[gearId] || [];
-    const isMine = existing.some(c => c.phone === currentUser.phone);
+    const isMine = existing.some(c => c.phone === currentUser.dbPhone);
 
     if (isMine) {
       const updated = existing.filter(c => c.phone !== currentUser.phone);
@@ -423,7 +427,7 @@ function App() {
       showToast("Removed your claim", "info");
       try {
         await sbFetch(
-          `gear_claims?gear_id=eq.${gearId}&user_phone=eq.${currentUser.phone}`,
+          `gear_claims?gear_id=eq.${gearId}&user_phone=eq.${currentUser.dbPhone}`,
           { method: "DELETE", prefer: "return=minimal" }
         );
       } catch (e) { console.error("Claim delete failed", e); }
@@ -434,7 +438,7 @@ function App() {
       try {
         await sbFetch("gear_claims", {
           method: "POST",
-          body: JSON.stringify({ gear_id: gearId, user_name: currentUser.name, user_phone: currentUser.phone }),
+          body: JSON.stringify({ gear_id: gearId, user_name: currentUser.name, user_phone: currentUser.dbPhone }),
         });
       } catch (e) { console.error("Claim insert failed", e); }
     }
@@ -448,11 +452,11 @@ function App() {
         await sbFetch("personal_checks", {
           method: "POST",
           prefer: "resolution=merge-duplicates,return=representation",
-          body: JSON.stringify({ user_phone: currentUser.phone, item, checked: true }),
+          body: JSON.stringify({ user_phone: currentUser.dbPhone, item, checked: true }),
         });
       } else {
         await sbFetch(
-          `personal_checks?user_phone=eq.${currentUser.phone}&item=eq.${encodeURIComponent(item)}`,
+          `personal_checks?user_phone=eq.${currentUser.dbPhone}&item=eq.${encodeURIComponent(item)}`,
           { method: "DELETE", prefer: "return=minimal" }
         );
       }
@@ -494,10 +498,10 @@ function App() {
         await sbFetch("arrival_day", {
           method: "POST",
           prefer: "resolution=merge-duplicates,return=representation",
-          body: JSON.stringify({ phone: currentUser.phone, day: newDay }),
+          body: JSON.stringify({ phone: currentUser.dbPhone, day: newDay }),
         });
       } else {
-        await sbFetch(`arrival_day?phone=eq.${currentUser.phone}`, { method: "DELETE", prefer: "return=minimal" });
+        await sbFetch(`arrival_day?phone=eq.${currentUser.dbPhone}`, { method: "DELETE", prefer: "return=minimal" });
       }
     } catch (e) { console.error("Arrival save failed", e); }
   };
@@ -508,7 +512,7 @@ function App() {
       await sbFetch("payments", {
         method: "POST",
         prefer: "resolution=merge-duplicates,return=representation",
-        body: JSON.stringify({ phone, paid, paid_at: paid ? new Date().toISOString() : null }),
+        body: JSON.stringify({ phone: ROSTER.find(r=>r.phone===phone)?.dbPhone || phone, paid, paid_at: paid ? new Date().toISOString() : null }),
       });
     } catch (e) { console.error("Payment save failed", e); showToast("Save failed", "error"); }
   };
@@ -713,10 +717,10 @@ function App() {
 
               {/* Meal status card */}
               {(() => {
-                const myChefMeals = MEALS.filter(m => !m.infoOnly).filter(m => appState.meals[m.id]?.chef?.phone === currentUser.phone);
+                const myChefMeals = MEALS.filter(m => !m.infoOnly).filter(m => appState.meals[m.id]?.chef?.phone === currentUser.dbPhone);
                 const myHelperMeals = MEALS.filter(m => !m.infoOnly).filter(m =>
-                  appState.meals[m.id]?.helper?.phone === currentUser.phone ||
-                  appState.meals[m.id]?.helper2?.phone === currentUser.phone
+                  appState.meals[m.id]?.helper?.phone === currentUser.dbPhone ||
+                  appState.meals[m.id]?.helper2?.phone === currentUser.dbPhone
                 );
                 const totalMySigned = myChefMeals.length + myHelperMeals.length;
                 const needsMore = totalMySigned < 1;
@@ -774,7 +778,7 @@ function App() {
 
               {/* Gear claim status */}
               {(() => {
-                const myClaims = GROUP_GEAR.filter(g => (appState.claims[g.id]||[]).some(c => c.phone === currentUser.phone));
+                const myClaims = GROUP_GEAR.filter(g => (appState.claims[g.id]||[]).some(c => c.phone === currentUser.dbPhone));
                 const unclaimed = GROUP_GEAR.filter(g => (appState.claims[g.id]||[]).length === 0);
                 return (
                   <div className="card">
@@ -1051,9 +1055,9 @@ function App() {
                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                       {dayMeals.map(meal => {
                         const slot = appState.meals[meal.id];
-                        const iAmChef = slot?.chef && slot.chef.phone === currentUser.phone;
-                        const iAmHelper = slot?.helper && slot.helper.phone === currentUser.phone;
-                        const iAmHelper2 = slot?.helper2 && slot.helper2.phone === currentUser.phone;
+                        const iAmChef = slot?.chef && slot.chef.phone === currentUser.dbPhone;
+                        const iAmHelper = slot?.helper && slot.helper.phone === currentUser.dbPhone;
+                        const iAmHelper2 = slot?.helper2 && slot.helper2.phone === currentUser.dbPhone;
                         const isEditingMenu = menuEdit[meal.id] !== undefined;
 
                         if (meal.infoOnly) {
@@ -1117,7 +1121,7 @@ function App() {
                                 <div style={{ display: "grid", gridTemplateColumns: roleSet.length === 3 ? "1fr 1fr 1fr" : "1fr 1fr", gap: 8 }}>
                                   {roleSet.map(([role, label]) => {
                                     const person = slot?.[role];
-                                    const isMine = person && person.phone === currentUser.phone;
+                                    const isMine = person && person.phone === currentUser.dbPhone;
                                     const isSeed = person?.phone === "seed";
                                     const taken = person && !isMine && !isSeed;
                                     return (
@@ -1164,7 +1168,7 @@ function App() {
                 </div>
                 {gearList.map((g, i) => {
                   const claimers = appState.claims[g.id] || [];
-                  const isMine = claimers.some(c => c.phone === currentUser.phone);
+                  const isMine = claimers.some(c => c.phone === currentUser.dbPhone);
                   return (
                     <div key={g.id} style={{ padding: "11px 16px", borderBottom: i < gearList.length-1 ? "1px solid var(--border)" : "none", display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
                       <div style={{ flex: 1 }}>
@@ -1174,8 +1178,8 @@ function App() {
                             {claimers.map(c => (
                               <span key={c.phone} style={{
                                 display: "inline-block", fontSize: 14, fontWeight: 600,
-                                background: c.phone === currentUser.phone ? "var(--pine)" : "#e8f4ea",
-                                color: c.phone === currentUser.phone ? "white" : "var(--pine)",
+                                background: c.phone === currentUser.dbPhone ? "var(--pine)" : "#e8f4ea",
+                                color: c.phone === currentUser.dbPhone ? "white" : "var(--pine)",
                                 borderRadius: 20, padding: "2px 8px",
                               }}>✓ {c.name}</span>
                             ))}
@@ -1307,10 +1311,10 @@ function App() {
                                 await sbFetch("arrival_day", {
                                   method: "POST",
                                   prefer: "resolution=merge-duplicates,return=representation",
-                                  body: JSON.stringify({ phone: r.phone, day: newDay }),
+                                  body: JSON.stringify({ phone: r.dbPhone, day: newDay }),
                                 });
                               } else {
-                                await sbFetch(`arrival_day?phone=eq.${r.phone}`, { method: "DELETE", prefer: "return=minimal" });
+                                await sbFetch(`arrival_day?phone=eq.${r.dbPhone}`, { method: "DELETE", prefer: "return=minimal" });
                               }
                             } catch(e) { showToast("Save failed", "error"); }
                           }} style={{
@@ -1341,11 +1345,11 @@ function App() {
                         <span className="tag tag-ocean">{r.adults + r.kids} ppl</span>
                       </div>
                       <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 2 }}>
-                        📱 {formatPhone(r.phone)} · {r.adults} adult{r.adults!==1?"s/teens":"/teen"}, {r.kids} kid{r.kids!==1?"s":""}
+                        📱 {formatPhone(r.dbPhone)} · {r.adults} adult{r.adults!==1?"s/teens":"/teen"}, {r.kids} kid{r.kids!==1?"s":""}
                       </div>
                       {subs.map(s => (
                         <div key={s.phone} style={{ fontSize: 14, color: "var(--ocean)", marginTop: 4 }}>
-                          ↳ {s.name} · 📱 {formatPhone(s.phone)}
+                          ↳ {s.name} · 📱 {formatPhone(s.dbPhone)}
                         </div>
                       ))}
                     </div>
