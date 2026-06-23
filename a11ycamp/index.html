@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A11Y Camp 2026 — UX Takeaways</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #24292F;
+    padding: 2px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .deck {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .slide {
+    background: #F6F8FA;
+    aspect-ratio: 4/3;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .slide-bar { height: 4px; background: #24292F; flex-shrink: 0; }
+
+  .slide-inner {
+    padding: 6% 7%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .slide-num {
+    font-size: clamp(11px, 1.2vw, 13px);
+    font-weight: 700;
+    color: #24292F;
+    margin-bottom: 5%;
+    flex-shrink: 0;
+  }
+
+  .slide-headline {
+    font-size: clamp(13px, 2.4vw, 28px);
+    font-weight: 700;
+    color: #24292F;
+    line-height: 1.35;
+    flex-grow: 1;
+  }
+
+  .slide-headline .em {
+    background: #D4E8FF;
+    color: #24292F;
+    padding: 0 3px;
+    border-radius: 3px;
+  }
+
+  .slide-directive {
+    font-size: clamp(11px, 1.4vw, 16px);
+    font-weight: 400;
+    color: #24292F;
+    line-height: 1.45;
+    margin-top: 4%;
+    flex-shrink: 0;
+  }
+
+  .slide-source {
+    font-size: clamp(11px, 1.1vw, 13px);
+    color: #57606A;
+    font-style: italic;
+    margin-top: 3%;
+    flex-shrink: 0;
+  }
+
+  .slide-source a {
+    color: #0969DA;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .slide-source a:hover { color: #0550AE; }
+
+  .slide-source a:focus-visible {
+    outline: 2px solid #0969DA;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .slide-footer-row {
+    border-top: 1px solid #D0D7DE;
+    margin-top: 3%;
+    padding-top: 2.5%;
+    flex-shrink: 0;
+  }
+
+  .slide-footer {
+    font-size: clamp(11px, 0.85vw, 12px);
+    color: #57606A;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">8 A11Y Camp 2026 takeaways for UX designers</h1>
+
+<div class="deck">
+
+  <div class="slide">
+    <div class="slide-bar"></div>
+    <div class="slide-inner">
+      <div class="slide-num">01 / 08</div>
+      <div class="slide-headline" role="heading" aria-level="2">AI is generating <span class="em">inaccessible code</span> at scale and that's a design problem too.</div>
+      <div class="slide-directive">Write accessibility requirements into your design specs. They're now AI training data.</div>
+      <div class="slide-source">LinkedIn — <a href="https://www.linkedin.com/in/carolscott/">Carol Scott</a> &amp; <a href="https://www.linkedin.com/in/liuamyj/">Amy Liu</a></div>
+      <div class="slide-footer-row"><span class="slide-footer">Bay Area Accessibility Camp · May 2026</span></div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-bar"></div>
+    <div class="slide-inner">
+      <div class="slide-num">02 / 08</div>
+      <div class="slide-headline" role="heading" aria-level="2">The accessibility <span class="em">bug cycle</span> is backwards. Catch it in design, not after launch.</div>
+      <div class="slide-directive">Make accessibility criteria part of your definition of done, not a post-launch checklist.</div>
+      <div class="slide-source">LinkedIn — <a href="https://www.linkedin.com/in/carolscott/">Carol Scott</a> &amp; <a href="https://www.linkedin.com/in/liuamyj/">Amy Liu</a></div>
+      <div class="slide-footer-row"><span class="slide-footer">Bay Area Accessibility Camp · May 2026</span></div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-bar"></div>
+    <div class="slide-inner">
+      <div class="slide-num">03 / 08</div>
+      <div class="slide-headline" role="heading" aria-level="2">MCP lets AI agents read your <span class="em">design system</span>. Make it readable!</div>
+      <div class="slide-directive">Annotate your design system for accessibility. AI reads what you write.</div>
+      <div class="slide-source">Deque — <a href="https://www.linkedin.com/in/jmr-dev/">Jeremy Rivera</a></div>
+      <div class="slide-footer-row"><span class="slide-footer">Bay Area Accessibility Camp · May 2026</span></div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-bar"></div>
+    <div class="slide-inner">
+      <div class="slide-num">04 / 08</div>
+      <div class="slide-headline" role="heading" aria-level="2"><span class="em">Buried</span> accessibility features don't help anyone.</div>
+      <div class="slide-directive">Surface accessible features in your primary user flows, not buried in settings.</div>
+      <div class="slide-source">— <a href="https://www.linkedin.com/in/michaelallennesmith/">Michael Allen Nesmith</a></div>
+      <div class="slide-footer-row"><span class="slide-footer">Bay Area Accessibility Camp · May 2026</span></div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-bar"></div>
+    <div class="slide-inner">
+      <div class="slide-num">05 / 08</div>
+      <div class="slide-headline" role="heading" aria-level="2">"We have no disabled users" is a <span class="em">data collection failure</span>, not a fact.</div>
+      <div class="slide-directive">Recruit disabled users into your research panels. Absence of data is not absence of need.</div>
+      <div class="slide-source">— <a href="https://www.linkedin.com/in/michaelallennesmith/">Michael Allen Nesmith</a></div>
+      <div class="slide-footer-row"><span class="slide-footer">Bay Area Accessibility Camp · May 2026</span></div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-bar"></div>
+    <div class="slide-inner">
+      <div class="slide-num">06 / 08</div>
+      <div class="slide-headline" role="heading" aria-level="2">Context engineering is now a <span class="em">design skill</span>.</div>
+      <div class="slide-directive">Learn to write structured prompts and specs that give AI the right accessibility context.</div>
+      <div class="slide-source">eBay — <a href="https://www.linkedin.com/in/gouthamponnada/">Goutham Ponnada</a> &amp; <a href="https://www.linkedin.com/in/ianmcburnie/">Ian McBurnie</a></div>
+      <div class="slide-footer-row"><span class="slide-footer">Bay Area Accessibility Camp · May 2026</span></div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-bar"></div>
+    <div class="slide-inner">
+      <div class="slide-num">07 / 08</div>
+      <div class="slide-headline" role="heading" aria-level="2">Test with the right users before you commit to <span class="em">patterns</span>.</div>
+      <div class="slide-directive">Run assistive tech testing before locking in navigation patterns, not after.</div>
+      <div class="slide-source">Slack — <a href="https://www.linkedin.com/in/toddkloots/">Todd Kloots</a></div>
+      <div class="slide-footer-row"><span class="slide-footer">Bay Area Accessibility Camp · May 2026</span></div>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-bar"></div>
+    <div class="slide-inner">
+      <div class="slide-num">08 / 08</div>
+      <div class="slide-headline" role="heading" aria-level="2">Treating accessibility as a <span class="em">one-time audit</span> is a design culture problem.</div>
+      <div class="slide-directive">Push for accessibility in every sprint review, not just before launch.</div>
+      <div class="slide-source">Asana — <a href="https://www.linkedin.com/in/devonpersing/">Devon Persing</a> &amp; <a href="https://www.linkedin.com/in/andrewhedges/">Andrew Hedges</a></div>
+      <div class="slide-footer-row"><span class="slide-footer">Bay Area Accessibility Camp · May 2026</span></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
