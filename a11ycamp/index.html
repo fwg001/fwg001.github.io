@@ -5,16 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A11Y Camp 2026 — UX Takeaways</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     background: #24292F;
-    padding: 2px;
     font-family: 'Inter', sans-serif;
+    padding: 48px 2px;
   }
 
+  /* HEADER */
+  .page-header {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    padding: 0 7%;
+  }
+
+  .page-header .eyebrow {
+    font-size: 12px;
+    font-weight: 400;
+    color: #8B949E;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  .page-header h1 {
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 700;
+    color: #F0F6FC;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .page-header .intro {
+    font-size: clamp(14px, 1.6vw, 17px);
+    font-weight: 300;
+    color: #8B949E;
+    line-height: 1.6;
+  }
+
+  .page-header a {
+    color: #FFFFFF;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* SLIDES */
   .deck {
     display: flex;
     flex-direction: column;
@@ -25,11 +64,17 @@
 
   .slide {
     background: #F6F8FA;
-    aspect-ratio: 4/3;
-    min-height: 200px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+  }
+
+  .slide-subtext {
+    min-height: 2rem;
+    margin: 14px 0 24px;
+    color: #8B949E;
+    font-size: 13px;
+    line-height: 1.5;
   }
 
   .slide-bar { height: 4px; background: #24292F; flex-shrink: 0; }
@@ -108,12 +153,54 @@
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
+
+  /* FOOTER */
+  .page-footer {
+    max-width: 800px;
+    margin: 40px auto 0;
+    padding: 0 7%;
+  }
+
+  .page-footer .footer-label {
+    font-size: 12px;
+    font-weight: 400;
+    color: #8B949E;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  .page-footer h2 {
+    font-size: clamp(18px, 2.4vw, 26px);
+    font-weight: 700;
+    color: #F0F6FC;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  .page-footer .notes {
+    font-size: clamp(14px, 1.6vw, 17px);
+    font-weight: 300;
+    color: #8B949E;
+    line-height: 1.6;
+  }
 </style>
 </head>
 <body>
 
-<h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">8 A11Y Camp 2026 takeaways for UX designers</h1>
+<!-- HEADER -->
+<header class="page-header">
+  <p class="eyebrow">Bay Area Accessibility Camp · May 29 2026</p>
+  <h1>8 Takeaways for UX Designers</h1>
+  <p class="intro">This year's edition of the <a href="https://www.bayareaaccessibilitycamp.com/">Bay Area Accessibility Camp</a> included a wide range of interesting topics. It was hosted at Github headquarters in San Francisco, CA.
+  <br/><br/>Here are some of the main takeaways from my own notes, supplemented by AI transcriptions (Granola) and reformatted to slides by Claude.
+  </p>
 
+    <a href="/">-James Carleton</a>
+</header>
+
+<!-- SLIDES -->
+<main>
 <div class="deck">
 
   <div class="slide">
@@ -127,6 +214,8 @@
     </div>
   </div>
 
+  <div class="slide-subtext"></div>
+
   <div class="slide">
     <div class="slide-bar"></div>
     <div class="slide-inner">
@@ -137,6 +226,8 @@
       <div class="slide-footer-row"><span class="slide-footer">Bay Area Accessibility Camp · May 2026</span></div>
     </div>
   </div>
+
+  <div class="slide-subtext"></div>
 
   <div class="slide">
     <div class="slide-bar"></div>
@@ -149,6 +240,8 @@
     </div>
   </div>
 
+  <div class="slide-subtext"></div>
+
   <div class="slide">
     <div class="slide-bar"></div>
     <div class="slide-inner">
@@ -159,6 +252,8 @@
       <div class="slide-footer-row"><span class="slide-footer">Bay Area Accessibility Camp · May 2026</span></div>
     </div>
   </div>
+
+  <div class="slide-subtext"></div>
 
   <div class="slide">
     <div class="slide-bar"></div>
@@ -171,6 +266,8 @@
     </div>
   </div>
 
+  <div class="slide-subtext"></div>
+
   <div class="slide">
     <div class="slide-bar"></div>
     <div class="slide-inner">
@@ -181,6 +278,8 @@
       <div class="slide-footer-row"><span class="slide-footer">Bay Area Accessibility Camp · May 2026</span></div>
     </div>
   </div>
+
+  <div class="slide-subtext"></div>
 
   <div class="slide">
     <div class="slide-bar"></div>
@@ -193,6 +292,8 @@
     </div>
   </div>
 
+  <div class="slide-subtext"></div>
+
   <div class="slide">
     <div class="slide-bar"></div>
     <div class="slide-inner">
@@ -204,6 +305,17 @@
     </div>
   </div>
 
+  <div class="slide-subtext"></div>
+
 </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <p class="footer-label">Final thoughts</p>
+  <h2>Check out next year's event!</h2>
+  <p class="notes">Thanks goes to all the speakers and organizers for making this event so unique and valuable. </p>
+</footer>
+
 </body>
 </html>
