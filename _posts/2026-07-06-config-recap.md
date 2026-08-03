@@ -127,6 +127,7 @@ permalink: /blog/config-2026/
 
 <header>
   <div>
+    <div class="header-eyebrow"><a href="/">Back to Carleton design</a></div>
     <h1>Config 2026 - Recap</h1>
   </div>
 </header>
