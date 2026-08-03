@@ -12,9 +12,16 @@ permalink: /blog/config-2026/
     color: #f5f2eb;
     background: #0a0a0a;
     line-height: 1.8;
-    max-width: 1400px;
-    margin: 0 auto;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    width: 100vw;
+    max-width: none;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    min-height: 100vh;
     padding-bottom: 24px;
+    overflow-x: hidden;
   }
   .config-recap-post * { box-sizing: border-box; }
   .config-recap-post a { color: #8bbcff; text-decoration: underline; }
@@ -120,7 +127,6 @@ permalink: /blog/config-2026/
 
 <header>
   <div>
-    <div class="header-eyebrow">Figma Config 2026 · Field Notes</div>
     <h1>Config 2026 - Recap</h1>
   </div>
 </header>
@@ -167,7 +173,7 @@ permalink: /blog/config-2026/
     </div>
     <div class="photo-text">
       <span class="note-tag">The iterative conference</span>
-      <div class="note-body">Since the start, Congif has grown like crazy each year at Moscone Center in San Francicisco. Each time I return the Figma team has put so much work into building a unique experience. In <a href="https://www.carletondesign.com/2023/06/23/config/">2023</a> they made it huge, and the crowds became an issue. Then next time logistics where improved, <a href="https://www.carletondesign.com/2024/06/29/config/">2024</a> was the start of AI and the Config brand expression was everywhere. I would say 2026 was even more optimized.</div>
+      <div class="note-body">Since the start, Config has grown like crazy each year at Moscone Center in San Francicisco. Each time I return the Figma team has put so much work into building a unique experience. In <a href="https://www.carletondesign.com/2023/06/23/config/">2023</a> they made it huge, and the crowds became an issue. Then next time logistics where improved, <a href="https://www.carletondesign.com/2024/06/29/config/">2024</a> was the start of AI and the Config brand expression was everywhere. I would say 2026 was even more optimized.</div>
     </div>
     <div class="photo-text">
       <span class="note-tag">Team learning</span>
