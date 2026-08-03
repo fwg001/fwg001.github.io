@@ -159,8 +159,8 @@ permalink: /blog/config-2026/
         <img src="{{ '/assets/posts/config-recap/venue-vibes.jpg' | relative_url }}" alt="Pics of the conference center themed inside and outside of Moscone">
       </div>
       <div class="photo-caption">
-        <div class="caption-title">Friends from the office :)</div>
-        <div class="caption-sub">JPMC Payments teammates at Moscone Center</div>
+       <div class="caption-title">Fresh Config branding inside and out!</div>
+        <div class="caption-sub">Moscone Center San Francisco</div>
       </div>
     </div>
     <div class="photo-card">
@@ -168,8 +168,8 @@ permalink: /blog/config-2026/
         <img src="{{ '/assets/posts/config-recap/opening-day-lawn.jpg' | relative_url }}" alt="Group on the lawn outside the conference center">
       </div>
       <div class="photo-caption">
-        <div class="caption-title">Fresh Config branding inside and out!</div>
-        <div class="caption-sub">Moscone Center San Francisco</div>
+        <div class="caption-title">Friends from the office :)</div>
+        <div class="caption-sub">JPMC Payments teammates at Moscone Center</div>
       </div>
     </div>
     <div class="photo-text">
