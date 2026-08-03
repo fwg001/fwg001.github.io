@@ -1,7 +1,7 @@
 ---
-layout: post
+layout: none
 title: "Config 2026 - Recap"
-date: 2026-08-02
+date: 2026-07-06
 permalink: /blog/config-2026/
 ---
 
