@@ -109,7 +109,19 @@ permalink: /blog/config-2026/
   .config-recap-post .photo-text { display: flex; flex-direction: column; gap: 14px; }
   .config-recap-post .note-tag { font-family: "Space Mono", monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #e8c547; }
   .config-recap-post .note-body { font-size: 18px; line-height: 1.8; color: #aaa9a0; padding-left: 0; }
-  .config-recap-post .notes-section { padding: 40px 60px 60px; border-bottom: 1px solid #2a2a2a; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .config-recap-post .notes-section { 
+    padding: 40px 60px 60px; 
+    border-bottom: 1px solid #2a2a2a; 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 24px;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
   .config-recap-post .note-card { background: #111; border: 1px solid #252525; padding: 28px; display: flex; flex-direction: column; gap: 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
   .config-recap-post .note-title { font-family: "Playfair Display", serif; font-size: 22px; font-weight: 400; line-height: 1.2; color: #f5f2eb; }
   .config-recap-post .topic-link { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #8bbcff; text-decoration: underline; align-self: flex-start; }
@@ -117,7 +129,7 @@ permalink: /blog/config-2026/
   .config-recap-post footer { padding: 40px 60px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
   .config-recap-post .footer-sig { font-family: "Playfair Display", serif; font-style: italic; font-size: 16px; color: #7e7e76; }
   @media (max-width: 900px) {
-    .config-recap-post header, .config-recap-post .intro-strip, .config-recap-post .section-headline, .config-recap-post .photo-section, .config-recap-post .notes-section, .config-recap-post footer { padding-left: 28px; padding-right: 28px; }
+    .config-recap-post header, .config-recap-post .intro-strip, .config-recap-post .section-headline, .config-recap-post .photo-section, .config-recap-post .notes-section, .config-recap-post footer { padding-left: 30px; padding-right: 30px; }
     .config-recap-post .intro-strip { grid-template-columns: 1fr; }
     .config-recap-post .photo-layout, .config-recap-post .photo-layout.reverse { grid-template-columns: 1fr; }
     .config-recap-post .photo-layout.reverse .photo-card, .config-recap-post .photo-layout.reverse .photo-text { order: initial; }
@@ -174,7 +186,7 @@ permalink: /blog/config-2026/
     </div>
     <div class="photo-text">
       <span class="note-tag">The iterative conference</span>
-      <div class="note-body">Since the start, Config has grown like crazy each year at Moscone Center in San Francicisco. Each time I return the Figma team has put so much work into building a unique experience. In <a href="https://www.carletondesign.com/2023/06/23/config/">2023</a> they made it huge, and the crowds became an issue. Then next time logistics where improved, <a href="https://www.carletondesign.com/2024/06/29/config/">2024</a> was the start of AI and the Config brand expression was everywhere. I would say 2026 was even more optimized.</div>
+      <div class="note-body">Since the start, Config has grown like crazy each year at Moscone Center in San Francicisco. Each time I return the Figma team has put so much work into building a unique experience that feels fresh and intentional. It's a masterclass in conference design.</div>
     </div>
     <div class="photo-text">
       <span class="note-tag">Team learning</span>
@@ -197,7 +209,7 @@ permalink: /blog/config-2026/
     </div>
     <div class="photo-text">
       <span class="note-tag">Escape to nature</span>
-      <div class="note-body">My new favorite way to start a tech conference - escape tech and explore nature instead! <a href="https://www.linkedin.com/in/bencallahan/">Ben Callahan</a> organized a group hike through majestic redwoods at <a href="https://www.nps.gov/muwo/">Muir Woods National Monument</a>. These huge trees don't have deep roots like you would expect. Instead they have shallow roots that are interconnected so the trees can hold each other steady - a wonderful lesson for us.<br><br>Thanks to Ben (with sponsors <a href="https://sparkbox.com">Sparkbox</a>, <a href="https://southleft.com/ai-design-systems/">Southleft</a>, and <a href="https://aianddesign.systems">Brad Frost's AI course</a>) for providing a great event. If you're in the design system space, check out the <a href="https://bencallahan.com/redwoods">Redwoods community</a>.</div>
+      <div class="note-body">My new favorite way to start a tech conference - escape tech and explore nature instead! <a href="https://www.linkedin.com/in/bencallahan/">Ben Callahan</a> organized a great group hike through the redwoods. Being surrounded by 2,000-year-old trees puts everything in perspective.</div>
     </div>
   </div>
 </div>
@@ -212,14 +224,14 @@ permalink: /blog/config-2026/
     <div class="photo-frame">
       <img src="{{ '/assets/posts/config-recap/anarchy.jpg' | relative_url }}" alt="DS Anarchy slides">
     </div>
-    <div class="note-body">I loved this talk by <a href="https://www.linkedin.com/in/laurenloprete/">Lauren LoPrete</a>. It told a great story using punk music venues to teach principles for fostering creativity.
+    <div class="note-body">I loved this talk by <a href="https://www.linkedin.com/in/laurenloprete/">Lauren LoPrete</a>. It told a great story using punk music venues to teach principles for fostering creativity within structure. Key takeaways:
       <ul>
-        <li>Lauren says, “I didn’t go to art school to become a cop,” and she’s always cared more about building the conditions for great work than policing who gets to make it.</li>
-        <li>Design systems work has drifted into compliance work — teams meant to lower barriers and raise quality have started acting like gatekeepers, adding stricter standards, more approval gates, and more process.</li>
-        <li>AI tools are democratizing production the way the Xerox machine did for punk zines and flyers — when the means of production become this accessible, the scene grows, and you can’t govern your way out of that.</li>
-        <li>Her framework — “design systems anarchy”: modeled on how punk scenes built infrastructure for creative chaos instead of containing it; the venues that lasted had the clearest values and the most genuine trust in the people they served.</li>
+        <li>Lauren says, "I didn't go to art school to become a cop," and she's always cared more about building the conditions for great work than policing who gets to make it.</li>
+        <li>Design systems work has drifted into compliance work — teams meant to lower barriers and raise quality have started acting like gatekeepers, adding stricter standards, more approval gates, more process.</li>
+        <li>AI tools are democratizing production the way the Xerox machine did for punk zines and flyers — when the means of production become this accessible, the scene grows, and you can't govern it the old way.</li>
+        <li>Her framework — "design systems anarchy": modeled on how punk scenes built infrastructure for creative chaos instead of containing it; the venues that lasted had the clearest values and the most trust.</li>
         <li>Conviction as a container, not a cage — hold firmly to core principles, and let everything else flex.</li>
-        <li>Build “scenes instead of systems, venues instead of vaults.”</li>
+        <li>Build "scenes instead of systems, venues instead of vaults."</li>
         <li>A design system was never supposed to be permanent. It was supposed to be alive.</li>
       </ul>
     </div>
@@ -230,19 +242,19 @@ permalink: /blog/config-2026/
 
   <div class="note-card">
     <span class="note-tag">Workflow in collab</span>
-    <div class="note-title">Reimagining NASA.gov for Earth’s most important stories</div>
+    <div class="note-title">Reimagining NASA.gov for Earth's most important stories</div>
     <a href="https://www.youtube.com/watch?v=GpACvdM6guc&t=17s" class="topic-link">Watch the video</a>
     <div class="note-divider"></div>
     <div class="photo-frame">
       <img src="{{ '/assets/posts/config-recap/nasa.jpg' | relative_url }}" alt="NASA project highlight slides">
     </div>
-    <div class="note-body"><a href="https://www.linkedin.com/in/benkshown/">Ben Shown</a> and <a href="https://www.linkedin.com/in/megan-greco-7328774a/">Megan Greco</a> got to design with the funnest client - NASA. Of course it was a serious project but I can only imagine it was so fun to use the photo archive of planets and spacecraft for their designs.
+    <div class="note-body"><a href="https://www.linkedin.com/in/benkshown/">Ben Shown</a> and <a href="https://www.linkedin.com/in/megan-greco-7328774a/">Megan Greco</a> got to design with the funnest team at NASA. Some highlights:
       <ul>
-        <li>NASA’s redesign succeeded because it grounded decisions in <b>audience motivations</b>, not just demographics, using an alternative to personas, they called “Thinking Styles”, to identify the underserved pragmatist as the key design driver.</li>
-        <li>The team used a research-led, low-fi-first process: large-scale survey work, in-depth interviews, rough concept exploration, and repeated stakeholder critique to get better strategic feedback and build agency-wide ownership.</li>
-        <li>Outcome was not just a visual refresh but a scalable system: Horizon gave NASA a consistent design foundation across thousands of sites and supported products like NASA.gov, NASA+, and the Kids site while preserving range for different audiences.</li>
+        <li>NASA's redesign succeeded because it grounded decisions in <b>audience motivations</b>, not just demographics, using an alternative to personas, they called "Thinking Styles", to identify how people approach problems differently.</li>
+        <li>The team used a research-led, low-fi-first process: large-scale survey work, in-depth interviews, rough concept exploration, and repeated stakeholder critique to get better strategic feedback faster.</li>
+        <li>Outcome was not just a visual refresh but a scalable system: Horizon gave NASA a consistent design foundation across thousands of sites and supported products like NASA.gov, NASA+, and the Space App Challenge platform.</li>
       </ul>
-      BTW, it was fun to see these “Thinking Styles” illustrated using Muppets characters: Miss Piggy is the Pragmatist, Beaker is the Learner, Gonzo is the Explorer, and Kermit is the Connector.
+      BTW, it was fun to see these "Thinking Styles" illustrated using Muppets characters: Miss Piggy is the Pragmatist, Beaker is the Learner, Gonzo is the Explorer, and Kermit is the Connector.
     </div>
     <div class="photo-frame">
       <img src="{{ '/assets/posts/config-recap/muppets.jpg' | relative_url }}" alt="Muppets in the design process">
