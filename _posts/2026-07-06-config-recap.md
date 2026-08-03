@@ -131,7 +131,7 @@ permalink: /blog/config-2026/
       <li>Three days at <b>Moscone Center, San Francisco</b>.</li>
       <li>Dozens of sessions, side conversations, and Figma product reveals.</li>
       <li>Here's what stuck — the sessions worth rewatching, the people worth following up with, and the ideas that are already changing how we work.</li>
-    </ul>
+    </ul><!--more-->
   </div>
   <div class="photo-card intro-photo-card">
     <div class="photo-frame">
