@@ -12,24 +12,23 @@ permalink: /blog/config-2026/
     color: #f5f2eb;
     background: #0a0a0a;
     line-height: 1.8;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    width: 100vw;
-    max-width: none;
-    margin-left: -50vw;
-    margin-right: -50vw;
     min-height: 100vh;
     padding-bottom: 24px;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
   }
   .config-recap-post * { box-sizing: border-box; }
   .config-recap-post a { color: #8bbcff; text-decoration: underline; }
   .config-recap-post a:hover, .config-recap-post a:focus-visible { color: #b9d6ff; }
-  .config-recap-post header { padding: 80px 60px 60px; border-bottom: 1px solid #2a2a2a; }
+  .config-recap-post header {
+    padding: clamp(40px, 6vw, 80px) clamp(24px, 6vw, 60px) clamp(24px, 5vw, 60px);
+    border-bottom: 1px solid #2a2a2a;
+  }
   .config-recap-post h1 {
     font-family: "Playfair Display", serif;
-    font-size: clamp(52px, 8vw, 96px);
+    font-size: clamp(40px, 6vw, 96px);
     font-weight: 400;
     line-height: 0.92;
     letter-spacing: -0.02em;
@@ -45,15 +44,15 @@ permalink: /blog/config-2026/
     margin-bottom: 20px;
   }
   .config-recap-post .intro-strip {
-    padding: 48px 60px;
+    padding: clamp(28px, 5vw, 48px) clamp(24px, 6vw, 60px);
     border-bottom: 1px solid #2a2a2a;
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
-    gap: 40px;
+    gap: clamp(20px, 3vw, 40px);
     align-items: start;
   }
   .config-recap-post .intro-text {
-    font-size: 18px;
+    font-size: clamp(16px, 1.7vw, 18px);
     color: #aaa9a0;
     font-weight: 300;
     max-width: 680px;
@@ -94,46 +93,65 @@ permalink: /blog/config-2026/
   .config-recap-post .caption-sub { font-family: "Space Mono", monospace; font-size: 10px; color: #595959; }
   .config-recap-post .section-headline {
     font-family: "Playfair Display", serif;
-    font-size: clamp(32px, 4vw, 54px);
+    font-size: clamp(28px, 3.7vw, 54px);
     font-weight: 400;
     line-height: 1.05;
     letter-spacing: -0.03em;
     color: #f5f2eb;
-    margin: 20px 60px 0;
+    margin: 20px clamp(24px, 6vw, 60px) 0;
   }
-  .config-recap-post .photo-section { padding: 40px 60px 60px; border-bottom: 1px solid #2a2a2a; }
+  .config-recap-post .photo-section {
+    padding: clamp(24px, 4vw, 40px) clamp(24px, 6vw, 60px) clamp(32px, 5vw, 60px);
+    border-bottom: 1px solid #2a2a2a;
+  }
   .config-recap-post .photo-layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start; }
   .config-recap-post .photo-layout.reverse { grid-template-columns: 1fr 1.3fr; }
   .config-recap-post .photo-layout.reverse .photo-card { order: 2; }
   .config-recap-post .photo-layout.reverse .photo-text { order: 1; }
   .config-recap-post .photo-text { display: flex; flex-direction: column; gap: 14px; }
   .config-recap-post .note-tag { font-family: "Space Mono", monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #e8c547; }
-  .config-recap-post .note-body { font-size: 18px; line-height: 1.8; color: #aaa9a0; padding-left: 0; }
+  .config-recap-post .note-body { font-size: clamp(16px, 1.7vw, 18px); line-height: 1.8; color: #aaa9a0; padding-left: 0; }
   .config-recap-post .notes-section { 
-    padding: 40px 60px 60px; 
+    padding: clamp(24px, 4vw, 40px) clamp(24px, 6vw, 60px) clamp(32px, 5vw, 60px); 
     border-bottom: 1px solid #2a2a2a; 
     display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, minmax(0, 1fr)); 
     gap: 24px;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    width: 100vw;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: 100%;
+    margin: 0;
   }
   .config-recap-post .note-card { background: #111; border: 1px solid #252525; padding: 28px; display: flex; flex-direction: column; gap: 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
   .config-recap-post .note-title { font-family: "Playfair Display", serif; font-size: 22px; font-weight: 400; line-height: 1.2; color: #f5f2eb; }
   .config-recap-post .topic-link { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #8bbcff; text-decoration: underline; align-self: flex-start; }
   .config-recap-post .note-divider { height: 1px; background: #1e1e1e; }
-  .config-recap-post footer { padding: 40px 60px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .config-recap-post footer { padding: clamp(24px, 4vw, 40px) clamp(24px, 6vw, 60px); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
   .config-recap-post .footer-sig { font-family: "Playfair Display", serif; font-style: italic; font-size: 16px; color: #7e7e76; }
   @media (max-width: 900px) {
-    .config-recap-post header, .config-recap-post .intro-strip, .config-recap-post .section-headline, .config-recap-post .photo-section, .config-recap-post .notes-section, .config-recap-post footer { padding-left: 30px; padding-right: 30px; }
     .config-recap-post .intro-strip { grid-template-columns: 1fr; }
     .config-recap-post .photo-layout, .config-recap-post .photo-layout.reverse { grid-template-columns: 1fr; }
     .config-recap-post .photo-layout.reverse .photo-card, .config-recap-post .photo-layout.reverse .photo-text { order: initial; }
     .config-recap-post .notes-section { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .config-recap-post header,
+    .config-recap-post .intro-strip,
+    .config-recap-post .section-headline,
+    .config-recap-post .photo-section,
+    .config-recap-post .notes-section,
+    .config-recap-post footer {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .config-recap-post .note-card {
+      padding: 20px;
+    }
+
+    .config-recap-post footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 </style>
 
@@ -157,8 +175,8 @@ permalink: /blog/config-2026/
       <img src="{{ '/assets/posts/config-recap/badge.jpg' | relative_url }}" alt="Conference badge and lanyard with Config 2026 logo">
     </div>
     <div class="photo-caption">
-      <div class="caption-title">Badge &amp; tote energy</div>
-      <div class="caption-sub">Config is always strong on branding</div>
+      <div class="caption-title">Badge &amp; tote</div>
+      <div class="caption-sub">Config is always strong on it's branding</div>
     </div>
   </div>
 </div>
