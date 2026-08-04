@@ -18,6 +18,7 @@ permalink: /blog/config-2026/
     width: 100%;
     max-width: 1280px;
     margin: 0 auto;
+    position: relative;
   }
   .config-recap-post * { box-sizing: border-box; }
   .config-recap-post a { color: #8bbcff; text-decoration: underline; }
@@ -98,10 +99,12 @@ permalink: /blog/config-2026/
     line-height: 1.05;
     letter-spacing: -0.03em;
     color: #f5f2eb;
-    margin: 20px clamp(24px, 6vw, 60px) 0;
+    margin: 0;
+    padding: clamp(28px, 4vw, 40px) clamp(24px, 6vw, 60px) 16px;
   }
   .config-recap-post .photo-section {
     padding: clamp(24px, 4vw, 40px) clamp(24px, 6vw, 60px) clamp(32px, 5vw, 60px);
+    border-top: 1px solid #2a2a2a;
     border-bottom: 1px solid #2a2a2a;
   }
   .config-recap-post .photo-layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start; }
@@ -113,6 +116,7 @@ permalink: /blog/config-2026/
   .config-recap-post .note-body { font-size: clamp(16px, 1.7vw, 18px); line-height: 1.8; color: #aaa9a0; padding-left: 0; }
   .config-recap-post .notes-section { 
     padding: clamp(24px, 4vw, 40px) clamp(24px, 6vw, 60px) clamp(32px, 5vw, 60px); 
+    border-top: 1px solid #2a2a2a;
     border-bottom: 1px solid #2a2a2a; 
     display: grid; 
     grid-template-columns: repeat(3, minmax(0, 1fr)); 
