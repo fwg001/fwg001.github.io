@@ -208,7 +208,7 @@ permalink: /blog/config-2026/
     </div>
     <div class="photo-text">
       <span class="note-tag">The iterative conference</span>
-      <div class="note-body">Since the start, Config has grown like crazy each year at Moscone Center in San Francicisco. Each time I return the Figma team has put so much work into building a unique [...]
+      <div class="note-body">Since the start, Config has grown like crazy each year at Moscone Center in San Francicisco. Each time I return the Figma team has put so much work into building a unique experience that feels fresh and intentional. It's a masterclass in conference design.</div>
     </div>
     <div class="photo-text">
       <span class="note-tag">Team learning</span>
@@ -231,7 +231,7 @@ permalink: /blog/config-2026/
     </div>
     <div class="photo-text">
       <span class="note-tag">Escape to nature</span>
-      <div class="note-body">My new favorite way to start a tech conference - escape tech and explore nature instead! <a href="https://www.linkedin.com/in/bencallahan/">Ben Callahan</a> organized a gr[...]
+      <div class="note-body">My new favorite way to start a tech conference - escape tech and explore nature instead! <a href="https://www.linkedin.com/in/bencallahan/">Ben Callahan</a> organized a great group hike through the redwoods. Being surrounded by 2,000-year-old trees puts everything in perspective.</div>
     </div>
   </div>
 </div>
@@ -246,12 +246,12 @@ permalink: /blog/config-2026/
     <div class="photo-frame">
       <img src="{{ '/assets/posts/config-recap/anarchy.jpg' | relative_url }}" alt="DS Anarchy slides">
     </div>
-    <div class="note-body">I loved this talk by <a href="https://www.linkedin.com/in/laurenloprete/">Lauren LoPrete</a>. It told a great story using punk music venues to teach principles for fostering[...]
+    <div class="note-body">I loved this talk by <a href="https://www.linkedin.com/in/laurenloprete/">Lauren LoPrete</a>. It told a great story using punk music venues to teach principles for fostering creativity within structure. Key takeaways:
       <ul>
         <li>Lauren says, "I didn't go to art school to become a cop," and she's always cared more about building the conditions for great work than policing who gets to make it.</li>
-        <li>Design systems work has drifted into compliance work — teams meant to lower barriers and raise quality have started acting like gatekeepers, adding stricter standards, more approval gate[...]
-        <li>AI tools are democratizing production the way the Xerox machine did for punk zines and flyers — when the means of production become this accessible, the scene grows, and you can't govern[...]
-        <li>Her framework — "design systems anarchy": modeled on how punk scenes built infrastructure for creative chaos instead of containing it; the venues that lasted had the clearest values and [...]
+        <li>Design systems work has drifted into compliance work — teams meant to lower barriers and raise quality have started acting like gatekeepers, adding stricter standards, more approval gates, more process.</li>
+        <li>AI tools are democratizing production the way the Xerox machine did for punk zines and flyers — when the means of production become this accessible, the scene grows, and you can't govern it the old way.</li>
+        <li>Her framework — "design systems anarchy": modeled on how punk scenes built infrastructure for creative chaos instead of containing it; the venues that lasted had the clearest values and the most trust.</li>
         <li>Conviction as a container, not a cage — hold firmly to core principles, and let everything else flex.</li>
         <li>Build "scenes instead of systems, venues instead of vaults."</li>
         <li>A design system was never supposed to be permanent. It was supposed to be alive.</li>
@@ -270,11 +270,11 @@ permalink: /blog/config-2026/
     <div class="photo-frame">
       <img src="{{ '/assets/posts/config-recap/nasa.jpg' | relative_url }}" alt="NASA project highlight slides">
     </div>
-    <div class="note-body"><a href="https://www.linkedin.com/in/benkshown/">Ben Shown</a> and <a href="https://www.linkedin.com/in/megan-greco-7328774a/">Megan Greco</a> got to design with the funnest[...]
+    <div class="note-body"><a href="https://www.linkedin.com/in/benkshown/">Ben Shown</a> and <a href="https://www.linkedin.com/in/megan-greco-7328774a/">Megan Greco</a> got to design with the funnest team at NASA. Some highlights:
       <ul>
-        <li>NASA's redesign succeeded because it grounded decisions in <b>audience motivations</b>, not just demographics, using an alternative to personas, they called "Thinking Styles", to identify [...]
-        <li>The team used a research-led, low-fi-first process: large-scale survey work, in-depth interviews, rough concept exploration, and repeated stakeholder critique to get better strategic feedb[...]
-        <li>Outcome was not just a visual refresh but a scalable system: Horizon gave NASA a consistent design foundation across thousands of sites and supported products like NASA.gov, NASA+, and the[...]
+        <li>NASA's redesign succeeded because it grounded decisions in <b>audience motivations</b>, not just demographics, using an alternative to personas, they called "Thinking Styles", to identify how people approach problems differently.</li>
+        <li>The team used a research-led, low-fi-first process: large-scale survey work, in-depth interviews, rough concept exploration, and repeated stakeholder critique to get better strategic feedback faster.</li>
+        <li>Outcome was not just a visual refresh but a scalable system: Horizon gave NASA a consistent design foundation across thousands of sites and supported products like NASA.gov, NASA+, and the Space App Challenge platform.</li>
       </ul>
       BTW, it was fun to see these "Thinking Styles" illustrated using Muppets characters: Miss Piggy is the Pragmatist, Beaker is the Learner, Gonzo is the Explorer, and Kermit is the Connector.
     </div>
