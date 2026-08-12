@@ -10,9 +10,6 @@
   --color-button-to: #001157;
   --font: "JetBrains Mono", monospace;
   --max-width: 700px;
-  /* cursor position in viewport px, updated by the tiny script at the bottom of the page */
-  --mx: 50vw;
-  --my: 50vh;
 }
 
 * {
@@ -61,31 +58,6 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .water-shimmer {
-    display: none;
-  }
-}
-
-/* bigger, more intense waves that follow the cursor */
-.water-ripple {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  filter: url(#water-ripple);
-  mix-blend-mode: overlay;
-  opacity: 0.9;
-  mask-image: radial-gradient(circle 280px at var(--mx) var(--my), black 0%, black 35%, transparent 75%);
-  -webkit-mask-image: radial-gradient(
-    circle 280px at var(--mx) var(--my),
-    black 0%,
-    black 35%,
-    transparent 75%
-  );
-  transition: -webkit-mask-position 0.05s linear;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .water-ripple {
     display: none;
   }
 }
