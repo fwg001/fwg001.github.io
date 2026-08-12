@@ -1,0 +1,161 @@
+/* James' Birthday Odyssey — clean hand-written styles (replaces Framer export) */
+
+:root {
+  --color-bg: #d1ebff;
+  --color-text: #121314;
+  --color-heading: #091666;
+  --color-link: #09f;
+  --color-link-hover: #08f;
+  --color-button-from: #06f;
+  --color-button-to: #001157;
+  --font: "JetBrains Mono", monospace;
+  --max-width: 700px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.wave {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+h1 {
+  font-size: 38px;
+  color: var(--color-heading);
+  text-align: center;
+  margin: 0;
+}
+
+h2 {
+  font-size: 32px;
+  color: var(--color-heading);
+  margin: 0 0 16px;
+}
+
+p {
+  margin: 0 0 16px;
+}
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--color-link);
+}
+a:hover {
+  color: var(--color-link-hover);
+}
+
+/* Theme section (Odyssey intro + gif) */
+.theme .odyssey-gif {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 8px auto 0;
+  border-radius: 12px;
+}
+
+/* Intro row: portrait photo, intro text, charity:water badge */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+.intro .portrait {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.intro .intro-text {
+  font-size: 20px;
+  color: var(--color-heading);
+}
+.intro .intro-text p:last-child {
+  margin-bottom: 0;
+}
+.intro .badge {
+  width: 120px;
+  flex: none;
+}
+
+/* Buttons */
+.button {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 27px;
+  padding: 16px 32px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, var(--color-button-from) 0%, var(--color-button-to) 100%);
+}
+.button:hover {
+  color: #fff;
+}
+
+/* Two-photo grid */
+.photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.photos img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Donation history list */
+.history {
+  list-style: disc;
+  padding-left: 24px;
+  margin: 0 0 16px;
+}
+.history a {
+  text-decoration: underline;
+}
+
+.total strong {
+  font-weight: 700;
+}
+
+.thanks-heading {
+  font-size: 32px;
+  color: var(--color-heading);
+  margin: 0 0 16px;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 30px;
+  }
+  .photos {
+    grid-template-columns: 1fr;
+  }
+}
