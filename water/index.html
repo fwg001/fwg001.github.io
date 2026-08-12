@@ -33,6 +33,42 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <svg width="0" height="0" aria-hidden="true" focusable="false">
+      <filter id="water-shimmer">
+        <feTurbulence type="fractalNoise" baseFrequency="0.015 0.025" numOctaves="4" seed="7" result="noise">
+          <animate
+            attributeName="baseFrequency"
+            dur="30s"
+            values="0.015 0.025;0.024 0.036;0.015 0.025"
+            repeatCount="indefinite"
+          />
+        </feTurbulence>
+        <feColorMatrix
+          in="noise"
+          type="matrix"
+          values="0 0 0 0 0.31 0 0 0 0 0.68 0 0 0 0 0.86 0 0 0 0.75 0"
+        />
+      </filter>
+      <filter id="water-ripple">
+        <feTurbulence type="fractalNoise" baseFrequency="0.006 0.01" numOctaves="5" seed="3" result="noise">
+          <animate
+            attributeName="baseFrequency"
+            dur="6s"
+            values="0.006 0.01;0.01 0.016;0.006 0.01"
+            repeatCount="indefinite"
+          />
+        </feTurbulence>
+        <feColorMatrix
+          in="noise"
+          type="matrix"
+          values="0 0 0 0 0.1 0 0 0 0 0.55 0 0 0 0 0.95 0 0 0 1 0"
+        />
+      </filter>
+    </svg>
+    <div class="water-shimmer" aria-hidden="true"></div>
+    <div class="water-ripple" aria-hidden="true"></div>
+    <div class="drip-trail" aria-hidden="true"></div>
+
     <img class="wave" src="assets/hSQndYrgkNHrIdWqR6iSiFEDU.gif" alt="Animated wave divider" />
 
     <main>
@@ -41,8 +77,8 @@
       <section class="theme">
        <p>
           This year I'm setting sail for clean water, inspired by the epic tale of Homer's Odyssey.
-          Every long voyage is worth it when it ends with someone getting clean water for the first
-          time.
+          My years long voyage is worth it when it ends with someone getting access to clean water for the first
+          time in their lives.
         </p>
         <img
           class="odyssey-gif"
@@ -57,6 +93,7 @@
           src="assets/zfBHaLAfaTC4W1BzJ3r2gq6aPG4.png"
           alt="Charity:Water Supporter"
         />
+        <h2 class="intro-subheading">Why water?</h2>
         <div class="intro-text">
           <p>
             When I first heard Scott's story of founding a different kind of charity where 100% of
@@ -247,5 +284,30 @@
     </main>
 
     <img class="wave" src="assets/hSQndYrgkNHrIdWqR6iSiFEDU.gif" alt="Animated wave divider" />
+
+    <script>
+      // Moves the .water-ripple spotlight (see style.css) to follow the cursor,
+      // and leaves a trail of fading drips behind it as it moves.
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const dripTrail = document.querySelector(".drip-trail");
+        let lastDrip = 0;
+
+        window.addEventListener("pointermove", (event) => {
+          document.documentElement.style.setProperty("--mx", event.clientX + "px");
+          document.documentElement.style.setProperty("--my", event.clientY + "px");
+
+          const now = performance.now();
+          if (now - lastDrip < 55) return;
+          lastDrip = now;
+
+          const drip = document.createElement("span");
+          drip.className = "drip";
+          drip.style.left = event.clientX + "px";
+          drip.style.top = event.clientY + "px";
+          dripTrail.appendChild(drip);
+          drip.addEventListener("animationend", () => drip.remove());
+        });
+      }
+    </script>
   </body>
 </html>

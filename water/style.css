@@ -10,6 +10,9 @@
   --color-button-to: #001157;
   --font: "JetBrains Mono", monospace;
   --max-width: 700px;
+  /* cursor position in viewport px, updated by the tiny script at the bottom of the page */
+  --mx: 50vw;
+  --my: 50vh;
 }
 
 * {
@@ -18,11 +21,108 @@
 
 body {
   margin: 0;
-  background: var(--color-bg);
+  background: linear-gradient(120deg, #4fa8ff, #bfe3ff, #a8e6cc, #bfe3ff, #4fa8ff);
+  background-size: 400% 400%;
+  animation: water-drift 8s ease-in-out infinite;
   color: var(--color-text);
   font-family: var(--font);
   font-size: 18px;
   line-height: 1.5;
+}
+
+@keyframes water-drift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+    background: var(--color-bg);
+  }
+}
+
+.water-shimmer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  filter: url(#water-shimmer);
+  mix-blend-mode: overlay;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .water-shimmer {
+    display: none;
+  }
+}
+
+/* bigger, more intense waves that follow the cursor */
+.water-ripple {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  filter: url(#water-ripple);
+  mix-blend-mode: overlay;
+  opacity: 0.9;
+  mask-image: radial-gradient(circle 280px at var(--mx) var(--my), black 0%, black 35%, transparent 75%);
+  -webkit-mask-image: radial-gradient(
+    circle 280px at var(--mx) var(--my),
+    black 0%,
+    black 35%,
+    transparent 75%
+  );
+  transition: -webkit-mask-position 0.05s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .water-ripple {
+    display: none;
+  }
+}
+
+/* trail of little droplets left behind the cursor */
+.drip-trail {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+.drip {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #4fa8ff 55%, #0055d4 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px 2px rgba(10, 124, 255, 0.8);
+  transform: translate(-50%, -50%);
+  animation: drip-fall 1100ms ease-in forwards;
+}
+@keyframes drip-fall {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 55px) scale(0.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drip-trail {
+    display: none;
+  }
 }
 
 .wave {
@@ -101,20 +201,76 @@ a:hover {
   width: 120px;
   flex: none;
 }
+.intro .intro-subheading {
+  font-size: 18px;
+  margin: -8px 0 0;
+}
 
-/* Buttons */
+/* Buttons — classic Mac OS X "Aqua" gel-pill style */
 .button {
+  position: relative;
   display: block;
+  overflow: hidden;
   text-align: center;
   text-decoration: none;
   color: #fff;
   font-size: 27px;
   padding: 16px 32px;
-  border-radius: 12px;
-  background: linear-gradient(180deg, var(--color-button-from) 0%, var(--color-button-to) 100%);
+  border-radius: 999px;
+  background: linear-gradient(to bottom, #eaf6ff 0%, #7fc4ff 45%, #0a7cff 50%, #0055d4 100%);
+  border: 1px solid #0047b3;
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.85),
+    inset 0 -6px 10px rgba(0, 60, 150, 0.5),
+    0 4px 8px rgba(0, 60, 150, 0.35);
+  text-shadow: 0 -1px 1px rgba(0, 40, 100, 0.6);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
 }
+
+/* glossy highlight cap across the top half — the signature Aqua "candy" look */
+.button::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 4%;
+  right: 4%;
+  height: 45%;
+  border-radius: 999px 999px 60% 60% / 100% 100% 40% 40%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+/* shine sweep that animates across on hover */
+.button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+
 .button:hover {
   color: #fff;
+  transform: translateY(-2px) scale(1.03);
+  filter: brightness(1.1);
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.9),
+    inset 0 -6px 10px rgba(0, 60, 150, 0.5),
+    0 8px 22px rgba(0, 130, 255, 0.6);
+}
+.button:hover::after {
+  left: 125%;
+}
+.button:active {
+  transform: translateY(0) scale(0.98);
+  filter: brightness(0.97);
 }
 
 /* Two-photo grid */
