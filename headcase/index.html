@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Headcase">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="icon.png">
+<title>Headcase</title>
+<style>
+html{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+body{margin:0}
+/* Layout: iOS-style navigation stack — large-title screens with inset grouped lists, one column, max 560px */
+:root{
+  --bg:#F2F2F7; --card:#FFFFFF; --fg:#000000; --fg2:#3C3C4399; --sep:#3C3C4329; --fill:#7878801F;
+  --accent:#8E5CF0; --accent-soft:#8E5CF01F;
+  --green:#34C759; --yellow:#FFCC00; --orange:#FF9500; --red:#FF3B30; --teal:#30B0C7;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  --font-display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+  --r:12px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#000000; --card:#1C1C1E; --fg:#FFFFFF; --fg2:#EBEBF599; --sep:#54545899; --fill:#7878803D;
+  --accent:#A47BFF; --accent-soft:#A47BFF2E; --green:#30D158; --yellow:#FFD60A; --orange:#FF9F0A; --red:#FF453A; --teal:#40C8E0;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#000000; --card:#1C1C1E; --fg:#FFFFFF; --fg2:#EBEBF599; --sep:#54545899; --fill:#7878803D;
+  --accent:#A47BFF; --accent-soft:#A47BFF2E; --green:#30D158; --yellow:#FFD60A; --orange:#FF9F0A; --red:#FF453A; --teal:#40C8E0;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:17px;line-height:1.3;-webkit-font-smoothing:antialiased}
+.app{max-width:560px;margin:0 auto;padding:0 16px 48px}
+button{font:inherit;color:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.screen{display:flex;flex-direction:column;gap:22px}
+.anim .screen{animation:in .25s ease}
+@keyframes in{from{transform:translateX(12px);opacity:.6}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.screen{animation:none}}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;align-items:center;min-height:44px;margin:0 -16px;padding:0 8px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
+.nav-btn{background:none;border:0;color:var(--accent);padding:10px 8px;cursor:pointer;display:flex;align-items:center;gap:2px;font-size:17px}
+.nav-btn.strong{font-weight:600}
+.nav-btn[disabled]{opacity:.35;cursor:default}
+.nav-title{font-weight:600;font-size:17px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--fg2);margin:0}
+h1{font-family:var(--font-display);font-size:34px;font-weight:700;letter-spacing:.01em;margin:2px 0 0;text-wrap:balance}
+h2{font-size:22px;font-weight:700;margin:0}
+.section-h{font-size:13px;text-transform:uppercase;letter-spacing:.02em;color:var(--fg2);margin:0 16px 6px}
+.foot{font-size:13px;color:var(--fg2);margin:6px 16px 0}
+
+/* grouped list */
+.group{background:var(--card);border-radius:var(--r);overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;min-height:44px;padding:11px 16px;position:relative;width:100%;background:none;border:0;text-align:left}
+.row+.row::before{content:"";position:absolute;top:0;left:16px;right:0;border-top:.5px solid var(--sep)}
+.row.icon-row+.row.icon-row::before{left:56px}
+.row .grow{flex:1;min-width:0}
+.row .val{color:var(--fg2);font-variant-numeric:tabular-nums}
+button.row{cursor:pointer}
+button.row:active{background:var(--fill)}
+.chev{color:var(--fg2);opacity:.6;flex:none}
+.ico{width:30px;height:30px;border-radius:7px;display:grid;place-items:center;flex:none;color:#fff}
+
+/* home */
+.summary{background:var(--card);border-radius:var(--r);padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.summary-head{display:flex;align-items:center;gap:8px;color:var(--accent);font-weight:600;font-size:15px}
+.summary-head .t{flex:1}
+.summary-head .when{color:var(--fg2);font-weight:400;font-size:15px}
+.big{display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
+.big b{font-family:var(--font-display);font-size:34px;font-weight:700}
+.big span{color:var(--fg2);font-size:15px;font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{display:flex;flex-direction:column;gap:2px}
+.kpi small{font-size:12px;color:var(--fg2);font-weight:600;text-transform:uppercase;letter-spacing:.02em}
+.kpi b{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.actions{display:grid;gap:12px}
+.action{display:flex;align-items:center;gap:14px;padding:18px 16px;border-radius:16px;border:0;cursor:pointer;text-align:left;background:var(--card)}
+.action .ico{width:44px;height:44px;border-radius:12px}
+.action .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.action .txt b{font-size:19px}
+.action .txt span{font-size:15px;color:var(--fg2)}
+.action.primary{background:var(--accent);color:#fff}
+.action.primary .txt span{color:#ffffffcc}
+.action.primary .ico{background:#ffffff33}
+.action:active{transform:scale(.985)}
+
+/* form */
+.field{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+input[type=datetime-local],textarea,input[type=text]{font:inherit;color:var(--fg);background:transparent;border:0;width:100%;min-width:0}
+input[type=datetime-local]{text-align:right;color:var(--accent);width:auto;max-width:60%}
+textarea{resize:vertical;min-height:72px}
+input::placeholder,textarea::placeholder{color:var(--fg2)}
+.sev-top{display:flex;justify-content:space-between;align-items:baseline}
+.sev-num{font-family:var(--font-display);font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}
+.sev-num small{font-size:15px;color:var(--fg2);font-weight:600;margin-left:4px}
+.sev-label{font-weight:600}
+.scale{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.scale button{height:36px;border-radius:8px;border:0;background:var(--fill);cursor:pointer;font-weight:600;font-size:15px;font-variant-numeric:tabular-nums;color:var(--fg2)}
+.scale button.on{color:#fff}
+.scale-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--fg2)}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);background:var(--fill);border-radius:9px;padding:2px;gap:2px}
+.seg button{border:0;background:none;border-radius:7px;padding:7px 4px;font-size:14px;font-weight:500;cursor:pointer}
+.seg button.on{background:var(--card);box-shadow:0 1px 3px #0000001f,0 1px 1px #0000000a;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:0;background:var(--fill);border-radius:999px;padding:8px 14px;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.chip.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.chip.on::before{content:"✓";font-weight:700}
+.save{width:100%;border:0;border-radius:14px;padding:15px;background:var(--accent);color:#fff;font-weight:600;font-size:17px;cursor:pointer}
+.save:disabled{opacity:.5}
+
+/* history */
+.chart-card{background:var(--card);border-radius:var(--r);padding:14px 16px 10px;display:flex;flex-direction:column;gap:8px}
+.chart-card svg{width:100%;height:auto;display:block;overflow:visible}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);background:var(--fill);border-radius:9px;padding:2px;gap:2px}
+.tabs button{border:0;background:none;border-radius:7px;padding:6px;font-size:13px;font-weight:600;cursor:pointer}
+.tabs button.on{background:var(--card);box-shadow:0 1px 3px #0000001f}
+.ep-dot{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;flex:none;font-variant-numeric:tabular-nums}
+.ep-main{display:flex;flex-direction:column;gap:2px}
+.ep-main b{font-weight:600}
+.ep-sub{font-size:14px;color:var(--fg2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--fill);color:var(--fg2);white-space:nowrap}
+.empty{background:var(--card);border-radius:var(--r);padding:32px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.empty p{margin:0;color:var(--fg2);font-size:15px;max-width:30ch}
+.link{background:none;border:0;color:var(--accent);cursor:pointer;font-size:17px;padding:6px}
+.danger{color:var(--red);justify-content:center;font-weight:400}
+.confirm{background:var(--card);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:12px;text-align:center}
+.confirm p{margin:0;font-size:15px;color:var(--fg2)}
+.confirm .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.confirm button{border:0;border-radius:10px;padding:11px;font-weight:600;cursor:pointer;background:var(--fill)}
+.confirm .del{background:var(--red);color:#fff}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--card);color:var(--fg);padding:10px 18px;border-radius:999px;box-shadow:0 6px 24px #00000033;font-size:15px;font-weight:600;z-index:10}
+.note{font-size:12px;color:var(--fg2);text-align:center;margin:0}
+
+/* duration */
+.switch{position:relative;width:51px;height:31px;flex:none}
+.switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
+.switch span{position:absolute;inset:0;border-radius:999px;background:var(--fill);transition:background .2s}
+.switch span::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 6px #00000026;transition:transform .2s}
+.switch input:checked+span{background:var(--green)}
+.switch input:checked+span::after{transform:translateX(20px)}
+.switch input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.live{background:var(--card);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:12px}
+.live .grow{display:flex;flex-direction:column;gap:2px;min-width:0}
+.live b{font-size:17px}
+.live span{font-size:14px;color:var(--fg2);font-variant-numeric:tabular-nums}
+.end-btn{border:0;border-radius:999px;padding:8px 16px;background:var(--accent);color:#fff;font-weight:600;font-size:15px;cursor:pointer;flex:none}
+.pulse{width:10px;height:10px;border-radius:50%;background:var(--red);flex:none;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+.pill.on{background:var(--accent-soft);color:var(--accent)}
+.row-err{color:var(--red);font-size:13px;padding:0 16px 10px;margin:0}
+.end-edit{display:flex;flex-direction:column;gap:10px;padding:12px 16px}
+.end-edit .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.end-edit button{border:0;border-radius:10px;padding:10px;font-weight:600;cursor:pointer;background:var(--fill)}
+.end-edit button.go{background:var(--accent);color:#fff}
+/* passcode */
+.pin-screen{display:flex;flex-direction:column;align-items:center;gap:20px;padding-top:28px;text-align:center}
+.pin-screen .lock{width:56px;height:56px;border-radius:15px;background:var(--accent);color:#fff;display:grid;place-items:center}
+.pin-screen h1{font-size:22px;margin:0}
+.pin-screen .sub{margin:-12px 0 0;color:var(--fg2);font-size:15px;min-height:20px;max-width:32ch}
+.dots{display:flex;gap:18px;height:16px}
+.dots i{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--fg);display:block}
+.dots i.on{background:var(--fg)}
+.dots.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+@media (prefers-reduced-motion:reduce){.dots.shake{animation:none}}
+.keypad{display:grid;grid-template-columns:repeat(3,78px);gap:16px 24px;justify-content:center;margin-top:6px}
+.key{width:78px;height:78px;border-radius:50%;border:0;background:var(--card);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:32px;font-weight:400;line-height:1;font-variant-numeric:tabular-nums}
+.key small{font-size:10px;font-weight:600;letter-spacing:.15em;color:var(--fg2);margin-top:2px;height:12px}
+.key:active{background:var(--fill)}
+.key.ghost{background:none;font-size:17px}
+.key:disabled{opacity:.4}
+.pin-links{display:flex;flex-direction:column;gap:2px;align-items:center}
+.pin-links .link{font-size:15px}
+.email-step{width:100%;display:flex;flex-direction:column;gap:16px;text-align:left}
+/* auth */
+.auth{display:flex;flex-direction:column;gap:22px;padding-top:40px}
+.auth .group input{font:inherit;color:var(--fg);background:transparent;border:0;width:100%;min-width:0}
+.err{color:var(--red);font-size:15px;margin:0 16px}
+.ok{color:var(--green);font-size:15px;margin:0 16px}
+.setup{background:var(--card);border-radius:var(--r);padding:16px;font-size:15px;color:var(--fg2)}
+.setup code{font-family:ui-monospace,Menlo,monospace;font-size:13px;color:var(--fg)}
+</style>
+
+</head>
+<body>
+<div class="app" id="app"></div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
+</body>
+</html>
+<script>
+/* ======== CONFIG: paste your Supabase project values here ========
+   Supabase dashboard → Project Settings → API.
+   Use the PUBLIC publishable (or anon) key only. Never put a secret or service_role key here. */
+const SUPABASE_URL = "https://yuslkjmtfobfftilloqs.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_ecId8JnzuMMwt2IvB70zOA_KL882TGo";
+/* ================================================================ */
+
+const TRIGGERS=["Exercise","Stress","Poor sleep","Skipped meal","Dehydration","Alcohol","Caffeine","Bright light","Screen time","Weather change","Hormonal","Strong smell"];
+const NAUSEA=["None","Mild","Moderate","Severe"];
+const SEV_WORD=s=>s<=3?"Mild":s<=6?"Moderate":s<=8?"Severe":"Extreme";
+const sevColor=s=>s<=3?"var(--green)":s<=5?"var(--yellow)":s<=7?"var(--orange)":"var(--red)";
+const ICON={
+  stop:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5"/><path d="M9 2h6"/></svg>',
+  hourglass:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12M6 22h12M7 2c0 5 10 7 10 10S7 17 7 22M17 2c0 5-10 7-10 10s10 5 10 10"/></svg>',
+  brain:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 0 0-5.6-1.5A3 3 0 0 0 3.5 8 3.5 3.5 0 0 0 4 14.5 3 3 0 0 0 8 19a3 3 0 0 0 4 1"/><path d="M12 5a3 3 0 0 1 5.6-1.5A3 3 0 0 1 20.5 8a3.5 3.5 0 0 1-.5 6.5A3 3 0 0 1 16 19a3 3 0 0 1-4 1z"/><path d="M12 5v15"/></svg>',
+  plus:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  list:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 19V11M10 19V5M16 19v-6M22 19H2"/></svg>',
+  chev:'<svg class="chev" width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l6 6-6 6"/></svg>',
+  back:'<svg width="12" height="20" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 10l8 8"/></svg>',
+  clock:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  drop:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>',
+  bolt:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
+  gauge:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 17l4-5"/></svg>',
+  note:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3"/></svg>'
+};
+
+/* ---------- storage: Supabase (row-level security keeps each user's rows private) ---------- */
+const configured=!SUPABASE_URL.includes("YOUR-PROJECT")&&!SUPABASE_ANON_KEY.includes("YOUR-");
+const isRecovery=/type=recovery/.test(location.hash);
+const sb=configured&&window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true}}):null;
+let episodes=[], ready=false, session=null, loadError="";
+const fromRow=r=>({id:r.id,startedAt:r.started_at,endedAt:r.ended_at||null,severity:r.severity,nausea:r.nausea,triggers:r.triggers||[],other:r.other||"",notes:r.notes||"",createdAt:r.created_at});
+async function loadEpisodes(){
+  const {data,error}=await sb.from("episodes").select("*").order("started_at",{ascending:false});
+  if(error){loadError="Couldn’t load your log: "+error.message;console.warn(error)}
+  else{loadError="";episodes=data.map(fromRow)}
+  ready=true;render();
+}
+async function editEpisode(id,ep){
+  const {error}=await sb.from("episodes").update({started_at:ep.startedAt,ended_at:ep.endedAt||null,severity:ep.severity,nausea:ep.nausea,triggers:ep.triggers,other:ep.other||null,notes:ep.notes||null}).eq("id",id);
+  if(error)throw error;
+  await loadEpisodes();
+}
+async function addEpisode(ep){
+  const {error}=await sb.from("episodes").insert({started_at:ep.startedAt,ended_at:ep.endedAt||null,severity:ep.severity,nausea:ep.nausea,triggers:ep.triggers,other:ep.other||null,notes:ep.notes||null});
+  if(error)throw error;
+  await loadEpisodes();
+}
+async function updateEnd(id,endedAt){
+  const {error}=await sb.from("episodes").update({ended_at:endedAt}).eq("id",id);
+  if(error)throw error;
+  episodes=episodes.map(e=>e.id===id?{...e,endedAt}:e);render();
+}
+async function deleteEpisode(id){
+  const {error}=await sb.from("episodes").delete().eq("id",id);
+  if(error)throw error;
+  episodes=episodes.filter(e=>e.id!==id);render();
+}
+async function initStore(){
+  if(!sb){view={name:"setup"};render();return}
+  const {data}=await sb.auth.getSession();
+  session=data.session;
+  sb.auth.onAuthStateChange((evt,s)=>{
+    const was=!!session;session=s;
+    if(evt==="PASSWORD_RECOVERY"){startPin("recovery");return}
+    if(s&&!was){if(s.user?.email)rememberEmail(s.user.email);view={name:"home"};ready=false;render();loadEpisodes()}
+    if(!s){episodes=[];startPin("signin")}
+  });
+  if(session&&isRecovery){startPin("recovery");loadEpisodes()}
+  else if(session){view={name:"home"};render();loadEpisodes()}
+  else startPin("signin");
+}
+
+/* ---------- passcode screens ----------
+   The 6-digit passcode is the Supabase account password. The email is remembered on this device after the first sign-in. */
+const EMAIL_KEY="headcase.email";
+function savedEmail(){try{return localStorage.getItem(EMAIL_KEY)||""}catch(e){return""}}
+function rememberEmail(v){try{localStorage.setItem(EMAIL_KEY,v)}catch(e){}}
+function forgetEmail(){try{localStorage.removeItem(EMAIL_KEY)}catch(e){}}
+let pin={purpose:"signin",stage:"enter",entry:"",first:"",email:"",msg:"",err:false,busy:false};
+function startPin(purpose,msg=""){
+  const email=savedEmail();
+  pin={purpose,entry:"",first:"",email,msg,err:false,busy:false,
+    stage:purpose==="signin"?(email?"enter":"email"):purpose==="signup"?"email":"new"};
+  view={name:"pin"};render();
+}
+function pinTitle(){
+  const p=pin.purpose,st=pin.stage;
+  if(st==="email")return p==="signup"?"Create Account":"Sign In";
+  if(st==="enter")return "Enter Passcode";
+  if(st==="new")return p==="signup"?"Create a Passcode":"Enter a New Passcode";
+  return "Re-enter Passcode";
+}
+function pinScreen(){
+  const st=pin.stage, keys=[["1",""],["2","ABC"],["3","DEF"],["4","GHI"],["5","JKL"],["6","MNO"],["7","PQRS"],["8","TUV"],["9","WXYZ"]];
+  const lock=`<span class="lock">${ICON.brain}</span>`;
+  if(st==="email") return `<section class="screen pin-screen">${lock}<h1>${pinTitle()}</h1>
+    <p class="sub">${pin.purpose==="signup"?"Enter your email, then choose a 6-digit passcode.":"Enter your email. After this, you’ll only need your passcode on this device."}</p>
+    <form id="emailForm" class="email-step">
+      <div class="group"><label class="row" for="email"><input id="email" type="email" autocomplete="email" placeholder="Email" value="${esc(pin.email)}" required style="font:inherit;color:var(--fg);background:transparent;border:0;width:100%"></label></div>
+      ${pin.msg?`<p class="${pin.err?"err":"ok"}">${esc(pin.msg)}</p>`:""}
+      <button class="save" type="submit">Continue</button>
+    </form>
+    <button class="link" id="swapMode" style="font-size:15px">${pin.purpose==="signup"?"Already have an account? Sign in":"New here? Create an account"}</button>
+  </section>`;
+  return `<section class="screen pin-screen">${lock}<h1>${pinTitle()}</h1>
+    <p class="sub" style="${pin.err?"color:var(--red)":""}">${esc(pin.msg||(st==="enter"?pin.email:""))}</p>
+    <div class="dots" id="dots" aria-label="${pin.entry.length} of 6 digits entered">${Array.from({length:6},(_,i)=>`<i class="${i<pin.entry.length?"on":""}"></i>`).join("")}</div>
+    <div class="keypad">
+      ${keys.map(([n,l])=>`<button class="key" data-key="${n}" ${pin.busy?"disabled":""} aria-label="${n}">${n}<small>${l}</small></button>`).join("")}
+      ${pin.purpose==="change"?`<button class="key ghost" id="pinCancel">Cancel</button>`:`<span></span>`}
+      <button class="key" data-key="0" ${pin.busy?"disabled":""} aria-label="0">0<small></small></button>
+      <button class="key ghost" id="pinDel" aria-label="Delete">Delete</button>
+    </div>
+    <div class="pin-links">
+      ${st==="enter"?`<button class="link" id="forgot">Forgot passcode?</button><button class="link" id="otherEmail">Use a different email</button>`:""}
+      ${(pin.purpose==="signup"||pin.purpose==="recovery")&&st!=="enter"?`<button class="link" id="pinBack">Back</button>`:""}
+    </div>
+  </section>`;
+}
+function pinFail(msg){pin.entry="";pin.first=pin.stage==="confirm"?"":pin.first;pin.msg=msg;pin.err=true;pin.busy=false;render();const d=$("#dots");d&&d.classList.add("shake")}
+function authMessage(e){
+  const m=(e?.message||"").toLowerCase();
+  if(m.includes("invalid login"))return "Wrong passcode. Try again.";
+  if(m.includes("not confirmed"))return "Confirm your email first, using the link Supabase sent you.";
+  if(m.includes("rate")||e?.status===429)return "Too many attempts. Wait a minute and try again.";
+  if(m.includes("password"))return e.message.replace(/password/gi,"passcode");
+  return e?.message||"Something went wrong. Try again.";
+}
+async function pinComplete(){
+  const code=pin.entry;
+  if(pin.stage==="enter"){
+    pin.busy=true;render();
+    const {error}=await sb.auth.signInWithPassword({email:pin.email,password:code});
+    if(error)pinFail(authMessage(error));
+    return;
+  }
+  if(pin.stage==="new"){pin.first=code;pin.entry="";pin.stage="confirm";pin.msg="";pin.err=false;render();return}
+  if(pin.stage==="confirm"){
+    if(code!==pin.first){pin.stage="new";pinFail("Passcodes didn’t match. Try again.");return}
+    pin.busy=true;render();
+    if(pin.purpose==="signup"){
+      const {data,error}=await sb.auth.signUp({email:pin.email,password:code});
+      if(error){pin.stage="new";pin.first="";return pinFail(authMessage(error))}
+      rememberEmail(pin.email);
+      if(!data.session){pin={...pin,purpose:"signin",stage:"enter",entry:"",first:"",busy:false,err:false,msg:"Check your email and tap the confirmation link, then enter your passcode."};render()}
+    }else{
+      const {error}=await sb.auth.updateUser({password:code});
+      if(error){pin.stage="new";pin.first="";return pinFail(authMessage(error))}
+      if(isRecovery)history.replaceState(null,"",location.pathname);
+      toast("Passcode updated");go({name:"home"});
+    }
+  }
+}
+function pinKey(k){
+  if(pin.busy||pin.stage==="email")return;
+  if(k==="del"){pin.entry=pin.entry.slice(0,-1)}
+  else if(pin.entry.length<6){pin.entry+=k;if(pin.err){pin.err=false;pin.msg=""}}
+  render();
+  if(pin.entry.length===6)setTimeout(pinComplete,120);
+}
+document.addEventListener("keydown",ev=>{
+  if(view.name!=="pin"||pin.stage==="email"||ev.metaKey||ev.ctrlKey)return;
+  if(/^[0-9]$/.test(ev.key)){ev.preventDefault();pinKey(ev.key)}
+  else if(ev.key==="Backspace"){ev.preventDefault();pinKey("del")}
+});
+
+function setup(){
+  return `<section class="screen auth"><div><p class="eyebrow">Setup needed</p><h1>Headcase</h1></div>
+  <div class="setup">Open <code>index.html</code> and paste your Supabase project URL and anon key into <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> near the top of the script. You’ll find both under Project Settings → API in Supabase.</div></section>`;
+}
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const sorted=()=>[...episodes].sort((a,b)=>new Date(b.startedAt)-new Date(a.startedAt));
+const fmtDate=d=>new Date(d).toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});
+const fmtTime=d=>new Date(d).toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"});
+const fmtLong=d=>new Date(d).toLocaleString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"});
+function localInput(d=new Date()){const p=n=>String(n).padStart(2,"0");return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`}
+function ago(d){const days=Math.floor((Date.now()-new Date(d))/864e5);return days<=0?"Today":days===1?"Yesterday":days<30?days+" days ago":fmtDate(d)}
+function within(days){const c=Date.now()-days*864e5;return episodes.filter(e=>new Date(e.startedAt)>=c)}
+function topTrigger(list){const m={};list.forEach(e=>[...(e.triggers||[]),...(e.other?["Other"]:[])].forEach(t=>m[t]=(m[t]||0)+1));const t=Object.entries(m).sort((a,b)=>b[1]-a[1])[0];return t?t[0]:"—"}
+function durMs(e){return e.endedAt?new Date(e.endedAt)-new Date(e.startedAt):null}
+function fmtDur(ms){if(ms==null||ms<0)return "—";const m=Math.round(ms/6e4);if(m<60)return m+" min";const h=Math.floor(m/60),r=m%60;if(h<48)return r?`${h} hr ${r} min`:`${h} hr`;const d=Math.floor(h/24),rh=h%24;return rh?`${d} d ${rh} hr`:`${d} d`}
+function fmtDurShort(ms){if(ms==null||ms<0)return "";const m=Math.round(ms/6e4);if(m<60)return m+"m";const h=Math.floor(m/60),r=m%60;return r?`${h}h ${r}m`:`${h}h`}
+const ongoing=()=>sorted().filter(e=>!e.endedAt);
+function avgDur(list){const d=list.map(durMs).filter(x=>x!=null&&x>=0);return d.length?d.reduce((a,b)=>a+b,0)/d.length:null}
+const avg=list=>list.length?(list.reduce((s,e)=>s+e.severity,0)/list.length).toFixed(1):"—";
+function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,1800)}
+
+/* ---------- router ---------- */
+let view={name:"loading"}, draft=null, range=30, confirmDel=false, editEnd=false;
+function go(v){view=v;confirmDel=false;editEnd=false;const a=$("#app");a.classList.add("anim");render();window.scrollTo(0,0);setTimeout(()=>a.classList.remove("anim"),300)}
+
+function render(){
+  const app=$("#app");
+  if(view.name==="setup") app.innerHTML=setup();
+  else if(view.name==="pin") app.innerHTML=pinScreen();
+  else if(view.name==="home") app.innerHTML=home();
+  else if(view.name==="report") app.innerHTML=report();
+  else if(view.name==="history") app.innerHTML=history();
+  else if(view.name==="detail") app.innerHTML=detail();
+  bind();
+}
+
+function home(){
+  const last=sorted()[0], m30=within(30);
+  const summary=!ready?`<div class="summary"><div class="summary-head"><span class="t">Loading your log…</span></div></div>`
+   : last?`<div>
+    <h2 class="section-h" style="font-size:13px">Summary</h2>
+    <div class="summary">
+      <div class="summary-head">${ICON.brain}<span class="t">Migraines</span><span class="when">${ago(last.startedAt)}</span></div>
+      <div class="big"><b>${m30.length}</b><span>${m30.length===1?"episode":"episodes"} in the last 30 days</span></div>
+      <div class="kpis">
+        <div class="kpi"><small>Avg severity</small><b style="color:${m30.length?sevColor(+avg(m30)):'inherit'}">${avg(m30)}</b></div>
+        <div class="kpi"><small>Last</small><b>${last.severity}<span style="font-size:13px;color:var(--fg2)">/10</span></b></div>
+        <div class="kpi" style="min-width:0"><small>Top trigger</small><b style="font-size:17px;padding-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(topTrigger(m30))}</b></div>
+      </div>
+    </div></div>`
+   :`<div class="summary"><div class="summary-head">${ICON.brain}<span class="t">Migraines</span></div><p style="margin:0;color:var(--fg2);font-size:15px">No episodes logged yet. When a headache starts, tap Report a Headache to record the time, severity, nausea and likely triggers.</p></div>`;
+  return `<section class="screen">
+    <div class="nav"><span></span><span></span></div>
+    <div><p class="eyebrow">${new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"})}</p><h1>Headcase</h1></div>
+    <div class="actions">
+      <button class="action primary" data-go="report"><span class="ico">${ICON.plus}</span><span class="txt"><b>Report a Headache</b><span>Log an episode as it happens</span></span>${ICON.chev.replace('class="chev"','class="chev" style="color:#fff"')}</button>
+      <button class="action" data-go="history"><span class="ico" style="background:var(--accent)">${ICON.list}</span><span class="txt"><b>Headache History</b><span>Trends, triggers and past episodes</span></span>${ICON.chev}</button>
+    </div>
+    ${ongoing().map(e=>`<div class="live"><span class="pulse" aria-hidden="true"></span><span class="grow"><b>Headache in progress</b><span>Started ${fmtTime(e.startedAt)}${new Date(e.startedAt).toDateString()!==new Date().toDateString()?" "+fmtDate(e.startedAt):""} · ${fmtDur(Date.now()-new Date(e.startedAt))} so far</span></span><button class="end-btn" data-endnow="${esc(e.id)}">End Now</button></div>`).join("")}
+    ${summary}
+    ${loadError?`<p class="err">${esc(loadError)}</p>`:""}<p class="note">Signed in as ${esc(session?.user?.email||"")} · <button class="link" id="changePin" style="font-size:12px;padding:0">Change passcode</button> · <button class="link" id="signout" style="font-size:12px;padding:0">Sign out</button></p>
+  </section>`;
+}
+
+function report(){
+  const d=draft;
+  const s=d.severity;
+  return `<section class="screen">
+    <div class="nav"><button class="nav-btn" id="cancelForm">Cancel</button><span class="nav-title">${d.editId?"Edit Episode":"New Episode"}</span><button class="nav-btn strong" id="saveTop" ${s?"":"disabled"}>${d.editId?"Done":"Add"}</button></div>
+    <div><p class="eyebrow">Migraines</p><h1>${d.editId?"Edit Headache":"Report a Headache"}</h1></div>
+    <div class="group">
+      <label class="row icon-row" for="when"><span class="ico" style="background:var(--accent)">${ICON.clock}</span><span class="grow">Started</span><input id="when" type="datetime-local" value="${d.startedAt}" max="${localInput()}"></label>
+      <label class="row icon-row" for="ongoing"><span class="ico" style="background:var(--red)">${ICON.hourglass}</span><span class="grow">Still going</span><span class="switch"><input id="ongoing" type="checkbox" role="switch" ${d.ongoing?"checked":""}><span></span></span></label>
+      ${d.ongoing?"":`<label class="row icon-row" for="ended"><span class="ico" style="background:var(--teal)">${ICON.stop}</span><span class="grow">Ended</span><input id="ended" type="datetime-local" value="${d.endedAt}" max="${localInput()}"></label>
+      <div class="row icon-row"><span class="ico" style="background:var(--orange)">${ICON.gauge}</span><span class="grow">Duration</span><span class="val" id="durVal">${draftDurText()}</span></div>`}
+    </div>
+    <p class="foot" style="margin-top:-14px">${d.ongoing?"Leave this on while the headache lasts. You can tap End Now on the home screen when it stops.":"Turn on Still going if the headache hasn’t stopped yet."}</p>
+    <div>
+      <h2 class="section-h">Severity</h2>
+      <div class="group"><div class="field">
+        <div class="sev-top"><span class="sev-num" style="color:${s?sevColor(s):'var(--fg2)'}">${s||"–"}<small>/ 10</small></span><span class="sev-label" style="color:${s?sevColor(s):'var(--fg2)'}">${s?SEV_WORD(s):"Tap to rate"}</span></div>
+        <div class="scale" role="radiogroup" aria-label="Pain severity">${Array.from({length:10},(_,i)=>i+1).map(n=>`<button role="radio" aria-checked="${n===s}" data-sev="${n}" class="${n<=s?'on':''}" style="${n<=s?`background:${sevColor(n)}`:''}">${n}</button>`).join("")}</div>
+        <div class="scale-ends"><span>Barely noticeable</span><span>Worst imaginable</span></div>
+      </div></div>
+    </div>
+    <div>
+      <h2 class="section-h">Nausea</h2>
+      <div class="group"><div class="field"><div class="seg" role="radiogroup" aria-label="Nausea level">${NAUSEA.map((n,i)=>`<button role="radio" aria-checked="${i===d.nausea}" data-nau="${i}" class="${i===d.nausea?'on':''}">${n}</button>`).join("")}</div></div></div>
+    </div>
+    <div>
+      <h2 class="section-h">Possible triggers</h2>
+      <div class="group">
+        <div class="field"><div class="chips">${TRIGGERS.map(t=>`<button class="chip ${d.triggers.includes(t)?'on':''}" data-trig="${esc(t)}" aria-pressed="${d.triggers.includes(t)}">${esc(t)}</button>`).join("")}</div></div>
+        <label class="row" for="other"><input id="other" type="text" placeholder="Other trigger (e.g. long drive, perfume)" value="${esc(d.other)}"></label>
+      </div>
+      <p class="foot">Select everything that might apply. Patterns show up in History over time.</p>
+    </div>
+    <div>
+      <h2 class="section-h">Notes</h2>
+      <div class="group"><div class="field"><textarea id="notes" placeholder="Aura, location of pain, medication taken…">${esc(d.notes)}</textarea></div></div>
+    </div>
+    <button class="save" id="save" ${s?"":"disabled"}>${!s?"Rate severity to save":d.editId?"Save Changes":"Save Episode"}</button>
+  </section>`;
+}
+
+function chart(){
+  const days=range, today=new Date();today.setHours(0,0,0,0);
+  const buckets=Array.from({length:days},(_,i)=>{const d=new Date(today);d.setDate(d.getDate()-(days-1-i));return{d,max:0}});
+  episodes.forEach(e=>{const d=new Date(e.startedAt);d.setHours(0,0,0,0);const i=Math.round((d-buckets[0].d)/864e5);if(i>=0&&i<days)buckets[i].max=Math.max(buckets[i].max,e.severity)});
+  const W=320,H=120,pl=0,pr=22,pt=6,pb=18,cw=(W-pl-pr)/days,bw=Math.max(2,cw*.62);
+  const y=v=>pt+(H-pt-pb)*(1-v/10);
+  let g="";
+  [0,5,10].forEach(v=>{g+=`<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--sep)" stroke-width=".5" ${v?'stroke-dasharray="2 3"':''}/><text x="${W-pr+4}" y="${y(v)+3.5}" font-size="9" fill="var(--fg2)">${v}</text>`});
+  buckets.forEach((b,i)=>{const x=pl+i*cw+(cw-bw)/2;
+    if(b.max) g+=`<rect x="${x}" y="${y(b.max)}" width="${bw}" height="${y(0)-y(b.max)}" rx="${Math.min(3,bw/2)}" fill="${sevColor(b.max)}"><title>${fmtDate(b.d)}: ${b.max}/10</title></rect>`;
+  });
+  const lbl=[0,Math.floor(days/2),days-1];
+  lbl.forEach((i,k)=>{const x=pl+i*cw+cw/2;g+=`<text x="${x}" y="${H-4}" font-size="9" fill="var(--fg2)" text-anchor="${k===0?'start':k===2?'end':'middle'}">${buckets[i].d.toLocaleDateString(undefined,{month:"short",day:"numeric"})}</text>`});
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Peak severity per day, last ${days} days">${g}</svg>`;
+}
+
+function history(){
+  const list=within(range), all=sorted();
+  const groups={};all.forEach(e=>{const k=new Date(e.startedAt).toLocaleDateString(undefined,{month:"long",year:"numeric"});(groups[k]=groups[k]||[]).push(e)});
+  const body=!all.length?`<div class="empty"><span class="ico" style="background:var(--accent);width:44px;height:44px;border-radius:12px">${ICON.brain}</span><h2 style="font-size:19px">No headaches logged</h2><p>Episodes you report will appear here with a severity chart and your most common triggers.</p><button class="link" data-go="report">Report a Headache</button></div>`
+  :Object.entries(groups).map(([m,eps])=>`<div><h2 class="section-h">${m}</h2><div class="group">${eps.map(e=>`
+    <button class="row" data-ep="${esc(e.id)}">
+      <span class="ep-dot" style="background:${sevColor(e.severity)}">${e.severity}</span>
+      <span class="grow ep-main"><b>${fmtDate(e.startedAt)}</b><span class="ep-sub">${fmtTime(e.startedAt)}${e.endedAt?" · "+fmtDurShort(durMs(e)):""} · ${[...(e.triggers||[]),...(e.other?[e.other]:[])].map(esc).join(", ")||"No triggers noted"}</span></span>
+      ${!e.endedAt?`<span class="pill on">Ongoing</span>`:e.nausea?`<span class="pill">${NAUSEA[e.nausea]} nausea</span>`:""}
+      ${ICON.chev}
+    </button>`).join("")}</div></div>`).join("");
+  return `<section class="screen">
+    <div class="nav"><button class="nav-btn" data-go="home">${ICON.back}<span style="margin-left:4px">Summary</span></button><span></span><button class="nav-btn" data-go="report" aria-label="Report a headache">${ICON.plus}</button></div>
+    <div><p class="eyebrow">Migraines</p><h1>Headache History</h1></div>
+    ${all.length?`<div class="chart-card">
+      <div class="tabs">${[[7,"W"],[30,"M"],[90,"3M"]].map(([n,l])=>`<button data-range="${n}" class="${range===n?'on':''}">${l}</button>`).join("")}</div>
+      <div class="big"><b>${list.length}</b><span>${list.length===1?"episode":"episodes"} · avg severity ${avg(list)}</span></div>
+      ${chart()}
+    </div>
+    <div class="group">
+      <div class="row icon-row"><span class="ico" style="background:var(--accent)">${ICON.hourglass}</span><span class="grow">Average length</span><span class="val">${fmtDur(avgDur(list))}</span></div>
+      <div class="row icon-row"><span class="ico" style="background:var(--orange)">${ICON.bolt}</span><span class="grow">Most common trigger</span><span class="val">${esc(topTrigger(list))}</span></div>
+      <div class="row icon-row"><span class="ico" style="background:var(--teal)">${ICON.drop}</span><span class="grow">With nausea</span><span class="val">${list.length?Math.round(100*list.filter(e=>e.nausea>0).length/list.length)+"%":"—"}</span></div>
+      <div class="row icon-row"><span class="ico" style="background:var(--red)">${ICON.gauge}</span><span class="grow">Severe (7+)</span><span class="val">${list.filter(e=>e.severity>=7).length}</span></div>
+    </div>`:""}
+    ${body}
+  </section>`;
+}
+
+function detail(){
+  const e=episodes.find(x=>x.id===view.id);
+  if(!e) return `<section class="screen"><div class="nav"><button class="nav-btn" data-go="history">${ICON.back}<span style="margin-left:4px">History</span></button></div><div class="empty"><p>This episode was deleted.</p></div></section>`;
+  const trig=[...(e.triggers||[])];
+  return `<section class="screen">
+    <div class="nav"><button class="nav-btn" data-go="history">${ICON.back}<span style="margin-left:4px">History</span></button><span class="nav-title">Episode</span><button class="nav-btn" id="editBtn">Edit</button></div>
+    <div><p class="eyebrow">${fmtLong(e.startedAt)}</p><h1 style="color:${sevColor(e.severity)}">${e.severity}/10 <span style="font-size:22px">${SEV_WORD(e.severity)}</span></h1></div>
+    <div class="group">
+      <div class="row icon-row"><span class="ico" style="background:var(--accent)">${ICON.clock}</span><span class="grow">Started</span><span class="val">${fmtTime(e.startedAt)}</span></div>
+      <div class="row icon-row"><span class="ico" style="background:var(--teal)">${ICON.stop}</span><span class="grow">Ended</span><span class="val">${e.endedAt?(new Date(e.endedAt).toDateString()!==new Date(e.startedAt).toDateString()?fmtDate(e.endedAt)+", ":"")+fmtTime(e.endedAt):"Still going"}</span></div>
+      <div class="row icon-row"><span class="ico" style="background:var(--orange)">${ICON.hourglass}</span><span class="grow">Length</span><span class="val">${e.endedAt?fmtDur(durMs(e)):fmtDur(Date.now()-new Date(e.startedAt))+" so far"}</span></div>
+      <div class="row icon-row"><span class="ico" style="background:${sevColor(e.severity)}">${ICON.gauge}</span><span class="grow">Severity</span><span class="val">${e.severity} of 10</span></div>
+      <div class="row icon-row"><span class="ico" style="background:var(--teal)">${ICON.drop}</span><span class="grow">Nausea</span><span class="val">${NAUSEA[e.nausea||0]}</span></div>
+      ${editEnd?`<div class="end-edit"><label for="editEnd" style="font-size:15px;color:var(--fg2)">End time</label><input id="editEnd" type="datetime-local" value="${localInput(e.endedAt?new Date(e.endedAt):new Date())}" max="${localInput()}" style="text-align:left;max-width:100%"><div class="btns"><button id="cancelEnd">Cancel</button><button class="go" id="saveEnd">Save</button></div></div>`
+        :!e.endedAt?`<div class="row" style="gap:8px"><button class="end-btn" data-endnow="${esc(e.id)}">End Now</button><button class="link" id="setEnd" style="font-size:15px">Set end time</button></div>`:""}
+    </div>
+    <div><h2 class="section-h">Triggers</h2><div class="group"><div class="field">${trig.length||e.other?`<div class="chips">${trig.map(t=>`<span class="chip on" style="cursor:default">${esc(t)}</span>`).join("")}${e.other?`<span class="chip" style="cursor:default">Other: ${esc(e.other)}</span>`:""}</div>`:`<span style="color:var(--fg2)">None noted</span>`}</div></div></div>
+    ${e.notes?`<div><h2 class="section-h">Notes</h2><div class="group"><div class="field" style="white-space:pre-wrap">${esc(e.notes)}</div></div></div>`:""}
+    ${confirmDel?`<div class="confirm"><p>Delete this episode? This can’t be undone.</p><div class="btns"><button id="keep">Keep</button><button class="del" id="reallyDel">Delete</button></div></div>`
+      :`<div class="group"><button class="row danger" id="del">Delete Episode</button></div>`}
+  </section>`;
+}
+
+/* ---------- events ---------- */
+function draftDurText(){const ms=new Date(draft.endedAt)-new Date(draft.startedAt);return isNaN(ms)?"—":ms<0?"End is before start":fmtDur(ms)}
+function draftFrom(e){return{editId:e.id,startedAt:localInput(new Date(e.startedAt)),ongoing:!e.endedAt,endedAt:localInput(e.endedAt?new Date(e.endedAt):new Date()),severity:e.severity,nausea:e.nausea||0,triggers:[...(e.triggers||[])],other:e.other||"",notes:e.notes||""}}
+function newDraft(){return{ongoing:true,endedAt:localInput(),startedAt:localInput(),severity:0,nausea:0,triggers:[],other:"",notes:""}}
+function bind(){
+  if(view.name==="pin"){
+    document.querySelectorAll("[data-key]").forEach(b=>b.onclick=()=>pinKey(b.dataset.key));
+    $("#pinDel")&&($("#pinDel").onclick=()=>pinKey("del"));
+    $("#pinCancel")&&($("#pinCancel").onclick=()=>go({name:"home"}));
+    $("#pinBack")&&($("#pinBack").onclick=()=>{if(pin.stage==="confirm"){pin.stage="new";pin.entry="";pin.first="";pin.msg="";render()}else if(pin.purpose==="signup"){pin.stage="email";pin.entry="";render()}});
+    $("#swapMode")&&($("#swapMode").onclick=()=>{pin.purpose=pin.purpose==="signup"?"signin":"signup";pin.msg="";render()});
+    $("#otherEmail")&&($("#otherEmail").onclick=()=>{forgetEmail();pin={...pin,email:"",stage:"email",entry:"",msg:"",err:false};render()});
+    $("#forgot")&&($("#forgot").onclick=async()=>{
+      const {error}=await sb.auth.resetPasswordForEmail(pin.email,{redirectTo:location.origin+location.pathname});
+      pin.entry="";pin.err=!!error;pin.msg=error?authMessage(error):"We emailed you a link. Open it on this device to set a new passcode.";render()});
+    $("#emailForm")&&($("#emailForm").onsubmit=ev=>{ev.preventDefault();const v=$("#email").value.trim();if(!v)return;
+      pin.email=v;pin.msg="";pin.err=false;
+      if(pin.purpose==="signup")pin.stage="new";else{rememberEmail(v);pin.stage="enter"}
+      render()});
+  }
+  $("#changePin")&&($("#changePin").onclick=()=>startPin("change"));
+  $("#signout")&&($("#signout").onclick=()=>sb.auth.signOut());
+  document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const n=b.dataset.go;if(n==="report")draft=newDraft();go({name:n})});
+  document.querySelectorAll("[data-endnow]").forEach(b=>b.onclick=async()=>{b.disabled=true;try{await updateEnd(b.dataset.endnow,new Date().toISOString());toast("Headache ended")}catch(e){b.disabled=false;toast("Couldn’t save. Try again.")}});
+  document.querySelectorAll("[data-ep]").forEach(b=>b.onclick=()=>go({name:"detail",id:b.dataset.ep}));
+  document.querySelectorAll("[data-range]").forEach(b=>b.onclick=()=>{range=+b.dataset.range;render()});
+  if(view.name==="report"){
+    const sync=()=>{draft.startedAt=$("#when").value||draft.startedAt;if($("#ended"))draft.endedAt=$("#ended").value||draft.endedAt;draft.other=$("#other").value;draft.notes=$("#notes").value};
+    document.querySelectorAll("[data-sev]").forEach(b=>b.onclick=()=>{sync();draft.severity=+b.dataset.sev;keepScroll(render)});
+    document.querySelectorAll("[data-nau]").forEach(b=>b.onclick=()=>{sync();draft.nausea=+b.dataset.nau;keepScroll(render)});
+    document.querySelectorAll("[data-trig]").forEach(b=>b.onclick=()=>{sync();const t=b.dataset.trig,i=draft.triggers.indexOf(t);i<0?draft.triggers.push(t):draft.triggers.splice(i,1);keepScroll(render)});
+    const save=async()=>{sync();if(!draft.severity)return;
+      if(!draft.ongoing&&new Date(draft.endedAt)<new Date(draft.startedAt)){toast("End time is before the start time.");return}
+      $("#save").disabled=true;
+      const ep={startedAt:new Date(draft.startedAt).toISOString(),endedAt:draft.ongoing?null:new Date(draft.endedAt).toISOString(),severity:draft.severity,nausea:draft.nausea,triggers:draft.triggers,other:draft.other.trim(),notes:draft.notes.trim(),createdAt:new Date().toISOString()};
+      try{
+        if(draft.editId){await editEpisode(draft.editId,ep);toast("Changes saved");go({name:"detail",id:draft.editId})}
+        else{await addEpisode(ep);toast("Episode saved");go({name:"history"})}
+      }
+      catch(err){console.warn(err);$("#save").disabled=false;toast("Couldn’t save. Check your connection and try again.")}};
+    $("#ongoing").onchange=ev=>{sync();draft.ongoing=ev.target.checked;if(!draft.ongoing&&new Date(draft.endedAt)<new Date(draft.startedAt))draft.endedAt=localInput();keepScroll(render)};
+    const upd=()=>{sync();$("#durVal")&&($("#durVal").textContent=draftDurText())};
+    $("#when").oninput=upd;$("#ended")&&($("#ended").oninput=upd);
+    $("#save").onclick=save;
+    $("#cancelForm").onclick=()=>draft.editId?go({name:"detail",id:draft.editId}):go({name:"home"});$("#saveTop").onclick=save;
+  }
+  if(view.name==="detail"){
+    $("#editBtn")&&($("#editBtn").onclick=()=>{const e=episodes.find(x=>x.id===view.id);if(e){draft=draftFrom(e);go({name:"report"})}});
+    $("#setEnd")&&($("#setEnd").onclick=()=>{editEnd=true;render()});
+    $("#cancelEnd")&&($("#cancelEnd").onclick=()=>{editEnd=false;render()});
+    $("#saveEnd")&&($("#saveEnd").onclick=async()=>{const e=episodes.find(x=>x.id===view.id),v=$("#editEnd").value;if(!v)return;
+      if(new Date(v)<new Date(e.startedAt)){toast("End time is before the start time.");return}
+      if(new Date(v)>new Date()){toast("End time can’t be in the future.");return}
+      try{editEnd=false;await updateEnd(e.id,new Date(v).toISOString());toast("End time saved")}catch(err){toast("Couldn’t save. Try again.")}});
+    $("#del")&&($("#del").onclick=()=>{confirmDel=true;render()});
+    $("#keep")&&($("#keep").onclick=()=>{confirmDel=false;render()});
+    $("#reallyDel")&&($("#reallyDel").onclick=async()=>{try{await deleteEpisode(view.id);toast("Episode deleted");go({name:"history"})}catch(e){toast("Couldn’t delete. Try again.")}});
+  }
+}
+function keepScroll(fn){const y=window.scrollY;fn();window.scrollTo(0,y)}
+
+render();
+initStore();
+</script>
+</body>
+</html>
