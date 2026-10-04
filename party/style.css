@@ -1,0 +1,23 @@
+:root{--night:#1b1f3b;--ink:#23264a;--muted:#6b6f86;--pink:#ff5d8f;--pink-ink:#c0264f;--lemon:#ffd23f;--mint:#3ccf9e;--line:#e6e7f0;--bg:#f6f7fb}
+*{box-sizing:border-box}
+body{margin:0;font-family:Figtree,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif;line-height:1.15;margin:0 0 .5em}
+a{color:var(--pink-ink)}
+input,textarea,select,button{font:inherit}
+input,textarea,select{width:100%;padding:.6rem .7rem;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--pink)}
+input[type=checkbox],input[type=radio]{width:auto}
+label{display:block;font-weight:600;font-size:.9rem;margin:.8rem 0 .3rem}
+button,.btn{display:inline-block;border:0;border-radius:999px;padding:.6rem 1.1rem;font-weight:700;background:var(--night);color:#fff;cursor:pointer;text-decoration:none;line-height:1.3}
+button.pink{background:var(--pink)} button.ghost,.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+button.small,.btn.small{padding:.35rem .8rem;font-size:.85rem}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,a:focus-visible{outline:3px solid var(--lemon);outline-offset:2px}
+.muted{color:var(--muted)} .row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem} @media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.check{display:flex;gap:.5rem;align-items:flex-start;font-weight:400} .check input{margin-top:.35rem}
+.error{background:#ffe0e8;color:#a3173f;border-radius:12px;padding:.8rem 1rem;font-weight:600}
+.ok{background:#d6f5ea;color:#11775a;border-radius:12px;padding:.8rem 1rem;font-weight:700}
+.pill{display:inline-block;border-radius:999px;padding:.1rem .65rem;font-size:.8rem;font-weight:700}
+.p-yes{background:#d6f5ea;color:#11775a}.p-maybe{background:#fff2c2;color:#7a5a00}.p-no{background:#ffe0e8;color:#a3173f}.p-pending{background:#eceef5;color:var(--muted)}
+.loading{padding:3rem;text-align:center;color:var(--muted)}

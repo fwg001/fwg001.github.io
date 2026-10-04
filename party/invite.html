@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#1b120d">
+<title>You're invited</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ground:#1b120d;--card:#2a1c14;--field:#1f150f;--cream:#f6e7d3;--text2:#e6d3bd;--muted:#c9b39c;--amber:#ffb15c;--pumpkin:#f47b20;--glow:#ffd36b;--line:#4a3426;--display:"Bowlby One",Figtree,system-ui,sans-serif}
+*{box-sizing:border-box}
+html{background:var(--ground)}
+body{margin:0;background:var(--ground);color:var(--cream);font-family:Figtree,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+a{color:var(--amber);font-weight:600}a:hover{color:var(--glow)}
+:focus-visible{outline:3px solid var(--glow);outline-offset:3px}
+h1,h2{font-family:var(--display);font-weight:400;margin:0;line-height:1}
+.page{max-width:1120px;margin:0 auto;padding:56px 24px 80px}
+.grid{display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start}
+.info{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.patch{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.patch svg{display:block;overflow:visible;height:auto}
+.pk1{width:190px}.pk2{width:150px}.pk3{width:92px}
+.eyebrow{margin:0 0 12px;font-size:18px;font-weight:600;color:var(--amber);letter-spacing:.02em}
+h1{font-size:clamp(2.75rem,7vw,4.5rem);line-height:.98;letter-spacing:-.01em}
+.facts{border-top:2px dashed var(--line)}
+.fact{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:16px 0;border-bottom:2px dashed var(--line)}
+.fact dt{font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:13px;padding-top:3px}
+.fact dd{margin:0;display:flex;flex-direction:column;gap:4px;font-size:18px}
+.fact .strong{font-weight:600}
+dl{margin:0}
+.details{margin:0;font-size:17px;line-height:1.6;color:var(--text2);white-space:pre-line}
+.card{flex:1 1 420px;min-width:0;background:var(--card);border:1px solid #47301f;border-radius:28px;padding:36px;display:flex;flex-direction:column;gap:24px}
+.card h2{font-size:32px}
+form{display:flex;flex-direction:column;gap:24px;margin:0}
+.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;border:0;margin:0;padding:0}
+.choices legend{font-family:var(--display);font-size:32px;line-height:1;padding:0;margin-bottom:24px}
+.choice{display:flex;align-items:center;justify-content:center;text-align:center;min-height:64px;border-radius:16px;border:2px solid var(--cream);font-size:17px;font-weight:700;cursor:pointer;padding:10px 8px;position:relative}
+.choice input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.choice:has(input:checked){background:var(--pumpkin);color:var(--ground)}
+.choice:has(input:focus-visible){outline:3px solid var(--glow);outline-offset:3px}
+.field{display:flex;flex-direction:column;gap:10px}
+.field>label,.field>.lbl{font-weight:600;font-size:15px;color:var(--text2)}
+.stepper{display:flex;align-items:center;gap:12px}
+.stepper button{width:48px;height:48px;border-radius:999px;border:2px solid var(--cream);background:transparent;color:var(--cream);font-size:24px;font-weight:700;cursor:pointer;line-height:1}
+.stepper button:disabled{opacity:.4;cursor:default}
+.stepper output{min-width:40px;text-align:center;font-family:var(--display);font-size:28px}
+textarea{width:100%;border-radius:14px;border:2px solid var(--cream);background:var(--field);color:var(--cream);padding:12px 14px;font:inherit;font-size:16px;resize:vertical}
+textarea::placeholder{color:#9c8774}
+.primary{min-height:56px;border:0;border-radius:999px;background:var(--pumpkin);color:var(--ground);font:inherit;font-size:18px;font-weight:800;cursor:pointer;width:100%}
+.primary:disabled{opacity:.6;cursor:default}
+.hint{margin:-12px 0 0;text-align:center;font-size:14px;color:var(--muted)}
+.ok,.err{display:flex;align-items:center;gap:12px;border-radius:16px;padding:14px 16px;font-weight:700;font-size:16px}
+.ok{background:#34401f;border:1px solid #5e7d2e;color:#e3f1c4}
+.err{background:#4a1d1a;border:1px solid #8a3a33;color:#ffd9d4}
+.who{display:flex;flex-direction:column;gap:16px;border-top:2px dashed var(--line);padding-top:24px}
+.who h2{font-size:24px}
+.tot{display:flex;gap:28px;flex-wrap:wrap}
+.tot div{display:flex;flex-direction:column}
+.tot b{font-family:var(--display);font-weight:400;font-size:30px;color:var(--amber);line-height:1.2}
+.tot span{font-size:14px;color:var(--muted)}
+.who h3{margin:8px 0 0;font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.who ul{list-style:none;margin:0;padding:0}
+.who li{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-bottom:1px solid #3d2a1d}
+.who .nm{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.who .nm strong{font-size:16px}
+.who .you{font-size:14px;color:var(--amber)}
+.who .sm{font-size:14px;color:var(--muted)}
+.empty{color:var(--muted);margin:0}
+.solo{max-width:480px;margin:18vh auto;padding:24px;text-align:center}
+.solo h1{font-size:2.4rem;margin:24px 0 12px}.solo p{color:var(--text2)}
+.loading{padding:30vh 24px;text-align:center;color:var(--muted)}
+@media (max-width:600px){
+  .page{padding:32px 20px 48px}.grid{gap:28px}.info{gap:22px}
+  .patch{justify-content:center;gap:8px}.pk1{width:140px}.pk2{width:108px}.pk3{width:68px}
+  .eyebrow{font-size:16px}.fact{grid-template-columns:76px minmax(0,1fr)}.fact dd{font-size:16px}.fact dt{font-size:12px}
+  .details{font-size:16px}.card{padding:22px;border-radius:22px}.card h2,.choices legend{font-size:26px}
+  .choice{min-height:56px;font-size:15px}
+}
+</style>
+</head>
+<body>
+<main id="app"><div class="loading">Lighting the lanterns…</div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="common.js"></script>
+<script src="invite.js"></script>
+</body>
+</html>

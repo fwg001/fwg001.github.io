@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Party dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+.wrap{max-width:900px;margin:0 auto;padding:1.25rem}
+header.top{background:var(--night);color:#fff;padding:1.1rem 0}
+header.top .wrap{padding-top:0;padding-bottom:0;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+header.top h1{margin:0;font-size:1.35rem} header.top button{background:transparent;border:1.5px solid #ffffff55}
+section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.25rem;margin:1rem 0}
+section.todo{border:2px solid var(--pink)}
+.tally{display:flex;gap:1.5rem;flex-wrap:wrap} .tally div{min-width:70px}
+.tally b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:2rem;line-height:1}
+.flash{position:sticky;top:.5rem;z-index:5;margin-top:1rem}
+.item{border-top:1px solid var(--line);padding:.85rem 0;display:grid;grid-template-columns:1fr auto;gap:.4rem 1rem;align-items:start}
+.item:first-of-type{border-top:0} .item .acts{grid-column:1/-1}
+.item select{width:auto;padding:.3rem .5rem}
+.group{background:var(--bg);border-radius:12px;padding:1rem;margin:.5rem 0 1rem}
+.login{max-width:380px;margin:12vh auto;padding:1.5rem}
+h3{margin-top:1.2rem}
+</style>
+</head>
+<body>
+<div id="app"><div class="loading">Loading…</div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="common.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
