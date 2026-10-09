@@ -1,8 +1,10 @@
 (function () {
-  const { sb, configured, esc, firstName, fmtDate, icsDownload } = window.Party;
+  const { sb, configured, esc, firstName, fmtDate, normPhone, icsDownload } = window.Party;
   const app = document.getElementById('app');
-  const token = new URLSearchParams(location.search).get('t') || '';
-  let data = null, flash = '', size = 1;
+  const params = new URLSearchParams(location.search);
+  let token = params.get('t') || '';
+  const joinCode = params.get('join') || '';
+  let data = null, flash = '', size = 1, draft = { name: '', email: '', phone: '', status: '', note: '' };
 
   // The pumpkin patch: glowing jack-o'-lantern, winking red pumpkin, blue-gray grinner.
   const PATCH = `<div class="patch" aria-hidden="true">
@@ -18,6 +20,13 @@
 
   async function load() {
     if (!configured) return solo('Almost ready', "This site isn't connected to its database yet.");
+    if (!token && joinCode) {
+      const { data: j, error: je } = await sb.rpc('get_join', { p_code: joinCode });
+      if (je) return solo('Something went wrong', "We couldn't load the invitation. Please try again in a minute.");
+      if (!j) return solo("This invite link isn't active", 'Please ask the hosts for a new link.');
+      data = j;
+      return renderJoin();
+    }
     if (!token) return solo("We couldn't find that invite", 'Check that you opened the full link from your message.');
     const { data: d, error } = await sb.rpc('get_invite', { p_token: token });
     if (error) return solo('Something went wrong', "We couldn't load your invitation. Please try again in a minute.");
@@ -39,20 +48,18 @@
       ${maybe ? `<h3>Maybe</h3><ul>${maybe}</ul>` : ''}</section>`;
   }
 
-  function render() {
-    const p = data.party, g = data.guest;
-    document.title = p.title || "You're invited";
-    const past = p.starts_at && new Date(p.starts_at) < new Date();
+  function when(p) {
     const day = p.starts_at ? fmtDate(p.starts_at, p.time_zone, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }) : 'Date to be announced';
     const time = p.starts_at ? fmtDate(p.starts_at, p.time_zone, { hour: 'numeric', minute: '2-digit' }) + (p.ends_at ? ' – ' + fmtDate(p.ends_at, p.time_zone, { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }) : '') : '';
-    const opt = (v, label) => `<label class="choice"><input type="radio" name="status" value="${v}" ${g.status === v ? 'checked' : ''} required><span>${label}</span></label>`;
-    const banner = flash ? `<div class="${flash.startsWith('!') ? 'err' : 'ok'}" role="status">${flash.startsWith('!') ? '' : CHECK}<span>${esc(flash.replace(/^!/, ''))}</span></div>` : '';
+    return { day, time };
+  }
 
-    app.innerHTML = `<div class="page"><div class="grid">
-      <div class="info">
+  function infoHtml(p, eyebrow, past) {
+    const { day, time } = when(p);
+    return `<div class="info">
         ${PATCH}
         <div>
-          <p class="eyebrow">${esc(firstName(g.name))}, you're invited${p.host_name ? ' by ' + esc(p.host_name) : ''}</p>
+          <p class="eyebrow">${eyebrow}</p>
           <h1>${esc(p.title || 'A party')}</h1>
         </div>
         <dl class="facts">
@@ -60,25 +67,115 @@
           ${p.location ? `<div class="fact"><dt>Where</dt><dd><span class="strong">${esc(p.location)}</span><a href="https://maps.google.com/?q=${encodeURIComponent(p.location)}" target="_blank" rel="noopener">Open in maps</a></dd></div>` : ''}
         </dl>
         ${p.details ? `<p class="details">${esc(p.details)}</p>` : ''}
-      </div>
-      <div class="card">
-        ${banner}
-        ${past ? '<h2>This party has already happened</h2><p class="empty">Thanks for celebrating with us!</p>' : `
-        <form id="rsvp" novalidate>
-          <fieldset class="choices">
-            <legend>${g.status === 'pending' ? 'Can you make it?' : 'Your RSVP'}</legend>
-            ${opt('yes', 'Yes!')}${opt('maybe', 'Maybe')}${opt('no', "Can't make it")}
-          </fieldset>
-          <div class="field">
+      </div>`;
+  }
+
+  function bannerHtml() {
+    return flash ? `<div class="${flash.startsWith('!') ? 'err' : 'ok'}" role="status">${flash.startsWith('!') ? '' : CHECK}<span>${esc(flash.replace(/^!/, ''))}</span></div>` : '';
+  }
+
+  const opt = (v, label, cur) => `<label class="choice"><input type="radio" name="status" value="${v}" ${cur === v ? 'checked' : ''} required><span>${label}</span></label>`;
+  const stepperHtml = () => `<div class="field">
             <span class="lbl" id="size-lbl">How many people, including you?</span>
             <div class="stepper" role="group" aria-labelledby="size-lbl">
               <button type="button" id="dec" aria-label="One fewer person" ${size <= 1 ? 'disabled' : ''}>−</button>
               <output id="size" aria-live="polite">${size}</output>
               <button type="button" id="inc" aria-label="One more person" ${size >= 20 ? 'disabled' : ''}>+</button>
             </div>
-          </div>
+          </div>`;
+
+  function wireCommon(form) {
+    const p = data.party;
+    const cal = document.getElementById('cal');
+    if (cal) cal.addEventListener('click', (e) => {
+      e.preventDefault();
+      icsDownload('pumpkin-party.ics', [{ uid: 'party-' + new Date(p.starts_at).getTime(), start: p.starts_at,
+        end: p.ends_at || new Date(new Date(p.starts_at).getTime() + 3 * 3600e3).toISOString(),
+        title: p.title, location: p.location, description: (p.details ? p.details + '\n\n' : '') + location.href }]);
+    });
+    if (!form) return;
+    const out = form.querySelector('#size'), dec = form.querySelector('#dec'), inc = form.querySelector('#inc');
+    const setSize = (n) => { size = Math.min(20, Math.max(1, n)); out.textContent = size; dec.disabled = size <= 1; inc.disabled = size >= 20; };
+    dec.addEventListener('click', () => setSize(size - 1));
+    inc.addEventListener('click', () => setSize(size + 1));
+  }
+
+  const doneMsg = (s) => (s === 'yes' ? "You're on the list. See you there!" : s === 'no' ? "Thanks for letting us know. You'll be missed!" : 'Got it. We hope you can make it!');
+  const toCard = () => { const card = document.querySelector('.card'); if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+
+  // ---------- Open invite link: sign up ----------
+  function renderJoin() {
+    const p = data.party;
+    document.title = p.title || "You're invited";
+    const past = p.starts_at && new Date(p.starts_at) < new Date();
+    app.innerHTML = `<div class="page"><div class="grid">
+      ${infoHtml(p, `You're invited${p.host_name ? ' by ' + esc(p.host_name) : ''}`, past)}
+      <div class="card">
+        ${bannerHtml()}
+        ${past ? '<h2>This party has already happened</h2><p class="empty">Thanks for celebrating with us!</p>' : `
+        <form id="join" novalidate>
+          <h2>Join the party</h2>
+          <div class="field"><label for="j-name">Your name</label><input id="j-name" name="name" autocomplete="name" maxlength="100" value="${esc(draft.name)}" required></div>
+          <div class="field"><label for="j-email">Email</label><input id="j-email" name="email" type="email" autocomplete="email" maxlength="200" value="${esc(draft.email)}"></div>
+          <div class="field"><label for="j-phone">Mobile number</label><input id="j-phone" name="phone" type="tel" autocomplete="tel" maxlength="30" value="${esc(draft.phone)}"></div>
+          <p class="note">Add an email, a mobile number, or both so the hosts can send you reminders. Only the hosts see your contact details.</p>
+          <fieldset class="choices">
+            <legend class="small-legend">Can you make it?</legend>
+            ${opt('yes', 'Yes!', draft.status)}${opt('maybe', 'Maybe', draft.status)}${opt('no', "Can't make it", draft.status)}
+          </fieldset>
+          ${stepperHtml()}
           <div class="field">
-            <label for="note">Note for the host (optional)</label>
+            <label for="note">Note for the hosts (optional)</label>
+            <textarea id="note" rows="3" maxlength="500" placeholder="Allergies, running late, can't wait…">${esc(draft.note)}</textarea>
+          </div>
+          <button class="primary">Send RSVP</button>
+        </form>`}
+        ${whoHtml()}
+      </div>
+    </div></div>`;
+    const form = document.getElementById('join');
+    wireCommon(form);
+    if (!form) return;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const q = (sel) => form.querySelector(sel);
+      draft = { name: q('#j-name').value.trim(), email: q('#j-email').value.trim(), phone: q('#j-phone').value.trim(),
+        status: (q('input[name=status]:checked') || {}).value || '', note: q('#note').value };
+      const problem = !draft.name ? 'Please enter your name.'
+        : !draft.email && !draft.phone ? 'Please add an email or mobile number so the hosts can reach you.'
+        : draft.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(draft.email) ? "That email address doesn't look right."
+        : !draft.status ? "Pick Yes, Maybe, or Can't make it." : '';
+      if (problem) { flash = '!' + problem; renderJoin(); toCard(); return; }
+      const btn = q('.primary'); btn.disabled = true; btn.textContent = 'Saving…';
+      const { data: r, error } = await sb.rpc('register_guest', { p_code: joinCode, p_name: draft.name, p_email: draft.email,
+        p_phone: draft.phone ? normPhone(draft.phone) : '', p_status: draft.status, p_party_size: size, p_note: draft.note });
+      if (error || !r) { flash = '!' + ((error && error.message) || "That didn't save. Please try again."); renderJoin(); toCard(); return; }
+      token = r.token;
+      history.replaceState(null, '', location.pathname + '?t=' + encodeURIComponent(token));
+      flash = doneMsg(draft.status) + ' This page is now your personal invite. Bookmark it to change your answer later.';
+      await load();
+      toCard();
+    });
+  }
+
+  // ---------- Personal invite ----------
+  function render() {
+    const p = data.party, g = data.guest;
+    document.title = p.title || "You're invited";
+    const past = p.starts_at && new Date(p.starts_at) < new Date();
+    app.innerHTML = `<div class="page"><div class="grid">
+      ${infoHtml(p, `${esc(firstName(g.name))}, you're invited${p.host_name ? ' by ' + esc(p.host_name) : ''}`, past)}
+      <div class="card">
+        ${bannerHtml()}
+        ${past ? '<h2>This party has already happened</h2><p class="empty">Thanks for celebrating with us!</p>' : `
+        <form id="rsvp" novalidate>
+          <fieldset class="choices">
+            <legend>${g.status === 'pending' ? 'Can you make it?' : 'Your RSVP'}</legend>
+            ${opt('yes', 'Yes!', g.status)}${opt('maybe', 'Maybe', g.status)}${opt('no', "Can't make it", g.status)}
+          </fieldset>
+          ${stepperHtml()}
+          <div class="field">
+            <label for="note">Note for the hosts (optional)</label>
             <textarea id="note" name="note" rows="3" maxlength="500" placeholder="Allergies, running late, can't wait…">${esc(g.note)}</textarea>
           </div>
           <button class="primary">${g.status === 'pending' ? 'Send RSVP' : 'Update RSVP'}</button>
@@ -88,37 +185,20 @@
       </div>
     </div></div>`;
 
-    const cal = document.getElementById('cal');
-    if (cal) cal.addEventListener('click', (e) => {
-      e.preventDefault();
-      icsDownload('pumpkin-party.ics', [{ uid: 'party-' + new Date(p.starts_at).getTime(), start: p.starts_at,
-        end: p.ends_at || new Date(new Date(p.starts_at).getTime() + 3 * 3600e3).toISOString(),
-        title: p.title, location: p.location, description: (p.details ? p.details + '\n\n' : '') + location.href }]);
-    });
-
     const form = document.getElementById('rsvp');
+    wireCommon(form);
     if (!form) return;
-    const out = form.querySelector('#size'), dec = form.querySelector('#dec'), inc = form.querySelector('#inc');
-    const setSize = (n) => { size = Math.min(20, Math.max(1, n)); out.textContent = size; dec.disabled = size <= 1; inc.disabled = size >= 20; };
-    dec.addEventListener('click', () => setSize(size - 1));
-    inc.addEventListener('click', () => setSize(size + 1));
-
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = (form.querySelector('input[name=status]:checked') || {}).value;
-      if (!status) { flash = '!Pick Yes, Maybe, or Can\'t make it first.'; render(); return; }
+      if (!status) { flash = "!Pick Yes, Maybe, or Can't make it first."; render(); return; }
       const btn = form.querySelector('.primary');
       btn.disabled = true; btn.textContent = 'Saving…';
       const { data: d, error } = await sb.rpc('submit_rsvp', { p_token: token, p_status: status, p_party_size: size, p_note: form.querySelector('#note').value || '' });
       if (error) flash = '!' + (error.message || "That didn't save. Please try again.");
-      else {
-        data = d; size = d.guest.party_size;
-        const s = d.guest.status;
-        flash = s === 'yes' ? "You're on the list. See you there!" : s === 'no' ? "Thanks for letting us know. You'll be missed!" : 'Got it. We hope you can make it!';
-      }
+      else { data = d; size = d.guest.party_size; flash = doneMsg(d.guest.status); }
       render();
-      const card = document.querySelector('.card');
-      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      toCard();
     });
   }
 

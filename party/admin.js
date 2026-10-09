@@ -1,7 +1,7 @@
 (function () {
   const { sb, configured, esc, firstName, fmtDate, normPhone, icsDownload } = window.Party;
   const app = document.getElementById('app');
-  let party = null, guests = [], flash = '', busy = false;
+  let party = null, guests = [], flash = '', busy = false, editingId = null, editDraft = null;
   const store = { get: (k, d) => { try { return localStorage.getItem(k) || d; } catch { return d; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
   let outlookKind = store.get('outlookKind', 'live');
   const DAY = 864e5;
@@ -95,6 +95,19 @@
     if (field || row.length) { row.push(field); rows.push(row); }
     return rows.filter((r) => r.some((c) => c.trim()));
   }
+  // Finds the email and phone anywhere in a pasted line, with or without commas:
+  // "Jo Lee, jo@x.com, 555-1234", "Jo Lee jo@x.com", "Jo Lee <jo@x.com>", or tab-separated spreadsheet rows.
+  function parseLine(line) {
+    let rest = String(line || '');
+    const em = rest.match(/[^\s,;<>()"']+@[^\s,;<>()"']+\.[^\s,;<>()"']+/);
+    const email = em ? em[0] : '';
+    if (email) rest = rest.replace(email, ' ');
+    const ph = rest.match(/\+?\(?\d[\d\s().-]{5,}\d/);
+    const phone = ph && ph[0].replace(/\D/g, '').length >= 7 ? ph[0].trim() : '';
+    if (phone) rest = rest.replace(ph[0], ' ');
+    const name = rest.replace(/[,;\t<>()"]+/g, ' ').replace(/\s+/g, ' ').trim();
+    return { name, email, phone };
+  }
   function mapStatus(v) {
     v = (v || '').toLowerCase().trim();
     if (/^(yes|y|totally|going|attending|accepted?|confirmed|coming)\b/.test(v)) return 'yes';
@@ -172,15 +185,46 @@
     </section>`;
   }
 
+  function editRow(g) {
+    if (editDraft) g = { ...g, ...editDraft };
+    return `<form class="item" id="edit" data-id="${g.id}" style="display:block">
+      <strong>Edit guest</strong>
+      <div class="grid2">
+        <div><label for="e-name">Name</label><input id="e-name" name="name" value="${esc(g.name)}" required maxlength="100"></div>
+        <div><label for="e-email">Email</label><input id="e-email" name="email" type="email" value="${esc(g.email)}"></div>
+        <div><label for="e-phone">Phone</label><input id="e-phone" name="phone" type="tel" value="${esc(g.phone)}"></div>
+      </div>
+      <p class="row" style="margin:.8rem 0 0"><button class="small pink">Save</button><button type="button" class="small ghost" data-a="cancel-edit">Cancel</button></p>
+    </form>`;
+  }
+
+  const joinUrl = () => new URL('invite.html?join=' + party.join_code, location.href).href;
+  const newCode = () => Array.from(crypto.getRandomValues(new Uint8Array(12)), (b) => b.toString(16).padStart(2, '0')).join('');
+  function openLinkView() {
+    const on = party.join_enabled && party.join_code;
+    return `<section><h2>Open invite link</h2>
+      <p class="muted">One link you can share anywhere (a group chat, social media). People who open it enter their own name and contact details, RSVP, and get their own personal invite page. They're tagged "joined via open link" in your guest list. Anyone with this link can sign up, so share it only where you'd be happy for people to join.</p>
+      ${on ? `<label for="join-url">Your open invite link</label>
+        <input id="join-url" value="${esc(joinUrl())}" readonly onclick="this.select()">
+        <p class="row" style="margin:.8rem 0 0"><button class="small pink" data-a="copy-join">Copy link</button>
+          <button class="small ghost" data-a="new-join">Make a new link</button>
+          <button class="small ghost" data-a="join-off">Turn off</button></p>
+        <p class="muted" style="font-size:.85rem;margin:.5rem 0 0">"Make a new link" stops the old one from working, in case it was shared somewhere it shouldn't be.</p>`
+      : `<p><button class="small pink" data-a="join-on" ${party.title && party.starts_at ? '' : 'disabled'}>Turn on open invite link</button></p>
+        ${party.title && party.starts_at ? '' : '<p class="muted" style="font-size:.85rem">Add the party name and date first.</p>'}`}
+    </section>`;
+  }
+
   function guestsView(c) {
-    const rows = guests.map((g) => `<div class="item">
-      <div><strong>${esc(g.name)}</strong> <span class="pill p-${g.status}">${g.status === 'pending' ? 'no reply' : g.status}${g.status === 'yes' && g.party_size > 1 ? ' · ' + g.party_size : ''}</span><br>
+    const rows = guests.map((g) => g.id === editingId ? editRow(g) : `<div class="item">
+      <div><strong>${esc(g.name)}</strong>${g.source === 'self' ? ' <span class="pill p-pending">joined via open link</span>' : ''} <span class="pill p-${g.status}">${g.status === 'pending' ? 'no reply' : g.status}${g.status === 'yes' && g.party_size > 1 ? ' · ' + g.party_size : ''}</span><br>
         <span class="muted">${contact(g)}</span>${g.note ? `<br><em>“${esc(g.note)}”</em>` : ''}</div>
       <div class="muted" style="font-size:.85rem">${g.invited_at ? 'Invited ' + esc(fmtDate(g.invited_at, party.time_zone, { dateStyle: 'short' })) : 'Not invited yet'}</div>
       <div class="acts row">
         ${g.email ? `<button class="small ghost" data-a="email" data-id="${g.id}" data-kind="${g.invited_at ? 'reminder' : 'invite'}">${g.invited_at ? 'Email reminder' : 'Email invite'}</button>` : ''}
         ${g.phone ? `<button class="small ghost" data-a="text" data-id="${g.id}" data-kind="${g.invited_at ? 'reminder' : 'invite'}">${g.invited_at ? 'Text reminder' : 'Text invite'}</button>` : ''}
         <button class="small ghost" data-a="copy-link" data-id="${g.id}">Copy invite link</button>
+        <button class="small ghost" data-a="edit" data-id="${g.id}">Edit</button>
         <select data-a="status" data-id="${g.id}" aria-label="RSVP for ${esc(g.name)}">${['pending', 'yes', 'maybe', 'no'].map((s) => `<option value="${s}" ${g.status === s ? 'selected' : ''}>${s === 'pending' ? 'No reply' : s[0].toUpperCase() + s.slice(1)}</option>`).join('')}</select>
         <button class="small ghost" data-a="remove" data-id="${g.id}">Remove</button>
       </div></div>`).join('');
@@ -245,6 +289,8 @@
       <button class="ghost small" data-a="round-now" ${party.starts_at ? '' : 'disabled'}>Start a reminder round now</button></div>
   </section>
 
+  ${openLinkView()}
+
   <section><h2>Settings</h2>
     <label for="vis">What guests can see on their invite page (emails and phone numbers are never shown)</label>
     <select id="vis" data-a="visibility">${[['off', 'Nothing — keep the guest list private'], ['counts', 'Just the totals'], ['names', "Totals and names of who's coming"], ['all', 'Totals, names and RSVP comments']]
@@ -286,6 +332,12 @@
     } else if (a === 'copy-link') copy(inviteUrl(g), `${g.name}'s link`);
     else if (a === 'remove') { if (confirm(`Remove ${g.name}?`)) act(() => sb.from('guests').delete().eq('id', g.id).then(check), `Removed ${g.name}.`); }
     else if (a === 'export') exportCSV();
+    else if (a === 'edit') { editingId = g.id; editDraft = null; render(); const el = document.getElementById('e-name'); if (el) el.focus(); }
+    else if (a === 'cancel-edit') { editingId = null; editDraft = null; render(); }
+    else if (a === 'copy-join') copy(joinUrl(), 'Open invite link');
+    else if (a === 'join-on') act(() => sb.from('party').update({ join_enabled: true, join_code: party.join_code || newCode() }).eq('id', 1).then(check), 'Open invite link is on. Copy it below.');
+    else if (a === 'join-off') { if (confirm('Turn off the open invite link? Anyone who opens it will be told it is no longer active. People who already joined keep their own links.')) act(() => sb.from('party').update({ join_enabled: false }).eq('id', 1).then(check), 'Open invite link turned off.'); }
+    else if (a === 'new-join') { if (confirm('Make a new open invite link? The current one will stop working.')) act(() => sb.from('party').update({ join_code: newCode(), join_enabled: true }).eq('id', 1).then(check), 'New link ready. The old one no longer works.'); }
     else if (a === 'logout') sb.auth.signOut().then(() => loginView());
     else if (a === 'round-now') { if (confirm("Start a reminder round now? Everyone invited who hasn't said no will appear in your To send list.")) act(() => sb.from('party').update({ manual_round: `${party.starts_at}|m${new Date().toISOString()}` }).eq('id', 1).then(check), 'Reminder round started. See To send.'); }
     else if (a === 'calendar') {
@@ -325,13 +377,20 @@
       const days = [...new Set(String(fd.get('days')).split(/[,\s]+/).map(Number).filter((d) => d > 0 && d <= 365))].sort((a, b) => b - a);
       return act(() => sb.from('party').update({ reminder_days: days }).eq('id', 1).then(check), days.length ? 'Reminder days saved.' : 'Reminders turned off.');
     }
+    if (f.id === 'edit') {
+      const id = f.dataset.id;
+      const name = String(fd.get('name')).trim().slice(0, 100);
+      const email = String(fd.get('email')).trim().toLowerCase();
+      const phone = normPhone(String(fd.get('phone')));
+      editDraft = { name: String(fd.get('name')), email: String(fd.get('email')), phone: String(fd.get('phone')) };
+      if (!name) { flash = '!Please enter a name.'; return render(); }
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { flash = "!That email address doesn't look right."; return render(); }
+      const clash = guests.find((x) => x.id !== id && ((email && x.email === email) || (phone && x.phone === phone)));
+      if (clash) { flash = `!${clash.name} already has that ${email && clash.email === email ? 'email' : 'phone number'}.`; return render(); }
+      return act(async () => { check(await sb.from('guests').update({ name, email, phone }).eq('id', id)); editingId = null; editDraft = null; }, `Saved ${name}.`);
+    }
     if (f.id === 'add') {
-      const rows = String(fd.get('lines')).split(/\r?\n/).map((line) => {
-        const parts = line.split(',').map((s) => s.trim()).filter(Boolean);
-        const email = parts.find((p) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p)) || '';
-        const phone = parts.find((p) => p !== email && /\d{6,}/.test(p.replace(/\D/g, '')) && !/[a-z]/i.test(p)) || '';
-        return { name: parts.filter((p) => p !== email && p !== phone).join(' '), email, phone };
-      }).filter((r) => r.name || r.email || r.phone);
+      const rows = String(fd.get('lines')).split(/\r?\n/).map(parseLine).filter((r) => r.name || r.email || r.phone);
       let msg; return act(async () => { msg = await addGuests(rows); }, null).then(() => { if (!flash.startsWith('!')) { flash = msg; render(); } });
     }
     if (f.id === 'import') {
