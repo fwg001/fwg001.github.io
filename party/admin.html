@@ -14,8 +14,21 @@ header.top .wrap{padding-top:0;padding-bottom:0;display:flex;justify-content:spa
 header.top h1{margin:0;font-size:1.35rem} header.top button{background:transparent;border:1.5px solid #ffffff55}
 section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.25rem;margin:1rem 0}
 section.todo{border:2px solid var(--pink)}
-.tally{display:flex;gap:1.5rem;flex-wrap:wrap} .tally div{min-width:70px}
-.tally b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:2rem;line-height:1}
+.tally{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem} @media(max-width:560px){.tally{grid-template-columns:repeat(2,1fr)}}
+.tile{display:flex;flex-direction:column;justify-content:flex-start;border-radius:14px;padding:.8rem .9rem;text-align:left;font-weight:700;color:var(--ink);background:var(--bg);border:0;border-top:5px solid var(--c)}
+.tile b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:2.1rem;line-height:1.05}
+.tile small{display:block;font-weight:600;color:var(--muted);font-size:.8rem}
+.tile:hover{filter:brightness(.97)}
+.st-yes{--c:var(--mint);--t:#d6f5ea}.st-maybe{--c:var(--lemon);--t:#fff2c2}.st-no{--c:#ff7a9c;--t:#ffe0e8}.st-pending{--c:#b9bdd0;--t:#eceef5}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap;margin:.9rem 0 .4rem}
+.chip{background:#fff;color:var(--ink);border:1.5px solid var(--line);padding:.35rem .8rem;font-size:.88rem}
+.chip b{margin-left:.2rem}
+.chip[aria-pressed=true]{background:var(--night);color:#fff;border-color:var(--night)}
+.chip.st-yes[aria-pressed=true],.chip.st-maybe[aria-pressed=true],.chip.st-no[aria-pressed=true],.chip.st-pending[aria-pressed=true]{background:var(--t);color:var(--ink);border-color:var(--c)}
+.gh{display:flex;align-items:center;gap:.5rem;margin:1.3rem 0 .3rem;font-size:1.1rem}
+.gh .dot{width:.8rem;height:.8rem;border-radius:50%;background:var(--c)}
+.gh .muted{font-family:Figtree,sans-serif;font-weight:600;font-size:.95rem}
+.item.g{border-top:0;border-left:4px solid var(--c);background:#fff;padding:.75rem .9rem;margin:.45rem 0;border-radius:10px;box-shadow:0 0 0 1px var(--line)}
 .flash{position:sticky;top:.5rem;z-index:5;margin-top:1rem}
 .item{border-top:1px solid var(--line);padding:.85rem 0;display:grid;grid-template-columns:1fr auto;gap:.4rem 1rem;align-items:start}
 .item:first-of-type{border-top:0} .item .acts{grid-column:1/-1}

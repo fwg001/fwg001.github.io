@@ -4,6 +4,9 @@
   let party = null, guests = [], flash = '', busy = false, editingId = null, editDraft = null;
   const store = { get: (k, d) => { try { return localStorage.getItem(k) || d; } catch { return d; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
   let outlookKind = store.get('outlookKind', 'live');
+  let guestFilter = store.get('guestFilter', 'all');
+  const STATUSES = [['yes', 'Going'], ['maybe', 'Maybe'], ['pending', 'No reply'], ['no', "Can't make it"]];
+  const statusLabel = (st) => STATUSES.find(([k]) => k === st)[1];
   const DAY = 864e5;
 
   // ---------- Messages ----------
@@ -138,8 +141,8 @@
 
   function exportCSV() {
     const q = (s) => `"${String(s ?? '').replace(/"/g, '""')}"`;
-    const rows = [['Name', 'Email', 'Phone', 'RSVP', 'Party size', 'Note', 'Invited', 'Responded', 'Invite link']]
-      .concat(guests.map((g) => [g.name, g.email, g.phone, g.status, g.party_size, g.note, g.invited_at || '', g.responded_at || '', inviteUrl(g)]));
+    const rows = [['Name', 'Email', 'Phone', 'RSVP', 'Party size', 'Note', 'Invited', 'Responded', 'First opened', 'Last opened', 'Times opened', 'Invite link']]
+      .concat(guests.map((g) => [g.name, g.email, g.phone, g.status, g.party_size, g.note, g.invited_at || '', g.responded_at || '', g.first_viewed_at || '', g.last_viewed_at || '', g.view_count || 0, inviteUrl(g)]));
     const url = URL.createObjectURL(new Blob([rows.map((r) => r.map(q).join(',')).join('\n')], { type: 'text/csv' }));
     const a = Object.assign(document.createElement('a'), { href: url, download: 'guests.csv' });
     document.body.appendChild(a); a.click(); a.remove();
@@ -153,6 +156,17 @@
       <label for="pw">Password</label><input id="pw" type="password" name="password" autocomplete="current-password" required>
       <p><button class="pink" style="width:100%">Log in</button></p></form></main>`;
   }
+
+  // ---------- Invite views ----------
+  const seenWhen = (iso) => fmtDate(iso, party.time_zone, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  function viewText(g) {
+    if (g.first_viewed_at) {
+      const n = g.view_count || 1;
+      return n > 1 ? `Opened ${n} times, last ${seenWhen(g.last_viewed_at)}` : `Opened ${seenWhen(g.first_viewed_at)}`;
+    }
+    return g.invited_at ? 'Not opened yet' : '';
+  }
+  const viewPill = (g) => g.first_viewed_at ? ' <span class="pill p-seen">opened</span>' : g.invited_at ? ' <span class="pill p-unseen">not opened</span>' : '';
 
   const counts = () => guests.reduce((c, g) => { c[g.status]++; if (g.status === 'yes') c.people += g.party_size; return c; }, { yes: 0, maybe: 0, no: 0, pending: 0, people: 0 });
   const contact = (g) => esc([g.email, g.phone].filter(Boolean).join('  ·  ') || 'no contact info');
@@ -181,7 +195,7 @@
           <button class="small ghost" data-a="copy-bcc">Copy addresses</button><button class="small ghost" data-a="copy-group">Copy message</button>
           <button class="small ghost" data-a="mark-bcc">Mark all ${emailers.length} as sent</button></div>
           <p class="muted" style="margin:.5rem 0 0;font-size:.85rem">If Outlook opens without the addresses, paste them into BCC with the Copy buttons, then mark them as sent.</p></div>` : ''}
-        ${remind.map((g) => `<div class="item"><div><strong>${esc(g.name)}</strong> <span class="pill p-${g.status}">${g.status === 'pending' ? 'no reply' : g.status}</span><br><span class="muted">${contact(g)}</span></div><div class="acts row">${sendBtns(g, 'reminder', round.key)}</div></div>`).join('')}` : ''}
+        ${remind.map((g) => `<div class="item"><div><strong>${esc(g.name)}</strong> <span class="pill p-${g.status}">${g.status === 'pending' ? 'no reply' : g.status}</span>${g.status === 'pending' ? viewPill(g) : ''}<br><span class="muted">${contact(g)}</span></div><div class="acts row">${sendBtns(g, 'reminder', round.key)}</div></div>`).join('')}` : ''}
     </section>`;
   }
 
@@ -215,23 +229,42 @@
     </section>`;
   }
 
-  function guestsView(c) {
-    const rows = guests.map((g) => g.id === editingId ? editRow(g) : `<div class="item">
-      <div><strong>${esc(g.name)}</strong>${g.source === 'self' ? ' <span class="pill p-pending">joined via open link</span>' : ''} <span class="pill p-${g.status}">${g.status === 'pending' ? 'no reply' : g.status}${g.status === 'yes' && g.party_size > 1 ? ' · ' + g.party_size : ''}</span><br>
+  function guestRow(g) {
+    if (g.id === editingId) return editRow(g);
+    return `<div class="item g st-${g.status}" data-name="${esc((g.name + ' ' + g.email + ' ' + g.phone).toLowerCase())}">
+      <div><strong>${esc(g.name)}</strong> <span class="pill p-${g.status}">${statusLabel(g.status)}${g.status === 'yes' && g.party_size > 1 ? ` · ${g.party_size} people` : ''}</span>${g.source === 'self' ? ' <span class="pill p-pending">joined via open link</span>' : ''}<br>
         <span class="muted">${contact(g)}</span>${g.note ? `<br><em>“${esc(g.note)}”</em>` : ''}</div>
-      <div class="muted" style="font-size:.85rem">${g.invited_at ? 'Invited ' + esc(fmtDate(g.invited_at, party.time_zone, { dateStyle: 'short' })) : 'Not invited yet'}</div>
+      <div class="muted" style="font-size:.85rem;text-align:right">${g.invited_at ? 'Invited ' + esc(fmtDate(g.invited_at, party.time_zone, { dateStyle: 'short' })) : 'Not invited yet'}${viewText(g) ? `<br><span class="${g.first_viewed_at ? 'seen' : ''}">${esc(viewText(g))}</span>` : ''}</div>
       <div class="acts row">
         ${g.email ? `<button class="small ghost" data-a="email" data-id="${g.id}" data-kind="${g.invited_at ? 'reminder' : 'invite'}">${g.invited_at ? 'Email reminder' : 'Email invite'}</button>` : ''}
         ${g.phone ? `<button class="small ghost" data-a="text" data-id="${g.id}" data-kind="${g.invited_at ? 'reminder' : 'invite'}">${g.invited_at ? 'Text reminder' : 'Text invite'}</button>` : ''}
         <button class="small ghost" data-a="copy-link" data-id="${g.id}">Copy invite link</button>
         <button class="small ghost" data-a="edit" data-id="${g.id}">Edit</button>
-        <select data-a="status" data-id="${g.id}" aria-label="RSVP for ${esc(g.name)}">${['pending', 'yes', 'maybe', 'no'].map((s) => `<option value="${s}" ${g.status === s ? 'selected' : ''}>${s === 'pending' ? 'No reply' : s[0].toUpperCase() + s.slice(1)}</option>`).join('')}</select>
+        <select data-a="status" data-id="${g.id}" aria-label="RSVP for ${esc(g.name)}">${STATUSES.map(([v, l]) => `<option value="${v}" ${g.status === v ? 'selected' : ''}>${l}</option>`).join('')}</select>
         <button class="small ghost" data-a="remove" data-id="${g.id}">Remove</button>
-      </div></div>`).join('');
-    return `<section>
+      </div></div>`;
+  }
+
+  function guestsView(c) {
+    const byName = (a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+    const empty = { yes: 'No one has said yes yet.', maybe: 'No maybes.', pending: 'Everyone has replied.', no: "No one has said they can't make it." };
+    const group = ([st, label]) => {
+      const list = guests.filter((g) => g.status === st).sort(byName);
+      if (guestFilter === 'all' && !list.length) return '';
+      const people = st === 'yes' && c.people !== c.yes ? ` · ${c.people} people` : '';
+      return `<div class="ggroup"><h3 class="gh st-${st}"><span class="dot"></span>${label} <span class="muted">(${list.length}${people})</span></h3>
+        ${list.length ? list.map(guestRow).join('') : `<p class="muted">${empty[st]}</p>`}</div>`;
+    };
+    const shown = guestFilter === 'all' ? STATUSES : STATUSES.filter(([k]) => k === guestFilter);
+    const chip = (k, label, n) => `<button class="chip ${k === 'all' ? '' : 'st-' + k}" data-a="filter" data-f="${k}" aria-pressed="${guestFilter === k}">${label} <b>${n}</b></button>`;
+    const rows = guests.length ? shown.map(group).join('') : '';
+    return `<section id="guests">
       <div class="row" style="justify-content:space-between"><h2 style="margin:0">Guests (${guests.length})</h2>
         ${guests.length ? '<button class="small ghost" data-a="export">Download CSV</button>' : ''}</div>
+      ${guests.length ? `<div class="chips" role="group" aria-label="Show guests">${chip('all', 'Everyone', guests.length)}${STATUSES.map(([k, l]) => chip(k, l, c[k])).join('')}</div>
+        ${guests.length > 8 ? '<input id="gsearch" type="search" placeholder="Find a guest by name, email or phone" aria-label="Find a guest" style="margin:.2rem 0 .4rem">' : ''}` : ''}
       ${rows || '<p class="muted">No guests yet.</p>'}
+      <p class="muted" id="nomatch" hidden>No guests match that search.</p>
       <h3>Add guests</h3>
       <form id="add"><label for="lines">One per line: name, email, phone (either contact can be left out)</label>
         <textarea id="lines" name="lines" rows="3" placeholder="Jordan Lee, jordan@example.com, 555-123-4567"></textarea>
@@ -251,6 +284,13 @@
     return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
   }
 
+  function seenSummary() {
+    const waiting = guests.filter((g) => g.invited_at && g.status === 'pending');
+    if (!waiting.length) return '';
+    const opened = waiting.filter((g) => g.first_viewed_at).length, not = waiting.length - opened;
+    return `<p class="muted" style="margin:.8rem 0 0">Of the ${waiting.length} invited guest${waiting.length === 1 ? '' : 's'} who haven't replied: <strong>${opened}</strong> opened their invite, <strong>${not}</strong> ${not === 1 ? "hasn't" : "haven't"} opened it yet.</p>`;
+  }
+
   function render() {
     const c = counts();
     const next = nextReminder();
@@ -259,8 +299,8 @@
 <div class="wrap">
   ${flash ? `<div class="flash ${flash.startsWith('!') ? 'error' : 'ok'}" role="status">${esc(flash.replace(/^!/, ''))}</div>` : ''}
   <section><div class="tally">
-    <div><b>${c.yes}</b>Yes${c.people !== c.yes ? ` (${c.people} people)` : ''}</div><div><b>${c.maybe}</b>Maybe</div><div><b>${c.no}</b>No</div><div><b>${c.pending}</b>No reply</div>
-  </div></section>
+    ${STATUSES.map(([k, l]) => `<button class="tile st-${k}" data-a="filter" data-f="${k}" data-jump="1" aria-label="Show ${l}: ${c[k]}"><b>${c[k]}</b>${l}${k === 'yes' && c.people !== c.yes ? `<small>${c.people} people</small>` : ''}</button>`).join('')}
+  </div>${seenSummary()}</section>
 
   ${todoView()}
   ${guestsView(c)}
@@ -332,6 +372,12 @@
     } else if (a === 'copy-link') copy(inviteUrl(g), `${g.name}'s link`);
     else if (a === 'remove') { if (confirm(`Remove ${g.name}?`)) act(() => sb.from('guests').delete().eq('id', g.id).then(check), `Removed ${g.name}.`); }
     else if (a === 'export') exportCSV();
+    else if (a === 'filter') {
+      const f = b.dataset.f;
+      guestFilter = b.dataset.jump || guestFilter !== f ? f : 'all';
+      store.set('guestFilter', guestFilter); render();
+      if (b.dataset.jump) document.getElementById('guests')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
     else if (a === 'edit') { editingId = g.id; editDraft = null; render(); const el = document.getElementById('e-name'); if (el) el.focus(); }
     else if (a === 'cancel-edit') { editingId = null; editDraft = null; render(); }
     else if (a === 'copy-join') copy(joinUrl(), 'Open invite link');
@@ -349,6 +395,15 @@
       if (!evs.length) { flash = '!No upcoming reminder days to add.'; return render(); }
       icsDownload('party-reminders.ics', evs);
     }
+  });
+
+  app.addEventListener('input', (e) => {
+    if (e.target.id !== 'gsearch') return;
+    const q = e.target.value.trim().toLowerCase();
+    let any = false;
+    app.querySelectorAll('#guests .item.g').forEach((el) => { const hit = !q || el.dataset.name.includes(q); el.hidden = !hit; any = any || hit; });
+    app.querySelectorAll('#guests .ggroup').forEach((gr) => { gr.hidden = !!q && !gr.querySelector('.item.g:not([hidden])'); });
+    document.getElementById('nomatch').hidden = any;
   });
 
   app.addEventListener('change', (e) => {
