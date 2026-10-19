@@ -109,6 +109,9 @@ input::placeholder,textarea::placeholder{color:var(--fg2)}
 .chip{border:0;background:var(--fill);border-radius:999px;padding:8px 14px;font-size:15px;cursor:pointer;display:flex;align-items:center;gap:6px}
 .chip.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
 .chip.on::before{content:"✓";font-weight:700}
+.chip-label{font-size:13px;font-weight:600;color:var(--fg2);margin:0}
+.chip-label+.chips{margin-top:-2px}
+.chips+.chip-label{margin-top:8px}
 .save{width:100%;border:0;border-radius:14px;padding:15px;background:var(--accent);color:#fff;font-weight:600;font-size:17px;cursor:pointer}
 .save:disabled{opacity:.5}
 
@@ -132,7 +135,7 @@ input::placeholder,textarea::placeholder{color:var(--fg2)}
 .confirm .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .confirm button{border:0;border-radius:10px;padding:11px;font-weight:600;cursor:pointer;background:var(--fill)}
 .confirm .del{background:var(--red);color:#fff}
-.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--card);color:var(--fg);padding:10px 18px;border-radius:999px;box-shadow:0 6px 24px #00000033;font-size:15px;font-weight:600;z-index:10}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--card);color:var(--fg);padding:10px 18px;border-radius:999px;box-shadow:0 6px 24px #00000033;font-size:15px;font-weight:600;z-index:10;max-width:calc(100% - 32px);text-align:center}
 .note{font-size:12px;color:var(--fg2);text-align:center;margin:0}
 
 /* duration */
@@ -192,8 +195,6 @@ input::placeholder,textarea::placeholder{color:var(--fg2)}
 <div class="toast" id="toast" hidden></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
-</body>
-</html>
 <script>
 /* ======== CONFIG: paste your Supabase project values here ========
    Supabase dashboard → Project Settings → API.
@@ -203,6 +204,8 @@ const SUPABASE_ANON_KEY = "sb_publishable_ecId8JnzuMMwt2IvB70zOA_KL882TGo";
 /* ================================================================ */
 
 const TRIGGERS=["Exercise","Stress","Poor sleep","Skipped meal","Dehydration","Alcohol","Caffeine","Bright light","Screen time","Weather change","Hormonal","Strong smell"];
+const MEDICINES=["Ibuprofen","Acetaminophen","Aspirin","Naproxen","Excedrin","Sumatriptan","Rizatriptan","Nurtec","Ubrelvy","Anti-nausea"];
+const TREATMENTS=["Dark, quiet room","Sleep","Cold pack","Heat","Caffeine","Water","Food","Massage","Shower","Fresh air"];
 const NAUSEA=["None","Mild","Moderate","Severe"];
 const SEV_WORD=s=>s<=3?"Mild":s<=6?"Moderate":s<=8?"Severe":"Extreme";
 const sevColor=s=>s<=3?"var(--green)":s<=5?"var(--yellow)":s<=7?"var(--orange)":"var(--red)";
@@ -218,6 +221,8 @@ const ICON={
   drop:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>',
   bolt:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
   gauge:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 17l4-5"/></svg>',
+  pill:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5a5 5 0 0 1-7-7l10-10a5 5 0 0 1 7 7z"/><path d="M8.5 8.5l7 7"/></svg>',
+  leaf:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15"/><path d="M5 19l8-8"/></svg>',
   note:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3"/></svg>'
 };
 
@@ -226,7 +231,8 @@ const configured=!SUPABASE_URL.includes("YOUR-PROJECT")&&!SUPABASE_ANON_KEY.incl
 const isRecovery=/type=recovery/.test(location.hash);
 const sb=configured&&window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true}}):null;
 let episodes=[], ready=false, session=null, loadError="";
-const fromRow=r=>({id:r.id,startedAt:r.started_at,endedAt:r.ended_at||null,severity:r.severity,nausea:r.nausea,triggers:r.triggers||[],other:r.other||"",notes:r.notes||"",createdAt:r.created_at});
+const fromRow=r=>({id:r.id,startedAt:r.started_at,endedAt:r.ended_at||null,severity:r.severity,nausea:r.nausea,triggers:r.triggers||[],other:r.other||"",medicines:r.medicines||[],treatments:r.treatments||[],medOther:r.med_other||"",notes:r.notes||"",createdAt:r.created_at});
+const toRow=ep=>({started_at:ep.startedAt,ended_at:ep.endedAt||null,severity:ep.severity,nausea:ep.nausea,triggers:ep.triggers,other:ep.other||null,medicines:ep.medicines||[],treatments:ep.treatments||[],med_other:ep.medOther||null,notes:ep.notes||null});
 async function loadEpisodes(){
   const {data,error}=await sb.from("episodes").select("*").order("started_at",{ascending:false});
   if(error){loadError="Couldn’t load your log: "+error.message;console.warn(error)}
@@ -234,12 +240,12 @@ async function loadEpisodes(){
   ready=true;render();
 }
 async function editEpisode(id,ep){
-  const {error}=await sb.from("episodes").update({started_at:ep.startedAt,ended_at:ep.endedAt||null,severity:ep.severity,nausea:ep.nausea,triggers:ep.triggers,other:ep.other||null,notes:ep.notes||null}).eq("id",id);
+  const {error}=await sb.from("episodes").update(toRow(ep)).eq("id",id);
   if(error)throw error;
   await loadEpisodes();
 }
 async function addEpisode(ep){
-  const {error}=await sb.from("episodes").insert({started_at:ep.startedAt,ended_at:ep.endedAt||null,severity:ep.severity,nausea:ep.nausea,triggers:ep.triggers,other:ep.other||null,notes:ep.notes||null});
+  const {error}=await sb.from("episodes").insert(toRow(ep));
   if(error)throw error;
   await loadEpisodes();
 }
@@ -260,7 +266,9 @@ async function initStore(){
   sb.auth.onAuthStateChange((evt,s)=>{
     const was=!!session;session=s;
     if(evt==="PASSWORD_RECOVERY"){startPin("recovery");return}
-    if(s&&!was){if(s.user?.email)rememberEmail(s.user.email);view={name:"home"};ready=false;render();loadEpisodes()}
+    if(s&&!was){if(s.user?.email)rememberEmail(s.user.email);ready=false;
+      if(pendingSetPin){pendingSetPin=false;startPin("change","You’re signed in. Now choose a 6-digit passcode.")}else{view={name:"home"};render()}
+      loadEpisodes()}
     if(!s){episodes=[];startPin("signin")}
   });
   if(session&&isRecovery){startPin("recovery");loadEpisodes()}
@@ -274,6 +282,7 @@ const EMAIL_KEY="headcase.email";
 function savedEmail(){try{return localStorage.getItem(EMAIL_KEY)||""}catch(e){return""}}
 function rememberEmail(v){try{localStorage.setItem(EMAIL_KEY,v)}catch(e){}}
 function forgetEmail(){try{localStorage.removeItem(EMAIL_KEY)}catch(e){}}
+let pendingSetPin=false;
 let pin={purpose:"signin",stage:"enter",entry:"",first:"",email:"",msg:"",err:false,busy:false};
 function startPin(purpose,msg=""){
   const email=savedEmail();
@@ -291,6 +300,18 @@ function pinTitle(){
 function pinScreen(){
   const st=pin.stage, keys=[["1",""],["2","ABC"],["3","DEF"],["4","GHI"],["5","JKL"],["6","MNO"],["7","PQRS"],["8","TUV"],["9","WXYZ"]];
   const lock=`<span class="lock">${ICON.brain}</span>`;
+  if(st==="password") return `<section class="screen pin-screen">${lock}<h1>Sign In with Password</h1>
+    <p class="sub">Use the password you created before passcodes were added. You’ll choose a passcode right after.</p>
+    <form id="pwForm" class="email-step">
+      <div class="group">
+        <div class="row" style="color:var(--fg2)">${esc(pin.email)}</div>
+        <label class="row" for="pw"><input id="pw" type="password" autocomplete="current-password" placeholder="Password" required style="font:inherit;color:var(--fg);background:transparent;border:0;width:100%"></label>
+      </div>
+      ${pin.msg?`<p class="${pin.err?"err":"ok"}">${esc(pin.msg)}</p>`:""}
+      <button class="save" type="submit" ${pin.busy?"disabled":""}>Sign In</button>
+    </form>
+    <button class="link" id="pinToKeypad" style="font-size:15px">Use passcode instead</button>
+  </section>`;
   if(st==="email") return `<section class="screen pin-screen">${lock}<h1>${pinTitle()}</h1>
     <p class="sub">${pin.purpose==="signup"?"Enter your email, then choose a 6-digit passcode.":"Enter your email. After this, you’ll only need your passcode on this device."}</p>
     <form id="emailForm" class="email-step">
@@ -310,7 +331,7 @@ function pinScreen(){
       <button class="key ghost" id="pinDel" aria-label="Delete">Delete</button>
     </div>
     <div class="pin-links">
-      ${st==="enter"?`<button class="link" id="forgot">Forgot passcode?</button><button class="link" id="otherEmail">Use a different email</button>`:""}
+      ${st==="enter"?`<button class="link" id="usePw">Haven’t set a passcode yet? Sign in with password</button><button class="link" id="forgot">Forgot passcode?</button><button class="link" id="otherEmail">Use a different email</button>`:""}
       ${(pin.purpose==="signup"||pin.purpose==="recovery")&&st!=="enter"?`<button class="link" id="pinBack">Back</button>`:""}
     </div>
   </section>`;
@@ -318,7 +339,7 @@ function pinScreen(){
 function pinFail(msg){pin.entry="";pin.first=pin.stage==="confirm"?"":pin.first;pin.msg=msg;pin.err=true;pin.busy=false;render();const d=$("#dots");d&&d.classList.add("shake")}
 function authMessage(e){
   const m=(e?.message||"").toLowerCase();
-  if(m.includes("invalid login"))return "Wrong passcode. Try again.";
+  if(m.includes("invalid login"))return pin.stage==="password"?"That password didn’t work. Try again, or use Forgot passcode.":"Wrong passcode. If you haven’t set one yet, sign in with your password below.";
   if(m.includes("not confirmed"))return "Confirm your email first, using the link Supabase sent you.";
   if(m.includes("rate")||e?.status===429)return "Too many attempts. Wait a minute and try again.";
   if(m.includes("password"))return e.message.replace(/password/gi,"passcode");
@@ -340,6 +361,8 @@ async function pinComplete(){
       const {data,error}=await sb.auth.signUp({email:pin.email,password:code});
       if(error){pin.stage="new";pin.first="";return pinFail(authMessage(error))}
       rememberEmail(pin.email);
+      if(data.user&&Array.isArray(data.user.identities)&&data.user.identities.length===0){
+        pin={...pin,purpose:"signin",stage:"password",entry:"",first:"",busy:false,err:true,msg:"You already have an account with this email. Sign in with your password, then choose a passcode."};render();return}
       if(!data.session){pin={...pin,purpose:"signin",stage:"enter",entry:"",first:"",busy:false,err:false,msg:"Check your email and tap the confirmation link, then enter your passcode."};render()}
     }else{
       const {error}=await sb.auth.updateUser({password:code});
@@ -350,14 +373,14 @@ async function pinComplete(){
   }
 }
 function pinKey(k){
-  if(pin.busy||pin.stage==="email")return;
+  if(pin.busy||pin.stage==="email"||pin.stage==="password")return;
   if(k==="del"){pin.entry=pin.entry.slice(0,-1)}
   else if(pin.entry.length<6){pin.entry+=k;if(pin.err){pin.err=false;pin.msg=""}}
   render();
   if(pin.entry.length===6)setTimeout(pinComplete,120);
 }
 document.addEventListener("keydown",ev=>{
-  if(view.name!=="pin"||pin.stage==="email"||ev.metaKey||ev.ctrlKey)return;
+  if(view.name!=="pin"||pin.stage==="email"||pin.stage==="password"||ev.metaKey||ev.ctrlKey)return;
   if(/^[0-9]$/.test(ev.key)){ev.preventDefault();pinKey(ev.key)}
   else if(ev.key==="Backspace"){ev.preventDefault();pinKey("del")}
 });
@@ -378,13 +401,15 @@ function localInput(d=new Date()){const p=n=>String(n).padStart(2,"0");return `$
 function ago(d){const days=Math.floor((Date.now()-new Date(d))/864e5);return days<=0?"Today":days===1?"Yesterday":days<30?days+" days ago":fmtDate(d)}
 function within(days){const c=Date.now()-days*864e5;return episodes.filter(e=>new Date(e.startedAt)>=c)}
 function topTrigger(list){const m={};list.forEach(e=>[...(e.triggers||[]),...(e.other?["Other"]:[])].forEach(t=>m[t]=(m[t]||0)+1));const t=Object.entries(m).sort((a,b)=>b[1]-a[1])[0];return t?t[0]:"—"}
+function topOf(list,key){const m={};list.forEach(e=>(e[key]||[]).forEach(t=>m[t]=(m[t]||0)+1));const t=Object.entries(m).sort((a,b)=>b[1]-a[1])[0];return t?t[0]:"—"}
+const treated=e=>(e.medicines||[]).length||(e.treatments||[]).length||e.medOther;
 function durMs(e){return e.endedAt?new Date(e.endedAt)-new Date(e.startedAt):null}
 function fmtDur(ms){if(ms==null||ms<0)return "—";const m=Math.round(ms/6e4);if(m<60)return m+" min";const h=Math.floor(m/60),r=m%60;if(h<48)return r?`${h} hr ${r} min`:`${h} hr`;const d=Math.floor(h/24),rh=h%24;return rh?`${d} d ${rh} hr`:`${d} d`}
 function fmtDurShort(ms){if(ms==null||ms<0)return "";const m=Math.round(ms/6e4);if(m<60)return m+"m";const h=Math.floor(m/60),r=m%60;return r?`${h}h ${r}m`:`${h}h`}
 const ongoing=()=>sorted().filter(e=>!e.endedAt);
 function avgDur(list){const d=list.map(durMs).filter(x=>x!=null&&x>=0);return d.length?d.reduce((a,b)=>a+b,0)/d.length:null}
 const avg=list=>list.length?(list.reduce((s,e)=>s+e.severity,0)/list.length).toFixed(1):"—";
-function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,1800)}
+function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,msg.length>40?4500:1800)}
 
 /* ---------- router ---------- */
 let view={name:"loading"}, draft=null, range=30, confirmDel=false, editEnd=false;
@@ -415,7 +440,7 @@ function home(){
         <div class="kpi" style="min-width:0"><small>Top trigger</small><b style="font-size:17px;padding-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(topTrigger(m30))}</b></div>
       </div>
     </div></div>`
-   :`<div class="summary"><div class="summary-head">${ICON.brain}<span class="t">Migraines</span></div><p style="margin:0;color:var(--fg2);font-size:15px">No episodes logged yet. When a headache starts, tap Report a Headache to record the time, severity, nausea and likely triggers.</p></div>`;
+   :`<div class="summary"><div class="summary-head">${ICON.brain}<span class="t">Migraines</span></div><p style="margin:0;color:var(--fg2);font-size:15px">No episodes logged yet. When a headache starts, tap Report a Headache to record the time, severity, nausea, likely triggers and anything you took for it.</p></div>`;
   return `<section class="screen">
     <div class="nav"><span></span><span></span></div>
     <div><p class="eyebrow">${new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"})}</p><h1>Headcase</h1></div>
@@ -427,6 +452,10 @@ function home(){
     ${summary}
     ${loadError?`<p class="err">${esc(loadError)}</p>`:""}<p class="note">Signed in as ${esc(session?.user?.email||"")} · <button class="link" id="changePin" style="font-size:12px;padding:0">Change passcode</button> · <button class="link" id="signout" style="font-size:12px;padding:0">Sign out</button></p>
   </section>`;
+}
+
+function chipSet(items,selected,attr){
+  return `<div class="chips">${items.map(t=>`<button class="chip ${selected.includes(t)?'on':''}" ${attr}="${esc(t)}" aria-pressed="${selected.includes(t)}">${esc(t)}</button>`).join("")}</div>`;
 }
 
 function report(){
@@ -457,14 +486,27 @@ function report(){
     <div>
       <h2 class="section-h">Possible triggers</h2>
       <div class="group">
-        <div class="field"><div class="chips">${TRIGGERS.map(t=>`<button class="chip ${d.triggers.includes(t)?'on':''}" data-trig="${esc(t)}" aria-pressed="${d.triggers.includes(t)}">${esc(t)}</button>`).join("")}</div></div>
+        <div class="field">${chipSet(TRIGGERS,d.triggers,"data-trig")}</div>
         <label class="row" for="other"><input id="other" type="text" placeholder="Other trigger (e.g. long drive, perfume)" value="${esc(d.other)}"></label>
       </div>
       <p class="foot">Select everything that might apply. Patterns show up in History over time.</p>
     </div>
     <div>
+      <h2 class="section-h">Medicines &amp; treatments</h2>
+      <div class="group">
+        <div class="field">
+          <p class="chip-label" id="medLbl">Medicines</p>
+          <div role="group" aria-labelledby="medLbl">${chipSet(MEDICINES,d.medicines,"data-med")}</div>
+          <p class="chip-label" id="trtLbl" style="margin-top:6px">Treatments</p>
+          <div role="group" aria-labelledby="trtLbl">${chipSet(TREATMENTS,d.treatments,"data-trt")}</div>
+        </div>
+        <label class="row" for="medOther"><input id="medOther" type="text" placeholder="Other, or dose and time (e.g. Sumatriptan 50 mg at 3 pm)" value="${esc(d.medOther)}"></label>
+      </div>
+      <p class="foot">Note what you took or tried for this episode.</p>
+    </div>
+    <div>
       <h2 class="section-h">Notes</h2>
-      <div class="group"><div class="field"><textarea id="notes" placeholder="Aura, location of pain, medication taken…">${esc(d.notes)}</textarea></div></div>
+      <div class="group"><div class="field"><textarea id="notes" placeholder="Aura, location of pain, what helped…">${esc(d.notes)}</textarea></div></div>
     </div>
     <button class="save" id="save" ${s?"":"disabled"}>${!s?"Rate severity to save":d.editId?"Save Changes":"Save Episode"}</button>
   </section>`;
@@ -493,7 +535,7 @@ function history(){
   :Object.entries(groups).map(([m,eps])=>`<div><h2 class="section-h">${m}</h2><div class="group">${eps.map(e=>`
     <button class="row" data-ep="${esc(e.id)}">
       <span class="ep-dot" style="background:${sevColor(e.severity)}">${e.severity}</span>
-      <span class="grow ep-main"><b>${fmtDate(e.startedAt)}</b><span class="ep-sub">${fmtTime(e.startedAt)}${e.endedAt?" · "+fmtDurShort(durMs(e)):""} · ${[...(e.triggers||[]),...(e.other?[e.other]:[])].map(esc).join(", ")||"No triggers noted"}</span></span>
+      <span class="grow ep-main"><b>${fmtDate(e.startedAt)}</b><span class="ep-sub">${fmtTime(e.startedAt)}${e.endedAt?" · "+fmtDurShort(durMs(e)):""} · ${[...(e.triggers||[]),...(e.other?[e.other]:[])].map(esc).join(", ")||"No triggers noted"}</span>${(e.medicines||[]).length||(e.treatments||[]).length?`<span class="ep-sub">${[...(e.medicines||[]),...(e.treatments||[])].map(esc).join(", ")}</span>`:""}</span>
       ${!e.endedAt?`<span class="pill on">Ongoing</span>`:e.nausea?`<span class="pill">${NAUSEA[e.nausea]} nausea</span>`:""}
       ${ICON.chev}
     </button>`).join("")}</div></div>`).join("");
@@ -510,15 +552,22 @@ function history(){
       <div class="row icon-row"><span class="ico" style="background:var(--orange)">${ICON.bolt}</span><span class="grow">Most common trigger</span><span class="val">${esc(topTrigger(list))}</span></div>
       <div class="row icon-row"><span class="ico" style="background:var(--teal)">${ICON.drop}</span><span class="grow">With nausea</span><span class="val">${list.length?Math.round(100*list.filter(e=>e.nausea>0).length/list.length)+"%":"—"}</span></div>
       <div class="row icon-row"><span class="ico" style="background:var(--red)">${ICON.gauge}</span><span class="grow">Severe (7+)</span><span class="val">${list.filter(e=>e.severity>=7).length}</span></div>
+    </div>
+    <div class="group">
+      <div class="row icon-row"><span class="ico" style="background:#5E5CE6">${ICON.pill}</span><span class="grow">Most used medicine</span><span class="val">${esc(topOf(list,"medicines"))}</span></div>
+      <div class="row icon-row"><span class="ico" style="background:var(--green)">${ICON.leaf}</span><span class="grow">Most used treatment</span><span class="val">${esc(topOf(list,"treatments"))}</span></div>
+      <div class="row icon-row"><span class="ico" style="background:var(--fg2)">${ICON.note}</span><span class="grow">Episodes treated</span><span class="val">${list.length?Math.round(100*list.filter(treated).length/list.length)+"%":"—"}</span></div>
     </div>`:""}
     ${body}
   </section>`;
 }
 
+function staticChips(items){return items.map(t=>`<span class="chip on" style="cursor:default">${esc(t)}</span>`).join("")}
+
 function detail(){
   const e=episodes.find(x=>x.id===view.id);
   if(!e) return `<section class="screen"><div class="nav"><button class="nav-btn" data-go="history">${ICON.back}<span style="margin-left:4px">History</span></button></div><div class="empty"><p>This episode was deleted.</p></div></section>`;
-  const trig=[...(e.triggers||[])];
+  const trig=[...(e.triggers||[])], meds=e.medicines||[], trts=e.treatments||[];
   return `<section class="screen">
     <div class="nav"><button class="nav-btn" data-go="history">${ICON.back}<span style="margin-left:4px">History</span></button><span class="nav-title">Episode</span><button class="nav-btn" id="editBtn">Edit</button></div>
     <div><p class="eyebrow">${fmtLong(e.startedAt)}</p><h1 style="color:${sevColor(e.severity)}">${e.severity}/10 <span style="font-size:22px">${SEV_WORD(e.severity)}</span></h1></div>
@@ -531,7 +580,12 @@ function detail(){
       ${editEnd?`<div class="end-edit"><label for="editEnd" style="font-size:15px;color:var(--fg2)">End time</label><input id="editEnd" type="datetime-local" value="${localInput(e.endedAt?new Date(e.endedAt):new Date())}" max="${localInput()}" style="text-align:left;max-width:100%"><div class="btns"><button id="cancelEnd">Cancel</button><button class="go" id="saveEnd">Save</button></div></div>`
         :!e.endedAt?`<div class="row" style="gap:8px"><button class="end-btn" data-endnow="${esc(e.id)}">End Now</button><button class="link" id="setEnd" style="font-size:15px">Set end time</button></div>`:""}
     </div>
-    <div><h2 class="section-h">Triggers</h2><div class="group"><div class="field">${trig.length||e.other?`<div class="chips">${trig.map(t=>`<span class="chip on" style="cursor:default">${esc(t)}</span>`).join("")}${e.other?`<span class="chip" style="cursor:default">Other: ${esc(e.other)}</span>`:""}</div>`:`<span style="color:var(--fg2)">None noted</span>`}</div></div></div>
+    <div><h2 class="section-h">Triggers</h2><div class="group"><div class="field">${trig.length||e.other?`<div class="chips">${staticChips(trig)}${e.other?`<span class="chip" style="cursor:default">Other: ${esc(e.other)}</span>`:""}</div>`:`<span style="color:var(--fg2)">None noted</span>`}</div></div></div>
+    <div><h2 class="section-h">Medicines &amp; treatments</h2><div class="group"><div class="field">${treated(e)?`
+      ${meds.length?`<p class="chip-label">Medicines</p><div class="chips">${staticChips(meds)}</div>`:""}
+      ${trts.length?`<p class="chip-label">Treatments</p><div class="chips">${staticChips(trts)}</div>`:""}
+      ${e.medOther?`<p class="chip-label">Other</p><div style="white-space:pre-wrap">${esc(e.medOther)}</div>`:""}`
+      :`<span style="color:var(--fg2)">None noted</span>`}</div></div></div>
     ${e.notes?`<div><h2 class="section-h">Notes</h2><div class="group"><div class="field" style="white-space:pre-wrap">${esc(e.notes)}</div></div></div>`:""}
     ${confirmDel?`<div class="confirm"><p>Delete this episode? This can’t be undone.</p><div class="btns"><button id="keep">Keep</button><button class="del" id="reallyDel">Delete</button></div></div>`
       :`<div class="group"><button class="row danger" id="del">Delete Episode</button></div>`}
@@ -540,8 +594,8 @@ function detail(){
 
 /* ---------- events ---------- */
 function draftDurText(){const ms=new Date(draft.endedAt)-new Date(draft.startedAt);return isNaN(ms)?"—":ms<0?"End is before start":fmtDur(ms)}
-function draftFrom(e){return{editId:e.id,startedAt:localInput(new Date(e.startedAt)),ongoing:!e.endedAt,endedAt:localInput(e.endedAt?new Date(e.endedAt):new Date()),severity:e.severity,nausea:e.nausea||0,triggers:[...(e.triggers||[])],other:e.other||"",notes:e.notes||""}}
-function newDraft(){return{ongoing:true,endedAt:localInput(),startedAt:localInput(),severity:0,nausea:0,triggers:[],other:"",notes:""}}
+function draftFrom(e){return{editId:e.id,startedAt:localInput(new Date(e.startedAt)),ongoing:!e.endedAt,endedAt:localInput(e.endedAt?new Date(e.endedAt):new Date()),severity:e.severity,nausea:e.nausea||0,triggers:[...(e.triggers||[])],other:e.other||"",medicines:[...(e.medicines||[])],treatments:[...(e.treatments||[])],medOther:e.medOther||"",notes:e.notes||""}}
+function newDraft(){return{ongoing:true,endedAt:localInput(),startedAt:localInput(),severity:0,nausea:0,triggers:[],other:"",medicines:[],treatments:[],medOther:"",notes:""}}
 function bind(){
   if(view.name==="pin"){
     document.querySelectorAll("[data-key]").forEach(b=>b.onclick=()=>pinKey(b.dataset.key));
@@ -553,6 +607,12 @@ function bind(){
     $("#forgot")&&($("#forgot").onclick=async()=>{
       const {error}=await sb.auth.resetPasswordForEmail(pin.email,{redirectTo:location.origin+location.pathname});
       pin.entry="";pin.err=!!error;pin.msg=error?authMessage(error):"We emailed you a link. Open it on this device to set a new passcode.";render()});
+    $("#usePw")&&($("#usePw").onclick=()=>{pin={...pin,stage:"password",entry:"",msg:"",err:false};render();$("#pw")?.focus()});
+    $("#pinToKeypad")&&($("#pinToKeypad").onclick=()=>{pin={...pin,stage:"enter",entry:"",msg:"",err:false};render()});
+    $("#pwForm")&&($("#pwForm").onsubmit=async ev=>{ev.preventDefault();const pw=$("#pw").value;if(!pw)return;
+      pin.busy=true;pendingSetPin=true;render();
+      const {error}=await sb.auth.signInWithPassword({email:pin.email,password:pw});
+      if(error){pendingSetPin=false;pin.busy=false;pin.err=true;pin.msg=authMessage(error);render()}});
     $("#emailForm")&&($("#emailForm").onsubmit=ev=>{ev.preventDefault();const v=$("#email").value.trim();if(!v)return;
       pin.email=v;pin.msg="";pin.err=false;
       if(pin.purpose==="signup")pin.stage="new";else{rememberEmail(v);pin.stage="enter"}
@@ -565,19 +625,23 @@ function bind(){
   document.querySelectorAll("[data-ep]").forEach(b=>b.onclick=()=>go({name:"detail",id:b.dataset.ep}));
   document.querySelectorAll("[data-range]").forEach(b=>b.onclick=()=>{range=+b.dataset.range;render()});
   if(view.name==="report"){
-    const sync=()=>{draft.startedAt=$("#when").value||draft.startedAt;if($("#ended"))draft.endedAt=$("#ended").value||draft.endedAt;draft.other=$("#other").value;draft.notes=$("#notes").value};
+    const sync=()=>{draft.startedAt=$("#when").value||draft.startedAt;if($("#ended"))draft.endedAt=$("#ended").value||draft.endedAt;draft.other=$("#other").value;draft.medOther=$("#medOther").value;draft.notes=$("#notes").value};
+    const toggle=(key,t)=>{sync();const a=draft[key],i=a.indexOf(t);i<0?a.push(t):a.splice(i,1);keepScroll(render)};
     document.querySelectorAll("[data-sev]").forEach(b=>b.onclick=()=>{sync();draft.severity=+b.dataset.sev;keepScroll(render)});
     document.querySelectorAll("[data-nau]").forEach(b=>b.onclick=()=>{sync();draft.nausea=+b.dataset.nau;keepScroll(render)});
-    document.querySelectorAll("[data-trig]").forEach(b=>b.onclick=()=>{sync();const t=b.dataset.trig,i=draft.triggers.indexOf(t);i<0?draft.triggers.push(t):draft.triggers.splice(i,1);keepScroll(render)});
+    document.querySelectorAll("[data-trig]").forEach(b=>b.onclick=()=>toggle("triggers",b.dataset.trig));
+    document.querySelectorAll("[data-med]").forEach(b=>b.onclick=()=>toggle("medicines",b.dataset.med));
+    document.querySelectorAll("[data-trt]").forEach(b=>b.onclick=()=>toggle("treatments",b.dataset.trt));
     const save=async()=>{sync();if(!draft.severity)return;
       if(!draft.ongoing&&new Date(draft.endedAt)<new Date(draft.startedAt)){toast("End time is before the start time.");return}
       $("#save").disabled=true;
-      const ep={startedAt:new Date(draft.startedAt).toISOString(),endedAt:draft.ongoing?null:new Date(draft.endedAt).toISOString(),severity:draft.severity,nausea:draft.nausea,triggers:draft.triggers,other:draft.other.trim(),notes:draft.notes.trim(),createdAt:new Date().toISOString()};
+      const ep={startedAt:new Date(draft.startedAt).toISOString(),endedAt:draft.ongoing?null:new Date(draft.endedAt).toISOString(),severity:draft.severity,nausea:draft.nausea,triggers:draft.triggers,other:draft.other.trim(),medicines:draft.medicines,treatments:draft.treatments,medOther:draft.medOther.trim(),notes:draft.notes.trim(),createdAt:new Date().toISOString()};
       try{
         if(draft.editId){await editEpisode(draft.editId,ep);toast("Changes saved");go({name:"detail",id:draft.editId})}
         else{await addEpisode(ep);toast("Episode saved");go({name:"history"})}
       }
-      catch(err){console.warn(err);$("#save").disabled=false;toast("Couldn’t save. Check your connection and try again.")}};
+      catch(err){console.warn(err);$("#save").disabled=false;
+        toast(/medicines|treatments|med_other/i.test(err?.message||"")?"Your database needs the new medicine columns. Run the updated SQL in Supabase, then try again.":"Couldn’t save. Check your connection and try again.")}};
     $("#ongoing").onchange=ev=>{sync();draft.ongoing=ev.target.checked;if(!draft.ongoing&&new Date(draft.endedAt)<new Date(draft.startedAt))draft.endedAt=localInput();keepScroll(render)};
     const upd=()=>{sync();$("#durVal")&&($("#durVal").textContent=draftDurText())};
     $("#when").oninput=upd;$("#ended")&&($("#ended").oninput=upd);
