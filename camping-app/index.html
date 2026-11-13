@@ -170,7 +170,7 @@ function formatPhone(raw) {
   return d.length > 10 ? base + d.slice(10) : base;
 }
 
-function exportCSV(mealState, claimState, gearList) {
+function exportCSV(mealState, claimState, gearList, surveyRows = []) {
   const rows = [];
   rows.push(["=== ROSTER ==="]);
   rows.push(["Name", "Phone", "Status", "Adults/Teens", "Kids"]);
@@ -187,6 +187,14 @@ function exportCSV(mealState, claimState, gearList) {
   rows.push(["Item", "Claimed By"]);
   gearList.forEach(g => rows.push([g.item, (claimState[g.id]||[]).map(c=>c.name).join(", ") || "Unclaimed"]));
 
+  rows.push([]);
+  rows.push(["=== SURVEY ==="]);
+  rows.push(["Name", "Preferred month", "Drive distance", "Drive Thursday"]);
+  surveyRows.forEach(r => {
+    const u = ROSTER.find(x => x.dbPhone === r.phone);
+    if (u) rows.push([u.name, r.month || "", r.drive_distance || "", r.thursday || ""]);
+  });
+
   const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
   const blob = new Blob([csv], { type: "text/csv" });
   const url = URL.createObjectURL(blob);
@@ -196,6 +204,14 @@ function exportCSV(mealState, claimState, gearList) {
 }
 
 // ─── MAIN APP ────────────────────────────────────────────────────────────────
+// ─── SURVEY ──────────────────────────────────────────────────────────────────
+// `field` matches the column name in the survey_responses table
+const SURVEY_QUESTIONS = [
+  { field: "month", q: "What is your preferred month for our Dads camping trip?", options: ["May", "June", "July", "August"] },
+  { field: "drive_distance", q: "How far would you be willing to drive?", options: ["1-2 hrs", "3-4 hrs", "4-5 hrs"] },
+  { field: "thursday", q: "Can you drive Thursday to avoid Friday traffic?", options: ["Yes", "No"] },
+];
+
 // ─── COUNTDOWN ───────────────────────────────────────────────────────────────
 function Countdown() {
   const target = new Date("2026-06-11T15:00:00");
@@ -258,6 +274,29 @@ function App() {
   const [payments, setPayments] = useState({});
   const [arrivalDay, setArrivalDay] = useState(null); // current user's arrival day
   const [allArrivals, setAllArrivals] = useState({});
+  const [survey, setSurvey] = useState({ month: null, drive_distance: null, thursday: null });
+  const [surveyAll, setSurveyAll] = useState([]); // admin only: everyone's responses
+
+  // Load survey answers whenever someone is signed in (admin loads everyone's)
+  useEffect(() => {
+    if (!currentUser) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const path = currentUser.admin
+          ? "survey_responses?select=*"
+          : `survey_responses?phone=eq.${currentUser.dbPhone}&select=*`;
+        const rows = await sbFetch(path);
+        if (cancelled) return;
+        if (currentUser.admin) setSurveyAll(rows);
+        const mine = rows.find(r => r.phone === currentUser.dbPhone);
+        setSurvey(mine
+          ? { month: mine.month, drive_distance: mine.drive_distance, thursday: mine.thursday }
+          : { month: null, drive_distance: null, thursday: null });
+      } catch (e) { console.error("Survey load failed", e); }
+    })();
+    return () => { cancelled = true; };
+  }, [currentUser]);
 
   // Auto-login from localStorage
   useEffect(() => {
@@ -517,6 +556,34 @@ function App() {
     } catch (e) { console.error("Payment save failed", e); showToast("Save failed", "error"); }
   };
 
+  const handleSurveyAnswer = async (field, value) => {
+    const next = { ...survey, [field]: value };
+    setSurvey(next);
+    if (currentUser.admin) {
+      setSurveyAll(prev => [
+        ...prev.filter(r => r.phone !== currentUser.dbPhone),
+        { phone: currentUser.dbPhone, ...next },
+      ]);
+    }
+    try {
+      await sbFetch("survey_responses", {
+        method: "POST",
+        prefer: "resolution=merge-duplicates,return=minimal",
+        body: JSON.stringify({
+          phone: currentUser.dbPhone,
+          month: next.month,
+          drive_distance: next.drive_distance,
+          thursday: next.thursday,
+          updated_at: new Date().toISOString(),
+        }),
+      });
+      showToast("Answer saved ✓");
+    } catch (e) {
+      console.error("Survey save failed", e);
+      showToast("Save failed: " + e.message.slice(0, 60), "error");
+    }
+  };
+
   const saveGearList = async (newGroup, newPersonal) => {
     setGearList(newGroup);
     setGearListPersonal(newPersonal);
@@ -535,10 +602,10 @@ function App() {
   const isGuest = currentUser?.type === "guest";
   const isSubuser = currentUser?.type === "subuser";
   const tabs = currentUser?.admin
-    ? ["🏠 Home", "📍 Location", "👥 Roster", "🍳 Meals", "🎒 Gear", "⚙️ Admin"]
+    ? ["🏠 Home", "📍 Location", "👥 Roster", "🍳 Meals", "🎒 Gear", "📋 Survey", "⚙️ Admin"]
     : isGuest
     ? ["🏠 Home", "📍 Location", "👥 Roster"]
-    : ["🏠 Home", "📍 Location", "👥 Roster", "🍳 Meals", "🎒 Gear"];
+    : ["🏠 Home", "📍 Location", "👥 Roster", "🍳 Meals", "🎒 Gear", "📋 Survey"];
 
   const CSS = `
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Sans+3:wght@300;400;600&display=swap');
@@ -1243,15 +1310,109 @@ function App() {
             </div>
           )}
 
-          {/* ── PAGE 5: ADMIN ── */}
-          {page === 5 && currentUser?.admin && (
+          {/* ── PAGE 5: SURVEY ── */}
+          {page === 5 && !isGuest && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <div className="card" style={{ padding: 16 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
+                  <div className="display" style={{ fontSize: 18, fontWeight: 600 }}>📋 Trip Survey</div>
+                  {(() => {
+                    const answered = SURVEY_QUESTIONS.filter(sq => survey[sq.field]).length;
+                    return answered === SURVEY_QUESTIONS.length
+                      ? <span className="tag tag-pine">All answered ✓</span>
+                      : <span className="tag tag-sunset">{answered} of {SURVEY_QUESTIONS.length} answered</span>;
+                  })()}
+                </div>
+                <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 6, lineHeight: 1.5 }}>
+                  Help us plan the next Dads camping trip. Your answers save as you tap, and you can change them any time.
+                </div>
+              </div>
+
+              {SURVEY_QUESTIONS.map((sq, n) => (
+                <div key={sq.field} className="card" style={{ padding: 16 }}>
+                  <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 10, lineHeight: 1.4 }}>{n + 1}. {sq.q}</div>
+                  <div style={{ display: "grid", gridTemplateColumns: sq.options.length === 3 ? "1fr 1fr 1fr" : "1fr 1fr", gap: 8 }}>
+                    {sq.options.map(opt => {
+                      const selected = survey[sq.field] === opt;
+                      return (
+                        <button key={opt} className="btn" aria-pressed={selected} onClick={() => handleSurveyAnswer(sq.field, opt)} style={{
+                          padding: "12px 8px", fontSize: 14, borderRadius: 10, textAlign: "center",
+                          background: selected ? "var(--ocean)" : "#f8f6f2",
+                          border: selected ? "2px solid var(--ocean)" : "1.5px solid var(--border)",
+                          color: selected ? "white" : "var(--text)",
+                          cursor: "pointer",
+                        }}>{selected ? "✓ " : ""}{opt}</button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── PAGE 6: ADMIN ── */}
+          {page === 6 && currentUser?.admin && (
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div className="display" style={{ fontSize: 18, fontWeight: 600 }}>Admin Dashboard</div>
-                <button className="btn btn-pine" onClick={() => exportCSV(appState.meals, appState.claims, gearList)} style={{ fontSize: 14 }}>
+                <button className="btn btn-pine" onClick={() => exportCSV(appState.meals, appState.claims, gearList, surveyAll)} style={{ fontSize: 14 }}>
                   ⬇ Export CSV
                 </button>
               </div>
+
+              {/* Survey Results */}
+              {(() => {
+                const people = ROSTER.filter(r => r.status === "confirmed");
+                const rows = surveyAll.filter(r => ROSTER.some(u => u.dbPhone === r.phone) && (r.month || r.drive_distance || r.thursday));
+                const nameOf = phone => ROSTER.find(u => u.dbPhone === phone)?.name || "Unknown";
+                const notYet = people.filter(p => !rows.some(r => r.phone === p.dbPhone));
+                return (
+                  <div className="card">
+                    <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <div className="display" style={{ fontSize: 15, fontWeight: 600 }}>📋 Survey Results</div>
+                      <span className="tag tag-pine">{rows.length} of {people.length} responded</span>
+                    </div>
+                    {SURVEY_QUESTIONS.map((sq, qi) => {
+                      const answered = rows.filter(r => r[sq.field]);
+                      return (
+                        <div key={sq.field} style={{ padding: "12px 16px", borderBottom: "1px solid var(--border)" }}>
+                          <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8, lineHeight: 1.4 }}>{qi + 1}. {sq.q}</div>
+                          {sq.options.map(opt => {
+                            const voters = answered.filter(r => r[sq.field] === opt);
+                            const pct = answered.length ? Math.round((voters.length / answered.length) * 100) : 0;
+                            return (
+                              <div key={opt} style={{ marginBottom: 8 }}>
+                                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14 }}>
+                                  <span style={{ fontWeight: 600 }}>{opt}</span>
+                                  <span style={{ color: "var(--muted)" }}>{voters.length} ({pct}%)</span>
+                                </div>
+                                <div style={{ height: 8, background: "#ece6d8", borderRadius: 4, marginTop: 3, overflow: "hidden" }}>
+                                  <div style={{ width: pct + "%", height: "100%", background: "var(--ocean)" }} />
+                                </div>
+                                {voters.length > 0 && (
+                                  <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 3, lineHeight: 1.4 }}>
+                                    {voters.map(v => nameOf(v.phone)).join(", ")}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    })}
+                    {notYet.length > 0 && (
+                      <div style={{ padding: "12px 16px" }}>
+                        <div style={{ fontSize: 14, fontWeight: 600, color: "var(--muted)", marginBottom: 6 }}>Not responded yet ({notYet.length})</div>
+                        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                          {notYet.map(p => (
+                            <span key={p.phone} style={{ background: "#f5f0e8", color: "var(--muted)", borderRadius: 20, padding: "3px 10px", fontSize: 14 }}>{p.name}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
 
               {/* Payments */}
               <div className="card">
