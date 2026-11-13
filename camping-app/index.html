@@ -206,6 +206,10 @@ function exportCSV(mealState, claimState, gearList, surveyRows = []) {
 // ─── MAIN APP ────────────────────────────────────────────────────────────────
 // ─── SURVEY ──────────────────────────────────────────────────────────────────
 // `field` matches the column name in the survey_responses table
+// While true, regular users only see the Survey tab (admins also keep Admin).
+// Set to false to bring back Home / Location / Roster / Meals / Gear.
+const SURVEY_ONLY = true;
+
 const SURVEY_QUESTIONS = [
   { field: "month", q: "What is your preferred month for our Dads camping trip?", options: ["May", "June", "July", "August"] },
   { field: "drive_distance", q: "How far would you be willing to drive?", options: ["1-2 hrs", "3-4 hrs", "4-5 hrs"] },
@@ -258,7 +262,7 @@ function Countdown() {
 
 function App() {
   const [screen, setScreen] = useState("login");
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(SURVEY_ONLY ? 5 : 0);
   const [phoneInput, setPhoneInput] = useState("");
   const [rawPhone, setRawPhone] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
@@ -276,6 +280,13 @@ function App() {
   const [allArrivals, setAllArrivals] = useState({});
   const [survey, setSurvey] = useState({ month: null, drive_distance: null, thursday: null });
   const [surveyAll, setSurveyAll] = useState([]); // admin only: everyone's responses
+  const [surveyDraft, setSurveyDraft] = useState({ month: null, drive_distance: null, thursday: null });
+  const [surveySaving, setSurveySaving] = useState(false);
+
+  // In survey-only mode, send everyone straight to the survey after sign-in
+  useEffect(() => {
+    if (currentUser && SURVEY_ONLY) setPage(5);
+  }, [currentUser]);
 
   // Load survey answers whenever someone is signed in (admin loads everyone's)
   useEffect(() => {
@@ -290,9 +301,11 @@ function App() {
         if (cancelled) return;
         if (currentUser.admin) setSurveyAll(rows);
         const mine = rows.find(r => r.phone === currentUser.dbPhone);
-        setSurvey(mine
+        const loaded = mine
           ? { month: mine.month, drive_distance: mine.drive_distance, thursday: mine.thursday }
-          : { month: null, drive_distance: null, thursday: null });
+          : { month: null, drive_distance: null, thursday: null };
+        setSurvey(loaded);
+        setSurveyDraft(loaded);
       } catch (e) { console.error("Survey load failed", e); }
     })();
     return () => { cancelled = true; };
@@ -372,7 +385,7 @@ function App() {
     if (found) {
       setCurrentUser(found);
       setScreen("app");
-      setPage(0);
+      setPage(SURVEY_ONLY ? 5 : 0);
       setLoginError("");
       // Remember phone in localStorage for auto-login
       try { localStorage.setItem("camp-phone", hashedInput); } catch(e) {}
@@ -556,32 +569,38 @@ function App() {
     } catch (e) { console.error("Payment save failed", e); showToast("Save failed", "error"); }
   };
 
-  const handleSurveyAnswer = async (field, value) => {
-    const next = { ...survey, [field]: value };
-    setSurvey(next);
-    if (currentUser.admin) {
-      setSurveyAll(prev => [
-        ...prev.filter(r => r.phone !== currentUser.dbPhone),
-        { phone: currentUser.dbPhone, ...next },
-      ]);
-    }
+  const handleSurveyAnswer = (field, value) => {
+    setSurveyDraft(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSurveySubmit = async () => {
+    if (surveySaving) return;
+    setSurveySaving(true);
     try {
       await sbFetch("survey_responses", {
         method: "POST",
         prefer: "resolution=merge-duplicates,return=minimal",
         body: JSON.stringify({
           phone: currentUser.dbPhone,
-          month: next.month,
-          drive_distance: next.drive_distance,
-          thursday: next.thursday,
+          month: surveyDraft.month,
+          drive_distance: surveyDraft.drive_distance,
+          thursday: surveyDraft.thursday,
           updated_at: new Date().toISOString(),
         }),
       });
-      showToast("Answer saved ✓");
+      setSurvey(surveyDraft);
+      if (currentUser.admin) {
+        setSurveyAll(prev => [
+          ...prev.filter(r => r.phone !== currentUser.dbPhone),
+          { phone: currentUser.dbPhone, ...surveyDraft },
+        ]);
+      }
+      showToast("Survey submitted — thank you! ✓");
     } catch (e) {
       console.error("Survey save failed", e);
-      showToast("Save failed: " + e.message.slice(0, 60), "error");
+      showToast("Submit failed: " + e.message.slice(0, 60), "error");
     }
+    setSurveySaving(false);
   };
 
   const saveGearList = async (newGroup, newPersonal) => {
@@ -601,11 +620,13 @@ function App() {
 
   const isGuest = currentUser?.type === "guest";
   const isSubuser = currentUser?.type === "subuser";
-  const tabs = currentUser?.admin
-    ? ["🏠 Home", "📍 Location", "👥 Roster", "🍳 Meals", "🎒 Gear", "📋 Survey", "⚙️ Admin"]
+  const fullTabs = currentUser?.admin
+    ? [["🏠 Home", 0], ["📍 Location", 1], ["👥 Roster", 2], ["🍳 Meals", 3], ["🎒 Gear", 4], ["📋 Survey", 5], ["⚙️ Admin", 6]]
     : isGuest
-    ? ["🏠 Home", "📍 Location", "👥 Roster"]
-    : ["🏠 Home", "📍 Location", "👥 Roster", "🍳 Meals", "🎒 Gear", "📋 Survey"];
+    ? [["🏠 Home", 0], ["📍 Location", 1], ["👥 Roster", 2]]
+    : [["🏠 Home", 0], ["📍 Location", 1], ["👥 Roster", 2], ["🍳 Meals", 3], ["🎒 Gear", 4], ["📋 Survey", 5]];
+  const tabs = (SURVEY_ONLY ? fullTabs.filter(([, id]) => id === 5 || id === 6) : fullTabs)
+    .map(([label, id]) => ({ label, id }));
 
   const CSS = `
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Sans+3:wght@300;400;600&display=swap');
@@ -753,17 +774,19 @@ function App() {
         </div>
 
         {/* Tab Bar */}
+        {tabs.length > 1 && (
         <div style={{ display: "flex", background: "white", borderBottom: "1px solid var(--border)", overflowX: "auto" }}>
-          {tabs.map((t, i) => (
-            <button key={t} onClick={() => setPage(i)} style={{
+          {tabs.map(t => (
+            <button key={t.id} onClick={() => setPage(t.id)} style={{
               flex: 1, minWidth: 60, padding: "10px 4px", background: "none", border: "none",
-              borderBottom: page === i ? "2.5px solid var(--ocean)" : "2.5px solid transparent",
-              color: page === i ? "var(--ocean)" : "var(--muted)",
+              borderBottom: page === t.id ? "2.5px solid var(--ocean)" : "2.5px solid transparent",
+              color: page === t.id ? "var(--ocean)" : "var(--muted)",
               fontSize: 14, fontWeight: 600, letterSpacing: "0.04em", cursor: "pointer",
               fontFamily: "'Source Sans 3', sans-serif", whiteSpace: "nowrap",
-            }}>{t}</button>
+            }}>{t.label}</button>
           ))}
         </div>
+        )}
 
         {/* Pages */}
         <div style={{ flex: 1, overflowY: "auto", padding: "20px 16px 40px" }}>
@@ -1311,44 +1334,59 @@ function App() {
           )}
 
           {/* ── PAGE 5: SURVEY ── */}
-          {page === 5 && !isGuest && (
-            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div className="card" style={{ padding: 16 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
-                  <div className="display" style={{ fontSize: 18, fontWeight: 600 }}>📋 Trip Survey</div>
-                  {(() => {
-                    const answered = SURVEY_QUESTIONS.filter(sq => survey[sq.field]).length;
-                    return answered === SURVEY_QUESTIONS.length
-                      ? <span className="tag tag-pine">All answered ✓</span>
-                      : <span className="tag tag-sunset">{answered} of {SURVEY_QUESTIONS.length} answered</span>;
-                  })()}
-                </div>
-                <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 6, lineHeight: 1.5 }}>
-                  Help us plan the next Dads camping trip. Your answers save as you tap, and you can change them any time.
-                </div>
-              </div>
-
-              {SURVEY_QUESTIONS.map((sq, n) => (
-                <div key={sq.field} className="card" style={{ padding: 16 }}>
-                  <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 10, lineHeight: 1.4 }}>{n + 1}. {sq.q}</div>
-                  <div style={{ display: "grid", gridTemplateColumns: sq.options.length === 3 ? "1fr 1fr 1fr" : "1fr 1fr", gap: 8 }}>
-                    {sq.options.map(opt => {
-                      const selected = survey[sq.field] === opt;
-                      return (
-                        <button key={opt} className="btn" aria-pressed={selected} onClick={() => handleSurveyAnswer(sq.field, opt)} style={{
-                          padding: "12px 8px", fontSize: 14, borderRadius: 10, textAlign: "center",
-                          background: selected ? "var(--ocean)" : "#f8f6f2",
-                          border: selected ? "2px solid var(--ocean)" : "1.5px solid var(--border)",
-                          color: selected ? "white" : "var(--text)",
-                          cursor: "pointer",
-                        }}>{selected ? "✓ " : ""}{opt}</button>
-                      );
-                    })}
+          {page === 5 && !isGuest && (() => {
+            const complete = SURVEY_QUESTIONS.every(sq => surveyDraft[sq.field]);
+            const hasSubmitted = SURVEY_QUESTIONS.every(sq => survey[sq.field]);
+            const dirty = SURVEY_QUESTIONS.some(sq => surveyDraft[sq.field] !== survey[sq.field]);
+            const answered = SURVEY_QUESTIONS.filter(sq => surveyDraft[sq.field]).length;
+            const done = hasSubmitted && !dirty;
+            return (
+              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                <div className="card" style={{ padding: 16 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
+                    <div className="display" style={{ fontSize: 18, fontWeight: 600 }}>📋 Trip Survey</div>
+                    {done
+                      ? <span className="tag tag-pine">Submitted ✓</span>
+                      : <span className="tag tag-sunset">{answered} of {SURVEY_QUESTIONS.length} answered</span>}
+                  </div>
+                  <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 6, lineHeight: 1.5 }}>
+                    {done
+                      ? "Thanks — your answers are in. You can change them and resubmit any time."
+                      : "Help us plan the next Dads camping trip. Answer all three questions, then tap Submit."}
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
+
+                {SURVEY_QUESTIONS.map((sq, n) => (
+                  <div key={sq.field} className="card" style={{ padding: 16 }}>
+                    <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 10, lineHeight: 1.4 }}>{n + 1}. {sq.q}</div>
+                    <div style={{ display: "grid", gridTemplateColumns: sq.options.length === 3 ? "1fr 1fr 1fr" : "1fr 1fr", gap: 8 }}>
+                      {sq.options.map(opt => {
+                        const selected = surveyDraft[sq.field] === opt;
+                        return (
+                          <button key={opt} className="btn" aria-pressed={selected} onClick={() => handleSurveyAnswer(sq.field, opt)} style={{
+                            padding: "12px 8px", fontSize: 14, borderRadius: 10, textAlign: "center",
+                            background: selected ? "var(--ocean)" : "#f8f6f2",
+                            border: selected ? "2px solid var(--ocean)" : "1.5px solid var(--border)",
+                            color: selected ? "white" : "var(--text)",
+                            cursor: "pointer",
+                          }}>{selected ? "✓ " : ""}{opt}</button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+
+                <button className="btn" onClick={handleSurveySubmit} disabled={!complete || done || surveySaving} style={{
+                  width: "100%", padding: "14px", fontSize: 16, borderRadius: 10,
+                  background: done ? "var(--pine)" : complete ? "var(--ocean)" : "#e8e2d4",
+                  color: done || complete ? "white" : "#3d4a3d",
+                  cursor: !complete || done || surveySaving ? "default" : "pointer",
+                }}>
+                  {surveySaving ? "Submitting…" : done ? "Submitted ✓" : !complete ? "Answer all 3 questions to submit" : hasSubmitted ? "Update my answers" : "Submit survey"}
+                </button>
+              </div>
+            );
+          })()}
 
           {/* ── PAGE 6: ADMIN ── */}
           {page === 6 && currentUser?.admin && (
