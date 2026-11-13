@@ -376,6 +376,10 @@ function App() {
 
   const handleLogin = async () => {
     // Hash the typed phone before comparing to stored hashes
+    if (!window.crypto || !window.crypto.subtle) {
+      setLoginError("Login needs a secure (https://) connection. Open the https:// address of this page.");
+      return;
+    }
     const encoder = new TextEncoder();
     const data = encoder.encode(rawPhone);
     const hashBuffer = await crypto.subtle.digest("SHA-256", data);
@@ -699,12 +703,12 @@ function App() {
         </svg>
 
         <div style={{ position: "relative", zIndex: 1, width: "100%", maxWidth: 360, textAlign: "center" }}>
-          <div style={{ fontSize: 56, marginBottom: 12 }}>🏖️</div>
+          <div style={{ fontSize: 56, marginBottom: 12 }}>⛺</div>
           <h1 className="display" style={{ color: "#f2e8d5", fontSize: 30, fontWeight: 600, marginBottom: 4 }}>
-            Sunset Beach
+            Dads Camping 2027
           </h1>
           <p style={{ color: "#8abccc", fontSize: 14, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 36 }}>
-            Dads & Kids Camping 2026
+            Location TBD
           </p>
 
           <div style={{ background: "rgba(255,255,255,0.07)", backdropFilter: "blur(12px)", borderRadius: 16, border: "1px solid rgba(255,255,255,0.12)", padding: "28px 24px" }}>
@@ -762,7 +766,7 @@ function App() {
           display: "flex", justifyContent: "space-between", alignItems: "center",
         }}>
           <div>
-            <div className="display" style={{ color: "#f2e8d5", fontSize: 16, fontWeight: 600 }}>🏖️ Sunset Beach</div>
+            <div className="display" style={{ color: "#f2e8d5", fontSize: 16, fontWeight: 600 }}>⛺ Dads Camping 2027</div>
             <div style={{ color: "rgba(242,232,213,0.7)", fontSize: 14, marginTop: 1 }}>
               {currentUser?.name}{currentUser?.admin ? " · Admin" : ""}
             </div>
