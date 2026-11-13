@@ -189,10 +189,10 @@ function exportCSV(mealState, claimState, gearList, surveyRows = []) {
 
   rows.push([]);
   rows.push(["=== SURVEY ==="]);
-  rows.push(["Name", "Preferred month", "Drive distance", "Drive Thursday"]);
+  rows.push(["Name", "Preferred months", "Drive distance", "Drive Thursday", "Comments"]);
   surveyRows.forEach(r => {
     const u = ROSTER.find(x => x.dbPhone === r.phone);
-    if (u) rows.push([u.name, r.month || "", r.drive_distance || "", r.thursday || ""]);
+    if (u) rows.push([u.name, ansList(r.month).join(" / "), r.drive_distance || "", r.thursday || "", r.comments || ""]);
   });
 
   const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
@@ -210,8 +210,10 @@ function exportCSV(mealState, claimState, gearList, surveyRows = []) {
 // Set to false to bring back Home / Location / Roster / Meals / Gear.
 const SURVEY_ONLY = true;
 
+// Multi-select answers are stored as a comma-separated string, e.g. "May,July"
+const ansList = v => (v ? String(v).split(",").filter(Boolean) : []);
 const SURVEY_QUESTIONS = [
-  { field: "month", q: "What is your preferred month for our Dads camping trip?", options: ["May", "June", "July", "August"] },
+  { field: "month", q: "What are your preferred months for our Dads camping trip? (select all that work)", options: ["May", "June", "July", "August"], multi: true },
   { field: "drive_distance", q: "How far would you be willing to drive?", options: ["1-2 hrs", "3-4 hrs", "4-5 hrs"] },
   { field: "thursday", q: "Can you drive Thursday to avoid Friday traffic?", options: ["Yes", "No"] },
 ];
@@ -278,9 +280,9 @@ function App() {
   const [payments, setPayments] = useState({});
   const [arrivalDay, setArrivalDay] = useState(null); // current user's arrival day
   const [allArrivals, setAllArrivals] = useState({});
-  const [survey, setSurvey] = useState({ month: null, drive_distance: null, thursday: null });
+  const [survey, setSurvey] = useState({ month: null, drive_distance: null, thursday: null, comments: null });
   const [surveyAll, setSurveyAll] = useState([]); // admin only: everyone's responses
-  const [surveyDraft, setSurveyDraft] = useState({ month: null, drive_distance: null, thursday: null });
+  const [surveyDraft, setSurveyDraft] = useState({ month: null, drive_distance: null, thursday: null, comments: null });
   const [surveySaving, setSurveySaving] = useState(false);
 
   // In survey-only mode, send everyone straight to the survey after sign-in
@@ -302,8 +304,8 @@ function App() {
         if (currentUser.admin) setSurveyAll(rows);
         const mine = rows.find(r => r.phone === currentUser.dbPhone);
         const loaded = mine
-          ? { month: mine.month, drive_distance: mine.drive_distance, thursday: mine.thursday }
-          : { month: null, drive_distance: null, thursday: null };
+          ? { month: mine.month, drive_distance: mine.drive_distance, thursday: mine.thursday, comments: mine.comments || null }
+          : { month: null, drive_distance: null, thursday: null, comments: null };
         setSurvey(loaded);
         setSurveyDraft(loaded);
       } catch (e) { console.error("Survey load failed", e); }
@@ -574,7 +576,14 @@ function App() {
   };
 
   const handleSurveyAnswer = (field, value) => {
-    setSurveyDraft(prev => ({ ...prev, [field]: value }));
+    const sq = SURVEY_QUESTIONS.find(q => q.field === field);
+    setSurveyDraft(prev => {
+      if (!sq || !sq.multi) return { ...prev, [field]: value };
+      const cur = ansList(prev[field]);
+      const next = cur.includes(value) ? cur.filter(x => x !== value) : [...cur, value];
+      const ordered = sq.options.filter(o => next.includes(o));
+      return { ...prev, [field]: ordered.length ? ordered.join(",") : null };
+    });
   };
 
   const handleSurveySubmit = async () => {
@@ -589,6 +598,7 @@ function App() {
           month: surveyDraft.month,
           drive_distance: surveyDraft.drive_distance,
           thursday: surveyDraft.thursday,
+          comments: (surveyDraft.comments || "").trim() || null,
           updated_at: new Date().toISOString(),
         }),
       });
@@ -1341,7 +1351,7 @@ function App() {
           {page === 5 && !isGuest && (() => {
             const complete = SURVEY_QUESTIONS.every(sq => surveyDraft[sq.field]);
             const hasSubmitted = SURVEY_QUESTIONS.every(sq => survey[sq.field]);
-            const dirty = SURVEY_QUESTIONS.some(sq => surveyDraft[sq.field] !== survey[sq.field]);
+            const dirty = SURVEY_QUESTIONS.some(sq => surveyDraft[sq.field] !== survey[sq.field]) || (surveyDraft.comments || "") !== (survey.comments || "");
             const answered = SURVEY_QUESTIONS.filter(sq => surveyDraft[sq.field]).length;
             const done = hasSubmitted && !dirty;
             return (
@@ -1365,7 +1375,7 @@ function App() {
                     <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 10, lineHeight: 1.4 }}>{n + 1}. {sq.q}</div>
                     <div style={{ display: "grid", gridTemplateColumns: sq.options.length === 3 ? "1fr 1fr 1fr" : "1fr 1fr", gap: 8 }}>
                       {sq.options.map(opt => {
-                        const selected = surveyDraft[sq.field] === opt;
+                        const selected = ansList(surveyDraft[sq.field]).includes(opt);
                         return (
                           <button key={opt} className="btn" aria-pressed={selected} onClick={() => handleSurveyAnswer(sq.field, opt)} style={{
                             padding: "12px 8px", fontSize: 14, borderRadius: 10, textAlign: "center",
@@ -1379,6 +1389,17 @@ function App() {
                     </div>
                   </div>
                 ))}
+
+                <div className="card" style={{ padding: 16 }}>
+                  <label htmlFor="survey-comments" style={{ display: "block", fontSize: 15, fontWeight: 600, marginBottom: 10, lineHeight: 1.4 }}>
+                    Additional ideas or comments <span style={{ fontWeight: 400, color: "var(--muted)" }}>(optional)</span>
+                  </label>
+                  <textarea id="survey-comments" rows={4} maxLength={1000}
+                    value={surveyDraft.comments || ""}
+                    onChange={e => setSurveyDraft(prev => ({ ...prev, comments: e.target.value }))}
+                    placeholder="Location ideas, activities, dates, anything else…"
+                    style={{ width: "100%", boxSizing: "border-box", padding: 12, fontSize: 16, borderRadius: 10, border: "1.5px solid var(--border)", fontFamily: "inherit", resize: "vertical", color: "var(--text)", background: "#fff" }} />
+                </div>
 
                 <button className="btn" onClick={handleSurveySubmit} disabled={!complete || done || surveySaving} style={{
                   width: "100%", padding: "14px", fontSize: 16, borderRadius: 10,
@@ -1405,7 +1426,7 @@ function App() {
               {/* Survey Results */}
               {(() => {
                 const people = ROSTER.filter(r => r.status === "confirmed");
-                const rows = surveyAll.filter(r => ROSTER.some(u => u.dbPhone === r.phone) && (r.month || r.drive_distance || r.thursday));
+                const rows = surveyAll.filter(r => ROSTER.some(u => u.dbPhone === r.phone) && (r.month || r.drive_distance || r.thursday || r.comments));
                 const nameOf = phone => ROSTER.find(u => u.dbPhone === phone)?.name || "Unknown";
                 const notYet = people.filter(p => !rows.some(r => r.phone === p.dbPhone));
                 return (
@@ -1420,7 +1441,7 @@ function App() {
                         <div key={sq.field} style={{ padding: "12px 16px", borderBottom: "1px solid var(--border)" }}>
                           <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8, lineHeight: 1.4 }}>{qi + 1}. {sq.q}</div>
                           {sq.options.map(opt => {
-                            const voters = answered.filter(r => r[sq.field] === opt);
+                            const voters = answered.filter(r => ansList(r[sq.field]).includes(opt));
                             const pct = answered.length ? Math.round((voters.length / answered.length) * 100) : 0;
                             return (
                               <div key={opt} style={{ marginBottom: 8 }}>
@@ -1442,6 +1463,16 @@ function App() {
                         </div>
                       );
                     })}
+                    {rows.some(r => r.comments) && (
+                      <div style={{ padding: "12px 16px", borderBottom: "1px solid var(--border)" }}>
+                        <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 8 }}>Comments &amp; ideas</div>
+                        {rows.filter(r => r.comments).map(r => (
+                          <div key={r.phone} style={{ fontSize: 14, lineHeight: 1.45, marginBottom: 8 }}>
+                            <span style={{ fontWeight: 600 }}>{nameOf(r.phone)}:</span> {r.comments}
+                          </div>
+                        ))}
+                      </div>
+                    )}
                     {notYet.length > 0 && (
                       <div style={{ padding: "12px 16px" }}>
                         <div style={{ fontSize: 14, fontWeight: 600, color: "var(--muted)", marginBottom: 6 }}>Not responded yet ({notYet.length})</div>
