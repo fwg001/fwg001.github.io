@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Family Bills</title>
+<style>
+  :root {
+    --bg: #f6f4ef;
+    --surface: #ffffff;
+    --ink: #1f2420;
+    --muted: #5c645e;
+    --line: #dcd8cf;
+    --accent: #2f5d50;
+    --accent-ink: #ffffff;
+    --paid: #1e6b45;
+    --paid-bg: #e3f2e8;
+    --due: #8a4b00;
+    --due-bg: #fdf0dc;
+    --danger: #a12a2a;
+    --focus: #1a56db;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #151816; --surface: #1f2421; --ink: #ecefeb; --muted: #a6aea8;
+      --line: #343b36; --accent: #7fbfa9; --accent-ink: #0f1a16;
+      --paid: #8fd6ac; --paid-bg: #1d3327; --due: #f2bf75; --due-bg: #3a2c17;
+      --danger: #f08a8a; --focus: #8ab4ff;
+      --shadow: none;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 20px 16px 64px; }
+  .skip { position: absolute; left: -999px; top: 8px; background: var(--surface); padding: 8px 12px; border-radius: 8px; z-index: 10; }
+  .skip:focus { left: 8px; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  header.top h1 { font-size: 1.25rem; margin: 0; letter-spacing: -.01em; }
+  header.top .who { color: var(--muted); font-size: .95rem; display: flex; align-items: center; gap: 12px; }
+
+  h2 { font-size: 1.1rem; margin: 0 0 12px; }
+  h3 { font-size: 1rem; margin: 0 0 8px; }
+  .muted { color: var(--muted); }
+  .small { font-size: .875rem; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); margin-bottom: 16px; }
+
+  button, .btn {
+    font: inherit; cursor: pointer; border-radius: 10px; padding: 10px 16px; min-height: 44px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  }
+  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+  button.link { border: none; background: none; padding: 4px 6px; min-height: 0; color: var(--accent); text-decoration: underline; }
+  button.danger { color: var(--danger); border-color: currentColor; background: transparent; }
+  button:disabled { opacity: .6; cursor: progress; }
+
+  label { display: block; font-weight: 600; margin-bottom: 4px; }
+  input[type=email], input[type=text], input[type=number], input[type=month], select, textarea {
+    font: inherit; width: 100%; padding: 10px 12px; min-height: 44px; border-radius: 10px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+  }
+  .field { margin-bottom: 14px; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .row > * { flex: 1 1 160px; }
+
+  /* Login */
+  .login { max-width: 420px; margin: 10vh auto 0; }
+
+  /* Member hero */
+  .hero { display: grid; gap: 16px; grid-template-columns: 1fr auto; align-items: center; }
+  @media (max-width: 560px) { .hero { grid-template-columns: 1fr; } }
+  .hero .month { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; font-size: .8rem; }
+  .hero .amount { font-size: 2.6rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; margin: 4px 0 8px; font-variant-numeric: tabular-nums; }
+  .breakdown { list-style: none; padding: 0; margin: 0; color: var(--muted); }
+  .breakdown li { display: flex; justify-content: space-between; max-width: 280px; font-variant-numeric: tabular-nums; }
+
+  .paycheck {
+    display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-radius: var(--radius);
+    border: 2px solid var(--line); cursor: pointer; font-weight: 600; min-width: 240px; user-select: none;
+  }
+  .paycheck input { width: 28px; height: 28px; margin: 0; accent-color: var(--paid); cursor: pointer; flex: none; }
+  .paycheck.is-paid { border-color: var(--paid); background: var(--paid-bg); color: var(--paid); }
+  .paycheck .sub { display: block; font-weight: 400; font-size: .85rem; color: var(--muted); }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+  @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+  .stat .k { color: var(--muted); font-size: .85rem; }
+  .stat .v { font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  /* Tables */
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  th { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 600; }
+  th[scope="row"] { font-size: 1rem; text-transform: none; letter-spacing: 0; color: var(--ink); }
+  td.num, th.num { text-align: right; }
+  .toolbar button { white-space: nowrap; }
+  tr:last-child td, tr:last-child th { border-bottom: none; }
+
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 999px; font-size: .85rem; font-weight: 600; white-space: nowrap; }
+  .pill.paid { background: var(--paid-bg); color: var(--paid); }
+  .pill.due { background: var(--due-bg); color: var(--due); }
+
+  /* Admin grid */
+  .grid th.sticky, .grid td.sticky { position: sticky; left: 0; background: var(--surface); z-index: 1; }
+  .cell {
+    display: block; width: 100%; min-width: 96px; text-align: center; padding: 8px 6px; border-radius: 10px;
+    border: 1px solid transparent; font-variant-numeric: tabular-nums; line-height: 1.25;
+  }
+  .cell.paid { background: var(--paid-bg); color: var(--paid); }
+  .cell.due { background: var(--due-bg); color: var(--due); }
+  .cell.none { color: var(--muted); background: transparent; border: 1px dashed var(--line); }
+  .cell small { display: block; font-size: .75rem; }
+
+  nav.tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  nav.tabs button[aria-current="page"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+
+  dialog { border: 1px solid var(--line); border-radius: var(--radius); padding: 0; width: min(460px, 92vw); background: var(--surface); color: var(--ink); }
+  dialog::backdrop { background: rgba(0,0,0,.4); }
+  dialog form { padding: 20px; }
+  dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; flex-wrap: wrap; }
+  dialog .actions .spacer { flex: 1; }
+
+  .notice { padding: 12px 14px; border-radius: 10px; background: var(--due-bg); color: var(--due); margin-bottom: 16px; }
+  .toast {
+    position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: var(--bg);
+    padding: 10px 16px; border-radius: 10px; font-size: .95rem; opacity: 0; pointer-events: none; transition: opacity .2s;
+  }
+  .toast.show { opacity: 1; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top" id="topbar" hidden>
+    <h1>Family Bills</h1>
+    <div class="who"><span id="whoName"></span><button class="link" id="signOut" type="button">Sign out</button></div>
+  </header>
+  <main id="main" tabindex="-1"><p class="muted">Loading…</p></main>
+</div>
+
+<dialog id="dlg"><form method="dialog" id="dlgForm"></form></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module">
+/* =====================================================================
+   // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDeVUhTvo2tmYvCagyTkZ_hU05vUFHGTt4",
+  authDomain: "bills-bcf77.firebaseapp.com",
+  projectId: "bills-bcf77",
+  storageBucket: "bills-bcf77.firebasestorage.app",
+  messagingSenderId: "928251575998",
+  appId: "1:928251575998:web:56e04be36ad5e3aef228ef"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+   ===================================================================== */
+const firebaseConfig = {
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'YOUR_PROJECT.firebaseapp.com',
+  projectId: 'YOUR_PROJECT',
+  appId: 'YOUR_APP_ID'
+};
+/* ===================================================================== */
+
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js';
+import {
+  getAuth, onAuthStateChanged, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, signOut
+} from 'https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js';
+import {
+  getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, addDoc, collection, query, where, getDocs, runTransaction
+} from 'https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js';
+
+const TZ = 'America/Los_Angeles';
+const configured = !firebaseConfig.apiKey.startsWith('YOUR_');
+const app = configured ? initializeApp(firebaseConfig) : null;
+const auth = configured ? getAuth(app) : null;
+const db = configured ? getFirestore(app) : null;
+
+const $ = (s, el = document) => el.querySelector(s);
+const main = $('#main');
+const dlg = $('#dlg');
+const dlgForm = $('#dlgForm');
+
+const state = { me: null, tab: 'overview', people: [], bills: [], assignments: [], dues: [] };
+
+/* ---------- utils ---------- */
+const money = n => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Number(n) || 0);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const round2 = n => Math.round(Number(n) * 100) / 100;
+
+// Months are 'YYYY-MM' strings everywhere (sort and compare as text).
+function currentMonth() {
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit' })
+    .formatToParts(new Date()).map(x => [x.type, x.value]));
+  return `${p.year}-${p.month}`;
+}
+function addMonths(ym, n) {
+  const [y, m] = ym.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1 + n, 1)).toISOString().slice(0, 7);
+}
+const monthLabel = (ym, opts = { month: 'long', year: 'numeric' }) =>
+  new Date(ym + '-15T12:00:00Z').toLocaleDateString('en-US', { ...opts, timeZone: 'UTC' });
+const shortMonth = ym => monthLabel(ym, { month: 'short', year: '2-digit' });
+const dateLabel = iso => iso ? new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: TZ }) : '';
+const dueId = (email, ym) => `${email}_${ym}`;
+const covers = (a, ym) => a.start <= ym && (!a.end || a.end >= ym);
+const docs = snap => snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+let toastTimer;
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+}
+function fail(err) {
+  console.error(err);
+  toast(err?.code === 'permission-denied' ? "You don't have permission to do that." : (err?.message || 'Something went wrong'));
+}
+
+/* ---------- month generation ---------- */
+// Build the due for one person from their assignments. Returns null if nothing is due.
+function buildDue(email, ym, assignments, bills) {
+  const lines = assignments
+    .filter(a => a.email === email && covers(a, ym))
+    .map(a => ({ a, b: bills.find(b => b.id === a.billId) }))
+    .filter(x => x.b && x.b.active)
+    .sort((x, y) => (x.b.sort ?? 0) - (y.b.sort ?? 0) || x.b.name.localeCompare(y.b.name))
+    .map(x => ({ bill: x.b.name, amount: round2(x.a.amount) }));
+  if (!lines.length) return null;
+  return {
+    email, month: ym,
+    amount: round2(lines.reduce((s, l) => s + l.amount, 0)),
+    breakdown: lines, paid: false, paidAt: null, markedBy: null, note: null
+  };
+}
+
+// Create the doc only if it doesn't exist yet (never overwrites a paid month).
+async function createIfMissing(data) {
+  const ref = doc(db, 'dues', dueId(data.email, data.month));
+  return runTransaction(db, async tx => {
+    const snap = await tx.get(ref);
+    if (!snap.exists()) { tx.set(ref, data); return true; }
+    return false;
+  });
+}
+
+async function ensureMonthAdmin(ym) {
+  let created = 0;
+  for (const p of state.people.filter(p => p.active)) {
+    const data = buildDue(p.id, ym, state.assignments, state.bills);
+    if (data && await createIfMissing(data)) created++;
+  }
+  return created;
+}
+
+/* ---------- auth ---------- */
+const EMAIL_KEY = 'familyBills.email';
+
+function renderLogin(msg = '') {
+  $('#topbar').hidden = true;
+  main.innerHTML = `
+    <div class="card login">
+      <h2>Family Bills</h2>
+      <p class="muted">Enter your email and we'll send you a sign-in link.</p>
+      ${!configured ? `<div class="notice">Firebase isn't configured yet. Add your firebaseConfig in the file.</div>` : ''}
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" autocomplete="email" required>
+        </div>
+        <button class="primary" type="submit" ${configured ? '' : 'disabled'}>Send sign-in link</button>
+        <p id="loginMsg" class="small" role="status" aria-live="polite">${esc(msg)}</p>
+      </form>
+    </div>`;
+  $('#loginForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const email = $('#email').value.trim().toLowerCase();
+    const out = $('#loginMsg');
+    if (!email) { out.textContent = 'Please enter your email.'; $('#email').focus(); return; }
+    const btn = e.submitter; btn.disabled = true;
+    try {
+      await sendSignInLinkToEmail(auth, email, { url: location.origin + location.pathname, handleCodeInApp: true });
+      localStorage.setItem(EMAIL_KEY, email);
+      out.textContent = `Check ${email} for your sign-in link (it may land in spam). You can close this tab.`;
+    } catch (err) {
+      out.textContent = err.code === 'auth/quota-exceeded'
+        ? 'Too many sign-in emails today. Try again tomorrow.'
+        : (err.message || 'Could not send the link.');
+    }
+    btn.disabled = false;
+  });
+}
+
+// Opened from the email link
+function renderConfirmEmail() {
+  $('#topbar').hidden = true;
+  main.innerHTML = `
+    <div class="card login">
+      <h2>Confirm your email</h2>
+      <p class="muted">You opened the link on a different device or browser. Enter the email you used, to finish signing in.</p>
+      <form id="confirmForm">
+        <div class="field"><label for="cemail">Email</label><input id="cemail" type="email" autocomplete="email" required></div>
+        <button class="primary" type="submit">Sign in</button>
+        <p id="cMsg" class="small" role="status" aria-live="polite"></p>
+      </form>
+    </div>`;
+  $('#confirmForm').addEventListener('submit', e => { e.preventDefault(); completeLink($('#cemail').value.trim().toLowerCase()); });
+}
+
+async function completeLink(email) {
+  try {
+    await signInWithEmailLink(auth, email, location.href);
+    localStorage.removeItem(EMAIL_KEY);
+    history.replaceState(null, '', location.pathname);
+  } catch (err) {
+    history.replaceState(null, '', location.pathname);
+    renderLogin(err.code === 'auth/invalid-action-code'
+      ? 'That link has expired or was already used. Send a new one.'
+      : (err.message || 'Sign-in failed.'));
+  }
+}
+
+$('#signOut').addEventListener('click', () => signOut(auth));
+
+async function boot(user) {
+  if (!user) { state.me = null; renderLogin(); return; }
+  const email = user.email.toLowerCase();
+  try {
+    const ref = doc(db, 'people', email);
+    let snap = await getDoc(ref);
+    if (!snap.exists()) {
+      // First sign-in by a bootstrap admin: create their profile. Rules reject this for anyone else.
+      try {
+        const name = email.split('@')[0].replace(/[._-]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        await setDoc(ref, { name, role: 'admin', active: true });
+        snap = await getDoc(ref);
+      } catch { /* not an admin */ }
+    }
+    if (!snap.exists() || !snap.data().active) {
+      $('#topbar').hidden = false; $('#whoName').textContent = email;
+      main.innerHTML = `<div class="card login"><h2>No access yet</h2><p>${esc(email)} isn't set up. Ask Lynsey or James to add you.</p></div>`;
+      return;
+    }
+    state.me = { id: email, ...snap.data() };
+    $('#topbar').hidden = false;
+    $('#whoName').textContent = state.me.name + (state.me.role === 'admin' ? ' · Admin' : '');
+    await refresh(true);
+  } catch (e) { fail(e); }
+}
+
+async function refresh(ensure = false) {
+  if (state.me.role === 'admin') await loadAdmin(ensure); else await loadMember(ensure);
+}
+
+/* =====================================================================
+   MEMBER VIEW
+   ===================================================================== */
+async function loadMember(ensure) {
+  const email = state.me.id;
+  if (ensure) {
+    try {
+      const [asg, bills] = await Promise.all([
+        getDocs(query(collection(db, 'assignments'), where('email', '==', email))),
+        getDocs(collection(db, 'bills'))
+      ]);
+      const data = buildDue(email, currentMonth(), docs(asg), docs(bills));
+      if (data) await createIfMissing(data);
+    } catch (e) { console.warn('Could not create this month', e); }
+  }
+  state.dues = docs(await getDocs(query(collection(db, 'dues'), where('email', '==', email))))
+    .sort((a, b) => b.month.localeCompare(a.month));
+  renderMember();
+}
+
+function renderMember() {
+  const cm = currentMonth();
+  const cur = state.dues.find(d => d.month === cm);
+  const year = cm.slice(0, 4);
+  const past = state.dues.filter(d => d.month <= cm);
+  const paidRows = state.dues.filter(d => d.paid);
+  const paidAll = paidRows.reduce((s, d) => s + Number(d.amount), 0);
+  const paidYear = paidRows.filter(d => d.month.startsWith(year)).reduce((s, d) => s + Number(d.amount), 0);
+  const olderUnpaid = past.filter(d => !d.paid && d.month !== cm).length;
+
+  main.innerHTML = `
+    <section class="card" aria-labelledby="curH">
+      ${cur ? `
+      <div class="hero">
+        <div>
+          <h2 id="curH" class="month">${monthLabel(cm)}</h2>
+          <div class="amount">${money(cur.amount)}</div>
+          <ul class="breakdown">${(cur.breakdown || []).map(b => `<li><span>${esc(b.bill)}</span><span>${money(b.amount)}</span></li>`).join('')}</ul>
+          ${cur.note ? `<p class="small muted">Note: ${esc(cur.note)}</p>` : ''}
+        </div>
+        ${payToggle(cur, `I've paid for ${monthLabel(cm, { month: 'long' })}`)}
+      </div>` : `<h2 id="curH">${monthLabel(cm)}</h2><p class="muted">Nothing due this month.</p>`}
+    </section>
+
+    ${olderUnpaid ? `<div class="notice">You have ${olderUnpaid} earlier month${olderUnpaid > 1 ? 's' : ''} not marked paid. See History below.</div>` : ''}
+
+    <section class="stats" aria-label="Totals">
+      <div class="stat"><div class="k">Paid in ${year}</div><div class="v">${money(paidYear)}</div></div>
+      <div class="stat"><div class="k">Paid all time</div><div class="v">${money(paidAll)}</div></div>
+      <div class="stat"><div class="k">Months paid</div><div class="v">${paidRows.length} of ${past.length}</div></div>
+    </section>
+
+    <section class="card" aria-labelledby="histH">
+      <h2 id="histH">History</h2>
+      ${state.dues.length ? `
+      <div class="table-scroll"><table>
+        <thead><tr><th scope="col">Month</th><th scope="col" class="num">Amount</th><th scope="col">Status</th><th scope="col"><span class="sr-only">Mark paid</span></th></tr></thead>
+        <tbody>${state.dues.map(d => `
+          <tr>
+            <th scope="row">${monthLabel(d.month)}</th>
+            <td class="num">${money(d.amount)}</td>
+            <td>${d.paid ? `<span class="pill paid">✓ Paid ${dateLabel(d.paidAt)}</span>` : `<span class="pill due">Due</span>`}</td>
+            <td><input type="checkbox" data-pay="${esc(d.id)}" ${d.paid ? 'checked' : ''} aria-label="Paid for ${monthLabel(d.month)}" style="width:22px;height:22px;accent-color:var(--paid)"></td>
+          </tr>`).join('')}
+        </tbody>
+      </table></div>` : `<p class="muted">No history yet.</p>`}
+    </section>`;
+}
+
+function payToggle(d, text) {
+  return `
+    <label class="paycheck ${d.paid ? 'is-paid' : ''}">
+      <input type="checkbox" data-pay="${esc(d.id)}" ${d.paid ? 'checked' : ''}>
+      <span>${d.paid ? 'Paid' : esc(text)}
+        <span class="sub">${d.paid ? `Marked ${dateLabel(d.paidAt)}. Untick if that was a mistake.` : 'Tick once you’ve sent the payment'}</span>
+      </span>
+    </label>`;
+}
+
+main.addEventListener('change', async e => {
+  const id = e.target.dataset?.pay;
+  if (!id) return;
+  const checked = e.target.checked;
+  e.target.disabled = true;
+  try {
+    const patch = { paid: checked, paidAt: checked ? new Date().toISOString() : null, markedBy: state.me.id };
+    await updateDoc(doc(db, 'dues', id), patch);
+    Object.assign(state.dues.find(d => d.id === id), patch);
+    toast(checked ? 'Marked as paid' : 'Marked as not paid');
+    renderMember();
+    $(`[data-pay="${CSS.escape(id)}"]`)?.focus();
+  } catch (err) { e.target.checked = !checked; e.target.disabled = false; fail(err); }
+});
+
+/* =====================================================================
+   ADMIN VIEW
+   ===================================================================== */
+async function loadAdmin(ensure) {
+  const [people, bills, assignments, dues] = await Promise.all(
+    ['people', 'bills', 'assignments', 'dues'].map(c => getDocs(collection(db, c)).then(docs)));
+  Object.assign(state, {
+    people: people.sort((a, b) => a.name.localeCompare(b.name)),
+    bills: bills.sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0) || a.name.localeCompare(b.name)),
+    assignments: assignments.sort((a, b) => b.start.localeCompare(a.start)),
+    dues
+  });
+  if (ensure && await ensureMonthAdmin(currentMonth())) return loadAdmin(false);
+  renderAdmin();
+}
+
+const nameOf = email => state.people.find(p => p.id === email)?.name ?? email ?? '—';
+const billOf = id => state.bills.find(b => b.id === id)?.name ?? '—';
+
+function renderAdmin() {
+  const tabs = [['overview', 'Overview'], ['bills', 'Bills & amounts'], ['people', 'People']];
+  main.innerHTML = `
+    <nav class="tabs" aria-label="Admin sections">
+      ${tabs.map(([k, l]) => `<button type="button" data-tab="${k}" ${state.tab === k ? 'aria-current="page"' : ''}>${l}</button>`).join('')}
+    </nav>
+    <div id="tabBody"></div>`;
+  const body = $('#tabBody');
+  if (state.tab === 'overview') body.innerHTML = adminOverview();
+  if (state.tab === 'bills') body.innerHTML = adminBills();
+  if (state.tab === 'people') body.innerHTML = adminPeople();
+}
+
+function adminOverview() {
+  const cm = currentMonth();
+  const curRows = state.dues.filter(d => d.month === cm);
+  const owed = curRows.reduce((s, d) => s + Number(d.amount), 0);
+  const got = curRows.filter(d => d.paid).reduce((s, d) => s + Number(d.amount), 0);
+  const unpaidNames = curRows.filter(d => !d.paid).map(d => nameOf(d.email));
+
+  const months = [...new Set(state.dues.map(d => d.month).concat(cm))].sort().reverse().slice(0, 12);
+  const emails = [...new Set(state.dues.map(d => d.email).concat(state.assignments.map(a => a.email)))]
+    .sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
+  const totalPaid = email => state.dues.filter(d => d.email === email && d.paid).reduce((s, d) => s + Number(d.amount), 0);
+
+  const gettingStarted = !state.assignments.length ? `
+    <section class="card"><h2>Getting started</h2>
+      <ol>
+        <li>On <strong>People</strong>, add Emma, Jake and the other admin by email.</li>
+        <li>On <strong>Bills &amp; amounts</strong>, add the starter bills, then set who pays what.</li>
+        <li>Come back here and select <strong>Refresh</strong> to create this month.</li>
+      </ol></section>` : '';
+
+  return gettingStarted + `
+    <section class="stats" aria-label="${monthLabel(cm)} summary">
+      <div class="stat"><div class="k">${monthLabel(cm)} collected</div><div class="v">${money(got)} <span class="muted small">of ${money(owed)}</span></div></div>
+      <div class="stat"><div class="k">Still to pay</div><div class="v" style="font-size:1.1rem">${curRows.length ? (unpaidNames.length ? esc(unpaidNames.join(', ')) : 'Everyone’s paid ✓') : '—'}</div></div>
+      <div class="stat"><div class="k">Collected all time</div><div class="v">${money(state.dues.filter(d => d.paid).reduce((s, d) => s + Number(d.amount), 0))}</div></div>
+    </section>
+
+    <section class="card" aria-labelledby="gridH">
+      <div class="toolbar">
+        <h2 id="gridH" style="margin:0">Payments by month</h2>
+        <div class="row" style="flex:0 0 auto">
+          <button type="button" data-act="recalc" data-month="${cm}">Refresh ${monthLabel(cm, { month: 'short' })} amounts</button>
+          <button type="button" data-act="nextMonth" data-month="${addMonths(cm, 1)}">Create ${monthLabel(addMonths(cm, 1), { month: 'short' })} early</button>
+        </div>
+      </div>
+      <p class="small muted">Select a cell to mark it paid, change the amount, or add a note.</p>
+      ${emails.length ? `
+      <div class="table-scroll"><table class="grid">
+        <thead><tr>
+          <th scope="col" class="sticky">Person</th>
+          ${months.map(m => `<th scope="col" style="text-align:center">${shortMonth(m)}</th>`).join('')}
+          <th scope="col" class="num">Total paid</th>
+        </tr></thead>
+        <tbody>
+          ${emails.map(email => `
+          <tr>
+            <th scope="row" class="sticky">${esc(nameOf(email))}</th>
+            ${months.map(m => {
+              const d = state.dues.find(x => x.email === email && x.month === m);
+              if (!d) return `<td><span class="cell none" aria-label="${esc(nameOf(email))}, ${monthLabel(m)}: nothing due">—</span></td>`;
+              return `<td><button type="button" class="cell ${d.paid ? 'paid' : 'due'}" data-act="editDue" data-id="${esc(d.id)}"
+                aria-label="${esc(nameOf(email))}, ${monthLabel(m)}: ${money(d.amount)}, ${d.paid ? 'paid' : 'not paid'}${d.note ? ', has note' : ''}. Edit">
+                ${money(d.amount)}<small>${d.paid ? '✓ Paid' : 'Due'}${d.note ? ' · 📝' : ''}</small></button></td>`;
+            }).join('')}
+            <td class="num"><strong>${money(totalPaid(email))}</strong></td>
+          </tr>`).join('')}
+        </tbody>
+      </table></div>` : `<p class="muted">No one has bills assigned yet.</p>`}
+    </section>`;
+}
+
+function adminBills() {
+  const cm = currentMonth();
+  return `
+    <section class="card" aria-labelledby="billsH">
+      <div class="toolbar"><h2 id="billsH" style="margin:0">Bills</h2>
+        <div class="row" style="flex:0 0 auto">
+          ${!state.bills.length ? `<button type="button" data-act="starterBills">Add Cell service + Car insurance</button>` : ''}
+          <button type="button" class="primary" data-act="editBill">Add bill</button>
+        </div></div>
+      <table>
+        <thead><tr><th scope="col">Bill</th><th scope="col">Status</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead>
+        <tbody>${state.bills.map(b => `
+          <tr><th scope="row">${esc(b.name)}</th><td>${b.active ? 'Active' : '<span class="muted">Inactive</span>'}</td>
+          <td class="num"><button type="button" class="link" data-act="editBill" data-id="${esc(b.id)}">Edit<span class="sr-only"> ${esc(b.name)}</span></button></td></tr>`).join('')
+          || `<tr><td colspan="3" class="muted">No bills yet.</td></tr>`}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" aria-labelledby="asgH">
+      <div class="toolbar"><h2 id="asgH" style="margin:0">Who pays what</h2><button type="button" class="primary" data-act="editAsg" ${state.bills.length ? '' : 'disabled'}>Add amount</button></div>
+      <p class="small muted">When a price changes, set an end month on the old line and add a new line starting the next month. Past months keep their amounts. To apply a change to this month, use “Refresh amounts” on Overview (unpaid months only).</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th scope="col">Person</th><th scope="col">Bill</th><th scope="col" class="num">Amount</th><th scope="col">From</th><th scope="col">Until</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead>
+        <tbody>${state.assignments.map(a => `
+          <tr ${covers(a, cm) ? '' : 'class="muted"'}>
+            <th scope="row">${esc(nameOf(a.email))}</th><td>${esc(billOf(a.billId))}</td>
+            <td class="num">${money(a.amount)}</td><td>${shortMonth(a.start)}</td><td>${a.end ? shortMonth(a.end) : 'Ongoing'}</td>
+            <td class="num"><button type="button" class="link" data-act="editAsg" data-id="${esc(a.id)}">Edit<span class="sr-only"> ${esc(nameOf(a.email))} ${esc(billOf(a.billId))}</span></button></td>
+          </tr>`).join('') || `<tr><td colspan="6" class="muted">None yet.</td></tr>`}
+        </tbody>
+      </table></div>
+    </section>`;
+}
+
+function adminPeople() {
+  return `
+    <section class="card" aria-labelledby="pplH">
+      <div class="toolbar"><h2 id="pplH" style="margin:0">People</h2><button type="button" class="primary" data-act="editPerson">Add person</button></div>
+      <p class="small muted">Once added, a person can sign in with that email address. Members see only their own bills. Admins see and edit everything.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Role</th><th scope="col">Status</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead>
+        <tbody>${state.people.map(p => `
+          <tr><th scope="row">${esc(p.name)}</th><td>${esc(p.id)}</td><td>${p.role === 'admin' ? 'Admin' : 'Member'}</td>
+          <td>${p.active ? 'Active' : '<span class="muted">Inactive</span>'}</td>
+          <td class="num"><button type="button" class="link" data-act="editPerson" data-id="${esc(p.id)}">Edit<span class="sr-only"> ${esc(p.name)}</span></button></td></tr>`).join('')}
+        </tbody>
+      </table></div>
+    </section>`;
+}
+
+/* ---------- admin actions ---------- */
+main.addEventListener('click', async e => {
+  const tab = e.target.closest('[data-tab]');
+  if (tab) { state.tab = tab.dataset.tab; renderAdmin(); $(`[data-tab="${state.tab}"]`).focus(); return; }
+  const el = e.target.closest('[data-act]');
+  if (!el) return;
+  const { act, id, month } = el.dataset;
+  try {
+    if (act === 'editDue') return openDue(id);
+    if (act === 'editBill') return openBill(id || null);
+    if (act === 'editAsg') return openAsg(id || null);
+    if (act === 'editPerson') return openPerson(id || null);
+    el.disabled = true;
+    if (act === 'starterBills') {
+      await addDoc(collection(db, 'bills'), { name: 'Cell service', active: true, sort: 1 });
+      await addDoc(collection(db, 'bills'), { name: 'Car insurance', active: true, sort: 2 });
+      await loadAdmin(); toast('Bills added');
+    }
+    if (act === 'recalc') {
+      // Re-copy amounts into unpaid rows for the month, then add anyone missing
+      for (const d of state.dues.filter(d => d.month === month && !d.paid)) {
+        const fresh = buildDue(d.email, month, state.assignments, state.bills);
+        if (fresh) await updateDoc(doc(db, 'dues', d.id), { amount: fresh.amount, breakdown: fresh.breakdown });
+      }
+      await ensureMonthAdmin(month);
+      await loadAdmin(); toast(`${monthLabel(month)} amounts refreshed`);
+    }
+    if (act === 'nextMonth') {
+      const n = await ensureMonthAdmin(month);
+      await loadAdmin(); toast(n ? `${monthLabel(month)} created` : `${monthLabel(month)} already exists`);
+    }
+  } catch (err) { el.disabled = false; fail(err); }
+});
+
+function openDialog(html, onSubmit, onDelete) {
+  const opener = document.activeElement;
+  dlgForm.innerHTML = html + `
+    <p class="small" id="dlgErr" role="alert" style="color:var(--danger)"></p>
+    <div class="actions">
+      ${onDelete ? `<button type="button" class="danger" id="dlgDel">Delete</button><span class="spacer"></span>` : ''}
+      <button type="button" id="dlgCancel">Cancel</button>
+      <button type="submit" class="primary">Save</button>
+    </div>`;
+  dlgForm.onsubmit = async e => {
+    e.preventDefault();
+    const btn = dlgForm.querySelector('[type=submit]'); btn.disabled = true;
+    try { await onSubmit(new FormData(dlgForm)); dlg.close(); await loadAdmin(); toast('Saved'); }
+    catch (err) { btn.disabled = false; $('#dlgErr').textContent = err.message; console.error(err); }
+  };
+  $('#dlgCancel').onclick = () => dlg.close();
+  if (onDelete) $('#dlgDel').onclick = async () => {
+    if (!confirm('Delete this? This can’t be undone.')) return;
+    try { await onDelete(); dlg.close(); await loadAdmin(); toast('Deleted'); } catch (err) { fail(err); }
+  };
+  dlg.onclose = () => opener?.isConnected && opener.focus();
+  dlg.showModal();
+  dlgForm.querySelector('input:not([type=checkbox]), select, textarea')?.focus();
+}
+
+function openDue(id) {
+  const d = state.dues.find(x => x.id === id);
+  openDialog(`
+    <h2>${esc(nameOf(d.email))} · ${monthLabel(d.month)}</h2>
+    <p class="small muted">${(d.breakdown || []).map(b => `${esc(b.bill)} ${money(b.amount)}`).join(' + ') || 'No breakdown'}</p>
+    <div class="field"><label for="f_amt">Amount due</label><input id="f_amt" name="amount" type="number" step="0.01" min="0" value="${d.amount}" required></div>
+    <div class="field"><label style="display:flex;gap:10px;align-items:center">
+      <input type="checkbox" name="paid" ${d.paid ? 'checked' : ''} style="width:22px;height:22px;accent-color:var(--paid)"> Paid</label>
+      ${d.paid ? `<p class="small muted">Marked ${dateLabel(d.paidAt)}${d.markedBy ? ' by ' + esc(nameOf(d.markedBy)) : ''}</p>` : ''}</div>
+    <div class="field"><label for="f_note">Note <span class="muted">(${esc(nameOf(d.email))} can see this)</span></label><textarea id="f_note" name="note" rows="2">${esc(d.note)}</textarea></div>`,
+    async fd => {
+      const paid = fd.get('paid') === 'on';
+      const patch = { amount: round2(fd.get('amount')), note: fd.get('note').trim() || null };
+      if (paid !== d.paid) Object.assign(patch, { paid, paidAt: paid ? new Date().toISOString() : null, markedBy: state.me.id });
+      await updateDoc(doc(db, 'dues', id), patch);
+    },
+    () => deleteDoc(doc(db, 'dues', id)));
+}
+
+function openBill(id) {
+  const b = id ? state.bills.find(x => x.id === id) : { name: '', active: true, sort: state.bills.length + 1 };
+  openDialog(`
+    <h2>${id ? 'Edit bill' : 'Add bill'}</h2>
+    <div class="field"><label for="f_bn">Name</label><input id="f_bn" name="name" type="text" value="${esc(b.name)}" required></div>
+    <div class="field"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="active" ${b.active ? 'checked' : ''} style="width:22px;height:22px"> Active</label>
+      <p class="small muted">Inactive bills are left out of new months.</p></div>`,
+    async fd => {
+      const row = { name: fd.get('name').trim(), active: fd.get('active') === 'on', sort: b.sort ?? 0 };
+      if (!row.name) throw new Error('Please enter a name.');
+      id ? await updateDoc(doc(db, 'bills', id), row) : await addDoc(collection(db, 'bills'), row);
+    },
+    id ? () => deleteDoc(doc(db, 'bills', id)) : null);
+}
+
+function openAsg(id) {
+  const a = id ? state.assignments.find(x => x.id === id) : { email: '', billId: '', amount: '', start: currentMonth(), end: null };
+  const people = state.people.filter(p => p.active);
+  openDialog(`
+    <h2>${id ? 'Edit amount' : 'Add amount'}</h2>
+    <div class="row">
+      <div class="field"><label for="f_p">Person</label><select id="f_p" name="email" required>
+        <option value="">Choose…</option>${people.map(p => `<option value="${esc(p.id)}" ${p.id === a.email ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select></div>
+      <div class="field"><label for="f_b">Bill</label><select id="f_b" name="billId" required>
+        <option value="">Choose…</option>${state.bills.map(b => `<option value="${esc(b.id)}" ${b.id === a.billId ? 'selected' : ''}>${esc(b.name)}</option>`).join('')}</select></div>
+    </div>
+    <div class="field"><label for="f_a">Monthly amount</label><input id="f_a" name="amount" type="number" step="0.01" min="0" value="${a.amount}" required></div>
+    <div class="row">
+      <div class="field"><label for="f_s">From</label><input id="f_s" name="start" type="month" value="${a.start}" required></div>
+      <div class="field"><label for="f_e">Until <span class="muted">(optional)</span></label><input id="f_e" name="end" type="month" value="${a.end || ''}"></div>
+    </div>`,
+    async fd => {
+      const row = {
+        email: fd.get('email'), billId: fd.get('billId'), amount: round2(fd.get('amount')),
+        start: fd.get('start'), end: fd.get('end') || null
+      };
+      if (!row.email || !row.billId || !row.start) throw new Error('Please fill in person, bill and start month.');
+      if (row.end && row.end < row.start) throw new Error('“Until” must be after “From”.');
+      id ? await updateDoc(doc(db, 'assignments', id), row) : await addDoc(collection(db, 'assignments'), row);
+    },
+    id ? () => deleteDoc(doc(db, 'assignments', id)) : null);
+}
+
+function openPerson(id) {
+  const p = id ? state.people.find(x => x.id === id) : { id: '', name: '', role: 'member', active: true };
+  const self = id === state.me.id;
+  openDialog(`
+    <h2>${id ? 'Edit ' + esc(p.name) : 'Add person'}</h2>
+    <div class="field"><label for="f_n">Name</label><input id="f_n" name="name" type="text" value="${esc(p.name)}" required></div>
+    <div class="field"><label for="f_em">Email</label>
+      ${id ? `<input id="f_em" type="email" value="${esc(p.id)}" disabled><p class="small muted">To change an email, add the person again with the new address.</p>`
+           : `<input id="f_em" name="email" type="email" autocomplete="off" required>`}</div>
+    <div class="field"><label for="f_r">Role</label><select id="f_r" name="role" ${self ? 'disabled' : ''}>
+      <option value="member" ${p.role === 'member' ? 'selected' : ''}>Member: sees only their own bills</option>
+      <option value="admin" ${p.role === 'admin' ? 'selected' : ''}>Admin: sees and edits everything</option></select>
+      ${self ? '<p class="small muted">You can’t change your own role.</p>' : ''}</div>
+    <div class="field"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="active" ${p.active ? 'checked' : ''} ${self ? 'disabled' : ''} style="width:22px;height:22px"> Active</label></div>`,
+    async fd => {
+      const row = { name: fd.get('name').trim() };
+      if (!row.name) throw new Error('Please enter a name.');
+      if (!self) Object.assign(row, { role: fd.get('role'), active: fd.get('active') === 'on' });
+      if (id) {
+        await updateDoc(doc(db, 'people', id), row);
+        if (self) { state.me.name = row.name; $('#whoName').textContent = row.name + ' · Admin'; }
+      } else {
+        const email = String(fd.get('email')).trim().toLowerCase();
+        if (!/^[^\s@/]+@[^\s@/]+\.[^\s@/]+$/.test(email)) throw new Error('Please enter a valid email.');
+        if (state.people.some(x => x.id === email)) throw new Error('That person is already added.');
+        await setDoc(doc(db, 'people', email), row);
+      }
+    },
+    id && !self ? () => deleteDoc(doc(db, 'people', id)) : null);
+}
+
+/* ---------- start ---------- */
+if (!configured) renderLogin();
+else if (isSignInWithEmailLink(auth, location.href)) {
+  const saved = localStorage.getItem(EMAIL_KEY);
+  saved ? completeLink(saved) : renderConfirmEmail();
+  onAuthStateChanged(auth, user => { if (user) boot(user); });
+} else {
+  onAuthStateChanged(auth, user => boot(user));
+}
+</script>
+</body>
+</html>
