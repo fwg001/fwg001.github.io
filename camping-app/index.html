@@ -189,10 +189,10 @@ function exportCSV(mealState, claimState, gearList, surveyRows = []) {
 
   rows.push([]);
   rows.push(["=== SURVEY ==="]);
-  rows.push(["Name", "Preferred months", "Drive distance", "Drive Thursday", "Comments"]);
+  rows.push(["Name", "Joining", "Preferred months", "Drive distance", "Drive Thursday", "Comments"]);
   surveyRows.forEach(r => {
     const u = ROSTER.find(x => x.dbPhone === r.phone);
-    if (u) rows.push([u.name, ansList(r.month).join(" / "), r.drive_distance || "", r.thursday || "", r.comments || ""]);
+    if (u) rows.push([u.name, r.joining || "", ansList(r.month).join(" / "), r.drive_distance || "", r.thursday || "", r.comments || ""]);
   });
 
   const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
@@ -213,6 +213,7 @@ const SURVEY_ONLY = true;
 // Multi-select answers are stored as a comma-separated string, e.g. "May,July"
 const ansList = v => (v ? String(v).split(",").filter(Boolean) : []);
 const SURVEY_QUESTIONS = [
+  { field: "joining", q: "Do you plan on joining this year's trip?", options: ["Yes", "No", "Maybe"] },
   { field: "month", q: "What are your preferred months for our Dads camping trip? (select all that work)", options: ["May", "June", "July", "August"], multi: true },
   { field: "drive_distance", q: "How far would you be willing to drive?", options: ["1-2 hrs", "3-4 hrs", "4-5 hrs"] },
   { field: "thursday", q: "Can you drive Thursday to avoid Friday traffic?", options: ["Yes", "No"] },
@@ -280,9 +281,9 @@ function App() {
   const [payments, setPayments] = useState({});
   const [arrivalDay, setArrivalDay] = useState(null); // current user's arrival day
   const [allArrivals, setAllArrivals] = useState({});
-  const [survey, setSurvey] = useState({ month: null, drive_distance: null, thursday: null, comments: null });
+  const [survey, setSurvey] = useState({ joining: null, month: null, drive_distance: null, thursday: null, comments: null });
   const [surveyAll, setSurveyAll] = useState([]); // admin only: everyone's responses
-  const [surveyDraft, setSurveyDraft] = useState({ month: null, drive_distance: null, thursday: null, comments: null });
+  const [surveyDraft, setSurveyDraft] = useState({ joining: null, month: null, drive_distance: null, thursday: null, comments: null });
   const [surveySaving, setSurveySaving] = useState(false);
 
   // In survey-only mode, send everyone straight to the survey after sign-in
@@ -304,8 +305,8 @@ function App() {
         if (currentUser.admin) setSurveyAll(rows);
         const mine = rows.find(r => r.phone === currentUser.dbPhone);
         const loaded = mine
-          ? { month: mine.month, drive_distance: mine.drive_distance, thursday: mine.thursday, comments: mine.comments || null }
-          : { month: null, drive_distance: null, thursday: null, comments: null };
+          ? { joining: mine.joining, month: mine.month, drive_distance: mine.drive_distance, thursday: mine.thursday, comments: mine.comments || null }
+          : { joining: null, month: null, drive_distance: null, thursday: null, comments: null };
         setSurvey(loaded);
         setSurveyDraft(loaded);
       } catch (e) { console.error("Survey load failed", e); }
@@ -595,6 +596,7 @@ function App() {
         prefer: "resolution=merge-duplicates,return=minimal",
         body: JSON.stringify({
           phone: currentUser.dbPhone,
+          joining: surveyDraft.joining,
           month: surveyDraft.month,
           drive_distance: surveyDraft.drive_distance,
           thursday: surveyDraft.thursday,
@@ -1366,7 +1368,7 @@ function App() {
                   <div style={{ fontSize: 14, color: "var(--muted)", marginTop: 6, lineHeight: 1.5 }}>
                     {done
                       ? "Thanks — your answers are in. You can change them and resubmit any time."
-                      : "Help us plan the next Dads camping trip. Answer all three questions, then tap Submit."}
+                      : "Help us plan the next Dads camping trip. Answer all four questions, then tap Submit."}
                   </div>
                 </div>
 
@@ -1407,7 +1409,7 @@ function App() {
                   color: done || complete ? "white" : "#3d4a3d",
                   cursor: !complete || done || surveySaving ? "default" : "pointer",
                 }}>
-                  {surveySaving ? "Submitting…" : done ? "Submitted ✓" : !complete ? "Answer all 3 questions to submit" : hasSubmitted ? "Update my answers" : "Submit survey"}
+                  {surveySaving ? "Submitting…" : done ? "Submitted ✓" : !complete ? `Answer all ${SURVEY_QUESTIONS.length} questions to submit` : hasSubmitted ? "Update my answers" : "Submit survey"}
                 </button>
               </div>
             );
@@ -1426,7 +1428,7 @@ function App() {
               {/* Survey Results */}
               {(() => {
                 const people = ROSTER.filter(r => r.status === "confirmed");
-                const rows = surveyAll.filter(r => ROSTER.some(u => u.dbPhone === r.phone) && (r.month || r.drive_distance || r.thursday || r.comments));
+                const rows = surveyAll.filter(r => ROSTER.some(u => u.dbPhone === r.phone) && (r.joining || r.month || r.drive_distance || r.thursday || r.comments));
                 const nameOf = phone => ROSTER.find(u => u.dbPhone === phone)?.name || "Unknown";
                 const notYet = people.filter(p => !rows.some(r => r.phone === p.dbPhone));
                 return (
