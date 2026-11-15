@@ -1,0 +1,9 @@
+{
+  "name": "bill-reminders",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "firebase-admin": "^14.5.1",
+    "nodemailer": "^10.5.0"
+  }
+}
