@@ -1,0 +1,50 @@
+name: Family bill reminders
+
+on:
+  schedule:
+    # Times are UTC. 17:00 UTC = 9am PST (10am during daylight time). Runs on the 1st and 10th.
+    - cron: '0 17 1,10 * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run: only print the emails, send nothing'
+        type: boolean
+        default: true
+      test_to:
+        description: 'Optional: send every email to this address instead'
+        type: string
+        required: false
+
+permissions:
+  contents: read
+  actions: write   # lets the last step keep the schedule switched on
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .github/scripts/bill-reminders
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: node remind.mjs
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          APP_URL: https://www.carletondesign.com/family-bills/
+          DRY_RUN: ${{ inputs.dry_run && 'true' || '' }}
+          TEST_TO: ${{ inputs.test_to }}
+
+      # GitHub pauses scheduled workflows in repos with no activity for 60 days.
+      # Re-enabling the workflow on each run keeps the schedule alive.
+      - name: Keep schedule alive
+        if: always()
+        working-directory: .
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/bill-reminders.yml/enable"
+        env:
+          GH_TOKEN: ${{ github.token }}
