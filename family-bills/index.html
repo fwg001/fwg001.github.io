@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Bills">
+<meta name="theme-color" content="#f6f4ef">
 <title>Family Bills</title>
 <style>
   :root {
@@ -33,6 +37,7 @@
     }
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
@@ -64,7 +69,7 @@
   button:disabled { opacity: .6; cursor: progress; }
 
   label { display: block; font-weight: 600; margin-bottom: 4px; }
-  input[type=email], input[type=text], input[type=number], input[type=month], select, textarea {
+  input[type=email], input[type=password], input[type=text], input[type=number], input[type=month], select, textarea {
     font: inherit; width: 100%; padding: 10px 12px; min-height: 44px; border-radius: 10px;
     border: 1px solid var(--line); background: var(--bg); color: var(--ink);
   }
@@ -172,7 +177,8 @@ const firebaseConfig = {
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js';
 import {
-  getAuth, onAuthStateChanged, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, signOut
+  getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+  sendPasswordResetEmail, sendEmailVerification, signOut
 } from 'https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js';
 import {
   getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, addDoc, collection, query, where, getDocs, runTransaction
@@ -262,75 +268,108 @@ async function ensureMonthAdmin(ym) {
 
 /* ---------- auth ---------- */
 const EMAIL_KEY = 'familyBills.email';
+const lastEmail = () => localStorage.getItem(EMAIL_KEY) || '';
 
-function renderLogin(msg = '') {
+const AUTH_MSG = {
+  'auth/invalid-credential': 'Email or password is incorrect. First time here? Create your password below.',
+  'auth/wrong-password': 'Email or password is incorrect.',
+  'auth/user-not-found': 'Email or password is incorrect. First time here? Create your password below.',
+  'auth/invalid-email': 'That doesn’t look like an email address.',
+  'auth/email-already-in-use': 'That email already has an account. Sign in, or use “Forgot password?” to set a new password.',
+  'auth/weak-password': 'Please use at least 8 characters.',
+  'auth/too-many-requests': 'Too many attempts. Wait a few minutes and try again.',
+  'auth/network-request-failed': 'No connection. Check your internet and try again.'
+};
+const authMsg = err => AUTH_MSG[err?.code] || err?.message || 'Something went wrong.';
+
+function renderLogin(msg = '', mode = 'signin') {
   $('#topbar').hidden = true;
+  const title = { signin: 'Sign in', create: 'Create your password', reset: 'Reset your password' }[mode];
+  const cta = { signin: 'Sign in', create: 'Create account', reset: 'Send reset link' }[mode];
   main.innerHTML = `
     <div class="card login">
       <h2>Family Bills</h2>
-      <p class="muted">Enter your email and we'll send you a sign-in link.</p>
+      <h3>${title}</h3>
+      ${mode === 'create' ? `<p class="muted small">Use the email Lynsey or James added for you. We'll send one email to confirm it's you.</p>` : ''}
+      ${mode === 'reset' ? `<p class="muted small">We'll email you a link to set a new password. Then come back here and sign in.</p>` : ''}
       ${!configured ? `<div class="notice">Firebase isn't configured yet. Add your firebaseConfig in the file.</div>` : ''}
       <form id="loginForm" novalidate>
         <div class="field">
           <label for="email">Email</label>
-          <input id="email" type="email" autocomplete="email" required>
+          <input id="email" type="email" autocomplete="username" autocapitalize="off" spellcheck="false" required value="${esc(lastEmail())}">
         </div>
-        <button class="primary" type="submit" ${configured ? '' : 'disabled'}>Send sign-in link</button>
+        ${mode !== 'reset' ? `
+        <div class="field">
+          <label for="pw">Password</label>
+          <input id="pw" type="password" autocomplete="${mode === 'create' ? 'new-password' : 'current-password'}" minlength="8" required ${mode === 'create' ? 'aria-describedby="pwHint"' : ''}>
+          ${mode === 'create' ? '<p id="pwHint" class="small muted">At least 8 characters.</p>' : ''}
+        </div>` : ''}
+        <button class="primary" type="submit" ${configured ? '' : 'disabled'}>${cta}</button>
         <p id="loginMsg" class="small" role="status" aria-live="polite">${esc(msg)}</p>
       </form>
+      <p class="small">${mode === 'signin'
+        ? `<button type="button" class="link" data-mode="create">First time? Create your password</button><br>
+           <button type="button" class="link" data-mode="reset">Forgot password?</button>`
+        : `<button type="button" class="link" data-mode="signin">Back to sign in</button>`}</p>
     </div>`;
+
+  main.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => {
+    renderLogin('', b.dataset.mode);
+    const email = $('#email'); (email.value ? ($('#pw') || email) : email).focus();
+  }));
+
   $('#loginForm').addEventListener('submit', async e => {
     e.preventDefault();
     const email = $('#email').value.trim().toLowerCase();
+    const pw = $('#pw')?.value || '';
     const out = $('#loginMsg');
     if (!email) { out.textContent = 'Please enter your email.'; $('#email').focus(); return; }
+    if (mode !== 'reset' && !pw) { out.textContent = 'Please enter your password.'; $('#pw').focus(); return; }
+    if (mode === 'create' && pw.length < 8) { out.textContent = AUTH_MSG['auth/weak-password']; $('#pw').focus(); return; }
     const btn = e.submitter; btn.disabled = true;
+    localStorage.setItem(EMAIL_KEY, email);
     try {
-      await sendSignInLinkToEmail(auth, email, { url: location.origin + location.pathname, handleCodeInApp: true });
-      localStorage.setItem(EMAIL_KEY, email);
-      out.textContent = `Check ${email} for your sign-in link (it may land in spam). You can close this tab.`;
-    } catch (err) {
-      out.textContent = err.code === 'auth/quota-exceeded'
-        ? 'Too many sign-in emails today. Try again tomorrow.'
-        : (err.message || 'Could not send the link.');
-    }
-    btn.disabled = false;
+      if (mode === 'signin') await signInWithEmailAndPassword(auth, email, pw);
+      if (mode === 'create') {
+        const cred = await createUserWithEmailAndPassword(auth, email, pw);
+        await sendEmailVerification(cred.user);
+      }
+      if (mode === 'reset') {
+        await sendPasswordResetEmail(auth, email);
+        renderLogin(`If ${email} has an account, a reset link is on its way. It may land in spam.`, 'signin');
+        return;
+      }
+    } catch (err) { out.textContent = authMsg(err); btn.disabled = false; }
   });
 }
 
-// Opened from the email link
-function renderConfirmEmail() {
-  $('#topbar').hidden = true;
+// Signed in, but hasn't confirmed their email yet
+function renderVerify(user) {
+  $('#topbar').hidden = false; $('#whoName').textContent = user.email;
   main.innerHTML = `
     <div class="card login">
       <h2>Confirm your email</h2>
-      <p class="muted">You opened the link on a different device or browser. Enter the email you used, to finish signing in.</p>
-      <form id="confirmForm">
-        <div class="field"><label for="cemail">Email</label><input id="cemail" type="email" autocomplete="email" required></div>
-        <button class="primary" type="submit">Sign in</button>
-        <p id="cMsg" class="small" role="status" aria-live="polite"></p>
-      </form>
+      <p>We sent a link to <strong>${esc(user.email)}</strong>. Tap it (it may land in spam), then come back here and select Continue.</p>
+      <p><button type="button" class="primary" id="vContinue">Continue</button>
+         <button type="button" id="vResend">Resend email</button></p>
+      <p id="vMsg" class="small" role="status" aria-live="polite"></p>
     </div>`;
-  $('#confirmForm').addEventListener('submit', e => { e.preventDefault(); completeLink($('#cemail').value.trim().toLowerCase()); });
-}
-
-async function completeLink(email) {
-  try {
-    await signInWithEmailLink(auth, email, location.href);
-    localStorage.removeItem(EMAIL_KEY);
-    history.replaceState(null, '', location.pathname);
-  } catch (err) {
-    history.replaceState(null, '', location.pathname);
-    renderLogin(err.code === 'auth/invalid-action-code'
-      ? 'That link has expired or was already used. Send a new one.'
-      : (err.message || 'Sign-in failed.'));
-  }
+  $('#vContinue').onclick = async () => {
+    await user.reload();
+    if (auth.currentUser.emailVerified) { await auth.currentUser.getIdToken(true); boot(auth.currentUser); }
+    else $('#vMsg').textContent = 'Not confirmed yet. Tap the link in the email first.';
+  };
+  $('#vResend').onclick = async () => {
+    try { await sendEmailVerification(user); $('#vMsg').textContent = 'Sent. Check your email.'; }
+    catch (err) { $('#vMsg').textContent = authMsg(err); }
+  };
 }
 
 $('#signOut').addEventListener('click', () => signOut(auth));
 
 async function boot(user) {
   if (!user) { state.me = null; renderLogin(); return; }
+  if (!user.emailVerified) { renderVerify(user); return; }
   const email = user.email.toLowerCase();
   try {
     const ref = doc(db, 'people', email);
@@ -590,7 +629,7 @@ function adminPeople() {
         <thead><tr><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Role</th><th scope="col">Status</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead>
         <tbody>${state.people.map(p => `
           <tr><th scope="row">${esc(p.name)}</th><td>${esc(p.id)}</td><td>${p.role === 'admin' ? 'Admin' : 'Member'}</td>
-          <td>${p.active ? 'Active' : '<span class="muted">Inactive</span>'}</td>
+          <td>${p.active ? 'Active' : '<span class="muted">Inactive</span>'}${p.reminders === false ? ' <span class="muted small">· no reminders</span>' : ''}</td>
           <td class="num"><button type="button" class="link" data-act="editPerson" data-id="${esc(p.id)}">Edit<span class="sr-only"> ${esc(p.name)}</span></button></td></tr>`).join('')}
         </tbody>
       </table></div>
@@ -731,9 +770,11 @@ function openPerson(id) {
       <option value="member" ${p.role === 'member' ? 'selected' : ''}>Member: sees only their own bills</option>
       <option value="admin" ${p.role === 'admin' ? 'selected' : ''}>Admin: sees and edits everything</option></select>
       ${self ? '<p class="small muted">You can’t change your own role.</p>' : ''}</div>
-    <div class="field"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="active" ${p.active ? 'checked' : ''} ${self ? 'disabled' : ''} style="width:22px;height:22px"> Active</label></div>`,
+    <div class="field"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="active" ${p.active ? 'checked' : ''} ${self ? 'disabled' : ''} style="width:22px;height:22px"> Active</label></div>
+    <div class="field"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="reminders" ${p.reminders !== false ? 'checked' : ''} style="width:22px;height:22px"> Email reminders</label>
+      <p class="small muted">Sent on the 1st and 10th when something is unpaid.</p></div>`,
     async fd => {
-      const row = { name: fd.get('name').trim() };
+      const row = { name: fd.get('name').trim(), reminders: fd.get('reminders') === 'on' };
       if (!row.name) throw new Error('Please enter a name.');
       if (!self) Object.assign(row, { role: fd.get('role'), active: fd.get('active') === 'on' });
       if (id) {
@@ -751,13 +792,7 @@ function openPerson(id) {
 
 /* ---------- start ---------- */
 if (!configured) renderLogin();
-else if (isSignInWithEmailLink(auth, location.href)) {
-  const saved = localStorage.getItem(EMAIL_KEY);
-  saved ? completeLink(saved) : renderConfirmEmail();
-  onAuthStateChanged(auth, user => { if (user) boot(user); });
-} else {
-  onAuthStateChanged(auth, user => boot(user));
-}
+else onAuthStateChanged(auth, user => boot(user));
 </script>
 </body>
 </html>
