@@ -7,7 +7,7 @@
 
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, collection, getDocs, query, where, doc, runTransaction } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, getDoc, query, where, doc, runTransaction } from 'firebase/firestore';
 import nodemailer from 'nodemailer';
 
 // Same public web config as the app (safe to commit)
@@ -109,6 +109,14 @@ async function main() {
   const cred = await signInWithEmailAndPassword(getAuth(app), env.SMTP_USER, env.BOT_PASSWORD);
   if (!cred.user.emailVerified) throw new Error(`${env.SMTP_USER} hasn't confirmed its email yet. Sign in to the app with it once and tap the confirmation link.`);
   const db = getFirestore(app);
+
+  // Check the account is an active admin in the app, with a clear message if not
+  const myEmail = cred.user.email.toLowerCase();
+  const me = await getDoc(doc(db, 'people', myEmail));
+  if (!me.exists()) throw new Error(`${myEmail} isn't on the People tab in the app. Add it there as an Admin (the email must match SMTP_USER exactly).`);
+  if (me.data().role !== 'admin') throw new Error(`${myEmail} is on the People tab but its role is "${me.data().role}". Change it to Admin.`);
+  if (me.data().active === false) throw new Error(`${myEmail} is set to Inactive on the People tab. Tick Active.`);
+  console.log(`Signed in as ${myEmail} (admin)`);
 
   const { ym: cm, day } = today();
   const isDueDay = day === 1;
