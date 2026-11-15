@@ -33,9 +33,9 @@ jobs:
       - run: npm install --no-audit --no-fund
       - run: node remind.mjs
         env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          BOT_PASSWORD: ${{ secrets.BOT_PASSWORD }}
           APP_URL: https://www.carletondesign.com/family-bills/
           DRY_RUN: ${{ inputs.dry_run && 'true' || '' }}
           TEST_TO: ${{ inputs.test_to }}
