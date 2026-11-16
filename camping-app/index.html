@@ -63,6 +63,7 @@ const ROSTER = [
   { name: "Peter Cook", phone: "2dcc9942b792a28aaa38a780b1ddc1eab49d14e692574ef70fc117bf025281c2", dbPhone: "5104272615", type: "adult", adults: 2, kids: 2, status: "confirmed", admin: false, parentPhone: null },
   { name: "Ben Quimby", phone: "409a8039a8ab06adf54d6ad9c43a4a5be20a8a75c25d3fddacff7ca15e122da6", dbPhone: "9102739103", type: "adult", adults: 0, kids: 0, status: "invited", admin: false, parentPhone: null },
   { name: "Joe Bass", phone: "3d36f6726ef1ec26bf1055be301e564b1da131c7f21fe78cf5a9e1084a1ec820", dbPhone: "8054231417", type: "adult", adults: 2, kids: 0, status: "confirmed", admin: false, parentPhone: null },
+  { name: "Jamison Donato", phone: "7aa2b901c70e0a65a85e24038af96b6efb9613b83d402ebda8e1988bc91d33e6", dbPhone: "4087214000", type: "adult", adults: 1, kids: 1, status: "confirmed", admin: false, parentPhone: null },
   { name: "Gria PA", phone: "76d5dcc9999105d8275caace187f92f7a9f1ed8ec9e45aeb7f66a8d3f5bea1c6", dbPhone: "4088900824", type: "adult", adults: 0, kids: 0, status: "invited", admin: false, parentPhone: null },
   { name: "Russ Drews", phone: "f30b7a7e7c4e5e9157346679c4fc7999b1751682934ee32989583381c3b3774a", dbPhone: "4084774235", type: "adult", adults: 0, kids: 0, status: "invited", admin: false, parentPhone: null },
   { name: "Emma Carleton", phone: "cbcaf9b04e2149a7d3d1202f64c10e92649f1a1ba2410a0950a27c1f91adb313", dbPhone: "4086470528", type: "subuser", adults: 0, kids: 0, status: "confirmed", admin: false, parentPhone: "5cd3222fcc8bd4eedff967f5b0d135357db8c0b0918ccdb9c06550afacc32639" },
@@ -111,9 +112,20 @@ const PERSONAL_GEAR = [
 const SUPABASE_URL = "https://ipobjafwifquhagvalaf.supabase.co";
 const SUPABASE_KEY = "sb_publishable_TahjTRUV4DSvdwwcbe6G6g_drXqlRF-";
 
+// Each trip year keeps its own tables so past years stay intact as a record.
+// 2026 uses the original table names; later years append _<year>.
+// survey_responses is shared (the survey is about planning the next trip).
+const SEASON = 2027;
+const SEASON_TABLES = ["meal_signups", "gear_claims", "app_config", "payments", "arrival_day", "personal_checks"];
+function seasonPath(path) {
+  if (SEASON === 2026) return path;
+  const name = path.split(/[?\/]/)[0];
+  return SEASON_TABLES.includes(name) ? name + "_" + SEASON + path.slice(name.length) : path;
+}
+
 async function sbFetch(path, options = {}) {
   const { prefer, headers: extraHeaders, ...fetchOptions } = options;
-  const res = await fetch(SUPABASE_URL + "/rest/v1/" + path, {
+  const res = await fetch(SUPABASE_URL + "/rest/v1/" + seasonPath(path), {
     ...fetchOptions,
     headers: {
       "apikey": SUPABASE_KEY,
@@ -137,8 +149,8 @@ function buildAppState(mealRows, claimRows) {
   const meals = Object.fromEntries(MEALS.filter(m => !m.infoOnly).map(m => [
     m.id,
     {
-      chef: m.defaultChef ? { name: m.defaultChef, phone: ROSTER.find(r=>r.name===m.defaultChef)?.dbPhone || "seed" } : null,
-      helper: m.defaultHelper ? { name: m.defaultHelper, phone: ROSTER.find(r=>r.name===m.defaultHelper)?.dbPhone || "seed" } : null,
+      chef: m.defaultChef && SEASON === 2026 ? { name: m.defaultChef, phone: ROSTER.find(r=>r.name===m.defaultChef)?.dbPhone || "seed" } : null,
+      helper: m.defaultHelper && SEASON === 2026 ? { name: m.defaultHelper, phone: ROSTER.find(r=>r.name===m.defaultHelper)?.dbPhone || "seed" } : null,
       helper2: null,
       menu: m.menu,
     }
