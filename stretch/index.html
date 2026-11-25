@@ -229,6 +229,11 @@
   .switch.on{background:var(--accent);}
   .switch .knob{position:absolute; top:2.5px; left:2.5px; width:22px; height:22px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.3); transition:transform .25s cubic-bezier(.34,1.4,.64,1);}
   .switch.on .knob{transform:translateX(19px);}
+  .rep-scale-row{flex-direction:column; align-items:stretch; gap:10px;}
+  .seg{display:grid; grid-template-columns:repeat(4,1fr); gap:4px; padding:4px; border-radius:12px; background:var(--surface-2); border:1px solid var(--border);}
+  .seg button{border:none; background:transparent; color:var(--text-muted); font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700; padding:9px 0; border-radius:9px; cursor:pointer; transition:background .2s ease, color .2s ease;}
+  .seg button[aria-checked="true"]{background:var(--accent); color:var(--on-accent);}
+  .seg button:focus-visible{outline:2px solid var(--focus); outline-offset:1px;}
 </style>
 </head>
 <body>
@@ -406,6 +411,18 @@
         <button type="button" class="switch" id="mute-switch" role="switch" aria-checked="false" aria-label="Sound effects">
           <span class="knob"></span>
         </button>
+      </div>
+      <div class="settings-row rep-scale-row" style="border-bottom:1px solid var(--border); margin-bottom:18px; padding-bottom:16px;">
+        <div class="settings-text">
+          <div class="name" id="rep-scale-title">Repetitions</div>
+          <div class="cat" id="rep-scale-desc" style="text-transform:none; letter-spacing:0; font-size:11.5px;">Scale back reps from the original program. Hold times and sets stay the same.</div>
+        </div>
+        <div class="seg" id="rep-scale-seg" role="radiogroup" aria-labelledby="rep-scale-title" aria-describedby="rep-scale-desc">
+          <button type="button" role="radio" data-scale="1">Full</button>
+          <button type="button" role="radio" data-scale="0.75">−25%</button>
+          <button type="button" role="radio" data-scale="0.5">−50%</button>
+          <button type="button" role="radio" data-scale="0.25">−75%</button>
+        </div>
       </div>
       <p class="settings-intro">Choose which exercises count toward today's routine. Turning one off doesn't erase its history — it just skips it in "Start today's routine" until you switch it back on.</p>
       <div id="settings-list"></div>
@@ -598,6 +615,29 @@ async function saveProgress(){
 let enabledMap = {};
 let ACTIVE = [];
 
+/* ---------------- REP SCALING ---------------- */
+const REP_SCALES = [1, 0.75, 0.5, 0.25];
+let repScale = 1;
+
+function repsFor(ex){
+  return Math.max(1, Math.round(ex.reps * repScale));
+}
+
+function doseLabelFor(ex){
+  if(repScale === 1) return ex.doseLabel;
+  return ex.doseLabel.replace(/(\d+) reps/, () => { const n = repsFor(ex); return `${n} rep${n === 1 ? '' : 's'}`; });
+}
+
+function setRepScale(val){
+  repScale = REP_SCALES.includes(val) ? val : 1;
+  storageSet('cervical-rep-scale', repScale);
+}
+
+async function loadRepScale(){
+  const val = await storageGet('cervical-rep-scale');
+  return REP_SCALES.includes(val) ? val : 1;
+}
+
 function isEnabled(id){
   return enabledMap[id] !== false;
 }
@@ -683,7 +723,7 @@ function renderHome(){
       <div class="text-block">
         <div class="cat">${ex.cat}</div>
         <h3>${ex.name}</h3>
-        <div class="dose">${isDone ? '<span class="status-note">Completed today</span> &middot; ' : ''}${ex.doseLabel}${ex.equipment ? ' &middot; <span class="equip-inline">Needs: ' + ex.equipment + '</span>' : ''}</div>
+        <div class="dose">${isDone ? '<span class="status-note">Completed today</span> &middot; ' : ''}${doseLabelFor(ex)}${ex.equipment ? ' &middot; <span class="equip-inline">Needs: ' + ex.equipment + '</span>' : ''}</div>
       </div>
       <span class="go" aria-hidden="true">${isDone ? '✓' : '▸'}</span>
     `;
@@ -722,7 +762,7 @@ function estimateExSeconds(ex){
   const sideCount = ex.sides ? ex.sides.length : 1;
   const setCount = ex.sets || 1;
   const perRep = ex.hold + ex.restRep;
-  return sideCount * setCount * ex.reps * perRep;
+  return sideCount * setCount * repsFor(ex) * perRep;
 }
 
 function goHome(){
@@ -768,6 +808,24 @@ function openSettings(){
     setMuted(!newSoundOn);
     if(newSoundOn) soundSetComplete();
   };
+  const seg = document.getElementById('rep-scale-seg');
+  const segBtns = Array.from(seg.querySelectorAll('button'));
+  const syncSeg = () => segBtns.forEach(b => {
+    const on = parseFloat(b.dataset.scale) === repScale;
+    b.setAttribute('aria-checked', String(on));
+    b.tabIndex = on ? 0 : -1;
+  });
+  segBtns.forEach((b, i) => {
+    b.onclick = () => { setRepScale(parseFloat(b.dataset.scale)); syncSeg(); renderHome(); };
+    b.onkeydown = (e) => {
+      const dir = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ? -1 : 0;
+      if(!dir) return;
+      e.preventDefault();
+      const next = segBtns[(i + dir + segBtns.length) % segBtns.length];
+      next.click(); next.focus();
+    };
+  });
+  syncSeg();
   renderSettings();
 }
 
@@ -930,7 +988,7 @@ function loadExercise(idx, resetProgress){
   else { kp.style.display='none'; }
 
   updateRepCounter(ex);
-  announce(`${ex.name}${ex.sides ? ', ' + ex.sides[sideIdx] : ''}. Rep ${repIdx+1} of ${ex.reps}.`);
+  announce(`${ex.name}${ex.sides ? ', ' + ex.sides[sideIdx] : ''}. Rep ${repIdx+1} of ${repsFor(ex)}.`);
   beginPhase(ex, 'hold');
 }
 
@@ -965,7 +1023,7 @@ function selectSide(idx){
   updateSideToggle(sideIdx, false);
   if(navigator.vibrate) navigator.vibrate(15);
   updateRepCounter(ex);
-  announce(`${ex.sides[sideIdx]}. Rep 1 of ${ex.reps}.`);
+  announce(`${ex.sides[sideIdx]}. Rep 1 of ${repsFor(ex)}.`);
   stopTicking();
   beginPhase(ex, 'hold');
 }
@@ -984,7 +1042,7 @@ function updateProgressBar(ex, ph){
   const fill = document.getElementById('progress-bar-fill');
   const track = document.getElementById('progress-bar-track');
   const completedReps = ph === 'rest' ? repIdx + 1 : repIdx;
-  const pct = Math.round((completedReps / ex.reps) * 100);
+  const pct = Math.round((completedReps / repsFor(ex)) * 100);
   fill.style.width = pct + '%';
   track.setAttribute('aria-valuenow', pct);
 }
@@ -1001,7 +1059,7 @@ function renderSteps(ex){
 
 function updateRepCounter(ex){
   const setCount = ex.sets || 1;
-  let text = `Rep ${repIdx+1} of ${ex.reps}`;
+  let text = `Rep ${repIdx+1} of ${repsFor(ex)}`;
   if(setCount > 1) text += ` · Set ${setIdx+1} of ${setCount}`;
   document.getElementById('rep-counter').textContent = text;
 }
@@ -1039,7 +1097,7 @@ function tick(ex){
 
 function advance(ex){
   if(phase === 'hold'){
-    const isLastRep = repIdx === ex.reps - 1;
+    const isLastRep = repIdx === repsFor(ex) - 1;
     const setCount = ex.sets || 1;
     const isLastSet = setIdx === setCount - 1;
     const sideCount = ex.sides ? ex.sides.length : 1;
@@ -1058,7 +1116,7 @@ function advance(ex){
   const prevSideIdx = sideIdx;
 
   repIdx++;
-  if(repIdx >= ex.reps){
+  if(repIdx >= repsFor(ex)){
     repIdx = 0;
     setIdx++;
     if(setIdx >= setCount){
@@ -1074,7 +1132,7 @@ function advance(ex){
   }
   if(ex.sides) updateSideToggle(sideIdx, sideIdx !== prevSideIdx);
   updateRepCounter(ex);
-  announce(`${ex.sides ? ex.sides[sideIdx] + '. ' : ''}Rep ${repIdx+1} of ${ex.reps}.`);
+  announce(`${ex.sides ? ex.sides[sideIdx] + '. ' : ''}Rep ${repIdx+1} of ${repsFor(ex)}.`);
   beginPhase(ex, 'hold');
 }
 
@@ -1195,10 +1253,11 @@ function boot(){
   }catch(e){
     console.error('Initial render failed:', e);
   }
-  Promise.all([loadProgress(), loadEnabled(), loadMuted()]).then(([store, enabled, mutedVal]) => {
+  Promise.all([loadProgress(), loadEnabled(), loadMuted(), loadRepScale()]).then(([store, enabled, mutedVal, scaleVal]) => {
     progressStore = store || {};
     enabledMap = enabled || {};
     muted = mutedVal;
+    repScale = scaleVal;
     refreshActive();
     renderHome();
   }).catch(e => {
