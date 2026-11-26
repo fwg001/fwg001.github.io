@@ -24,6 +24,8 @@
     --due-bg: #fdf0dc;
     --danger: #a12a2a;
     --focus: #1a56db;
+    --check-ink: #ffffff;
+    --box-line: #6b736d;
     --radius: 14px;
     --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.04);
   }
@@ -33,6 +35,7 @@
       --line: #343b36; --accent: #7fbfa9; --accent-ink: #0f1a16;
       --paid: #8fd6ac; --paid-bg: #1d3327; --due: #f2bf75; --due-bg: #3a2c17;
       --danger: #f08a8a; --focus: #8ab4ff;
+      --check-ink: #0f1a16; --box-line: #8e9690;
       --shadow: none;
     }
   }
@@ -92,7 +95,7 @@
     display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-radius: var(--radius);
     border: 2px solid var(--line); cursor: pointer; font-weight: 600; min-width: 240px; user-select: none;
   }
-  .paycheck input { width: 28px; height: 28px; margin: 0; accent-color: var(--paid); cursor: pointer; flex: none; }
+  .paycheck input { width: 28px; height: 28px; }
   .paycheck.is-paid { border-color: var(--paid); background: var(--paid-bg); color: var(--paid); }
   .paycheck .sub { display: block; font-weight: 400; font-size: .85rem; color: var(--muted); }
 
@@ -124,7 +127,22 @@
   }
   .cell.paid { background: var(--paid-bg); color: var(--paid); }
   .cell.paid.unmoved { border: 1px dashed var(--paid); }
-  .xfer { width: 22px; height: 22px; accent-color: var(--accent); margin: 0; vertical-align: middle; }
+
+  /* Checkboxes: drawn by hand so the tick always contrasts with its fill (iOS draws a
+     white tick even on light fills, which made it disappear in dark mode). */
+  input[type=checkbox] {
+    -webkit-appearance: none; appearance: none; flex: none; margin: 0; cursor: pointer; vertical-align: middle;
+    width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--box-line); background: var(--surface);
+    display: inline-grid; place-items: center; --fill: var(--accent);
+  }
+  input[type=checkbox]::before {
+    content: ""; width: 62%; height: 62%; background: var(--check-ink); transform: scale(0); transition: transform .1s;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+  input[type=checkbox]:checked { background: var(--fill); border-color: var(--fill); }
+  input[type=checkbox]:checked::before { transform: scale(1); }
+  input[type=checkbox]:disabled { opacity: .45; cursor: not-allowed; }
+  input[data-pay], input[name=paid] { --fill: var(--paid); }
   .cell.due { background: var(--due-bg); color: var(--due); }
   .cell.none { color: var(--muted); background: transparent; border: 1px dashed var(--line); }
   .cell small { display: block; font-size: .75rem; }
@@ -155,7 +173,7 @@
 <div class="wrap">
   <header class="top" id="topbar" hidden>
     <h1>Family Bills</h1>
-    <div class="who"><span id="whoName"></span><button class="link" id="signOut" type="button">Sign out</button></div>
+    <div class="who"><span id="whoName"></span><button class="link" id="reload" type="button">Refresh</button><button class="link" id="signOut" type="button">Sign out</button></div>
   </header>
   <main id="main" tabindex="-1"><p class="muted">Loading…</p></main>
 </div>
@@ -369,6 +387,14 @@ function renderVerify(user) {
 
 $('#signOut').addEventListener('click', () => signOut(auth));
 
+// Home Screen apps have no reload button. Fetch the page fresh (skipping the
+// cache) so a newly pushed version is picked up, then reload.
+$('#reload').addEventListener('click', async e => {
+  e.target.disabled = true; e.target.textContent = 'Refreshing…';
+  try { await fetch(location.href, { cache: 'reload' }); } catch {}
+  location.reload();
+});
+
 async function boot(user) {
   if (!user) { state.me = null; renderLogin(); return; }
   if (!user.emailVerified) { renderVerify(user); return; }
@@ -462,7 +488,7 @@ function renderMember() {
             <th scope="row">${monthLabel(d.month)}</th>
             <td class="num">${money(d.amount)}</td>
             <td>${d.paid ? `<span class="pill paid">✓ Paid ${dateLabel(d.paidAt)}</span>` : `<span class="pill due">Due</span>`}</td>
-            <td><input type="checkbox" data-pay="${esc(d.id)}" ${d.paid ? 'checked' : ''} aria-label="Paid for ${monthLabel(d.month)}" style="width:22px;height:22px;accent-color:var(--paid)"></td>
+            <td><input type="checkbox" data-pay="${esc(d.id)}" ${d.paid ? 'checked' : ''} aria-label="Paid for ${monthLabel(d.month)}"></td>
           </tr>`).join('')}
         </tbody>
       </table></div>` : `<p class="muted">No history yet.</p>`}
@@ -753,7 +779,7 @@ function openDue(id) {
     <p class="small muted">${(d.breakdown || []).map(b => `${esc(b.bill)} ${money(b.amount)}`).join(' + ') || 'No breakdown'}</p>
     <div class="field"><label for="f_amt">Amount due</label><input id="f_amt" name="amount" type="number" step="0.01" min="0" value="${d.amount}" required></div>
     <div class="field"><label style="display:flex;gap:10px;align-items:center">
-      <input type="checkbox" name="paid" ${d.paid ? 'checked' : ''} style="width:22px;height:22px;accent-color:var(--paid)"> Paid</label>
+      <input type="checkbox" name="paid" ${d.paid ? 'checked' : ''}> Paid</label>
       ${d.paid ? `<p class="small muted">Marked ${dateLabel(d.paidAt)}${d.markedBy ? ' by ' + esc(nameOf(d.markedBy)) : ''}</p>` : ''}</div>
     <div class="field"><label style="display:flex;gap:10px;align-items:center">
       <input type="checkbox" name="transferred" id="f_xfer" class="xfer" ${d.transferred ? 'checked' : ''} ${d.paid ? '' : 'disabled'}> Moved to 360 Checking</label>
@@ -780,7 +806,7 @@ function openBill(id) {
   openDialog(`
     <h2>${id ? 'Edit bill' : 'Add bill'}</h2>
     <div class="field"><label for="f_bn">Name</label><input id="f_bn" name="name" type="text" value="${esc(b.name)}" required></div>
-    <div class="field"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="active" ${b.active ? 'checked' : ''} style="width:22px;height:22px"> Active</label>
+    <div class="field"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="active" ${b.active ? 'checked' : ''}> Active</label>
       <p class="small muted">Inactive bills are left out of new months.</p></div>`,
     async fd => {
       const row = { name: fd.get('name').trim(), active: fd.get('active') === 'on', sort: b.sort ?? 0 };
@@ -831,8 +857,8 @@ function openPerson(id) {
       <option value="member" ${p.role === 'member' ? 'selected' : ''}>Member: sees only their own bills</option>
       <option value="admin" ${p.role === 'admin' ? 'selected' : ''}>Admin: sees and edits everything</option></select>
       ${self ? '<p class="small muted">You can’t change your own role.</p>' : ''}</div>
-    <div class="field"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="active" ${p.active ? 'checked' : ''} ${self ? 'disabled' : ''} style="width:22px;height:22px"> Active</label></div>
-    <div class="field"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="reminders" ${p.reminders !== false ? 'checked' : ''} style="width:22px;height:22px"> Email reminders</label>
+    <div class="field"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="active" ${p.active ? 'checked' : ''} ${self ? 'disabled' : ''}> Active</label></div>
+    <div class="field"><label style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="reminders" ${p.reminders !== false ? 'checked' : ''}> Email reminders</label>
       <p class="small muted">Sent on the 1st and 10th when something is unpaid.</p></div>`,
     async fd => {
       const row = { name: fd.get('name').trim(), reminders: fd.get('reminders') === 'on' };
