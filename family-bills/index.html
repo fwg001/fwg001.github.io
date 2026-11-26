@@ -96,7 +96,7 @@
   .paycheck.is-paid { border-color: var(--paid); background: var(--paid-bg); color: var(--paid); }
   .paycheck .sub { display: block; font-weight: 400; font-size: .85rem; color: var(--muted); }
 
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
   @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
   .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
   .stat .k { color: var(--muted); font-size: .85rem; }
@@ -123,6 +123,8 @@
     border: 1px solid transparent; font-variant-numeric: tabular-nums; line-height: 1.25;
   }
   .cell.paid { background: var(--paid-bg); color: var(--paid); }
+  .cell.paid.unmoved { border: 1px dashed var(--paid); }
+  .xfer { width: 22px; height: 22px; accent-color: var(--accent); margin: 0; vertical-align: middle; }
   .cell.due { background: var(--due-bg); color: var(--due); }
   .cell.none { color: var(--muted); background: transparent; border: 1px dashed var(--line); }
   .cell small { display: block; font-size: .75rem; }
@@ -478,6 +480,8 @@ function payToggle(d, text) {
 }
 
 main.addEventListener('change', async e => {
+  const xid = e.target.dataset?.xfer;
+  if (xid) return setTransferred([xid], e.target.checked, e.target);
   const id = e.target.dataset?.pay;
   if (!id) return;
   const checked = e.target.checked;
@@ -534,6 +538,9 @@ function adminOverview() {
   const months = [...new Set(state.dues.map(d => d.month).concat(cm))].sort().reverse().slice(0, 12);
   const emails = [...new Set(state.dues.map(d => d.email).concat(state.assignments.map(a => a.email)))]
     .sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
+  const toMove = state.dues.filter(d => d.paid && !d.transferred)
+    .sort((a, b) => b.month.localeCompare(a.month) || nameOf(a.email).localeCompare(nameOf(b.email)));
+  const toMoveAmt = toMove.reduce((s, d) => s + Number(d.amount), 0);
   const totalPaid = email => state.dues.filter(d => d.email === email && d.paid).reduce((s, d) => s + Number(d.amount), 0);
 
   const gettingStarted = !state.assignments.length ? `
@@ -548,7 +555,28 @@ function adminOverview() {
     <section class="stats" aria-label="${monthLabel(cm)} summary">
       <div class="stat"><div class="k">${monthLabel(cm)} collected</div><div class="v">${money(got)} <span class="muted small">of ${money(owed)}</span></div></div>
       <div class="stat"><div class="k">Still to pay</div><div class="v" style="font-size:1.1rem">${curRows.length ? (unpaidNames.length ? esc(unpaidNames.join(', ')) : 'Everyone’s paid ✓') : '—'}</div></div>
+      <div class="stat"><div class="k">Waiting to move to 360 Checking</div><div class="v">${money(toMoveAmt)} <span class="muted small">${toMove.length} payment${toMove.length === 1 ? '' : 's'}</span></div></div>
       <div class="stat"><div class="k">Collected all time</div><div class="v">${money(state.dues.filter(d => d.paid).reduce((s, d) => s + Number(d.amount), 0))}</div></div>
+    </section>
+
+    <section class="card" aria-labelledby="xferH">
+      <div class="toolbar">
+        <h2 id="xferH" style="margin:0">Move to 360 Checking</h2>
+        ${toMove.length > 1 ? `<button type="button" data-act="xferAll">Mark all ${toMove.length} as moved</button>` : ''}
+      </div>
+      ${toMove.length ? `
+      <p class="small muted">Paid payments that haven’t been moved yet. Tick each one once it’s in 360 Checking.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th scope="col" style="width:1%">Moved</th><th scope="col">Person</th><th scope="col">Month</th><th scope="col" class="num">Amount</th></tr></thead>
+        <tbody>${toMove.map(d => `
+          <tr>
+            <td><input type="checkbox" class="xfer" data-xfer="${esc(d.id)}" aria-label="${esc(nameOf(d.email))}, ${monthLabel(d.month)}, ${money(d.amount)}: moved to 360 Checking"></td>
+            <th scope="row">${esc(nameOf(d.email))}</th>
+            <td>${shortMonth(d.month)}<span class="small muted" style="display:block">Paid ${dateLabel(d.paidAt)}</span></td>
+            <td class="num">${money(d.amount)}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table></div>` : `<p class="muted">${state.dues.some(d => d.paid) ? 'Everything paid has been moved to 360 Checking ✓' : 'Nothing paid yet.'}</p>`}
     </section>
 
     <section class="card" aria-labelledby="gridH">
@@ -559,7 +587,7 @@ function adminOverview() {
           <button type="button" data-act="nextMonth" data-month="${addMonths(cm, 1)}">Create ${monthLabel(addMonths(cm, 1), { month: 'short' })} early</button>
         </div>
       </div>
-      <p class="small muted">Select a cell to mark it paid, change the amount, or add a note.</p>
+      <p class="small muted">Select a cell to mark it paid or moved to 360 Checking, change the amount, or add a note. A dashed border means paid but not yet moved.</p>
       ${emails.length ? `
       <div class="table-scroll"><table class="grid">
         <thead><tr>
@@ -574,9 +602,9 @@ function adminOverview() {
             ${months.map(m => {
               const d = state.dues.find(x => x.email === email && x.month === m);
               if (!d) return `<td><span class="cell none" aria-label="${esc(nameOf(email))}, ${monthLabel(m)}: nothing due">—</span></td>`;
-              return `<td><button type="button" class="cell ${d.paid ? 'paid' : 'due'}" data-act="editDue" data-id="${esc(d.id)}"
-                aria-label="${esc(nameOf(email))}, ${monthLabel(m)}: ${money(d.amount)}, ${d.paid ? 'paid' : 'not paid'}${d.note ? ', has note' : ''}. Edit">
-                ${money(d.amount)}<small>${d.paid ? '✓ Paid' : 'Due'}${d.note ? ' · 📝' : ''}</small></button></td>`;
+              return `<td><button type="button" class="cell ${d.paid ? 'paid' : 'due'}${d.paid && !d.transferred ? ' unmoved' : ''}" data-act="editDue" data-id="${esc(d.id)}"
+                aria-label="${esc(nameOf(email))}, ${monthLabel(m)}: ${money(d.amount)}, ${d.paid ? (d.transferred ? 'paid, moved to 360 Checking' : 'paid, not yet moved to 360 Checking') : 'not paid'}${d.note ? ', has note' : ''}. Edit">
+                ${money(d.amount)}<small>${d.paid ? (d.transferred ? '✓ Paid · In 360' : '✓ Paid · Not moved') : 'Due'}${d.note ? ' · 📝' : ''}</small></button></td>`;
             }).join('')}
             <td class="num"><strong>${money(totalPaid(email))}</strong></td>
           </tr>`).join('')}
@@ -663,12 +691,35 @@ main.addEventListener('click', async e => {
       await ensureMonthAdmin(month);
       await loadAdmin(); toast(`${monthLabel(month)} amounts refreshed`);
     }
+    if (act === 'xferAll') {
+      const ids = state.dues.filter(d => d.paid && !d.transferred).map(d => d.id);
+      return setTransferred(ids, true, el);
+    }
     if (act === 'nextMonth') {
       const n = await ensureMonthAdmin(month);
       await loadAdmin(); toast(n ? `${monthLabel(month)} created` : `${monthLabel(month)} already exists`);
     }
   } catch (err) { el.disabled = false; fail(err); }
 });
+
+// Admin: mark payments as moved (or not) to 360 Checking
+async function setTransferred(ids, on, el) {
+  if (el) el.disabled = true;
+  const patch = on
+    ? { transferred: true, transferredAt: new Date().toISOString(), transferredBy: state.me.id }
+    : { transferred: false, transferredAt: null, transferredBy: null };
+  try {
+    await Promise.all(ids.map(id => updateDoc(doc(db, 'dues', id), patch)));
+    ids.forEach(id => Object.assign(state.dues.find(d => d.id === id), patch));
+    toast(ids.length > 1 ? `${ids.length} payments marked as moved to 360 Checking`
+      : on ? 'Marked as moved to 360 Checking' : 'Marked as not moved');
+    renderAdmin();
+    ($('[data-xfer]') || main).focus();
+  } catch (err) {
+    if (el) { el.disabled = false; if (el.type === 'checkbox') el.checked = !on; }
+    fail(err);
+  }
+}
 
 function openDialog(html, onSubmit, onDelete) {
   const opener = document.activeElement;
@@ -704,14 +755,24 @@ function openDue(id) {
     <div class="field"><label style="display:flex;gap:10px;align-items:center">
       <input type="checkbox" name="paid" ${d.paid ? 'checked' : ''} style="width:22px;height:22px;accent-color:var(--paid)"> Paid</label>
       ${d.paid ? `<p class="small muted">Marked ${dateLabel(d.paidAt)}${d.markedBy ? ' by ' + esc(nameOf(d.markedBy)) : ''}</p>` : ''}</div>
+    <div class="field"><label style="display:flex;gap:10px;align-items:center">
+      <input type="checkbox" name="transferred" id="f_xfer" class="xfer" ${d.transferred ? 'checked' : ''} ${d.paid ? '' : 'disabled'}> Moved to 360 Checking</label>
+      <p class="small muted" id="f_xferHint">${d.transferred ? `Marked ${dateLabel(d.transferredAt)}${d.transferredBy ? ' by ' + esc(nameOf(d.transferredBy)) : ''}` : 'Only for paid payments. Members don’t see this.'}</p></div>
     <div class="field"><label for="f_note">Note <span class="muted">(${esc(nameOf(d.email))} can see this)</span></label><textarea id="f_note" name="note" rows="2">${esc(d.note)}</textarea></div>`,
     async fd => {
       const paid = fd.get('paid') === 'on';
       const patch = { amount: round2(fd.get('amount')), note: fd.get('note').trim() || null };
       if (paid !== d.paid) Object.assign(patch, { paid, paidAt: paid ? new Date().toISOString() : null, markedBy: state.me.id });
+      const moved = paid && fd.get('transferred') === 'on';
+      if (moved !== !!d.transferred) Object.assign(patch, moved
+        ? { transferred: true, transferredAt: new Date().toISOString(), transferredBy: state.me.id }
+        : { transferred: false, transferredAt: null, transferredBy: null });
       await updateDoc(doc(db, 'dues', id), patch);
     },
     () => deleteDoc(doc(db, 'dues', id)));
+  // "Moved" only makes sense once it's paid
+  const paidBox = dlgForm.querySelector('[name=paid]'), xferBox = $('#f_xfer');
+  paidBox.onchange = () => { xferBox.disabled = !paidBox.checked; if (!paidBox.checked) xferBox.checked = false; };
 }
 
 function openBill(id) {
